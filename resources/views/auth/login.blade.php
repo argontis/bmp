@@ -6,446 +6,160 @@
     <title>Masuk - Bakti Merah Putih</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root {
-            --primary: #D32F2F;
-            --primary-dark: #B71C1C;
-            --text-main: #1F2937;
-            --text-muted: #6B7280;
-            --bg-gray: #F3F4F6;
-            --border-color: #E5E7EB;
-        }
-
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
         }
-
-        body {
-            background-color: #f9fafb;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-        }
-
-        .app-container {
-            width: 100%;
-            max-width: 480px;
-            background-color: #ffffff;
-            position: relative;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-        }
-
-        /* Hero Section */
-        .hero {
-            position: relative;
-            height: 340px;
-            background-image: url('/images/bg.png');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 24px;
-            color: white;
-            text-align: center;
-            z-index: 1;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, rgba(31, 41, 55, 0.6) 0%, rgba(211, 47, 47, 0.85) 100%);
-            z-index: -1;
-        }
-
-        .back-btn {
-            position: absolute;
-            top: 24px;
-            left: 24px;
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 500;
-            font-size: 14px;
-        }
-
-        .logo-container {
-            margin-top: 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .logo-text {
-            font-size: 32px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .logo-text span {
-            font-weight: 400;
-        }
-
-        .logo-badge {
-            background-color: #D32F2F;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-left: 4px;
-        }
-
-        .hero-subtitle {
-            margin-top: 16px;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .badges {
-            display: flex;
-            gap: 12px;
-            margin-top: 16px;
-        }
-
-        .badge {
-            background-color: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* Form Section */
-        .form-section {
-            background-color: #ffffff;
-            border-top-left-radius: 24px;
-            border-top-right-radius: 24px;
-            padding: 32px 24px;
-            margin-top: -30px;
-            z-index: 2;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .welcome-title {
-            color: #1e3a8a; /* Dark blue */
-            font-size: 24px;
-            font-weight: 700;
-            text-align: center;
-        }
-
-        .welcome-subtitle {
-            color: var(--text-muted);
-            text-align: center;
-            font-size: 14px;
-            margin-top: 8px;
-            margin-bottom: 24px;
-        }
-
-        .tabs {
-            display: flex;
-            background-color: var(--bg-gray);
-            border-radius: 12px;
-            padding: 4px;
-            margin-bottom: 24px;
-        }
-
-        .tab {
-            flex: 1;
-            text-align: center;
-            padding: 12px 0;
-            font-weight: 600;
-            font-size: 14px;
-            color: var(--text-muted);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .tab.active {
-            background-color: #ffffff;
-            color: var(--text-main);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .google-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            width: 100%;
-            padding: 14px;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            background-color: #ffffff;
-            font-weight: 600;
-            font-size: 14px;
-            color: var(--text-main);
-            cursor: pointer;
-            transition: background-color 0.2s;
-            margin-bottom: 24px;
-        }
-
-        .google-btn:hover {
-            background-color: var(--bg-gray);
-        }
-
-        .divider {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            margin-bottom: 24px;
-            color: var(--text-muted);
-            font-size: 12px;
-        }
-
-        .divider::before, .divider::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .divider::before { margin-right: 12px; }
-        .divider::after { margin-left: 12px; }
-
-        .input-group {
-            position: relative;
-            margin-bottom: 16px;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 16px 16px 16px 48px;
-            border: none;
-            background-color: var(--bg-gray);
-            border-radius: 12px;
-            font-size: 14px;
-            color: var(--text-main);
-            outline: none;
-            transition: ring 0.2s;
-        }
-        
-        .input-group input:focus {
-            box-shadow: 0 0 0 2px var(--primary);
-        }
-
-        .input-icon {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #9CA3AF;
-            display: flex;
-            align-items: center;
-        }
-
-        .eye-icon {
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #9CA3AF;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-        }
-
-        .forgot-password {
-            display: block;
-            text-align: right;
-            color: var(--primary);
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
-            margin-bottom: 24px;
-        }
-
-        .submit-btn {
-            width: 100%;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 16px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            transition: background-color 0.2s, transform 0.1s;
-            box-shadow: 0 4px 14px rgba(211, 47, 47, 0.4);
-        }
-
-        .submit-btn:hover {
-            background-color: var(--primary-dark);
-        }
-        
-        .submit-btn:active {
-            transform: scale(0.98);
-        }
-
-        .trust-badges {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            margin-top: 24px;
-            font-size: 12px;
-            color: #9CA3AF;
-        }
-
-        .trust-badge {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .trust-badge svg {
-            color: #10B981; /* Emerald green */
-        }
-        
-        .dot {
-            width: 4px;
-            height: 4px;
-            background-color: #D1D5DB;
-            border-radius: 50%;
-        }
-
-        .terms {
-            text-align: center;
-            font-size: 11px;
-            color: #9CA3AF;
-            margin-top: 24px;
-            line-height: 1.5;
-        }
-
-        .terms a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <!-- Hero Section -->
-        <div class="hero">
-            <a href="#" class="back-btn">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M19 12H5M12 19l-7-7 7-7"/>
-                </svg>
-                Kembali
-            </a>
-
-            <div class="logo-container">
-                <div class="logo-text">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:-8px;">
-                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#D32F2F"/>
-                    </svg>
-                    Bakti <span>Merah Putih</span>
-                </div>
-            </div>
-
-            <p class="hero-subtitle">Bersama Menebar Kebaikan untuk Indonesia</p>
-
-            <div class="badges">
-                <div class="badge">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                    Terverifikasi
-                </div>
-                <div class="badge">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                    78 Program Aktif
-                </div>
-            </div>
-        </div>
-
-        <!-- Form Section -->
-        <div class="form-section">
-            <h1 class="welcome-title">Selamat Datang</h1>
-            <p class="welcome-subtitle">Masuk untuk mulai berdonasi</p>
-
-            <div class="tabs">
-                <div class="tab active">Masuk</div>
-                <div class="tab">Daftar</div>
-            </div>
-
-            <button class="google-btn">
-                <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-                </svg>
-                Lanjutkan dengan Google
-            </button>
-
-            <div class="divider">atau dengan email</div>
-
-            <form action="#" method="POST">
-                <div class="input-group">
-                    <div class="input-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                    </div>
-                    <input type="email" placeholder="Alamat email" required>
-                </div>
-
-                <div class="input-group">
-                    <div class="input-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                    </div>
-                    <input type="password" placeholder="Kata sandi" required>
-                    <div class="eye-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                    </div>
-                </div>
-
-                <a href="#" class="forgot-password">Lupa kata sandi?</a>
-
-                <button type="submit" class="submit-btn">
-                    Masuk Sekarang
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    <div class="min-h-screen flex items-center justify-center bg-[#F4F6F9]" style="font-family: Inter, sans-serif;">
+        <div class="relative w-full max-w-[430px] min-h-screen bg-white flex flex-col shadow-[0_0_80px_-20px_rgba(0,0,0,0.18)] overflow-hidden">
+            <div class="relative overflow-hidden flex-shrink-0" style="height: 300px;">
+                <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&amp;h=600&amp;fit=crop&amp;auto=format" alt="Anak-anak ceria" class="absolute inset-0 w-full h-full object-cover">
+                <div class="absolute inset-0" style="background: linear-gradient(160deg, rgba(18, 53, 91, 0.933) 0%, rgba(214, 40, 40, 0.8) 100%);"></div>
+                <div class="absolute inset-0 opacity-[0.08] pointer-events-none" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 20px 20px;"></div>
+                <button onclick="window.location.href='/'" class="absolute top-12 left-5 flex items-center gap-1.5 text-white/80 hover:text-white transition-colors text-[13px] font-semibold z-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left w-4 h-4"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg> Kembali
                 </button>
-            </form>
-
-            <div class="trust-badges">
-                <div class="trust-badge">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
-                    Data aman & terenkripsi
+                <div class="absolute inset-0 flex flex-col items-center justify-center gap-3">
+                    <img src="/images/logo.png" alt="Bakti Merah Putih" class="h-16 w-auto object-contain drop-shadow-lg">
+                    <p class="text-white/75 text-[13px] font-medium tracking-wide">Bersama Menebar Kebaikan untuk Indonesia</p>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/15 border border-white/25 text-white text-[10px] font-bold">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big w-2.5 h-2.5 text-emerald-400"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Terverifikasi
+                        </span>
+                        <span class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/15 border border-white/25 text-white text-[10px] font-bold">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big w-2.5 h-2.5 text-emerald-400"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> 78 Program Aktif
+                        </span>
+                    </div>
                 </div>
-                <div class="dot"></div>
-                <div class="trust-badge">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                    Terverifikasi resmi
-                </div>
+                <svg class="absolute bottom-0 left-0 w-full" viewBox="0 0 430 32" preserveAspectRatio="none"><path d="M0 32 Q215 0 430 32 L430 32 L0 32Z" fill="white"></path></svg>
             </div>
+            
+            <div class="flex-1 flex flex-col px-6 pt-2 pb-8 overflow-y-auto">
+                <div class="mb-6 text-center">
+                    <h2 id="welcome-title" class="text-[22px] font-extrabold text-[#12355B] tracking-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">Selamat Datang</h2>
+                    <p id="welcome-subtitle" class="text-[13px] text-gray-400 mt-1">Masuk untuk mulai berdonasi</p>
+                </div>
+                
+                <div class="flex bg-[#F4F6F9] rounded-2xl p-1 mb-5">
+                    <button id="tab-login" class="flex-1 py-2.5 rounded-xl text-[13px] font-bold transition-all duration-200 bg-white shadow-sm text-[#12355B]">Masuk</button>
+                    <button id="tab-register" class="flex-1 py-2.5 rounded-xl text-[13px] font-bold transition-all duration-200 text-gray-400 hover:text-gray-600">Daftar</button>
+                </div>
+                
+                <button class="w-full flex items-center justify-center gap-3 py-3.5 bg-white border border-gray-200 rounded-2xl text-[14px] font-bold text-[#1B1B1B] hover:bg-gray-50 hover:border-gray-300 active:scale-[0.98] transition-all duration-150 shadow-sm mb-5 disabled:opacity-60">
+                    <svg viewBox="0 0 24 24" class="w-5 h-5 shrink-0" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"></path>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+                    </svg>
+                    Lanjutkan dengan Google
+                </button>
+                
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="flex-1 h-px bg-gray-200"></div>
+                    <span class="text-[11px] text-gray-400 font-semibold">atau dengan email</span>
+                    <div class="flex-1 h-px bg-gray-200"></div>
+                </div>
+                
+                <form id="form-login" class="space-y-3" onsubmit="event.preventDefault(); window.location.href='/dashboard';" style="opacity: 1; transform: none; display: block;">
+                    <div class="relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                        <input type="email" placeholder="Alamat email" required="" class="w-full pl-11 pr-4 py-3.5 bg-[#F4F6F9] rounded-2xl text-[13px] text-[#1B1B1B] placeholder-gray-400 outline-none focus:ring-2 transition-all border border-transparent" value="" style="--tw-ring-color: #D6282840;">
+                    </div>
+                    <div class="relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        <input type="password" placeholder="Kata sandi" required="" class="w-full pl-11 pr-12 py-3.5 bg-[#F4F6F9] rounded-2xl text-[13px] text-[#1B1B1B] placeholder-gray-400 outline-none focus:ring-2 transition-all border border-transparent" value="" style="--tw-ring-color: #D6282840;">
+                        <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye w-4 h-4"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+                    </div>
+                    <div class="text-right">
+                        <button type="button" class="text-[12px] font-bold" style="color: rgb(214, 40, 40);">Lupa kata sandi?</button>
+                    </div>
+                    <div class="pt-1">
+                        <button type="submit" class="w-full py-4 rounded-2xl text-[15px] font-extrabold text-white active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg" style="background: rgb(214, 40, 40); box-shadow: rgba(214, 40, 40, 0.6) 0px 12px 28px -8px;">
+                            Masuk Sekarang
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg>
+                        </button>
+                    </div>
+                </form>
 
-            <p class="terms">
-                Dengan masuk, Anda menyetujui <a href="#">Syarat & Ketentuan</a> dan <a href="#">Kebijakan Privasi</a> Bakti Merah Putih
-            </p>
+                <form id="form-register" class="space-y-3" onsubmit="event.preventDefault(); window.location.href='/dashboard';" style="opacity: 1; transform: none; display: none;">
+                    <div class="relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        <input type="text" placeholder="Nama lengkap" required="" class="w-full pl-11 pr-4 py-3.5 bg-[#F4F6F9] rounded-2xl text-[13px] text-[#1B1B1B] placeholder-gray-400 outline-none focus:ring-2 transition-all border border-transparent" style="--tw-ring-color: #D6282840;">
+                    </div>
+                    <div class="relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                        <input type="email" placeholder="Alamat email" required="" class="w-full pl-11 pr-4 py-3.5 bg-[#F4F6F9] rounded-2xl text-[13px] text-[#1B1B1B] placeholder-gray-400 outline-none focus:ring-2 transition-all border border-transparent" style="--tw-ring-color: #D6282840;">
+                    </div>
+                    <div class="relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        <input type="password" placeholder="Kata sandi" required="" class="w-full pl-11 pr-12 py-3.5 bg-[#F4F6F9] rounded-2xl text-[13px] text-[#1B1B1B] placeholder-gray-400 outline-none focus:ring-2 transition-all border border-transparent" style="--tw-ring-color: #D6282840;">
+                        <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye w-4 h-4"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+                    </div>
+                    <div class="pt-1">
+                        <button type="submit" class="w-full py-4 rounded-2xl text-[15px] font-extrabold text-white active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg" style="background: rgb(214, 40, 40); box-shadow: rgba(214, 40, 40, 0.6) 0px 12px 28px -8px;">
+                            Buat Akun
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg>
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="mt-6 flex items-center justify-center gap-4">
+                    <div class="flex items-center gap-1.5 text-[11px] text-gray-400 font-semibold">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check w-3.5 h-3.5 text-emerald-500"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg> Data aman &amp; terenkripsi
+                    </div>
+                    <div class="w-1 h-1 rounded-full bg-gray-300"></div>
+                    <div class="flex items-center gap-1.5 text-[11px] text-gray-400 font-semibold">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big w-3.5 h-3.5 text-emerald-500"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Terverifikasi resmi
+                    </div>
+                </div>
+                
+                <p class="text-center text-[10px] text-gray-400 mt-3 leading-relaxed px-4">
+                    Dengan masuk, Anda menyetujui <a href="#" class="font-bold" style="color: rgb(214, 40, 40);">Syarat &amp; Ketentuan</a> dan <a href="#" class="font-bold" style="color: rgb(214, 40, 40);">Kebijakan Privasi</a> Bakti Merah Putih
+                </p>
+            </div>
         </div>
     </div>
+    
+
+    <script>
+        const tabLogin = document.getElementById('tab-login');
+        const tabRegister = document.getElementById('tab-register');
+        const formLogin = document.getElementById('form-login');
+        const formRegister = document.getElementById('form-register');
+        const welcomeTitle = document.getElementById('welcome-title');
+        const welcomeSubtitle = document.getElementById('welcome-subtitle');
+
+        const activeClass = "flex-1 py-2.5 rounded-xl text-[13px] font-bold transition-all duration-200 bg-white shadow-sm text-[#12355B]";
+        const inactiveClass = "flex-1 py-2.5 rounded-xl text-[13px] font-bold transition-all duration-200 text-gray-400 hover:text-gray-600";
+
+        tabLogin.addEventListener('click', () => {
+            tabLogin.className = activeClass;
+            tabRegister.className = inactiveClass;
+            
+            formLogin.style.display = 'block';
+            formRegister.style.display = 'none';
+            
+            welcomeTitle.innerText = "Selamat Datang";
+            welcomeSubtitle.innerText = "Masuk untuk mulai berdonasi";
+        });
+
+        tabRegister.addEventListener('click', () => {
+            tabRegister.className = activeClass;
+            tabLogin.className = inactiveClass;
+            
+            formRegister.style.display = 'block';
+            formLogin.style.display = 'none';
+            
+            welcomeTitle.innerText = "Buat Akun Baru";
+            welcomeSubtitle.innerText = "Bergabung dan buat perubahan nyata";
+        });
+    </script>
 </body>
 </html>

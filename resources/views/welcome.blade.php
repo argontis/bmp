@@ -1,2753 +1,878 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bakti Merah Putih - Yayasan Sosial & Kemanusiaan</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>Bakti Merah Putih</title>
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (CDN for rapid prototyping) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#D62828',
+                        secondary: '#12355B'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
     <style>
-        :root {
-            --primary: #D62828; /* Red */
-            --primary-dark: #DC2626;
-            --text-light: #F9FAFB;
-            --text-gray: #9CA3AF;
-            --glass-bg: rgba(31, 41, 55, 0.4);
-            --glass-border: rgba(255, 255, 255, 0.1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-
-        body {
-            background-color: #0F172A; /* Fallback dark blue */
-            color: var(--text-light);
-            overflow-x: hidden;
-        }
-
-        /* Hero Section */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            background-image: url('/images/hero-bg.png');
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* Overlays */
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.8) 40%, rgba(15, 23, 42, 0.4) 100%);
-            z-index: 1;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-            background-size: 24px 24px;
-            z-index: 2;
-            opacity: 0.5;
-            mask-image: linear-gradient(to right, black 20%, transparent 80%);
-            -webkit-mask-image: linear-gradient(to right, black 20%, transparent 80%);
-        }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 24px;
-            width: 100%;
-            position: relative;
-            z-index: 10;
-        }
-
-        /* Navbar */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 24px 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 28px;
-            font-weight: 800;
-            color: white;
-            text-decoration: none;
-        }
-
-        .logo svg {
-            margin-right: -4px;
-        }
-
-        .logo span {
-            font-weight: 400;
-            font-size: 16px;
-            display: block;
-            margin-top: -4px;
-            color: #E2E8F0;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 24px;
-        }
-
-        .nav-link {
-            color: #E2E8F0;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 500;
-            position: relative;
-            transition: color 0.2s;
-        }
-
-        .nav-link:hover {
-            color: white;
-        }
-
-        .nav-link.active {
-            color: white;
-        }
-
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 4px;
-            background-color: var(--primary);
-            border-radius: 50%;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 13px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: none;
-        }
-
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-
-        .btn-outline {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-        }
-
-        .btn-outline:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Main Content Grid */
-        .hero-content {
-            flex: 1;
-            display: grid;
-            grid-template-columns: 1.35fr 0.65fr;
-            gap: 60px;
-            align-items: center;
-            padding-top: 80px;
-            padding-bottom: 60px;
-        }
-
-        /* Left Column */
-        .badge-top {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-size: 13px;
-            font-weight: 500;
-            color: #E2E8F0;
-            margin-bottom: 24px;
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-        }
-
-        .badge-top .dot {
-            width: 8px;
-            height: 8px;
-            background-color: #10B981;
-            border-radius: 50%;
-            animation: pulse-green 2s infinite ease-in-out;
-        }
-
-        @keyframes pulse-green {
-            0% {
-                background-color: #047857; /* Hijau Tua */
-                box-shadow: 0 0 0 0 rgba(110, 231, 183, 0.4);
-            }
-            50% {
-                background-color: #6EE7B7; /* Hijau Muda */
-                box-shadow: 0 0 0 6px rgba(110, 231, 183, 0);
-            }
-            100% {
-                background-color: #047857; /* Hijau Tua */
-                box-shadow: 0 0 0 0 rgba(110, 231, 183, 0);
-            }
-        }
-
-        .headline {
-            font-size: 64px;
-            line-height: 1.1;
-            font-weight: 800;
-            margin-bottom: 24px;
-            letter-spacing: -0.02em;
-        }
-
-        .headline .highlight {
-            color: var(--primary);
-            position: relative;
-            display: inline-block;
-        }
-
-        .headline .highlight::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 4px;
-            width: 100%;
-            height: 6px;
-            background-color: var(--primary);
-            border-radius: 4px;
-            opacity: 0.8;
-            transform: rotate(-1deg);
-        }
-
-        .description {
-            font-size: 18px;
-            line-height: 1.6;
-            color: #CBD5E1;
-            margin-bottom: 40px;
-            max-width: 90%;
-        }
-
-        .cta-group {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 40px;
-        }
-
-        .trust-badges-bottom {
-            display: flex;
-            gap: 24px;
-            font-size: 13px;
-            color: #94A3B8;
-        }
-
-        .trust-badge-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .trust-badge-item svg {
-            color: #10B981;
-        }
-
-        /* Right Column - Glass Card */
-        .glass-card {
-            background-color: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 32px;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 32px;
-        }
-
-        .card-header-icon {
-            background-color: rgba(245, 158, 11, 0.2);
-            color: #F59E0B;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .stats-list {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-            margin-bottom: 32px;
-        }
-
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .stat-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .icon-red { background-color: rgba(239, 68, 68, 0.15); color: #D62828; }
-        .icon-blue { background-color: rgba(59, 130, 246, 0.15); color: #3B82F6; }
-        .icon-green { background-color: rgba(16, 185, 129, 0.15); color: #10B981; }
-        .icon-orange { background-color: rgba(245, 158, 11, 0.15); color: #F59E0B; }
-
-        .stat-info h3 {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 2px;
-        }
-
-        .stat-info p {
-            font-size: 13px;
-            color: #94A3B8;
-        }
-
-        .update-card {
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 20px;
-        }
-
-        .update-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: #10B981;
-            font-size: 11px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .update-badge .dot {
-            width: 4px;
-            height: 4px;
-            background-color: currentColor;
-            border-radius: 50%;
-        }
-
-        .update-text {
-            font-size: 14px;
-            line-height: 1.5;
-            font-weight: 500;
-            margin-bottom: 12px;
-        }
-
-        .update-meta {
-            font-size: 12px;
-            color: #94A3B8;
-        }
-
-        /* Pagination Dots */
-        .pagination {
-            position: absolute;
-            bottom: 40px;
-            right: 40px;
-            display: flex;
-            gap: 8px;
-            z-index: 10;
-        }
-
-        .page-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .page-dot.active {
-            width: 24px;
-            border-radius: 4px;
-            background-color: white;
-        }
-
-        @media (max-width: 1024px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            .headline {
-                font-size: 48px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            .headline {
-                font-size: 40px;
-            }
-            .cta-group {
-                flex-direction: column;
-            }
-            .trust-badges-bottom {
-                flex-wrap: wrap;
-            }
-        }
-
-        /* Stats Bar */
-        .stats-floating {
-            background-color: #FBFAF7;
-            border-radius: 24px;
-            padding: 32px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
-            max-width: 1280px;
-            margin: 60px auto;
-            width: calc(100% - 48px);
-        }
-
-        .stat-box {
-            text-align: center;
-            flex: 1;
-            position: relative;
-        }
-
-        .stat-box:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 10%;
-            height: 80%;
-            width: 1px;
-            background-color: #E5E7EB;
-        }
-
-        .stat-box-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 16px;
-        }
-
-        .stat-box-icon.red { background-color: #FEE2E2; color: #D62828; }
-        .stat-box-icon.blue { background-color: #DBEAFE; color: #3B82F6; }
-        .stat-box-icon.green { background-color: #D1FAE5; color: #10B981; }
-        .stat-box-icon.orange { background-color: #FFEDD5; color: #F97316; }
-        .stat-box-icon.yellow { background-color: #FEF3C7; color: #F59E0B; }
-
-        .stat-box h3 {
-            font-size: 28px;
-            font-weight: 800;
-            color: #111827;
-            margin-bottom: 4px;
-        }
-
-        .stat-box p {
-            font-size: 13px;
-            font-weight: 600;
-            color: #6B7280;
-        }
-
-        /* Program Section */
-        .program-section {
-            padding: 120px 24px 100px;
-            max-width: 1280px;
-            margin: 0 auto;
-            background-color: #FBFAF7;
-        }
-
-        body {
-            background-color: #FBFAF7;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 40px;
-        }
-
-        .section-label {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #D62828;
-            font-size: 13px;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-
-        .section-label::before {
-            content: '';
-            width: 32px;
-            height: 2px;
-            background-color: #D62828;
-        }
-
-        .section-title {
-            font-size: 40px;
-            font-weight: 800;
-            color: #0F172A;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-        }
-
-        .btn-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            border-radius: 30px;
-            border: 1px solid #CBD5E1;
-            color: #334155;
-            font-weight: 600;
-            font-size: 14px;
-            text-decoration: none;
-            transition: all 0.2s;
-            background-color: white;
-        }
-
-        .btn-link:hover {
-            border-color: #94A3B8;
-            color: #0F172A;
-        }
-
-        .program-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-        }
-
-        .program-card {
-            background-color: white;
-            border: 1px solid #E2E8F0;
-            border-radius: 20px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.2s, box-shadow 0.2s;
-            position: relative;
-        }
-
-        .program-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-image-wrap {
-            position: relative;
-            height: 180px;
-        }
-
-        .card-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .card-badge {
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            background-color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 800;
-        }
-
-        .card-badge.blue { color: #3B82F6; }
-        .card-badge.red { color: #D62828; }
-        .card-badge.green { color: #10B981; }
-        .card-badge.orange { color: #F97316; }
-
-        .card-icon-float {
-            position: absolute;
-            bottom: -16px;
-            left: 20px;
-            width: 32px;
-            height: 32px;
-            background-color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            z-index: 2;
-        }
-
-        .card-icon-float.blue { color: #3B82F6; }
-        .card-icon-float.red { color: #D62828; }
-        .card-icon-float.green { color: #10B981; }
-        .card-icon-float.orange { color: #F97316; }
-
-        .card-content {
-            padding: 32px 20px 24px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-title {
-            font-size: 18px;
-            font-weight: 800;
-            color: #0F172A;
-            margin-bottom: 12px;
-        }
-
-        .card-desc {
-            font-size: 13px;
-            color: #64748B;
-            line-height: 1.6;
-            margin-bottom: 24px;
-            flex-grow: 1;
-            font-weight: 500;
-        }
-
-        .card-footer {
-            border-top: 1px solid #F1F5F9;
-            padding-top: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 11px;
-            font-weight: 700;
-        }
-
-        .card-stat {
-            color: #64748B;
-        }
-
-        .card-link {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            text-decoration: none;
-        }
-        
-        .card-link.blue { color: #3B82F6; }
-        .card-link.red { color: #D62828; }
-        .card-link.green { color: #10B981; }
-        .card-link.orange { color: #F97316; }
-
-        @media (max-width: 1024px) {
-            .stats-floating {
-                flex-wrap: wrap;
-                gap: 24px;
-                padding: 24px;
-            }
-            .stat-box {
-                flex: 1 1 calc(33.333% - 24px);
-            }
-            .stat-box::after { display: none; }
-            
-            .program-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* How to Donate Section */
-        .how-to-donate {
-            padding: 80px 24px 100px;
-            max-width: 1280px;
-            margin: 0 auto;
-            text-align: center;
-            background-color: #FBFAF7;
-        }
-
-        .htd-header {
-            margin-bottom: 64px;
-        }
-
-        .htd-steps {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        /* The connecting dotted line */
-        .htd-steps::before {
-            content: '';
-            position: absolute;
-            top: 40px; /* half of 80px block */
-            left: 10%;
-            right: 10%;
-            height: 0;
-            border-top: 2px dashed rgba(239, 68, 68, 0.3); /* Red dashed line */
-            z-index: 1;
-        }
-
-        .htd-step-item {
-            flex: 1;
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 0 12px;
-        }
-
-        .htd-icon-box {
-            width: 80px;
-            height: 80px;
-            background-color: white;
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
-            margin-bottom: 24px;
-            position: relative;
-        }
-
-        .htd-icon-box svg {
-            color: #D62828;
-            width: 28px;
-            height: 28px;
-        }
-
-        .htd-step-num {
-            position: absolute;
-            top: -6px;
-            right: -6px;
-            width: 22px;
-            height: 22px;
-            background-color: #1E293B;
-            color: white;
-            border-radius: 50%;
-            font-size: 11px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 3px solid #F8FAFC;
-            box-sizing: content-box;
-        }
-
-        .htd-title {
-            font-size: 15px;
-            font-weight: 800;
-            color: #0F172A;
-            margin-bottom: 12px;
-        }
-
-        .htd-desc {
-            font-size: 12px;
-            color: #64748B;
-            line-height: 1.6;
-            font-weight: 500;
-        }
-
-        @media (max-width: 768px) {
-            .htd-steps {
-                flex-direction: column;
-                gap: 48px;
-            }
-            .htd-steps::before {
-                display: none;
-            }
-        }
-
-        /* Donation Section */
-        .donation-section {
-            padding: 80px 40px 100px;
-            max-width: 1280px;
-            margin: 0 auto;
-            position: relative;
-            background-color: #FFFFFF;
-            border-radius: 40px;
-        }
-
-        /* Ambient backgrounds */
-        .ambient-glow-left {
-            position: absolute;
-            top: 20%;
-            left: -10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(239,68,68,0.06) 0%, rgba(255,255,255,0) 70%);
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .ambient-glow-right {
-            position: absolute;
-            bottom: -10%;
-            right: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, rgba(255,255,255,0) 70%);
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .donation-header {
-            text-align: center;
-            margin-bottom: 48px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .donation-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            color: #D62828;
-            font-size: 13px;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-
-        .donation-label::before,
-        .donation-label::after {
-            content: '';
-            width: 32px;
-            height: 1px;
-            background-color: #D62828;
-            opacity: 0.5;
-        }
-
-        .donation-title {
-            font-size: 40px;
-            font-weight: 800;
-            color: #0F172A;
-            margin-bottom: 16px;
-        }
-
-        .donation-subtitle {
-            font-size: 15px;
-            color: #64748B;
-            max-width: 500px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        .donation-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .donate-card {
-            background-color: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 20px 25px -5px rgba(0, 0, 0, 0.05);
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .donate-card:hover {
-            transform: translateY(-8px);
-        }
-
-        .d-card-image {
-            position: relative;
-            height: 220px;
-        }
-
-        .d-card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .d-card-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
-        }
-
-        .d-badge-group {
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            display: flex;
-            gap: 8px;
-        }
-
-        .d-badge {
-            background-color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 800;
-            color: #0F172A;
-        }
-
-        .d-badge.warning {
-            background-color: #F59E0B;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .d-timer {
-            position: absolute;
-            bottom: 16px;
-            right: 16px;
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .d-card-body {
-            padding: 24px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .d-card-title {
-            font-size: 17px;
-            font-weight: 800;
-            color: #0F172A;
-            line-height: 1.4;
-            margin-bottom: 24px;
-        }
-
-        .d-progress-wrap {
-            margin-bottom: 24px;
-            margin-top: auto;
-        }
-
-        .d-progress-stats {
-            display: flex;
-            justify-content: space-between;
-            font-size: 11px;
-            margin-bottom: 10px;
-        }
-
-        .d-terkumpul {
-            color: #94A3B8;
-            font-weight: 500;
-        }
-
-        .d-terkumpul span {
-            color: #D62828;
-            font-weight: 800;
-        }
-
-        .d-donatur {
-            color: #94A3B8;
-            font-weight: 500;
-        }
-
-        .d-progress-bar {
-            width: 100%;
-            height: 6px;
-            background-color: #E2E8F0;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 16px;
-        }
-
-        .d-progress-fill {
-            height: 100%;
-            background-color: #D62828;
-            border-radius: 10px;
-        }
-
-        .d-amount-row {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .d-amount-current {
-            font-size: 18px;
-            font-weight: 800;
-            color: #0F172A;
-        }
-
-        .d-amount-target {
-            font-size: 11px;
-            color: #94A3B8;
-            font-weight: 500;
-        }
-
-        .btn-donate-full {
-            display: block;
-            width: 100%;
-            text-align: center;
-            background-color: var(--primary);
-            color: white;
-            padding: 14px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 14px;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-
-        .btn-donate-full:hover {
-            background-color: var(--primary-dark);
-        }
-
-        @media (max-width: 1024px) {
-            .donation-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .donation-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Gallery Section (Bento Grid) */
-        .gallery-section {
-            padding: 100px 40px;
-            max-width: 1280px;
-            margin: 0 auto;
-            background-color: #FFFFFF;
-            border-radius: 40px;
-        }
-
-        .gallery-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 48px;
-        }
-
-        .gallery-header-left {
-            max-width: 600px;
-        }
-
-        .gallery-title {
-            font-size: 40px;
-            font-weight: 800;
-            color: #0F172A;
-            line-height: 1.2;
-            margin-bottom: 0;
-        }
-        
-        .gallery-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: #0F172A;
-            font-size: 14px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: color 0.2s;
-            margin-bottom: 8px; /* align nicely with the text */
-        }
-        
-        .gallery-link:hover {
-            color: #D62828;
-        }
-
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(2, 280px);
-            gap: 24px;
-        }
-
-        .bento-item {
-            border-radius: 24px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .bento-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .bento-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .bento-1 {
-            grid-column: span 1;
-            grid-row: span 2;
-        }
-
-        .bento-2 {
-            grid-column: span 2;
-            grid-row: span 1;
-        }
-
-        .bento-3 {
-            grid-column: span 1;
-            grid-row: span 1;
-        }
-
-        .bento-4 {
-            grid-column: span 1;
-            grid-row: span 1;
-        }
-        
-        .bento-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 32px 24px 24px;
-            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
-            color: white;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        @media (max-width: 1024px) {
-            .bento-grid {
-                grid-template-columns: repeat(2, 1fr);
-                grid-template-rows: auto;
-            }
-            .bento-1 {
-                grid-column: span 2;
-                height: 400px;
-            }
-            .bento-2 {
-                grid-column: span 2;
-                height: 300px;
-            }
-            .bento-3, .bento-4 {
-                grid-column: span 1;
-                height: 250px;
-            }
-            .gallery-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 24px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .bento-grid {
-                grid-template-columns: 1fr;
-            }
-            .bento-1, .bento-2, .bento-3, .bento-4 {
-                grid-column: span 1;
-                height: 300px;
-            }
-        }
-
-        /* Testimonial & Partners Section */
-        .tp-section {
-            background-color: #1E293B; /* Or #0F172A depending on color picker */
-            padding: 100px 24px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tp-ambient {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(239,68,68,0.05) 0%, rgba(30,41,59,0) 60%);
-            pointer-events: none;
-            transform: translate(30%, -30%);
-        }
-
-        .tp-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 64px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Left: Testimonial */
-        .tp-left {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .tp-quote-icon {
-            color: #D62828;
-            margin-bottom: 24px;
-            opacity: 0.9;
-        }
-
-        .tp-quote-text {
-            font-size: 32px;
-            font-weight: 800;
-            color: white;
-            line-height: 1.4;
-            margin-bottom: 32px;
-        }
-
-        .tp-profile {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 48px;
-        }
-
-        .tp-avatar-wrapper {
-            position: relative;
-            width: 56px;
-            height: 56px;
-        }
-
-        .tp-avatar {
-            width: 100%;
-            height: 100%;
-            border-radius: 12px;
-            object-fit: cover;
-        }
-
-        .tp-status-dot {
-            position: absolute;
-            bottom: -2px;
-            right: -2px;
-            width: 14px;
-            height: 14px;
-            background-color: #10B981;
-            border: 2px solid #1E293B;
-            border-radius: 50%;
-        }
-
-        .tp-name {
-            font-size: 16px;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 4px;
-        }
-
-        .tp-role {
-            font-size: 13px;
-            color: #94A3B8;
-        }
-
-        .tp-rating {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .tp-stars {
-            display: flex;
-            gap: 4px;
-            color: #F59E0B;
-        }
-
-        .tp-rating-text {
-            font-size: 13px;
-            color: #94A3B8;
-        }
-
-        /* Right: Partners */
-        .tp-right {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .tp-right-label {
-            font-size: 12px;
-            font-weight: 700;
-            color: #94A3B8;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 24px;
-        }
-
-        .tp-partners-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-
-        .tp-partner-box {
-            background-color: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 16px 20px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            transition: background-color 0.2s;
-        }
-        
-        .tp-partner-box:hover {
-            background-color: rgba(255, 255, 255, 0.08);
-        }
-
-        .tp-partner-icon {
-            color: #94A3B8;
-            width: 24px;
-            height: 24px;
-            flex-shrink: 0;
-        }
-
-        .c-gov { color: #E2E8F0; }
-        .c-corp { color: #E2E8F0; }
-        .c-edu { color: #F59E0B; }
-        .c-ngo { color: #3B82F6; }
-
-        .tp-partner-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .tp-partner-name {
-            font-size: 14px;
-            font-weight: 700;
-            color: white;
-        }
-
-        .tp-partner-cat {
-            font-size: 11px;
-            color: #64748B;
-        }
-
-        .tp-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .tp-badge {
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 8px 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 12px;
-            color: #E2E8F0;
-            font-weight: 600;
-        }
-
-        .tp-badge svg {
-            color: #10B981; /* teal/emerald */
-            width: 14px;
-            height: 14px;
-        }
-
-        @media (max-width: 1024px) {
-            .tp-container {
-                grid-template-columns: 1fr;
-                gap: 80px;
-            }
-            .tp-quote-text {
-                font-size: 28px;
-            }
-        }
-        @media (max-width: 640px) {
-            .tp-partners-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* News Section */
-        .news-section {
-            padding: 100px 24px;
-            max-width: 1280px;
-            margin: 0 auto;
-            background-color: #FBFAF7;
-        }
-
-        .news-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 48px;
-        }
-
-        .news-header-left {
-            max-width: 600px;
-        }
-
-        .news-title {
-            font-size: 40px;
-            font-weight: 800;
-            color: #0F172A;
-            line-height: 1.2;
-            margin-bottom: 0;
-        }
-
-        .news-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: #1E293B;
-            font-size: 14px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: color 0.2s;
-            margin-bottom: 8px;
-        }
-        
-        .news-link:hover {
-            color: #D62828;
-        }
-
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        .news-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-            border: 1px solid #F1F5F9;
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .news-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-        }
-
-        .news-image-wrapper {
-            position: relative;
-            height: 240px;
-            overflow: hidden;
-        }
-
-        .news-image-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .news-card:hover .news-image-wrapper img {
-            transform: scale(1.05);
-        }
-
-        .news-badge {
-            position: absolute;
-            bottom: 16px;
-            left: 16px;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            color: white;
-            z-index: 2;
-        }
-
-        .badge-red { background-color: #D62828; }
-        .badge-blue { background-color: #3B82F6; }
-        .badge-green { background-color: #10B981; }
-
-        .news-content {
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .news-meta {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            font-size: 12px;
-            color: #94A3B8;
-            margin-bottom: 12px;
-            font-weight: 500;
-        }
-        
-        .news-meta-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .news-meta-item svg {
-            width: 14px;
-            height: 14px;
-        }
-
-        .news-card-title {
-            font-size: 18px;
-            font-weight: 800;
-            color: #0F172A;
-            line-height: 1.4;
-            margin-bottom: 12px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .news-card-desc {
-            font-size: 13px;
-            color: #64748B;
-            line-height: 1.6;
-            margin-bottom: 24px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            flex-grow: 1;
-        }
-
-        .news-read-more {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: #D62828;
-            font-size: 13px;
-            font-weight: 700;
-            text-decoration: none;
-        }
-
-        .news-read-more:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 1024px) {
-            .news-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .news-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 24px;
-            }
-        }
-        @media (max-width: 768px) {
-            .news-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* CTA / Newsletter Section */
-        .cta-section {
-            padding: 40px 24px 100px;
-            max-width: 1280px;
-            margin: 0 auto;
-            background-color: #FBFAF7;
-        }
-
-        .cta-box {
-            background: linear-gradient(135deg, #D62828 0%, #DC2626 100%);
-            border-radius: 32px;
-            padding: 80px 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 40px 100px -20px rgba(239, 68, 68, 0.4);
-        }
-
-        /* Subtle dot pattern background */
-        .cta-box::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px);
-            background-size: 24px 24px;
-            opacity: 0.6;
-            pointer-events: none;
-        }
-
-        .cta-content {
-            position: relative;
-            z-index: 2;
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .cta-icon-wrapper {
-            width: 48px;
-            height: 48px;
-            background-color: rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            margin-bottom: 24px;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .cta-title {
-            font-size: 36px;
-            font-weight: 800;
-            color: white;
-            margin-bottom: 16px;
-            line-height: 1.2;
-        }
-
-        .cta-desc {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 40px;
-            line-height: 1.6;
-            font-weight: 500;
-        }
-
-        .cta-form {
-            display: flex;
-            gap: 12px;
-            width: 100%;
-            max-width: 480px;
-        }
-
-        .cta-input {
-            flex-grow: 1;
-            padding: 0 24px;
-            height: 48px;
-            border-radius: 24px;
-            border: 2px solid transparent;
-            background-color: white;
-            font-size: 14px;
-            font-family: inherit;
-            outline: none;
-            transition: all 0.2s;
-        }
-
-        .cta-input:focus {
-            border-color: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
-        }
-
-        .cta-input::placeholder {
-            color: #94A3B8;
-        }
-
-        .cta-button {
-            height: 48px;
-            padding: 0 32px;
-            border-radius: 24px;
-            background-color: #1E293B;
-            color: white;
-            font-weight: 700;
-            font-size: 14px;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.2s, transform 0.2s;
-            font-family: inherit;
-        }
-
-        .cta-button:hover {
-            background-color: #0F172A;
-            transform: translateY(-2px);
-        }
-        
-        .cta-button:active {
-            transform: translateY(0);
-        }
-
-        @media (max-width: 640px) {
-            .cta-form {
-                flex-direction: column;
-            }
-            .cta-box {
-                padding: 60px 24px;
-            }
-            .cta-title {
-                font-size: 28px;
-            }
-        }
-
-        /* Footer Section */
-        .footer {
-            background-color: #0F172A; /* Darker blue for footer */
-            color: #94A3B8;
-            padding: 80px 24px 40px;
-            position: relative;
-        }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 35%;
-            height: 4px;
-            background-color: #D62828;
-        }
-
-        .footer-container {
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 48px;
-            margin-bottom: 64px;
-        }
-
-        .footer-brand {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: white;
-            text-decoration: none;
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-
-        .footer-desc {
-            font-size: 14px;
-            line-height: 1.6;
-            max-width: 320px;
-        }
-
-        .footer-socials {
-            display: flex;
-            gap: 12px;
-        }
-
-        .social-link {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #1E293B;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #94A3B8;
-            transition: all 0.2s;
-            text-decoration: none;
-        }
-
-        .social-link:hover {
-            background-color: #D62828;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .footer-title {
-            font-size: 12px;
-            font-weight: 700;
-            color: white;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 24px;
-        }
-
-        .footer-links {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .footer-link {
-            color: #94A3B8;
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.2s;
-        }
-
-        .footer-link:hover {
-            color: white;
-        }
-
-        .footer-contact {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .contact-icon {
-            width: 20px;
-            height: 20px;
-            color: #D62828;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .btn-download {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 24px;
-            background-color: #1E293B;
-            color: white;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-            margin-top: 12px;
-            transition: background-color 0.2s;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            width: fit-content;
-        }
-
-        .btn-download:hover {
-            background-color: #334155;
-        }
-
-        .footer-bottom {
-            padding-top: 32px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-        }
-
-        .footer-bottom-links {
-            display: flex;
-            gap: 24px;
-            align-items: center;
-        }
-        
-        .footer-dot {
-            width: 4px;
-            height: 4px;
-            background-color: #64748B;
-            border-radius: 50%;
-        }
-
-        @media (max-width: 1024px) {
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (max-width: 640px) {
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-            .footer-bottom {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 16px;
-            }
-            .footer-bottom-links {
-                flex-wrap: wrap;
-                gap: 12px;
-            }
-        }
+        .css-uwf2km {position: relative; flex: 1 0 0; display: block;}
+        .css-fou3uo {min-height: 1px; width: 100%; height: 100dvh;}
     </style>
 </head>
 <body>
-
-    <div class="hero">
-        <div class="container">
-            <!-- Navbar -->
-            <nav class="navbar">
-                <a href="#" class="logo">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#D62828"/>
-                    </svg>
-                    <div>
-                        Bakti <span>Merah Putih</span>
-                    </div>
-                </a>
-
-                <div class="nav-links">
-                    <a href="#" class="nav-link active">Beranda</a>
-                    <a href="#" class="nav-link">Tentang Kami</a>
-                    <a href="#" class="nav-link">Program</a>
-                    <a href="#" class="nav-link">Donasi</a>
-                    <a href="#" class="nav-link">Laporan</a>
-                    <a href="#" class="nav-link">Artikel</a>
-                    <a href="#" class="nav-link">Galeri</a>
-                    <a href="#" class="nav-link">Relawan</a>
-                    <a href="#" class="nav-link">Kontak</a>
-                </div>
-
-                <a href="#" class="btn btn-primary">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                    </svg>
-                    Donasi Sekarang
-                </a>
-            </nav>
-
-            <!-- Main Content -->
-            <div class="hero-content">
-                <!-- Left Column -->
-                <div class="content-text">
-                    <div class="badge-top">
-                        <div class="dot"></div>
-                        Yayasan Sosial & Kemanusiaan — Est. 2015
-                    </div>
-
-                    <h1 class="headline">
-                        Bersama Menebar <br>
-                        <span class="highlight">Kebaikan</span> untuk <br>
-                        Indonesia.
-                    </h1>
-
-                    <p class="description">
-                        Bakti Merah Putih bergerak di bidang pendidikan, kesehatan, lingkungan, dan kemanusiaan untuk menghadirkan perubahan nyata bagi jutaan masyarakat di seluruh pelosok Indonesia.
-                    </p>
-
-                    <div class="cta-group">
-                        <a href="#" class="btn btn-primary" style="padding: 16px 32px; font-size: 16px;">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                            </svg>
-                            Donasi Sekarang 
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                        </a>
-                        <a href="#" class="btn btn-outline" style="padding: 16px 32px; font-size: 16px;">
-                            Lihat Program
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px;"><path d="M9 18l6-6-6-6"/></svg>
-                        </a>
-                    </div>
-
-                    <div class="trust-badges-bottom">
-                        <div class="trust-badge-item">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                            Terverifikasi Kemenkumham
-                        </div>
-                        <div class="trust-badge-item">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                            Laporan Audit Terbuka
-                        </div>
-                        <div class="trust-badge-item">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                            Donasi Real-time
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Column (Glass Card) -->
-                <div class="glass-card">
-                    <div class="card-header">
-                        <div class="card-header-icon">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                        </div>
-                        Dampak Kebaikan Kita
-                    </div>
-
-                    <div class="stats-list">
-                        <div class="stat-item">
-                            <div class="stat-icon icon-red">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path></svg>
-                            </div>
-                            <div class="stat-info">
-                                <h3>Rp 12,85 M</h3>
-                                <p>Total Donasi</p>
-                            </div>
-                        </div>
-
-                        <div class="stat-item">
-                            <div class="stat-icon icon-blue">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                            </div>
-                            <div class="stat-info">
-                                <h3>12.500+</h3>
-                                <p>Penerima Manfaat</p>
-                            </div>
-                        </div>
-
-                        <div class="stat-item">
-                            <div class="stat-icon icon-green">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-                            </div>
-                            <div class="stat-info">
-                                <h3>78</h3>
-                                <p>Program Aktif</p>
-                            </div>
-                        </div>
-
-                        <div class="stat-item">
-                            <div class="stat-icon icon-orange">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                            </div>
-                            <div class="stat-info">
-                                <h3>5.000+</h3>
-                                <p>Donatur Setia</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="update-card">
-                        <div class="update-badge">
-                            <div class="dot"></div> Update terbaru
-                        </div>
-                        <p class="update-text">
-                            "Relawan kami baru saja menyelesaikan distribusi ke 120 keluarga terdampak banjir di Kalimantan Selatan."
-                        </p>
-                        <p class="update-meta">— 2 jam lalu - Tim Lapangan</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="pagination">
-            <div class="page-dot active"></div>
-            <div class="page-dot"></div>
-            <div class="page-dot"></div>
-        </div>
-
-    </div>
-
-    <!-- Stats Bar -->
-    <div class="stats-floating">
-        <div class="stat-box">
-            <div class="stat-box-icon red">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-            </div>
-            <h3>12.500+</h3>
-            <p>Penerima Manfaat</p>
-        </div>
-        <div class="stat-box">
-            <div class="stat-box-icon blue">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-            </div>
-            <h3>350+</h3>
-            <p>Program Sosial</p>
-        </div>
-        <div class="stat-box">
-            <div class="stat-box-icon green">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-            </div>
-            <h3>28</h3>
-            <p>Provinsi</p>
-        </div>
-        <div class="stat-box">
-            <div class="stat-box-icon red">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-            </div>
-            <h3>5.000+</h3>
-            <p>Donatur</p>
-        </div>
-        <div class="stat-box">
-            <div class="stat-box-icon orange">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-            </div>
-            <h3>700+</h3>
-            <p>Relawan Aktif</p>
-        </div>
-    </div>
-
-    <!-- Program Kami Section -->
-    <section class="program-section">
-        <div class="section-header">
-            <div>
-                <div class="section-label">PROGRAM KAMI</div>
-                <h2 class="section-title">Bersama Hadirkan<br>Perubahan Nyata</h2>
-            </div>
-            <a href="#" class="btn-link">
-                Lihat Semua Program
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-        </div>
-
-        <div class="program-grid">
-            <!-- Card 1 -->
-            <div class="program-card">
-                <div class="card-image-wrap">
-                    <img src="/images/program-guru.png" alt="Bakti Guru" class="card-image">
-                    <div class="card-badge blue">Pendidikan</div>
-                    <div class="card-icon-float blue">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <h3 class="card-title">Bakti Guru</h3>
-                    <p class="card-desc">Melatih dan mendampingi guru-guru di wilayah 3T agar mampu menghadirkan pendidikan berkualitas bagi generasi penerus bangsa.</p>
-                    <div class="card-footer">
-                        <span class="card-stat">1.200 guru didampingi</span>
-                        <a href="#" class="card-link blue">
-                            Selengkapnya 
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="program-card">
-                <div class="card-image-wrap">
-                    <img src="/images/program-beasiswa.png" alt="Bakti Pendidikan" class="card-image">
-                    <div class="card-badge red">Beasiswa</div>
-                    <div class="card-icon-float red">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <h3 class="card-title">Bakti Pendidikan</h3>
-                    <p class="card-desc">Memberikan beasiswa penuh dan perlengkapan belajar bagi anak-anak dari keluarga prasejahtera di seluruh kepulauan Indonesia.</p>
-                    <div class="card-footer">
-                        <span class="card-stat">4.500 beasiswa aktif</span>
-                        <a href="#" class="card-link red">
-                            Selengkapnya 
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="program-card">
-                <div class="card-image-wrap">
-                    <img src="/images/program-lingkungan.png" alt="Bakti Lingkungan" class="card-image">
-                    <div class="card-badge green">Lingkungan</div>
-                    <div class="card-icon-float green">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <h3 class="card-title">Bakti Lingkungan</h3>
-                    <p class="card-desc">Penanaman pohon, pengelolaan sampah komunitas, dan edukasi lingkungan hidup untuk menjaga keasrian alam Indonesia.</p>
-                    <div class="card-footer">
-                        <span class="card-stat">180.000 pohon ditanam</span>
-                        <a href="#" class="card-link green">
-                            Selengkapnya 
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="program-card">
-                <div class="card-image-wrap">
-                    <img src="/images/program-kesehatan.png" alt="Bakti Kesehatan" class="card-image">
-                    <div class="card-badge orange">Kesehatan</div>
-                    <div class="card-icon-float orange">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <h3 class="card-title">Bakti Kesehatan</h3>
-                    <p class="card-desc">Klinik keliling, pemeriksaan gratis, dan penyuluhan gizi bagi masyarakat terpencil yang jauh dari fasilitas layanan kesehatan.</p>
-                    <div class="card-footer">
-                        <span class="card-stat">38.000 pasien dilayani</span>
-                        <a href="#" class="card-link orange">
-                            Selengkapnya 
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Donation Section -->
-    <section class="donation-section">
-        <div class="ambient-glow-left"></div>
-        <div class="ambient-glow-right"></div>
-        
-        <div class="donation-header">
-            <div class="donation-label">DONASI TERBUKA</div>
-            <h2 class="donation-title">Program Terbaru</h2>
-            <p class="donation-subtitle">Pilih program yang menyentuh hati Anda. Setiap donasi tercatat transparan.</p>
-        </div>
-
-        <div class="donation-grid">
-            <!-- Card 1 -->
-            <div class="donate-card">
-                <div class="d-card-image">
-                    <img src="/images/donasi-pendidikan.png" alt="Pendidikan">
-                    <div class="d-card-overlay"></div>
-                    <div class="d-badge-group">
-                        <span class="d-badge" style="color: #3B82F6;">Pendidikan</span>
-                    </div>
-                    <div class="d-timer">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                        18 hari lagi
-                    </div>
-                </div>
-                <div class="d-card-body">
-                    <h3 class="d-card-title">Beasiswa untuk 100 Anak Berprestasi di NTT</h3>
-                    <div class="d-progress-wrap">
-                        <div class="d-progress-stats">
-                            <div class="d-terkumpul">Terkumpul <span>75%</span></div>
-                            <div class="d-donatur">843 donatur</div>
-                        </div>
-                        <div class="d-progress-bar">
-                            <div class="d-progress-fill" style="width: 75%;"></div>
-                        </div>
-                        <div class="d-amount-row">
-                            <div class="d-amount-current">Rp 112.500.000</div>
-                            <div class="d-amount-target">dari Rp 150.000.000</div>
-                        </div>
-                    </div>
-                    <a href="#" class="btn-donate-full">Donasi Sekarang</a>
-                </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="donate-card">
-                <div class="d-card-image">
-                    <img src="/images/donasi-pangan.png" alt="Pangan">
-                    <div class="d-card-overlay"></div>
-                    <div class="d-badge-group">
-                        <span class="d-badge" style="color: #F97316;">Pangan</span>
-                        <span class="d-badge warning">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4m0 4h.01"/></svg>
-                            Mendesak
-                        </span>
-                    </div>
-                    <div class="d-timer">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                        9 hari lagi
-                    </div>
-                </div>
-                <div class="d-card-body">
-                    <h3 class="d-card-title">Dapur Umum & Distribusi Pangan Untuk 500 KK Miskin Ekstrem</h3>
-                    <div class="d-progress-wrap">
-                        <div class="d-progress-stats">
-                            <div class="d-terkumpul">Terkumpul <span>82%</span></div>
-                            <div class="d-donatur">1.204 donatur</div>
-                        </div>
-                        <div class="d-progress-bar">
-                            <div class="d-progress-fill" style="width: 82%;"></div>
-                        </div>
-                        <div class="d-amount-row">
-                            <div class="d-amount-current">Rp 163.000.000</div>
-                            <div class="d-amount-target">dari Rp 200.000.000</div>
-                        </div>
-                    </div>
-                    <a href="#" class="btn-donate-full">Donasi Sekarang</a>
-                </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="donate-card">
-                <div class="d-card-image">
-                    <img src="/images/donasi-bencana.png" alt="Kebencanaan">
-                    <div class="d-card-overlay"></div>
-                    <div class="d-badge-group">
-                        <span class="d-badge" style="color: #D62828;">Kebencanaan</span>
-                    </div>
-                    <div class="d-timer">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                        30 hari lagi
-                    </div>
-                </div>
-                <div class="d-card-body">
-                    <h3 class="d-card-title">Pemulihan Pasca Banjir — Membangun Kembali 120 Rumah Warga</h3>
-                    <div class="d-progress-wrap">
-                        <div class="d-progress-stats">
-                            <div class="d-terkumpul">Terkumpul <span>43%</span></div>
-                            <div class="d-donatur">3.102 donatur</div>
-                        </div>
-                        <div class="d-progress-bar">
-                            <div class="d-progress-fill" style="width: 43%;"></div>
-                        </div>
-                        <div class="d-amount-row">
-                            <div class="d-amount-current">Rp 344.000.000</div>
-                            <div class="d-amount-target">dari Rp 800.000.000</div>
-                        </div>
-                    </div>
-                    <a href="#" class="btn-donate-full">Donasi Sekarang</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How To Donate Section -->
-    <section class="how-to-donate">
-        <div class="htd-header donation-header">
-            <div class="donation-label">CARA BERDONASI</div>
-            <h2 class="donation-title">Mudah, Cepat, dan Aman</h2>
-        </div>
-
-        <div class="htd-steps">
-            <!-- Step 1 -->
-            <div class="htd-step-item">
-                <div class="htd-icon-box">
-                    <div class="htd-step-num">1</div>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                </div>
-                <h3 class="htd-title">Pilih Program</h3>
-                <p class="htd-desc">Temukan program yang ingin Anda dukung dari ratusan kampanye terverifikasi</p>
-            </div>
-
-            <!-- Step 2 -->
-            <div class="htd-step-item">
-                <div class="htd-icon-box">
-                    <div class="htd-step-num">2</div>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                </div>
-                <h3 class="htd-title">Isi Nominal</h3>
-                <p class="htd-desc">Tentukan jumlah donasi sesuai kemampuan, mulai dari Rp10.000</p>
-            </div>
-
-            <!-- Step 3 -->
-            <div class="htd-step-item">
-                <div class="htd-icon-box">
-                    <div class="htd-step-num">3</div>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg>
-                </div>
-                <h3 class="htd-title">Pembayaran Aman</h3>
-                <p class="htd-desc">Lebih dari 10 metode pembayaran tersedia, semua terenkripsi SSL</p>
-            </div>
-
-            <!-- Step 4 -->
-            <div class="htd-step-item">
-                <div class="htd-icon-box">
-                    <div class="htd-step-num">4</div>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                </div>
-                <h3 class="htd-title">Berhasil & Tercatat</h3>
-                <p class="htd-desc">Bukti donasi dikirim otomatis ke email Anda dalam hitungan detik</p>
-            </div>
-
-            <!-- Step 5 -->
-            <div class="htd-step-item">
-                <div class="htd-icon-box">
-                    <div class="htd-step-num">5</div>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
-                </div>
-                <h3 class="htd-title">Laporan Transparan</h3>
-                <p class="htd-desc">Pantau penggunaan dana secara real-time lewat dashboard donatur</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section class="gallery-section">
-        <div class="gallery-header">
-            <div class="gallery-header-left">
-                <div class="donation-label" style="justify-content: flex-start;">
-                    <div style="width: 32px; height: 1px; background-color: #D62828; opacity: 0.5;"></div>
-                    GALERI LAPANGAN
-                </div>
-                <h2 class="gallery-title">Wajah Perubahan<br>Nyata</h2>
-            </div>
-            <a href="#" class="gallery-link">
-                Lihat Galeri Lengkap 
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-            </a>
-        </div>
-
-        <div class="bento-grid">
-            <div class="bento-item bento-1">
-                <img src="/images/galeri-1.png" alt="Anak kecil makan">
-            </div>
-            <div class="bento-item bento-2">
-                <img src="/images/galeri-2.png" alt="Anak-anak ceria membentuk tanda perdamaian">
-                <div class="bento-caption">Lima anak ceria membentuk tanda perdamaian bersama relawan</div>
-            </div>
-            <div class="bento-item bento-3">
-                <img src="/images/galeri-3.png" alt="Ibu menenun kain">
-            </div>
-            <div class="bento-item bento-4">
-                <img src="/images/galeri-4.png" alt="Warga desa di sore hari">
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Testimonial & Partners Section -->
-    <section class="tp-section">
-        <div class="tp-ambient"></div>
-        <div class="tp-container">
-            <!-- Left: Testimonial -->
-            <div class="tp-left">
-                <div class="donation-label" style="justify-content: flex-start; margin-bottom: 24px;">
-                    <div style="width: 32px; height: 1px; background-color: #D62828; opacity: 0.5;"></div>
-                    KISAH NYATA
-                </div>
+    <div id="container">
+        <div class="css-uwf2km css-fou3uo tailwind">
+            <div class="min-h-screen bg-[#FBFAF7] text-[#1B1B1B] antialiased selection:bg-[#D62828] selection:text-white" style="font-family: Inter, sans-serif;">
                 
-                <div class="tp-quote-icon">
-                    <span style="font-family: Georgia, serif; font-size: 80px; line-height: 0; position: relative; top: 20px;">&ldquo;</span>
-                </div>
-
-                <h2 class="tp-quote-text">"Beasiswa dari Bakti Merah Putih membuat saya bisa kembali bersekolah dan meraih mimpi menjadi guru."</h2>
-
-                <div class="tp-profile">
-                    <div class="tp-avatar-wrapper">
-                        <img src="/images/galeri-1.png" alt="Siti Rahayu" class="tp-avatar">
-                        <div class="tp-status-dot"></div>
-                    </div>
-                    <div>
-                        <div class="tp-name">Siti Rahayu, 16 tahun</div>
-                        <div class="tp-role">Penerima Beasiswa 2025 — Nusa Tenggara Timur</div>
-                    </div>
-                </div>
-
-                <div class="tp-rating">
-                    <div class="tp-stars">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                    </div>
-                    <div class="tp-rating-text">4.9/5 dari 1.200+ ulasan donatur</div>
-                </div>
-            </div>
-
-            <!-- Right: Partners -->
-            <div class="tp-right">
-                <div class="tp-right-label">DIPERCAYA & DIDUKUNG OLEH</div>
-                
-                <div class="tp-partners-grid">
-                    <!-- Partner 1 -->
-                    <div class="tp-partner-box">
-                        <svg class="tp-partner-icon c-gov" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M16 6h.01"></path><path d="M12 6h.01"></path><path d="M12 10h.01"></path><path d="M12 14h.01"></path><path d="M16 10h.01"></path><path d="M16 14h.01"></path><path d="M8 10h.01"></path><path d="M8 14h.01"></path></svg>
-                        <div class="tp-partner-info">
-                            <div class="tp-partner-name">Kemendikbud RI</div>
-                            <div class="tp-partner-cat">Pemerintah</div>
-                        </div>
-                    </div>
-                    <!-- Partner 2 -->
-                    <div class="tp-partner-box">
-                        <svg class="tp-partner-icon c-gov" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"></path><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"></path></svg>
-                        <div class="tp-partner-info">
-                            <div class="tp-partner-name">Kemenkes RI</div>
-                            <div class="tp-partner-cat">Pemerintah</div>
-                        </div>
-                    </div>
-                    <!-- Partner 3 -->
-                    <div class="tp-partner-box">
-                        <svg class="tp-partner-icon c-corp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-                        <div class="tp-partner-info">
-                            <div class="tp-partner-name">Bank BRI</div>
-                            <div class="tp-partner-cat">Perusahaan</div>
-                        </div>
-                    </div>
-                    <!-- Partner 4 -->
-                    <div class="tp-partner-box">
-                        <svg class="tp-partner-icon c-corp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
-                        <div class="tp-partner-info">
-                            <div class="tp-partner-name">Telkom Indonesia</div>
-                            <div class="tp-partner-cat">Perusahaan</div>
-                        </div>
-                    </div>
-                    <!-- Partner 5 -->
-                    <div class="tp-partner-box">
-                        <svg class="tp-partner-icon c-edu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
-                        <div class="tp-partner-info">
-                            <div class="tp-partner-name">Universitas Indonesia</div>
-                            <div class="tp-partner-cat">Akademik</div>
-                        </div>
-                    </div>
-                    <!-- Partner 6 -->
-                    <div class="tp-partner-box">
-                        <svg class="tp-partner-icon c-edu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
-                        <div class="tp-partner-info">
-                            <div class="tp-partner-name">UGM Yogyakarta</div>
-                            <div class="tp-partner-cat">Akademik</div>
-                        </div>
-                    </div>
-                    <!-- Partner 7 -->
-                    <div class="tp-partner-box">
-                        <svg class="tp-partner-icon c-ngo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                        <div class="tp-partner-info">
-                            <div class="tp-partner-name">BNPB</div>
-                            <div class="tp-partner-cat">NGO / Lembaga</div>
-                        </div>
-                    </div>
-                    <!-- Partner 8 -->
-                    <div class="tp-partner-box">
-                        <svg class="tp-partner-icon c-ngo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                        <div class="tp-partner-info">
-                            <div class="tp-partner-name">UNDP Indonesia</div>
-                            <div class="tp-partner-cat">NGO / Lembaga</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tp-badges">
-                    <div class="tp-badge">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
-                        Legalitas Resmi
-                    </div>
-                    <div class="tp-badge">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                        Terdaftar Kemenkumham
-                    </div>
-                    <div class="tp-badge">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
-                        ISO 9001:2015
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- News Section -->
-    <section class="news-section">
-        <div class="news-header">
-            <div class="news-header-left">
-                <div class="donation-label" style="justify-content: flex-start;">
-                    <div style="width: 32px; height: 1px; background-color: #D62828; opacity: 0.5;"></div>
-                    BERITA & CERITA
-                </div>
-                <h2 class="news-title">Dari Lapangan</h2>
-            </div>
-            <a href="#" class="news-link">
-                Semua Artikel 
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
-            </a>
-        </div>
-
-        <div class="news-grid">
-            <!-- News 1 -->
-            <div class="news-card">
-                <div class="news-image-wrapper">
-                    <img src="/images/galeri-2.png" alt="Program Beasiswa">
-                    <div class="news-badge badge-red">Program</div>
-                </div>
-                <div class="news-content">
-                    <div class="news-meta">
-                        <div class="news-meta-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                            15 Juli 2026
-                        </div>
-                        <div class="news-meta-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                            4 menit baca
-                        </div>
-                    </div>
-                    <h3 class="news-card-title">500 Anak NTT Terima Beasiswa Bakti Merah Putih 2026</h3>
-                    <p class="news-card-desc">Program beasiswa tahunan kami kembali menyentuh ratusan kehidupan di ujung timur Indonesia.</p>
-                    <div>
-                        <a href="#" class="news-read-more">Baca Selengkapnya &rarr;</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- News 2 -->
-            <div class="news-card">
-                <div class="news-image-wrapper">
-                    <img src="/images/donasi-bencana.png" alt="Relawan Banjir">
-                    <div class="news-badge badge-blue">Kebencanaan</div>
-                </div>
-                <div class="news-content">
-                    <div class="news-meta">
-                        <div class="news-meta-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                            8 Juli 2026
-                        </div>
-                        <div class="news-meta-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                            6 menit baca
-                        </div>
-                    </div>
-                    <h3 class="news-card-title">Sigap di Lapangan: Tim Relawan Bakti Pulihkan 3 Desa Pasca Banjir</h3>
-                    <p class="news-card-desc">Dalam 48 jam pertama, 120 relawan kami bergerak cepat mendistribusikan logistik.</p>
-                    <div>
-                        <a href="#" class="news-read-more">Baca Selengkapnya &rarr;</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- News 3 -->
-            <div class="news-card">
-                <div class="news-image-wrapper">
-                    <img src="/images/program-lingkungan.png" alt="Menanam Pohon">
-                    <div class="news-badge badge-green">Lingkungan</div>
-                </div>
-                <div class="news-content">
-                    <div class="news-meta">
-                        <div class="news-meta-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                            1 Juli 2026
-                        </div>
-                        <div class="news-meta-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                            5 menit baca
-                        </div>
-                    </div>
-                    <h3 class="news-card-title">Gerakan 10.000 Pohon: Pulihkan Ekosistem Hutan Sulawesi</h3>
-                    <p class="news-card-desc">Bersama komunitas adat dan 700 donatur setia, kami menghijaukan 45 hektar lahan kritis.</p>
-                    <div>
-                        <a href="#" class="news-read-more">Baca Selengkapnya &rarr;</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA / Newsletter Section -->
-    <section class="cta-section">
-        <div class="cta-box">
-            <div class="cta-content">
-                <div class="cta-icon-wrapper">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                </div>
-                <h2 class="cta-title">Dapatkan Update Kegiatan<br>Kami</h2>
-                <p class="cta-desc">Ikuti perkembangan program dan dampak donasi Anda langsung di inbox.<br>Tanpa spam, selamanya.</p>
-                <form class="cta-form" action="#" method="POST" onsubmit="event.preventDefault();">
-                    <input type="email" class="cta-input" placeholder="nama@email.com" required>
-                    <button type="submit" class="cta-button">Daftar Sekarang</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-grid">
-                <!-- Column 1 -->
-                <div class="footer-brand">
-                    <a href="#" class="footer-logo">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="24" height="24" rx="8" fill="#D62828"/>
-                            <path d="M12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18C15.3137 18 18 15.3137 18 12" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M12 6V18" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                        Bakti Merah Putih
-                    </a>
-                    <p class="footer-desc">Bergerak bersama untuk Indonesia yang lebih baik. Sejak 2015, kami telah menyentuh jutaan kehidupan di 28 provinsi.</p>
-                    <div class="footer-socials">
-                        <a href="#" class="social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-                        <a href="#" class="social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-                        <a href="#" class="social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
-                        <a href="#" class="social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg></a>
-                    </div>
-                </div>
-
-                <!-- Column 2 -->
-                <div>
-                    <h3 class="footer-title">NAVIGASI</h3>
-                    <ul class="footer-links">
-                        <li><a href="#" class="footer-link">Beranda</a></li>
-                        <li><a href="#" class="footer-link">Tentang Kami</a></li>
-                        <li><a href="#" class="footer-link">Program</a></li>
-                        <li><a href="#" class="footer-link">Donasi</a></li>
-                        <li><a href="#" class="footer-link">Laporan & Keuangan</a></li>
-                    </ul>
-                </div>
-
-                <!-- Column 3 -->
-                <div>
-                    <h3 class="footer-title">PROGRAM</h3>
-                    <ul class="footer-links">
-                        <li><a href="#" class="footer-link">Bakti Guru</a></li>
-                        <li><a href="#" class="footer-link">Bakti Pendidikan</a></li>
-                        <li><a href="#" class="footer-link">Bakti Lingkungan</a></li>
-                        <li><a href="#" class="footer-link">Bakti Kesehatan</a></li>
-                        <li><a href="#" class="footer-link">Bakti Pangan & Gizi</a></li>
-                        <li><a href="#" class="footer-link">Bakti Bencana</a></li>
-                    </ul>
-                </div>
-
-                <!-- Column 4 -->
-                <div>
-                    <h3 class="footer-title">KONTAK</h3>
-                    <div class="footer-contact">
-                        <div class="contact-item">
-                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                            <span>Jl. Sudirman No. 45, Kel. Karet Semanggi, Jakarta Pusat 10220</span>
-                        </div>
-                        <div class="contact-item">
-                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                            <span>+62 21 5550 1234</span>
-                        </div>
-                        <div class="contact-item">
-                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                            <span>info@baktimerahputih.org</span>
-                        </div>
-                        <a href="#" class="btn-download">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                            Unduh Laporan 2025
+                <header class="fixed top-0 inset-x-0 z-50 transition-all duration-300 bg-transparent" style="height: 88px;">
+                    <div class="absolute top-0 inset-x-0 h-[3px] transition-opacity duration-300 opacity-100" style="background: linear-gradient(90deg, rgb(214, 40, 40), rgb(214, 40, 40) 50%, rgb(255, 255, 255) 50%);"></div>
+                    <div class="max-w-[1280px] mx-auto px-6 h-full flex items-center justify-between gap-6">
+                        <a href="#" class="shrink-0 block">
+                            <img src="/images/logo.png" alt="Bakti Merah Putih" class="h-14 w-auto object-contain transition-opacity duration-300">
                         </a>
+                        <nav class="hidden xl:flex items-center gap-0.5">
+                            <button class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#D62828] text-white/80 hover:text-white">
+                                Beranda
+                                <span class="absolute left-1/2 -translate-x-1/2 -bottom-0.5 w-1.5 h-1.5 rounded-full bg-[#D62828]" style="transform: none; transform-origin: 50% 50% 0px; opacity: 1;"></span>
+                            </button>
+                            <button class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">Tentang Kami</button>
+                            <button class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">Program</button>
+                            <button class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">Donasi</button>
+                            <button class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">Laporan</button>
+                            <button class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">Artikel</button>
+                            <button class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">Galeri</button>
+                            <button class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">Relawan</button>
+                            <button class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">Kontak</button>
+                        </nav>
+                        <div class="flex items-center gap-3">
+                            <button class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-[#D62828] text-white rounded-full text-[13px] font-bold hover:bg-[#B91C1C] transition-all duration-200 shadow-[0_8px_20px_-8px_rgba(214,40,40,0.7)] hover:shadow-[0_10px_26px_-8px_rgba(214,40,40,0.85)] hover:-translate-y-0.5" onclick="window.location.href='/login'">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4 fill-white shrink-0"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+                                Donasi Sekarang
+                            </button>
+                            <button class="xl:hidden p-2.5 rounded-xl hover:bg-black/5 transition-colors" style="color: white;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu w-5 h-5"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+                            </button>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </header>
 
-            <div class="footer-bottom">
-                <div>&copy; 2026 Yayasan Bakti Merah Putih. Seluruh hak cipta dilindungi undang-undang.</div>
-                <div class="footer-bottom-links">
-                    <a href="#" class="footer-link">Kebijakan Privasi</a>
-                    <div class="footer-dot"></div>
-                    <a href="#" class="footer-link">Syarat & Ketentuan</a>
-                    <div class="footer-dot"></div>
-                    <a href="#" class="footer-link">Laporan Keuangan</a>
+                <section class="relative overflow-hidden flex items-center" style="min-height: max(100vh, 760px);">
+                    <div class="absolute inset-0 bg-[#0a1f3a]">
+                        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1920&h=1080&fit=crop&auto=format" alt="Relawan Bakti Merah Putih bersama anak-anak ceria" class="absolute inset-0 w-full h-full object-cover object-center" style="opacity: 0.62; transform: none;">
+                        <div class="absolute inset-0 bg-gradient-to-r from-[#0D2137] via-[#0D2137]/85 to-[#0D2137]/25"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0D2137] via-transparent to-[#0D2137]/40"></div>
+                        <div class="absolute inset-0 opacity-[0.05] pointer-events-none" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 22px 22px;"></div>
+                        <div class="absolute bottom-8 right-8 flex items-center gap-2 z-10">
+                            <button class="rounded-full transition-all duration-300 w-7 h-2 bg-white"></button>
+                            <button class="rounded-full transition-all duration-300 w-2 h-2 bg-white/40 hover:bg-white/70"></button>
+                            <button class="rounded-full transition-all duration-300 w-2 h-2 bg-white/40 hover:bg-white/70"></button>
+                        </div>
+                    </div>
+                    <div class="relative max-w-[1280px] mx-auto px-6 w-full pt-28 pb-24">
+                        <div class="grid lg:grid-cols-[1fr_380px] gap-16 items-center">
+                            <div>
+                                <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-white/20 bg-white/[0.08] backdrop-blur-md text-white/90 text-[13px] font-semibold mb-8" style="opacity: 1; transform: none;">
+                                    <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+                                    Yayasan Sosial &amp; Kemanusiaan — Est. 2015
+                                </div>
+                                <h1 class="text-5xl md:text-6xl xl:text-[76px] font-extrabold text-white leading-[1.03] tracking-[-0.02em] mb-7" style="font-family: 'Plus Jakarta Sans', sans-serif; opacity: 1; transform: none;">
+                                    Bersama Menebar<br>
+                                    <span class="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-rose-300">
+                                        Kebaikan
+                                        <svg class="absolute -bottom-2 left-0 w-full" height="10" viewBox="0 0 200 10" preserveAspectRatio="none"><path d="M2 7 Q 60 2 100 6 T 198 5" stroke="#D62828" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.8"></path></svg>
+                                    </span> 
+                                    untuk<br>Indonesia.
+                                </h1>
+                                <p class="text-white/75 text-lg leading-relaxed max-w-xl mb-10" style="opacity: 1; transform: none;">
+                                    Bakti Merah Putih bergerak di bidang pendidikan, kesehatan, lingkungan, dan kemanusiaan untuk menghadirkan perubahan nyata bagi jutaan masyarakat di seluruh pelosok Indonesia.
+                                </p>
+                                <div class="flex flex-wrap gap-4" style="opacity: 1; transform: none;">
+                                    <button onclick="window.location.href='/login'" class="group inline-flex items-center gap-2.5 px-8 py-4 bg-[#D62828] text-white rounded-full font-extrabold text-[15px] hover:bg-[#B91C1C] transition-all shadow-[0_18px_40px_-12px_rgba(214,40,40,0.8)] hover:-translate-y-0.5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4 fill-white"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg> 
+                                        Donasi Sekarang
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4 group-hover:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                                    </button>
+                                    <button class="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-md border border-white/25 text-white rounded-full font-bold text-[15px] hover:bg-white/20 transition-all">
+                                        Lihat Program 
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg>
+                                    </button>
+                                </div>
+                                <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-10" style="opacity: 1;">
+                                    <span class="flex items-center gap-1.5 text-white/60 text-xs font-medium">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big w-3.5 h-3.5 text-emerald-400"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> 
+                                        Terverifikasi Kemenkumham
+                                    </span>
+                                    <span class="flex items-center gap-1.5 text-white/60 text-xs font-medium">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big w-3.5 h-3.5 text-emerald-400"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> 
+                                        Laporan Audit Terbuka
+                                    </span>
+                                    <span class="flex items-center gap-1.5 text-white/60 text-xs font-medium">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big w-3.5 h-3.5 text-emerald-400"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> 
+                                        Donasi Real-time
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="hidden lg:block" style="opacity: 1; transform: none;">
+                                <div class="rounded-[28px] p-7 border border-white/15 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.5)]" style="background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(24px);">
+                                    <div class="flex items-center gap-2 mb-6">
+                                        <div class="w-7 h-7 rounded-lg bg-amber-400/20 flex items-center justify-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star w-4 h-4 text-amber-400 fill-amber-400"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                                        </div>
+                                        <span class="text-white font-bold text-sm" style="font-family: 'Plus Jakarta Sans', sans-serif;">Dampak Kebaikan Kita</span>
+                                    </div>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center gap-4 rounded-2xl p-2 -mx-2 hover:bg-white/5 transition-colors">
+                                            <div class="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style="background: rgba(214, 40, 40, 0.12);">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wallet w-5 h-5" style="color: rgb(214, 40, 40);"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path></svg>
+                                            </div>
+                                            <div>
+                                                <div class="text-white font-extrabold text-xl leading-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">Rp 12,85 M</div>
+                                                <div class="text-white/55 text-xs font-medium">Total Donasi</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-4 rounded-2xl p-2 -mx-2 hover:bg-white/5 transition-colors">
+                                            <div class="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style="background: rgba(37, 99, 235, 0.14);">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users w-5 h-5" style="color: rgb(37, 99, 235);"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                            </div>
+                                            <div>
+                                                <div class="text-white font-extrabold text-xl leading-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">12.500+</div>
+                                                <div class="text-white/55 text-xs font-medium">Penerima Manfaat</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-4 rounded-2xl p-2 -mx-2 hover:bg-white/5 transition-colors">
+                                            <div class="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style="background: rgba(22, 163, 74, 0.14);">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open w-5 h-5" style="color: rgb(22, 163, 74);"><path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path></svg>
+                                            </div>
+                                            <div>
+                                                <div class="text-white font-extrabold text-xl leading-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">78</div>
+                                                <div class="text-white/55 text-xs font-medium">Program Aktif</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-4 rounded-2xl p-2 -mx-2 hover:bg-white/5 transition-colors">
+                                            <div class="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style="background: rgba(245, 158, 11, 0.16);">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hand-heart w-5 h-5" style="color: rgb(245, 158, 11);"><path d="M11 14h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 16"></path><path d="m7 20 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"></path><path d="m2 15 6 6"></path><path d="M19.5 8.5c.7-.7 1.5-1.6 1.5-2.7A2.73 2.73 0 0 0 16 4a2.78 2.78 0 0 0-5 1.8c0 1.2.8 2 1.5 2.8L16 12Z"></path></svg>
+                                            </div>
+                                            <div>
+                                                <div class="text-white font-extrabold text-xl leading-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">5.000+</div>
+                                                <div class="text-white/55 text-xs font-medium">Donatur Setia</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="my-6 h-px bg-white/10"></div>
+                                    <div class="bg-white/[0.07] rounded-2xl p-4 border border-white/10">
+                                        <p class="text-emerald-400 text-[11px] mb-1.5 font-bold flex items-center gap-1.5">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Update terbaru
+                                        </p>
+                                        <p class="text-white text-sm font-semibold leading-snug">"Relawan kami baru saja menyelesaikan distribusi ke 120 keluarga terdampak banjir di Kalimantan Selatan."</p>
+                                        <p class="text-white/45 text-[11px] mt-2">— 2 jam lalu · Tim Lapangan</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="relative bg-[#FBFAF7] py-16">
+                    <div class="max-w-[1280px] mx-auto px-6">
+                        <div class="rounded-[28px] bg-white ring-1 ring-black/[0.05] shadow-[0_20px_50px_-30px_rgba(13,33,55,0.35)] overflow-hidden">
+                            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 divide-x divide-y lg:divide-y-0 divide-black/[0.06]">
+                                <div class="flex flex-col items-center text-center px-6 py-8 group hover:bg-[#FBFAF7] transition-colors" style="opacity: 1; transform: none;">
+                                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300" style="background: rgb(254, 242, 242);">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users w-6 h-6" style="color: rgb(214, 40, 40);"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                    </div>
+                                    <div class="text-[30px] font-extrabold text-[#12355B] leading-none mb-1.5" style="font-family: 'Plus Jakarta Sans', sans-serif;">12.500+</div>
+                                    <div class="text-xs text-[#8A8A8A] font-semibold">Penerima Manfaat</div>
+                                </div>
+                                <div class="flex flex-col items-center text-center px-6 py-8 group hover:bg-[#FBFAF7] transition-colors" style="opacity: 1; transform: none;">
+                                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300" style="background: rgb(239, 246, 255);">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award w-6 h-6" style="color: rgb(29, 78, 216);"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path><circle cx="12" cy="8" r="6"></circle></svg>
+                                    </div>
+                                    <div class="text-[30px] font-extrabold text-[#12355B] leading-none mb-1.5" style="font-family: 'Plus Jakarta Sans', sans-serif;">350+</div>
+                                    <div class="text-xs text-[#8A8A8A] font-semibold">Program Sosial</div>
+                                </div>
+                                <div class="flex flex-col items-center text-center px-6 py-8 group hover:bg-[#FBFAF7] transition-colors" style="opacity: 1; transform: none;">
+                                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300" style="background: rgb(240, 253, 244);">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-6 h-6" style="color: rgb(22, 163, 74);"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                    </div>
+                                    <div class="text-[30px] font-extrabold text-[#12355B] leading-none mb-1.5" style="font-family: 'Plus Jakarta Sans', sans-serif;">28</div>
+                                    <div class="text-xs text-[#8A8A8A] font-semibold">Provinsi</div>
+                                </div>
+                                <div class="flex flex-col items-center text-center px-6 py-8 group hover:bg-[#FBFAF7] transition-colors" style="opacity: 1; transform: none;">
+                                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300" style="background: rgb(254, 242, 242);">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-6 h-6" style="color: rgb(214, 40, 40);"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+                                    </div>
+                                    <div class="text-[30px] font-extrabold text-[#12355B] leading-none mb-1.5" style="font-family: 'Plus Jakarta Sans', sans-serif;">5.000+</div>
+                                    <div class="text-xs text-[#8A8A8A] font-semibold">Donatur</div>
+                                </div>
+                                <div class="flex flex-col items-center text-center px-6 py-8 group hover:bg-[#FBFAF7] transition-colors" style="opacity: 1; transform: none;">
+                                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300" style="background: rgb(255, 251, 235);">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users w-6 h-6" style="color: rgb(217, 119, 6);"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                    </div>
+                                    <div class="text-[30px] font-extrabold text-[#12355B] leading-none mb-1.5" style="font-family: 'Plus Jakarta Sans', sans-serif;">700+</div>
+                                    <div class="text-xs text-[#8A8A8A] font-semibold">Relawan Aktif</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-[#FBFAF7] py-24">
+                    <div class="max-w-[1280px] mx-auto px-6">
+                        <div class="flex items-end justify-between mb-12">
+                            <div>
+                                <span class="inline-flex items-center gap-2.5 mb-5 ">
+                                    <span class="h-px w-7" style="background: rgb(214, 40, 40);"></span>
+                                    <span class="text-[11px] font-extrabold tracking-[0.22em] uppercase" style="color: rgb(214, 40, 40);">Program Kami</span>
+                                </span>
+                                <h2 class="text-4xl lg:text-[52px] font-extrabold text-[#12355B] leading-[1.05] tracking-[-0.02em]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Bersama Hadirkan<br>Perubahan Nyata</h2>
+                            </div>
+                            <button class="hidden md:inline-flex items-center gap-2 px-5 py-3 border border-[#12355B]/20 text-[#12355B] rounded-full text-[13px] font-bold hover:bg-[#12355B] hover:text-white hover:border-[#12355B] transition-all duration-200">
+                                Lihat Semua Program <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <div class="group bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.05] hover:ring-black/[0.1] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 cursor-pointer flex flex-col" style="opacity: 1; transform: none;">
+                                <div class="relative h-52 bg-gray-200 overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1632215861513-130b66fe97f4?w=720&h=480&fit=crop&auto=format" alt="Seorang guru perempuan mendampingi murid-murid sekolah dasar di ruang kelas pedesaan" class="w-full h-full object-cover group-hover:scale-[1.08] transition-transform duration-700">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                                    <div class="absolute top-4 left-4"><span class="px-3 py-1.5 rounded-full text-[11px] font-extrabold backdrop-blur-sm" style="background: rgb(239, 246, 255); color: rgb(29, 78, 216);">Pendidikan</span></div>
+                                    <div class="absolute -bottom-5 left-6 w-11 h-11 rounded-2xl bg-white flex items-center justify-center shadow-lg ring-1 ring-black/5" style="color: rgb(29, 78, 216);">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open w-5 h-5"><path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path></svg>
+                                    </div>
+                                </div>
+                                <div class="p-6 pt-8 flex flex-col flex-1">
+                                    <h3 class="font-extrabold text-[#12355B] text-lg mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Bakti Guru</h3>
+                                    <p class="text-sm text-[#666] leading-relaxed mb-4 flex-1">Melatih dan mendampingi guru-guru di wilayah 3T agar mampu menghadirkan pendidikan berkualitas bagi generasi penerus bangsa.</p>
+                                    <div class="flex items-center justify-between pt-4 border-t border-black/[0.06]">
+                                        <span class="text-xs font-bold text-[#8A8A8A]">1.200 guru didampingi</span>
+                                        <button class="flex items-center gap-1 text-xs font-bold transition-all duration-200 group-hover:gap-2" style="color: rgb(29, 78, 216);">Selengkapnya <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3.5 h-3.5"><path d="m9 18 6-6-6-6"></path></svg></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="group bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.05] hover:ring-black/[0.1] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 cursor-pointer flex flex-col" style="opacity: 1; transform: none;">
+                                <div class="relative h-52 bg-gray-200 overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1636202339022-7d67f7447e3a?w=720&h=480&fit=crop&auto=format" alt="Anak-anak belajar bersama di kelas dengan penuh semangat" class="w-full h-full object-cover group-hover:scale-[1.08] transition-transform duration-700">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                                    <div class="absolute top-4 left-4"><span class="px-3 py-1.5 rounded-full text-[11px] font-extrabold backdrop-blur-sm" style="background: rgb(254, 242, 242); color: rgb(214, 40, 40);">Beasiswa</span></div>
+                                    <div class="absolute -bottom-5 left-6 w-11 h-11 rounded-2xl bg-white flex items-center justify-center shadow-lg ring-1 ring-black/5" style="color: rgb(214, 40, 40);">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-graduation-cap w-5 h-5"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path><path d="M22 10v6"></path><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path></svg>
+                                    </div>
+                                </div>
+                                <div class="p-6 pt-8 flex flex-col flex-1">
+                                    <h3 class="font-extrabold text-[#12355B] text-lg mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Bakti Pendidikan</h3>
+                                    <p class="text-sm text-[#666] leading-relaxed mb-4 flex-1">Memberikan beasiswa penuh dan perlengkapan belajar bagi anak-anak dari keluarga prasejahtera di seluruh kepulauan Indonesia.</p>
+                                    <div class="flex items-center justify-between pt-4 border-t border-black/[0.06]">
+                                        <span class="text-xs font-bold text-[#8A8A8A]">4.500 beasiswa aktif</span>
+                                        <button class="flex items-center gap-1 text-xs font-bold transition-all duration-200 group-hover:gap-2" style="color: rgb(214, 40, 40);">Selengkapnya <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3.5 h-3.5"><path d="m9 18 6-6-6-6"></path></svg></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="group bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.05] hover:ring-black/[0.1] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 cursor-pointer flex flex-col" style="opacity: 1; transform: none;">
+                                <div class="relative h-52 bg-gray-200 overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1763856957026-a74ab4f05891?w=720&h=480&fit=crop&auto=format" alt="Tangan menanam bibit pohon kecil di tanah subur sebagai aksi pelestarian lingkungan" class="w-full h-full object-cover group-hover:scale-[1.08] transition-transform duration-700">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                                    <div class="absolute top-4 left-4"><span class="px-3 py-1.5 rounded-full text-[11px] font-extrabold backdrop-blur-sm" style="background: rgb(240, 253, 244); color: rgb(22, 163, 74);">Lingkungan</span></div>
+                                    <div class="absolute -bottom-5 left-6 w-11 h-11 rounded-2xl bg-white flex items-center justify-center shadow-lg ring-1 ring-black/5" style="color: rgb(22, 163, 74);">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf w-5 h-5"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg>
+                                    </div>
+                                </div>
+                                <div class="p-6 pt-8 flex flex-col flex-1">
+                                    <h3 class="font-extrabold text-[#12355B] text-lg mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Bakti Lingkungan</h3>
+                                    <p class="text-sm text-[#666] leading-relaxed mb-4 flex-1">Penanaman pohon, pengelolaan sampah komunitas, dan edukasi lingkungan hidup untuk menjaga keasrian alam Indonesia.</p>
+                                    <div class="flex items-center justify-between pt-4 border-t border-black/[0.06]">
+                                        <span class="text-xs font-bold text-[#8A8A8A]">180.000 pohon ditanam</span>
+                                        <button class="flex items-center gap-1 text-xs font-bold transition-all duration-200 group-hover:gap-2" style="color: rgb(22, 163, 74);">Selengkapnya <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3.5 h-3.5"><path d="m9 18 6-6-6-6"></path></svg></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="group bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.05] hover:ring-black/[0.1] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 cursor-pointer flex flex-col" style="opacity: 1; transform: none;">
+                                <div class="relative h-52 bg-gray-200 overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1621353880071-4752fa42cbc7?w=720&h=480&fit=crop&auto=format" alt="Tenaga medis sukarela memberikan layanan kesehatan gratis kepada warga pedesaan" class="w-full h-full object-cover group-hover:scale-[1.08] transition-transform duration-700">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                                    <div class="absolute top-4 left-4"><span class="px-3 py-1.5 rounded-full text-[11px] font-extrabold backdrop-blur-sm" style="background: rgb(255, 251, 235); color: rgb(217, 119, 6);">Kesehatan</span></div>
+                                    <div class="absolute -bottom-5 left-6 w-11 h-11 rounded-2xl bg-white flex items-center justify-center shadow-lg ring-1 ring-black/5" style="color: rgb(217, 119, 6);">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-stethoscope w-5 h-5"><path d="M11 2v2"></path><path d="M5 2v2"></path><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"></path><path d="M8 15a6 6 0 0 0 12 0v-3"></path><circle cx="20" cy="10" r="2"></circle></svg>
+                                    </div>
+                                </div>
+                                <div class="p-6 pt-8 flex flex-col flex-1">
+                                    <h3 class="font-extrabold text-[#12355B] text-lg mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Bakti Kesehatan</h3>
+                                    <p class="text-sm text-[#666] leading-relaxed mb-4 flex-1">Klinik keliling, pemeriksaan gratis, dan penyuluhan gizi bagi masyarakat terpencil yang jauh dari fasilitas layanan kesehatan.</p>
+                                    <div class="flex items-center justify-between pt-4 border-t border-black/[0.06]">
+                                        <span class="text-xs font-bold text-[#8A8A8A]">38.000 pasien dilayani</span>
+                                        <button class="flex items-center gap-1 text-xs font-bold transition-all duration-200 group-hover:gap-2" style="color: rgb(217, 119, 6);">Selengkapnya <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3.5 h-3.5"><path d="m9 18 6-6-6-6"></path></svg></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="relative bg-white py-24 overflow-hidden">
+                    <div class="absolute top-24 -left-20 w-80 h-80 rounded-full bg-red-100/40 blur-3xl pointer-events-none"></div>
+                    <div class="absolute bottom-10 -right-24 w-96 h-96 rounded-full bg-blue-100/40 blur-3xl pointer-events-none"></div>
+                    <div class="relative max-w-[1280px] mx-auto px-6">
+                        <div class="text-center mb-14 flex flex-col items-center">
+                            <span class="inline-flex items-center gap-2.5 mb-5 justify-center">
+                                <span class="h-px w-7" style="background: rgb(214, 40, 40);"></span>
+                                <span class="text-[11px] font-extrabold tracking-[0.22em] uppercase" style="color: rgb(214, 40, 40);">Donasi Terbuka</span>
+                            </span>
+                            <h2 class="text-4xl lg:text-[52px] font-extrabold text-[#12355B] tracking-[-0.02em]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Program Terbaru</h2>
+                            <p class="text-[#888] mt-3 text-base max-w-lg mx-auto">Pilih program yang menyentuh hati Anda. Setiap donasi tercatat transparan.</p>
+                        </div>
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.06] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 flex flex-col" style="opacity: 1; transform: none;">
+                                <div class="relative h-52 bg-gray-200 overflow-hidden group">
+                                    <img src="https://images.unsplash.com/photo-1641886000798-41c1adbebb3b?w=720&h=440&fit=crop&auto=format" alt="Anak-anak kecil di Asia Tenggara duduk bersama dengan tatapan penuh harap" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent"></div>
+                                    <div class="absolute top-4 left-4 flex items-center gap-2"><span class="px-3 py-1.5 rounded-full text-[11px] font-extrabold backdrop-blur-sm" style="background: rgb(239, 246, 255); color: rgb(29, 78, 216);">Pendidikan</span></div>
+                                    <div class="absolute bottom-4 right-4">
+                                        <span class="px-3 py-1.5 bg-white/15 backdrop-blur-md border border-white/20 rounded-full text-white text-[11px] font-bold flex items-center gap-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-3 h-3"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 18 hari lagi
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="p-6 flex flex-col flex-1">
+                                    <h3 class="font-extrabold text-[#12355B] text-[15px] leading-snug mb-5" style="font-family: 'Plus Jakarta Sans', sans-serif;">Beasiswa untuk 100 Anak Berprestasi di NTT</h3>
+                                    <div class="mt-auto space-y-3">
+                                        <div class="flex items-center justify-between text-xs text-[#888] mb-1">
+                                            <span>Terkumpul <strong class="text-[#D62828]">75%</strong></span>
+                                            <span>843 donatur</span>
+                                        </div>
+                                        <div class="relative h-2.5 rounded-full bg-[#EFEBE6] overflow-hidden">
+                                            <div class="h-full rounded-full transition-all duration-[1200ms] ease-out" style="width: 75%; background: linear-gradient(90deg, rgb(185, 28, 28), rgb(214, 40, 40) 60%, rgb(248, 113, 113));"></div>
+                                        </div>
+                                        <div class="flex justify-between items-end">
+                                            <div>
+                                                <div class="text-[17px] font-extrabold text-[#12355B]">Rp 112.500.000</div>
+                                                <div class="text-[11px] text-[#aaa]">dari Rp 150.000.000</div>
+                                            </div>
+                                        </div>
+                                        <button class="w-full py-3.5 bg-[#D62828] text-white rounded-full text-[13px] font-extrabold hover:bg-[#B91C1C] transition-all shadow-[0_10px_24px_-10px_rgba(214,40,40,0.7)] hover:-translate-y-0.5 mt-2">Donasi Sekarang</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.06] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 flex flex-col" style="opacity: 1; transform: none;">
+                                <div class="relative h-52 bg-gray-200 overflow-hidden group">
+                                    <img src="https://images.unsplash.com/photo-1625236601674-8702e197b5b4?w=720&h=440&fit=crop&auto=format" alt="Relawan mendistribusikan bantuan makanan kepada warga yang membutuhkan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent"></div>
+                                    <div class="absolute top-4 left-4 flex items-center gap-2">
+                                        <span class="px-3 py-1.5 rounded-full text-[11px] font-extrabold backdrop-blur-sm" style="background: rgb(255, 251, 235); color: rgb(217, 119, 6);">Pangan</span>
+                                        <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-amber-400 text-white flex items-center gap-1 animate-pulse">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert w-2.5 h-2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg> Mendesak
+                                        </span>
+                                    </div>
+                                    <div class="absolute bottom-4 right-4">
+                                        <span class="px-3 py-1.5 bg-white/15 backdrop-blur-md border border-white/20 rounded-full text-white text-[11px] font-bold flex items-center gap-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-3 h-3"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 9 hari lagi
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="p-6 flex flex-col flex-1">
+                                    <h3 class="font-extrabold text-[#12355B] text-[15px] leading-snug mb-5" style="font-family: 'Plus Jakarta Sans', sans-serif;">Dapur Umum &amp; Distribusi Pangan Untuk 500 KK Miskin Ekstrem</h3>
+                                    <div class="mt-auto space-y-3">
+                                        <div class="flex items-center justify-between text-xs text-[#888] mb-1">
+                                            <span>Terkumpul <strong class="text-[#D62828]">82%</strong></span>
+                                            <span>1,204 donatur</span>
+                                        </div>
+                                        <div class="relative h-2.5 rounded-full bg-[#EFEBE6] overflow-hidden">
+                                            <div class="h-full rounded-full transition-all duration-[1200ms] ease-out" style="width: 82%; background: linear-gradient(90deg, rgb(185, 28, 28), rgb(214, 40, 40) 60%, rgb(248, 113, 113));"></div>
+                                        </div>
+                                        <div class="flex justify-between items-end">
+                                            <div>
+                                                <div class="text-[17px] font-extrabold text-[#12355B]">Rp 163.000.000</div>
+                                                <div class="text-[11px] text-[#aaa]">dari Rp 200.000.000</div>
+                                            </div>
+                                        </div>
+                                        <button class="w-full py-3.5 bg-[#D62828] text-white rounded-full text-[13px] font-extrabold hover:bg-[#B91C1C] transition-all shadow-[0_10px_24px_-10px_rgba(214,40,40,0.7)] hover:-translate-y-0.5 mt-2">Donasi Sekarang</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.06] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 flex flex-col" style="opacity: 1; transform: none;">
+                                <div class="relative h-52 bg-gray-200 overflow-hidden group">
+                                    <img src="https://images.unsplash.com/photo-1728320771441-17a19df0fe4c?w=720&h=440&fit=crop&auto=format" alt="Tenda pengungsian korban bencana alam berdiri di lapangan terbuka" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent"></div>
+                                    <div class="absolute top-4 left-4 flex items-center gap-2">
+                                        <span class="px-3 py-1.5 rounded-full text-[11px] font-extrabold backdrop-blur-sm" style="background: rgb(254, 242, 242); color: rgb(214, 40, 40);">Kebencanaan</span>
+                                    </div>
+                                    <div class="absolute bottom-4 right-4">
+                                        <span class="px-3 py-1.5 bg-white/15 backdrop-blur-md border border-white/20 rounded-full text-white text-[11px] font-bold flex items-center gap-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-3 h-3"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 30 hari lagi
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="p-6 flex flex-col flex-1">
+                                    <h3 class="font-extrabold text-[#12355B] text-[15px] leading-snug mb-5" style="font-family: 'Plus Jakarta Sans', sans-serif;">Pemulihan Pasca Banjir — Membangun Kembali 120 Rumah Warga</h3>
+                                    <div class="mt-auto space-y-3">
+                                        <div class="flex items-center justify-between text-xs text-[#888] mb-1">
+                                            <span>Terkumpul <strong class="text-[#D62828]">43%</strong></span>
+                                            <span>3,102 donatur</span>
+                                        </div>
+                                        <div class="relative h-2.5 rounded-full bg-[#EFEBE6] overflow-hidden">
+                                            <div class="h-full rounded-full transition-all duration-[1200ms] ease-out" style="width: 43%; background: linear-gradient(90deg, rgb(185, 28, 28), rgb(214, 40, 40) 60%, rgb(248, 113, 113));"></div>
+                                        </div>
+                                        <div class="flex justify-between items-end">
+                                            <div>
+                                                <div class="text-[17px] font-extrabold text-[#12355B]">Rp 344.000.000</div>
+                                                <div class="text-[11px] text-[#aaa]">dari Rp 800.000.000</div>
+                                            </div>
+                                        </div>
+                                        <button class="w-full py-3.5 bg-[#D62828] text-white rounded-full text-[13px] font-extrabold hover:bg-[#B91C1C] transition-all shadow-[0_10px_24px_-10px_rgba(214,40,40,0.7)] hover:-translate-y-0.5 mt-2">Donasi Sekarang</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-[#FBFAF7] py-24">
+                    <div class="max-w-[1280px] mx-auto px-6">
+                        <div class="text-center mb-16 flex flex-col items-center">
+                            <span class="inline-flex items-center gap-2.5 mb-5 justify-center">
+                                <span class="h-px w-7" style="background: rgb(214, 40, 40);"></span>
+                                <span class="text-[11px] font-extrabold tracking-[0.22em] uppercase" style="color: rgb(214, 40, 40);">Cara Berdonasi</span>
+                            </span>
+                            <h2 class="text-4xl lg:text-[52px] font-extrabold text-[#12355B] tracking-[-0.02em]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Mudah, Cepat, dan Aman</h2>
+                        </div>
+                        <div class="relative">
+                            <div class="hidden lg:block absolute top-10 left-[calc(10%+40px)] right-[calc(10%+40px)] h-px border-t-2 border-dashed border-[#D62828]/25 z-0"></div>
+                            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 relative z-10">
+                                <div class="flex flex-col items-center text-center group" style="opacity: 1; transform: none;">
+                                    <div class="relative mb-5">
+                                        <div class="w-20 h-20 rounded-3xl bg-white border border-black/[0.05] shadow-[0_12px_30px_-16px_rgba(13,33,55,0.4)] flex items-center justify-center group-hover:-translate-y-1 group-hover:shadow-[0_20px_40px_-16px_rgba(214,40,40,0.4)] transition-all duration-300">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe w-8 h-8 text-[#D62828]"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+                                        </div>
+                                        <div class="absolute -top-2 -right-2 w-7 h-7 bg-[#12355B] rounded-full flex items-center justify-center text-white text-[11px] font-extrabold shadow-lg ring-2 ring-[#FBFAF7]">1</div>
+                                    </div>
+                                    <h4 class="font-extrabold text-[#12355B] text-sm mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Pilih Program</h4>
+                                    <p class="text-[13px] text-[#888] leading-relaxed">Temukan program yang ingin Anda dukung dari ratusan kampanye terverifikasi</p>
+                                </div>
+                                <div class="flex flex-col items-center text-center group" style="opacity: 1; transform: none;">
+                                    <div class="relative mb-5">
+                                        <div class="w-20 h-20 rounded-3xl bg-white border border-black/[0.05] shadow-[0_12px_30px_-16px_rgba(13,33,55,0.4)] flex items-center justify-center group-hover:-translate-y-1 group-hover:shadow-[0_20px_40px_-16px_rgba(214,40,40,0.4)] transition-all duration-300">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-8 h-8 text-[#D62828]"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+                                        </div>
+                                        <div class="absolute -top-2 -right-2 w-7 h-7 bg-[#12355B] rounded-full flex items-center justify-center text-white text-[11px] font-extrabold shadow-lg ring-2 ring-[#FBFAF7]">2</div>
+                                    </div>
+                                    <h4 class="font-extrabold text-[#12355B] text-sm mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Isi Nominal</h4>
+                                    <p class="text-[13px] text-[#888] leading-relaxed">Tentukan jumlah donasi sesuai kemampuan, mulai dari Rp10.000</p>
+                                </div>
+                                <div class="flex flex-col items-center text-center group" style="opacity: 1; transform: none;">
+                                    <div class="relative mb-5">
+                                        <div class="w-20 h-20 rounded-3xl bg-white border border-black/[0.05] shadow-[0_12px_30px_-16px_rgba(13,33,55,0.4)] flex items-center justify-center group-hover:-translate-y-1 group-hover:shadow-[0_20px_40px_-16px_rgba(214,40,40,0.4)] transition-all duration-300">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check w-8 h-8 text-[#D62828]"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                                        </div>
+                                        <div class="absolute -top-2 -right-2 w-7 h-7 bg-[#12355B] rounded-full flex items-center justify-center text-white text-[11px] font-extrabold shadow-lg ring-2 ring-[#FBFAF7]">3</div>
+                                    </div>
+                                    <h4 class="font-extrabold text-[#12355B] text-sm mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Pembayaran Aman</h4>
+                                    <p class="text-[13px] text-[#888] leading-relaxed">Lebih dari 10 metode pembayaran tersedia, semua terenkripsi SSL</p>
+                                </div>
+                                <div class="flex flex-col items-center text-center group" style="opacity: 1; transform: none;">
+                                    <div class="relative mb-5">
+                                        <div class="w-20 h-20 rounded-3xl bg-white border border-black/[0.05] shadow-[0_12px_30px_-16px_rgba(13,33,55,0.4)] flex items-center justify-center group-hover:-translate-y-1 group-hover:shadow-[0_20px_40px_-16px_rgba(214,40,40,0.4)] transition-all duration-300">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big w-8 h-8 text-[#D62828]"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
+                                        </div>
+                                        <div class="absolute -top-2 -right-2 w-7 h-7 bg-[#12355B] rounded-full flex items-center justify-center text-white text-[11px] font-extrabold shadow-lg ring-2 ring-[#FBFAF7]">4</div>
+                                    </div>
+                                    <h4 class="font-extrabold text-[#12355B] text-sm mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Berhasil &amp; Tercatat</h4>
+                                    <p class="text-[13px] text-[#888] leading-relaxed">Bukti donasi dikirim otomatis ke email Anda dalam hitungan detik</p>
+                                </div>
+                                <div class="flex flex-col items-center text-center group" style="opacity: 1; transform: none;">
+                                    <div class="relative mb-5">
+                                        <div class="w-20 h-20 rounded-3xl bg-white border border-black/[0.05] shadow-[0_12px_30px_-16px_rgba(13,33,55,0.4)] flex items-center justify-center group-hover:-translate-y-1 group-hover:shadow-[0_20px_40px_-16px_rgba(214,40,40,0.4)] transition-all duration-300">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up w-8 h-8 text-[#D62828]"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+                                        </div>
+                                        <div class="absolute -top-2 -right-2 w-7 h-7 bg-[#12355B] rounded-full flex items-center justify-center text-white text-[11px] font-extrabold shadow-lg ring-2 ring-[#FBFAF7]">5</div>
+                                    </div>
+                                    <h4 class="font-extrabold text-[#12355B] text-sm mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Laporan Transparan</h4>
+                                    <p class="text-[13px] text-[#888] leading-relaxed">Pantau penggunaan dana secara real-time lewat dashboard donatur</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-white py-24">
+                    <div class="max-w-[1280px] mx-auto px-6">
+                        <div class="flex items-end justify-between mb-10">
+                            <div>
+                                <span class="inline-flex items-center gap-2.5 mb-5 ">
+                                    <span class="h-px w-7" style="background: rgb(214, 40, 40);"></span>
+                                    <span class="text-[11px] font-extrabold tracking-[0.22em] uppercase" style="color: rgb(214, 40, 40);">Galeri Lapangan</span>
+                                </span>
+                                <h2 class="text-4xl lg:text-[52px] font-extrabold text-[#12355B] leading-[1.05] tracking-[-0.02em]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Wajah Perubahan<br>Nyata</h2>
+                            </div>
+                            <button class="hidden md:flex items-center gap-2 text-[13px] font-bold text-[#12355B] hover:text-[#D62828] transition-colors">
+                                Lihat Galeri Lengkap <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link w-4 h-4"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-3 grid-rows-2 gap-4" style="height: 560px;">
+                            <div class="col-span-1 row-span-2 relative rounded-[26px] overflow-hidden bg-gray-200 group cursor-pointer ring-1 ring-black/5" style="opacity: 1; transform: none;">
+                                <img src="https://images.unsplash.com/photo-1720238280782-bd9e5b597903?w=600&h=900&fit=crop&auto=format" alt="Dua anak Indonesia berdiri berdampingan penuh semangat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
+                                <div class="absolute bottom-4 left-4 right-4 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400">
+                                    <p class="text-white text-xs font-semibold leading-snug">Dua anak Indonesia berdiri berdampingan penuh semangat</p>
+                                </div>
+                            </div>
+                            <div class="col-span-2 row-span-1 relative rounded-[26px] overflow-hidden bg-gray-200 group cursor-pointer ring-1 ring-black/5" style="opacity: 1; transform: none;">
+                                <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=900&h=420&fit=crop&auto=format" alt="Lima anak ceria membentuk tanda perdamaian bersama relawan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
+                                <div class="absolute bottom-4 left-4 right-4 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400">
+                                    <p class="text-white text-xs font-semibold leading-snug">Lima anak ceria membentuk tanda perdamaian bersama relawan</p>
+                                </div>
+                            </div>
+                            <div class="col-span-1 row-span-1 relative rounded-[26px] overflow-hidden bg-gray-200 group cursor-pointer ring-1 ring-black/5" style="opacity: 1; transform: none;">
+                                <img src="https://images.unsplash.com/photo-1759738099669-d64b0656f6cf?w=420&h=420&fit=crop&auto=format" alt="Perempuan desa Indonesia bertenun kain tradisional bersama-sama" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
+                                <div class="absolute bottom-4 left-4 right-4 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400">
+                                    <p class="text-white text-xs font-semibold leading-snug">Perempuan desa Indonesia bertenun kain tradisional bersama-sama</p>
+                                </div>
+                            </div>
+                            <div class="col-span-1 row-span-1 relative rounded-[26px] overflow-hidden bg-gray-200 group cursor-pointer ring-1 ring-black/5" style="opacity: 1; transform: none;">
+                                <img src="https://images.unsplash.com/photo-1782024097113-c824129378f2?w=420&h=420&fit=crop&auto=format" alt="Empat perempuan Indonesia berbagi kebahagiaan di bawah langit cerah" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
+                                <div class="absolute bottom-4 left-4 right-4 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400">
+                                    <p class="text-white text-xs font-semibold leading-snug">Empat perempuan Indonesia berbagi kebahagiaan di bawah langit cerah</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="relative bg-[#12355B] py-24 overflow-hidden">
+                    <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 26px 26px;"></div>
+                    <div class="absolute -top-32 -right-32 w-[28rem] h-[28rem] rounded-full bg-[#D62828]/15 blur-3xl pointer-events-none"></div>
+                    <div class="relative max-w-[1280px] mx-auto px-6">
+                        <div class="grid lg:grid-cols-2 gap-20 items-center">
+                            <div style="opacity: 1; transform: none;">
+                                <span class="inline-flex items-center gap-2.5 mb-5 ">
+                                    <span class="h-px w-7" style="background: rgb(248, 113, 113);"></span>
+                                    <span class="text-[11px] font-extrabold tracking-[0.22em] uppercase" style="color: rgb(248, 113, 113);">Kisah Nyata</span>
+                                </span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-quote w-14 h-14 text-[#D62828]/50 mb-5"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"></path><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"></path></svg>
+                                <blockquote class="text-3xl lg:text-[40px] font-extrabold text-white leading-[1.25] tracking-[-0.01em] mb-10" style="font-family: 'Plus Jakarta Sans', sans-serif;">"Beasiswa dari Bakti Merah Putih membuat saya bisa kembali bersekolah dan meraih mimpi menjadi guru."</blockquote>
+                                <div class="flex items-center gap-5">
+                                    <div class="relative">
+                                        <div class="w-16 h-16 rounded-2xl overflow-hidden bg-gray-600 ring-2 ring-white/20">
+                                            <img src="https://images.unsplash.com/photo-1581929378520-a4230051620d?w=120&h=120&fit=crop&auto=format" alt="Siti Rahayu penerima beasiswa" class="w-full h-full object-cover">
+                                        </div>
+                                        <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald-500 rounded-full border-2 border-[#12355B] flex items-center justify-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big w-3 h-3 text-white fill-white"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="text-white font-extrabold text-base" style="font-family: 'Plus Jakarta Sans', sans-serif;">Siti Rahayu, 16 tahun</div>
+                                        <div class="text-white/50 text-sm">Penerima Beasiswa 2025 — Nusa Tenggara Timur</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2 mt-8 pt-8 border-t border-white/10">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star w-4 h-4 text-amber-400 fill-amber-400"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star w-4 h-4 text-amber-400 fill-amber-400"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star w-4 h-4 text-amber-400 fill-amber-400"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star w-4 h-4 text-amber-400 fill-amber-400"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star w-4 h-4 text-amber-400 fill-amber-400"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                                    <span class="text-white/50 text-sm ml-1">4.9/5 dari 1.200+ ulasan donatur</span>
+                                </div>
+                            </div>
+                            <div style="opacity: 1; transform: none;">
+                                <h3 class="text-white/50 text-[11px] font-extrabold uppercase tracking-[0.22em] mb-6">Dipercaya &amp; Didukung Oleh</h3>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div class="group flex items-center gap-3 px-5 py-4 rounded-2xl bg-white/[0.06] border border-white/10 hover:bg-white/[0.12] hover:border-white/25 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+                                        <span class="text-xl flex-shrink-0">🏛️</span>
+                                        <div>
+                                            <div class="text-white font-bold text-[13px] leading-tight">Kemendikbud RI</div>
+                                            <div class="text-white/40 text-[11px]">Pemerintah</div>
+                                        </div>
+                                    </div>
+                                    <div class="group flex items-center gap-3 px-5 py-4 rounded-2xl bg-white/[0.06] border border-white/10 hover:bg-white/[0.12] hover:border-white/25 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+                                        <span class="text-xl flex-shrink-0">🏛️</span>
+                                        <div>
+                                            <div class="text-white font-bold text-[13px] leading-tight">Kemenkes RI</div>
+                                            <div class="text-white/40 text-[11px]">Pemerintah</div>
+                                        </div>
+                                    </div>
+                                    <div class="group flex items-center gap-3 px-5 py-4 rounded-2xl bg-white/[0.06] border border-white/10 hover:bg-white/[0.12] hover:border-white/25 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+                                        <span class="text-xl flex-shrink-0">🏦</span>
+                                        <div>
+                                            <div class="text-white font-bold text-[13px] leading-tight">Bank BRI</div>
+                                            <div class="text-white/40 text-[11px]">Perusahaan</div>
+                                        </div>
+                                    </div>
+                                    <div class="group flex items-center gap-3 px-5 py-4 rounded-2xl bg-white/[0.06] border border-white/10 hover:bg-white/[0.12] hover:border-white/25 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+                                        <span class="text-xl flex-shrink-0">📡</span>
+                                        <div>
+                                            <div class="text-white font-bold text-[13px] leading-tight">Telkom Indonesia</div>
+                                            <div class="text-white/40 text-[11px]">Perusahaan</div>
+                                        </div>
+                                    </div>
+                                    <div class="group flex items-center gap-3 px-5 py-4 rounded-2xl bg-white/[0.06] border border-white/10 hover:bg-white/[0.12] hover:border-white/25 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+                                        <span class="text-xl flex-shrink-0">🎓</span>
+                                        <div>
+                                            <div class="text-white font-bold text-[13px] leading-tight">Universitas Indonesia</div>
+                                            <div class="text-white/40 text-[11px]">Akademik</div>
+                                        </div>
+                                    </div>
+                                    <div class="group flex items-center gap-3 px-5 py-4 rounded-2xl bg-white/[0.06] border border-white/10 hover:bg-white/[0.12] hover:border-white/25 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+                                        <span class="text-xl flex-shrink-0">🎓</span>
+                                        <div>
+                                            <div class="text-white font-bold text-[13px] leading-tight">UGM Yogyakarta</div>
+                                            <div class="text-white/40 text-[11px]">Akademik</div>
+                                        </div>
+                                    </div>
+                                    <div class="group flex items-center gap-3 px-5 py-4 rounded-2xl bg-white/[0.06] border border-white/10 hover:bg-white/[0.12] hover:border-white/25 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+                                        <span class="text-xl flex-shrink-0">🤝</span>
+                                        <div>
+                                            <div class="text-white font-bold text-[13px] leading-tight">BNPB</div>
+                                            <div class="text-white/40 text-[11px]">NGO / Lembaga</div>
+                                        </div>
+                                    </div>
+                                    <div class="group flex items-center gap-3 px-5 py-4 rounded-2xl bg-white/[0.06] border border-white/10 hover:bg-white/[0.12] hover:border-white/25 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+                                        <span class="text-xl flex-shrink-0">🌐</span>
+                                        <div>
+                                            <div class="text-white font-bold text-[13px] leading-tight">UNDP Indonesia</div>
+                                            <div class="text-white/40 text-[11px]">NGO / Lembaga</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-8 flex flex-wrap gap-3">
+                                    <div class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/[0.08] border border-white/15">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check w-4 h-4 text-emerald-400"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                                        <span class="text-white/70 text-xs font-semibold">Legalitas Resmi</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/[0.08] border border-white/15">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-landmark w-4 h-4 text-emerald-400"><line x1="3" x2="21" y1="22" y2="22"></line><line x1="6" x2="6" y1="18" y2="11"></line><line x1="10" x2="10" y1="18" y2="11"></line><line x1="14" x2="14" y1="18" y2="11"></line><line x1="18" x2="18" y1="18" y2="11"></line><polygon points="12 2 20 7 4 7"></polygon></svg>
+                                        <span class="text-white/70 text-xs font-semibold">Terdaftar Kemenkumham</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/[0.08] border border-white/15">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award w-4 h-4 text-emerald-400"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path><circle cx="12" cy="8" r="6"></circle></svg>
+                                        <span class="text-white/70 text-xs font-semibold">ISO 9001:2015</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-[#FBFAF7] py-24">
+                    <div class="max-w-[1280px] mx-auto px-6">
+                        <div class="flex items-end justify-between mb-12">
+                            <div>
+                                <span class="inline-flex items-center gap-2.5 mb-5 ">
+                                    <span class="h-px w-7" style="background: rgb(214, 40, 40);"></span>
+                                    <span class="text-[11px] font-extrabold tracking-[0.22em] uppercase" style="color: rgb(214, 40, 40);">Berita &amp; Cerita</span>
+                                </span>
+                                <h2 class="text-4xl lg:text-[52px] font-extrabold text-[#12355B] tracking-[-0.02em]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Dari Lapangan</h2>
+                            </div>
+                            <button class="hidden md:flex items-center gap-2 text-[13px] font-bold text-[#12355B] hover:text-[#D62828] transition-colors">
+                                Semua Artikel <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <article class="group bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.05] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 cursor-pointer" style="opacity: 1; transform: none;">
+                                <div class="relative h-52 bg-gray-200 overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=720&h=440&fit=crop&auto=format" alt="Anak-anak tersenyum lebar menunjukkan semangat belajar mereka" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                                    <div class="absolute bottom-4 left-4"><span class="px-3 py-1.5 rounded-full text-[11px] font-extrabold text-white backdrop-blur-sm" style="background: rgb(214, 40, 40);">Program</span></div>
+                                </div>
+                                <div class="p-6">
+                                    <div class="flex items-center gap-3 text-[11px] text-[#aaa] font-semibold mb-3">
+                                        <span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar w-3 h-3"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg> 15 Juli 2026</span>
+                                        <span>·</span>
+                                        <span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-3 h-3"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 4 menit baca</span>
+                                    </div>
+                                    <h3 class="font-extrabold text-[#12355B] text-[15px] leading-snug mb-3 group-hover:text-[#D62828] transition-colors" style="font-family: 'Plus Jakarta Sans', sans-serif;">500 Anak NTT Terima Beasiswa Bakti Merah Putih 2026</h3>
+                                    <p class="text-[13px] text-[#777] leading-relaxed mb-4">Program beasiswa tahunan kami kembali menyentuh ratusan kehidupan di ujung timur Indonesia.</p>
+                                    <button class="flex items-center gap-1 text-[13px] font-bold text-[#D62828] group-hover:gap-2 transition-all duration-200">Baca Selengkapnya <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-3.5 h-3.5"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+                                </div>
+                            </article>
+                            <article class="group bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.05] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 cursor-pointer" style="opacity: 1; transform: none;">
+                                <div class="relative h-52 bg-gray-200 overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1617494532674-67d22df2addb?w=720&h=440&fit=crop&auto=format" alt="Seorang anak bertahan di genangan banjir yang melanda kampungnya" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                                    <div class="absolute bottom-4 left-4"><span class="px-3 py-1.5 rounded-full text-[11px] font-extrabold text-white backdrop-blur-sm" style="background: rgb(29, 78, 216);">Kebencanaan</span></div>
+                                </div>
+                                <div class="p-6">
+                                    <div class="flex items-center gap-3 text-[11px] text-[#aaa] font-semibold mb-3">
+                                        <span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar w-3 h-3"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg> 8 Juli 2026</span>
+                                        <span>·</span>
+                                        <span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-3 h-3"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 6 menit baca</span>
+                                    </div>
+                                    <h3 class="font-extrabold text-[#12355B] text-[15px] leading-snug mb-3 group-hover:text-[#D62828] transition-colors" style="font-family: 'Plus Jakarta Sans', sans-serif;">Sigap di Lapangan: Tim Relawan Bakti Pulihkan 3 Desa Pasca Banjir</h3>
+                                    <p class="text-[13px] text-[#777] leading-relaxed mb-4">Dalam 48 jam pertama, 120 relawan kami bergerak cepat mendistribusikan logistik.</p>
+                                    <button class="flex items-center gap-1 text-[13px] font-bold text-[#D62828] group-hover:gap-2 transition-all duration-200">Baca Selengkapnya <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-3.5 h-3.5"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+                                </div>
+                            </article>
+                            <article class="group bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.05] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 cursor-pointer" style="opacity: 1; transform: none;">
+                                <div class="relative h-52 bg-gray-200 overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1763856957026-a74ab4f05891?w=720&h=440&fit=crop&auto=format" alt="Tangan menanam bibit pohon sebagai simbol harapan dan keberlanjutan alam" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                                    <div class="absolute bottom-4 left-4"><span class="px-3 py-1.5 rounded-full text-[11px] font-extrabold text-white backdrop-blur-sm" style="background: rgb(22, 163, 74);">Lingkungan</span></div>
+                                </div>
+                                <div class="p-6">
+                                    <div class="flex items-center gap-3 text-[11px] text-[#aaa] font-semibold mb-3">
+                                        <span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar w-3 h-3"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg> 1 Juli 2026</span>
+                                        <span>·</span>
+                                        <span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-3 h-3"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 5 menit baca</span>
+                                    </div>
+                                    <h3 class="font-extrabold text-[#12355B] text-[15px] leading-snug mb-3 group-hover:text-[#D62828] transition-colors" style="font-family: 'Plus Jakarta Sans', sans-serif;">Gerakan 10.000 Pohon: Pulihkan Ekosistem Hutan Sulawesi</h3>
+                                    <p class="text-[13px] text-[#777] leading-relaxed mb-4">Bersama komunitas adat dan 700 donatur setia, kami menghijaukan 45 hektar lahan kritis.</p>
+                                    <button class="flex items-center gap-1 text-[13px] font-bold text-[#D62828] group-hover:gap-2 transition-all duration-200">Baca Selengkapnya <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-3.5 h-3.5"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-[#FBFAF7] pb-24">
+                    <div class="max-w-[1280px] mx-auto px-6">
+                        <div class="relative bg-[#D62828] rounded-[32px] px-8 py-16 text-center overflow-hidden shadow-[0_40px_80px_-30px_rgba(214,40,40,0.6)]">
+                            <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-white/10 blur-2xl pointer-events-none"></div>
+                            <div class="absolute -bottom-16 -left-16 w-56 h-56 rounded-full bg-black/10 blur-xl pointer-events-none"></div>
+                            <div class="absolute inset-0 opacity-[0.07]" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 28px 28px;"></div>
+                            <div class="relative z-10 max-w-xl mx-auto">
+                                <div class="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-6">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail w-7 h-7 text-white"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                                </div>
+                                <h2 class="text-3xl lg:text-[40px] font-extrabold text-white mb-3 tracking-[-0.01em]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Dapatkan Update Kegiatan Kami</h2>
+                                <p class="text-white/80 mb-8 text-base">Ikuti perkembangan program dan dampak donasi Anda langsung di inbox. Tanpa spam, selamanya.</p>
+                                <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                                    <input type="email" required="" placeholder="nama@email.com" class="flex-1 px-5 py-4 rounded-full bg-white text-[#1B1B1B] placeholder-gray-400 text-sm font-medium outline-none focus:ring-4 focus:ring-white/40 shadow-lg" value="">
+                                    <button type="submit" class="px-7 py-4 bg-[#12355B] text-white rounded-full text-sm font-extrabold hover:bg-[#0f2a4a] transition-all whitespace-nowrap shadow-lg hover:-translate-y-0.5">Daftar Sekarang</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <footer class="relative bg-[#0D1F35] text-white pt-16 pb-8 overflow-hidden">
+                    <div class="absolute top-0 inset-x-0 h-[3px]" style="background: linear-gradient(90deg, rgb(214, 40, 40), rgb(214, 40, 40) 50%, rgb(255, 255, 255) 50%);"></div>
+                    <div class="max-w-[1280px] mx-auto px-6">
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 pb-12 border-b border-white/[0.08]">
+                            <div>
+                                <div class="mb-5">
+                                    <img src="/images/logo.png" alt="Bakti Merah Putih" class="h-14 w-auto object-contain">
+                                </div>
+                                <p class="text-white/50 text-[13px] leading-relaxed mb-6">Bergerak bersama untuk Indonesia yang lebih baik. Sejak 2015, kami telah menyentuh jutaan kehidupan di 28 provinsi.</p>
+                                <div class="flex items-center gap-2.5">
+                                    <button class="w-9 h-9 rounded-xl bg-white/[0.08] hover:bg-[#D62828] hover:-translate-y-0.5 flex items-center justify-center transition-all duration-200"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook w-4 h-4"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></button>
+                                    <button class="w-9 h-9 rounded-xl bg-white/[0.08] hover:bg-[#D62828] hover:-translate-y-0.5 flex items-center justify-center transition-all duration-200"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram w-4 h-4"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></button>
+                                    <button class="w-9 h-9 rounded-xl bg-white/[0.08] hover:bg-[#D62828] hover:-translate-y-0.5 flex items-center justify-center transition-all duration-200"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter w-4 h-4"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></button>
+                                    <button class="w-9 h-9 rounded-xl bg-white/[0.08] hover:bg-[#D62828] hover:-translate-y-0.5 flex items-center justify-center transition-all duration-200"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube w-4 h-4"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></button>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-[11px] font-extrabold text-white/40 uppercase tracking-[0.22em] mb-5">Navigasi</h4>
+                                <ul class="space-y-3">
+                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Beranda</a></li>
+                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Tentang Kami</a></li>
+                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Program</a></li>
+                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Donasi</a></li>
+                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Laporan &amp; Keuangan</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-[11px] font-extrabold text-white/40 uppercase tracking-[0.22em] mb-5">Program</h4>
+                                <ul class="space-y-3">
+                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Guru</a></li>
+                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Pendidikan</a></li>
+                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Lingkungan</a></li>
+                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Kesehatan</a></li>
+                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Pangan &amp; Gizi</a></li>
+                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Bencana</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-[11px] font-extrabold text-white/40 uppercase tracking-[0.22em] mb-5">Kontak</h4>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start gap-3 text-white/55 text-[13px]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 shrink-0 mt-0.5 text-white/30"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                        Jl. Sudirman No. 45, Kel. Karet Semanggi, Jakarta Pusat 10220
+                                    </li>
+                                    <li class="flex items-center gap-3 text-white/55 text-[13px]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone w-4 h-4 text-white/30"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                        +62 21 5550 1234
+                                    </li>
+                                    <li class="flex items-center gap-3 text-white/55 text-[13px]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail w-4 h-4 text-white/30"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                                        info@baktimerahputih.org
+                                    </li>
+                                </ul>
+                                <button class="mt-6 inline-flex items-center gap-2 px-4 py-2.5 bg-white/[0.08] hover:bg-white/[0.14] border border-white/10 rounded-full text-[13px] font-semibold transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download w-4 h-4 text-white/60"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
+                                    <span class="text-white/70">Unduh Laporan 2025</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <p class="text-white/30 text-xs">© 2026 Yayasan Bakti Merah Putih. Seluruh hak cipta dilindungi undang-undang.</p>
+                            <div class="flex items-center gap-4 text-white/30 text-xs">
+                                <span class="flex items-center gap-4"><a href="#" class="hover:text-white/60 transition-colors">Kebijakan Privasi</a><span>·</span></span>
+                                <span class="flex items-center gap-4"><a href="#" class="hover:text-white/60 transition-colors">Syarat &amp; Ketentuan</a><span>·</span></span>
+                                <span class="flex items-center gap-4"><a href="#" class="hover:text-white/60 transition-colors">Laporan Keuangan</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+
+                <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 sm:hidden">
+                    <button onclick="window.location.href='/login'" class="flex items-center gap-2 px-7 py-4 bg-[#D62828] text-white rounded-full font-extrabold text-sm shadow-[0_18px_40px_-10px_rgba(214,40,40,0.8)] hover:scale-105 transition-transform active:scale-95">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4 fill-white"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg> Donasi Sekarang
+                    </button>
                 </div>
             </div>
         </div>
-    </footer>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.querySelector('header');
+            const logo = document.querySelector('header img');
+            const navLinks = document.querySelectorAll('header nav button');
+            const mobileMenuBtn = document.querySelector('header .xl\\:hidden');
 
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 20) {
+                    header.classList.remove('bg-transparent');
+                    header.classList.add('bg-white', 'shadow-sm');
+                    logo.src = '/images/logo2.png';
+                    
+                    if (mobileMenuBtn) {
+                        mobileMenuBtn.style.color = '#1B1B1B';
+                    }
+                    
+                    navLinks.forEach(link => {
+                        link.classList.remove('text-white/80', 'hover:text-white');
+                    });
+                } else {
+                    header.classList.add('bg-transparent');
+                    header.classList.remove('bg-white', 'shadow-sm');
+                    logo.src = '/images/logo.png';
+                    
+                    if (mobileMenuBtn) {
+                        mobileMenuBtn.style.color = 'white';
+                    }
+                    
+                    navLinks.forEach(link => {
+                        link.classList.add('text-white/80', 'hover:text-white');
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
