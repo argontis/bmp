@@ -187,7 +187,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 text-gray-300 shrink-0"><path d="m9 18 6-6-6-6"></path></svg>
                             </button>
                             
-                            <form method="POST" action="/logout" class="mt-2 w-full">
+                            <form id="form-logout" onsubmit="event.preventDefault(); window.location.href='/';" class="mt-2 w-full">
                                 <button type="submit" class="w-full flex items-center justify-center gap-2 py-3.5 rounded-[16px] border-2 text-[13px] font-bold transition-colors" style="border-color: rgb(214, 40, 40); color: rgb(214, 40, 40);">Keluar dari Akun</button>
                             </form>
                         </div>
