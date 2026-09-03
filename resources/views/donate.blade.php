@@ -42,6 +42,21 @@
         .pb-safe {
             padding-bottom: env(safe-area-inset-bottom, 16px);
         }
+        
+        @keyframes swipeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-swipe-up {
+            animation: swipeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
     </style>
 </head>
 <body class="bg-gray-50 antialiased overflow-hidden">
@@ -70,7 +85,7 @@
                 </div>
             </div>
             
-            <div class="flex-1 flex flex-col overflow-hidden">
+            <div class="flex-1 flex flex-col overflow-hidden animate-swipe-up">
                 <div class="flex-1 flex flex-col overflow-hidden" style="opacity: 1; transform: none;">
                     <div class="flex-1 overflow-y-auto pb-24">
                         

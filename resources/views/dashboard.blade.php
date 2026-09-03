@@ -42,6 +42,21 @@
         .pb-safe {
             padding-bottom: env(safe-area-inset-bottom, 16px);
         }
+        
+        @keyframes swipeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-swipe-up {
+            animation: swipeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
     </style>
 </head>
 <body class="bg-gray-50 antialiased">
@@ -69,7 +84,7 @@
                 </div>
             </div>
             
-            <div class="flex-1 flex flex-col overflow-hidden">
+            <div class="flex-1 flex flex-col overflow-hidden animate-swipe-up">
                 <div class="flex-1 flex flex-col overflow-hidden" style="opacity: 1; transform: none;">
                     <div class="flex-1 overflow-y-auto pb-24">
                         
@@ -109,31 +124,31 @@
                                     </div>
                                     <span class="text-[10px] font-semibold text-gray-500">Riwayat</span>
                                 </button>
-                                <button class="flex flex-col items-center gap-1.5">
+                                <button onclick="window.location.href='/reward'" class="flex flex-col items-center gap-1.5">
                                     <div class="w-14 h-14 rounded-2xl flex items-center justify-center active:scale-90 transition-transform" style="background: rgb(255, 251, 235);">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gift w-6 h-6" style="color: rgb(217, 119, 6);"><rect x="3" y="8" width="18" height="4" rx="1"></rect><path d="M12 8v13"></path><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path></svg>
                                     </div>
                                     <span class="text-[10px] font-semibold text-gray-500">Reward</span>
                                 </button>
-                                <button class="flex flex-col items-center gap-1.5">
+                                <button onclick="window.location.href='/dampak'" class="flex flex-col items-center gap-1.5">
                                     <div class="w-14 h-14 rounded-2xl flex items-center justify-center active:scale-90 transition-transform" style="background: rgb(240, 253, 244);">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-no-axes-column w-6 h-6" style="color: rgb(22, 163, 74);"><line x1="18" x2="18" y1="20" y2="10"></line><line x1="12" x2="12" y1="20" y2="4"></line><line x1="6" x2="6" y1="20" y2="14"></line></svg>
                                     </div>
                                     <span class="text-[10px] font-semibold text-gray-500">Dampak</span>
                                 </button>
-                                <button class="flex flex-col items-center gap-1.5">
+                                <button onclick="window.location.href='/zakat'" class="flex flex-col items-center gap-1.5">
                                     <div class="w-14 h-14 rounded-2xl flex items-center justify-center active:scale-90 transition-transform" style="background: rgb(236, 254, 255);">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building2 lucide-building-2 w-6 h-6" style="color: rgb(8, 145, 178);"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg>
                                     </div>
                                     <span class="text-[10px] font-semibold text-gray-500">Zakat</span>
                                 </button>
-                                <button class="flex flex-col items-center gap-1.5">
+                                <button onclick="window.location.href='/darurat'" class="flex flex-col items-center gap-1.5">
                                     <div class="w-14 h-14 rounded-2xl flex items-center justify-center active:scale-90 transition-transform" style="background: rgb(254, 242, 242);">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap w-6 h-6" style="color: rgb(220, 38, 38);"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg>
                                     </div>
                                     <span class="text-[10px] font-semibold text-gray-500">Darurat</span>
                                 </button>
-                                <button class="flex flex-col items-center gap-1.5">
+                                <button onclick="window.location.href='/asuransi'" class="flex flex-col items-center gap-1.5">
                                     <div class="w-14 h-14 rounded-2xl flex items-center justify-center active:scale-90 transition-transform" style="background: rgb(249, 250, 251);">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield w-6 h-6" style="color: rgb(55, 65, 81);"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path></svg>
                                     </div>
