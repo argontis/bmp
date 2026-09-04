@@ -154,7 +154,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 text-gray-300 shrink-0"><path d="m9 18 6-6-6-6"></path></svg>
                             </button>
                             
-                            <button class="w-full flex items-center gap-3.5 bg-white rounded-[16px] px-4 py-3.5 shadow-[0_1px_6px_-2px_rgba(0,0,0,0.08)] hover:shadow-md transition-shadow text-left">
+                            <button onclick="window.location.href='/privasi'" class="w-full flex items-center gap-3.5 bg-white rounded-[16px] px-4 py-3.5 shadow-[0_1px_6px_-2px_rgba(0,0,0,0.08)] hover:shadow-md transition-shadow text-left">
                                 <div class="w-10 h-10 rounded-2xl bg-[#F4F6F9] flex items-center justify-center shrink-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield w-5 h-5 text-[#555]"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path></svg>
                                 </div>

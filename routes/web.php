@@ -85,3 +85,7 @@ Route::get('/relawan', function () {
 Route::get('/kontak', function () {
     return view('kontak');
 })->name('kontak');
+
+Route::get('/privasi', function () {
+    return view('privasi');
+})->name('privasi');
