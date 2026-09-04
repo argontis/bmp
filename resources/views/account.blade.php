@@ -165,7 +165,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 text-gray-300 shrink-0"><path d="m9 18 6-6-6-6"></path></svg>
                             </button>
                             
-                            <button class="w-full flex items-center gap-3.5 bg-white rounded-[16px] px-4 py-3.5 shadow-[0_1px_6px_-2px_rgba(0,0,0,0.08)] hover:shadow-md transition-shadow text-left">
+                            <button onclick="window.location.href='/history'" class="w-full flex items-center gap-3.5 bg-white rounded-[16px] px-4 py-3.5 shadow-[0_1px_6px_-2px_rgba(0,0,0,0.08)] hover:shadow-md transition-shadow text-left">
                                 <div class="w-10 h-10 rounded-2xl bg-[#F4F6F9] flex items-center justify-center shrink-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-credit-card w-5 h-5 text-[#555]"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" x2="22" y1="10" y2="10"></line></svg>
                                 </div>
