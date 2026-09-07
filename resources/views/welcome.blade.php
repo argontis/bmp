@@ -47,7 +47,7 @@
                             <img src="/images/logo.png" alt="Bakti Merah Putih" class="h-14 w-auto object-contain transition-opacity duration-300">
                         </a>
                         <nav class="hidden xl:flex items-center gap-0.5">
-                            <button class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#D62828] text-white/80 hover:text-white">
+                            <button onclick="window.location.href='/donasi'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#D62828] text-white/80 hover:text-white">
                                 Beranda
                                 <span class="absolute left-1/2 -translate-x-1/2 -bottom-0.5 w-1.5 h-1.5 rounded-full bg-[#D62828]" style="transform: none; transform-origin: 50% 50% 0px; opacity: 1;"></span>
                             </button>
@@ -61,11 +61,11 @@
                             <button onclick="window.location.href='/kontak'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">Kontak</button>
                         </nav>
                         <div class="flex items-center gap-3">
-                            <button class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-[#D62828] text-white rounded-full text-[13px] font-bold hover:bg-[#B91C1C] transition-all duration-200 shadow-[0_8px_20px_-8px_rgba(214,40,40,0.7)] hover:shadow-[0_10px_26px_-8px_rgba(214,40,40,0.85)] hover:-translate-y-0.5" onclick="window.location.href='/login'">
+                            <button class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-[#D62828] text-white rounded-full text-[13px] font-bold hover:bg-[#B91C1C] transition-all duration-200 shadow-[0_8px_20px_-8px_rgba(214,40,40,0.7)] hover:shadow-[0_10px_26px_-8px_rgba(214,40,40,0.85)] hover:-translate-y-0.5" onclick="window.location.href='/donasi'">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4 fill-white shrink-0"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
                                 Donasi Sekarang
                             </button>
-                            <button class="xl:hidden p-2.5 rounded-xl hover:bg-black/5 transition-colors" style="color: white;">
+                            <button onclick="window.location.href='/donasi'" class="xl:hidden p-2.5 rounded-xl hover:bg-black/5 transition-colors" style="color: white;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu w-5 h-5"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
                             </button>
                         </div>
@@ -103,12 +103,12 @@
                                     Bakti Merah Putih bergerak di bidang pendidikan, kesehatan, lingkungan, dan kemanusiaan untuk menghadirkan perubahan nyata bagi jutaan masyarakat di seluruh pelosok Indonesia.
                                 </p>
                                 <div class="flex flex-wrap gap-4" style="opacity: 1; transform: none;">
-                                    <button onclick="window.location.href='/login'" class="group inline-flex items-center gap-2.5 px-8 py-4 bg-[#D62828] text-white rounded-full font-extrabold text-[15px] hover:bg-[#B91C1C] transition-all shadow-[0_18px_40px_-12px_rgba(214,40,40,0.8)] hover:-translate-y-0.5">
+                                    <button onclick="window.location.href='/donasi'" class="group inline-flex items-center gap-2.5 px-8 py-4 bg-[#D62828] text-white rounded-full font-extrabold text-[15px] hover:bg-[#B91C1C] transition-all shadow-[0_18px_40px_-12px_rgba(214,40,40,0.8)] hover:-translate-y-0.5">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4 fill-white"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg> 
                                         Donasi Sekarang
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4 group-hover:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                                     </button>
-                                    <button class="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-md border border-white/25 text-white rounded-full font-bold text-[15px] hover:bg-white/20 transition-all">
+                                    <button onclick="window.location.href='/program'" class="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-md border border-white/25 text-white rounded-full font-bold text-[15px] hover:bg-white/20 transition-all">
                                         Lihat Program 
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg>
                                     </button>
@@ -247,7 +247,7 @@
                             </button>
                         </div>
                         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                            <div class="group bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.05] hover:ring-black/[0.1] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 cursor-pointer flex flex-col" style="opacity: 1; transform: none;">
+                            <div onclick="window.location.href='/program/bakti-guru'" class="group bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.05] hover:ring-black/[0.1] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 cursor-pointer flex flex-col" style="opacity: 1; transform: none;">
                                 <div class="relative h-52 bg-gray-200 overflow-hidden">
                                     <img src="https://images.unsplash.com/photo-1632215861513-130b66fe97f4?w=720&h=480&fit=crop&auto=format" alt="Seorang guru perempuan mendampingi murid-murid sekolah dasar di ruang kelas pedesaan" class="w-full h-full object-cover group-hover:scale-[1.08] transition-transform duration-700">
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
@@ -265,7 +265,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="group bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.05] hover:ring-black/[0.1] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 cursor-pointer flex flex-col" style="opacity: 1; transform: none;">
+                            <div onclick="window.location.href='/program/bakti-pendidikan'" class="group bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.05] hover:ring-black/[0.1] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 cursor-pointer flex flex-col" style="opacity: 1; transform: none;">
                                 <div class="relative h-52 bg-gray-200 overflow-hidden">
                                     <img src="https://images.unsplash.com/photo-1636202339022-7d67f7447e3a?w=720&h=480&fit=crop&auto=format" alt="Anak-anak belajar bersama di kelas dengan penuh semangat" class="w-full h-full object-cover group-hover:scale-[1.08] transition-transform duration-700">
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
@@ -283,7 +283,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="group bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.05] hover:ring-black/[0.1] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 cursor-pointer flex flex-col" style="opacity: 1; transform: none;">
+                            <div onclick="window.location.href='/program/bakti-lingkungan'" class="group bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.05] hover:ring-black/[0.1] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 cursor-pointer flex flex-col" style="opacity: 1; transform: none;">
                                 <div class="relative h-52 bg-gray-200 overflow-hidden">
                                     <img src="https://images.unsplash.com/photo-1763856957026-a74ab4f05891?w=720&h=480&fit=crop&auto=format" alt="Tangan menanam bibit pohon kecil di tanah subur sebagai aksi pelestarian lingkungan" class="w-full h-full object-cover group-hover:scale-[1.08] transition-transform duration-700">
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
@@ -301,7 +301,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="group bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.05] hover:ring-black/[0.1] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 cursor-pointer flex flex-col" style="opacity: 1; transform: none;">
+                            <div onclick="window.location.href='/program/bakti-kesehatan'" class="group bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.05] hover:ring-black/[0.1] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 cursor-pointer flex flex-col" style="opacity: 1; transform: none;">
                                 <div class="relative h-52 bg-gray-200 overflow-hidden">
                                     <img src="https://images.unsplash.com/photo-1621353880071-4752fa42cbc7?w=720&h=480&fit=crop&auto=format" alt="Tenaga medis sukarela memberikan layanan kesehatan gratis kepada warga pedesaan" class="w-full h-full object-cover group-hover:scale-[1.08] transition-transform duration-700">
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
@@ -363,7 +363,7 @@
                                                 <div class="text-[11px] text-[#aaa]">dari Rp 150.000.000</div>
                                             </div>
                                         </div>
-                                        <button class="w-full py-3.5 bg-[#D62828] text-white rounded-full text-[13px] font-extrabold hover:bg-[#B91C1C] transition-all shadow-[0_10px_24px_-10px_rgba(214,40,40,0.7)] hover:-translate-y-0.5 mt-2">Donasi Sekarang</button>
+                                        <button onclick="window.location.href='/donasi'" class="w-full py-3.5 bg-[#D62828] text-white rounded-full text-[13px] font-extrabold hover:bg-[#B91C1C] transition-all shadow-[0_10px_24px_-10px_rgba(214,40,40,0.7)] hover:-translate-y-0.5 mt-2">Donasi Sekarang</button>
                                     </div>
                                 </div>
                             </div>
@@ -399,7 +399,7 @@
                                                 <div class="text-[11px] text-[#aaa]">dari Rp 200.000.000</div>
                                             </div>
                                         </div>
-                                        <button class="w-full py-3.5 bg-[#D62828] text-white rounded-full text-[13px] font-extrabold hover:bg-[#B91C1C] transition-all shadow-[0_10px_24px_-10px_rgba(214,40,40,0.7)] hover:-translate-y-0.5 mt-2">Donasi Sekarang</button>
+                                        <button onclick="window.location.href='/donasi'" class="w-full py-3.5 bg-[#D62828] text-white rounded-full text-[13px] font-extrabold hover:bg-[#B91C1C] transition-all shadow-[0_10px_24px_-10px_rgba(214,40,40,0.7)] hover:-translate-y-0.5 mt-2">Donasi Sekarang</button>
                                     </div>
                                 </div>
                             </div>
@@ -432,7 +432,7 @@
                                                 <div class="text-[11px] text-[#aaa]">dari Rp 800.000.000</div>
                                             </div>
                                         </div>
-                                        <button class="w-full py-3.5 bg-[#D62828] text-white rounded-full text-[13px] font-extrabold hover:bg-[#B91C1C] transition-all shadow-[0_10px_24px_-10px_rgba(214,40,40,0.7)] hover:-translate-y-0.5 mt-2">Donasi Sekarang</button>
+                                        <button onclick="window.location.href='/donasi'" class="w-full py-3.5 bg-[#D62828] text-white rounded-full text-[13px] font-extrabold hover:bg-[#B91C1C] transition-all shadow-[0_10px_24px_-10px_rgba(214,40,40,0.7)] hover:-translate-y-0.5 mt-2">Donasi Sekarang</button>
                                     </div>
                                 </div>
                             </div>
@@ -517,7 +517,7 @@
                                 </span>
                                 <h2 class="text-4xl lg:text-[52px] font-extrabold text-[#12355B] leading-[1.05] tracking-[-0.02em]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Wajah Perubahan<br>Nyata</h2>
                             </div>
-                            <button class="hidden md:flex items-center gap-2 text-[13px] font-bold text-[#12355B] hover:text-[#D62828] transition-colors">
+                            <button onclick="window.location.href='/donasi'" class="hidden md:flex items-center gap-2 text-[13px] font-bold text-[#12355B] hover:text-[#D62828] transition-colors">
                                 Lihat Galeri Lengkap <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link w-4 h-4"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
                             </button>
                         </div>
@@ -683,7 +683,7 @@
                             </button>
                         </div>
                         <div class="grid md:grid-cols-3 gap-6">
-                            <article class="group bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.05] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 cursor-pointer" style="opacity: 1; transform: none;">
+                            <article onclick="window.location.href='/berita/beasiswa-ntt'" class="group bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.05] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 cursor-pointer" style="opacity: 1; transform: none;">
                                 <div class="relative h-52 bg-gray-200 overflow-hidden">
                                     <img src="https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=720&h=440&fit=crop&auto=format" alt="Anak-anak tersenyum lebar menunjukkan semangat belajar mereka" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
@@ -700,7 +700,7 @@
                                     <button class="flex items-center gap-1 text-[13px] font-bold text-[#D62828] group-hover:gap-2 transition-all duration-200">Baca Selengkapnya <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-3.5 h-3.5"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
                                 </div>
                             </article>
-                            <article class="group bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.05] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 cursor-pointer" style="opacity: 1; transform: none;">
+                            <article onclick="window.location.href='/berita/relawan-banjir'" class="group bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.05] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 cursor-pointer" style="opacity: 1; transform: none;">
                                 <div class="relative h-52 bg-gray-200 overflow-hidden">
                                     <img src="https://images.unsplash.com/photo-1617494532674-67d22df2addb?w=720&h=440&fit=crop&auto=format" alt="Seorang anak bertahan di genangan banjir yang melanda kampungnya" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
@@ -717,7 +717,7 @@
                                     <button class="flex items-center gap-1 text-[13px] font-bold text-[#D62828] group-hover:gap-2 transition-all duration-200">Baca Selengkapnya <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-3.5 h-3.5"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
                                 </div>
                             </article>
-                            <article class="group bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.05] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 cursor-pointer" style="opacity: 1; transform: none;">
+                            <article onclick="window.location.href='/berita/gerakan-pohon'" class="group bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.05] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 cursor-pointer" style="opacity: 1; transform: none;">
                                 <div class="relative h-52 bg-gray-200 overflow-hidden">
                                     <img src="https://images.unsplash.com/photo-1763856957026-a74ab4f05891?w=720&h=440&fit=crop&auto=format" alt="Tangan menanam bibit pohon sebagai simbol harapan dan keberlanjutan alam" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
@@ -788,12 +788,12 @@
                             <div>
                                 <h4 class="text-[11px] font-extrabold text-white/40 uppercase tracking-[0.22em] mb-5">Program</h4>
                                 <ul class="space-y-3">
-                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Guru</a></li>
-                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Pendidikan</a></li>
-                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Lingkungan</a></li>
-                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Kesehatan</a></li>
-                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Pangan &amp; Gizi</a></li>
-                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Bencana</a></li>
+                                    <li><a href="/program/bakti-guru" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Guru</a></li>
+                                    <li><a href="/program/bakti-pendidikan" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Pendidikan</a></li>
+                                    <li><a href="/program/bakti-lingkungan" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Lingkungan</a></li>
+                                    <li><a href="/program/bakti-kesehatan" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Kesehatan</a></li>
+                                    <li><a href="/program/bakti-pangan-gizi" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Pangan &amp; Gizi</a></li>
+                                    <li><a href="/program/bakti-bencana" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Bencana</a></li>
                                 </ul>
                             </div>
                             <div>
@@ -830,7 +830,7 @@
                 </footer>
 
                 <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 sm:hidden">
-                    <button onclick="window.location.href='/login'" class="flex items-center gap-2 px-7 py-4 bg-[#D62828] text-white rounded-full font-extrabold text-sm shadow-[0_18px_40px_-10px_rgba(214,40,40,0.8)] hover:scale-105 transition-transform active:scale-95">
+                    <button onclick="window.location.href='/donasi'" class="flex items-center gap-2 px-7 py-4 bg-[#D62828] text-white rounded-full font-extrabold text-sm shadow-[0_18px_40px_-10px_rgba(214,40,40,0.8)] hover:scale-105 transition-transform active:scale-95">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4 fill-white"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg> Donasi Sekarang
                     </button>
                 </div>

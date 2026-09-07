@@ -99,7 +99,7 @@
                                 <div class="p-8 flex-1 flex flex-col">
                                     <h3 class="text-2xl font-extrabold text-[#1B1B1B] mb-3" style="font-family: 'Plus Jakarta Sans', sans-serif;">Bakti Guru Pelosok</h3>
                                     <p class="text-gray-500 text-sm leading-relaxed mb-6 flex-1">Memberikan tunjangan dan pelatihan keterampilan untuk guru honorer yang mengabdi di daerah 3T (Tertinggal, Terdepan, Terluar).</p>
-                                    <button class="w-full py-3.5 rounded-2xl bg-gray-50 text-[#1B1B1B] font-bold text-sm hover:bg-gray-100 transition-colors border border-gray-200">Dukung Program</button>
+                                    <button onclick="window.location.href='/program/bakti-guru'" class="w-full py-3.5 rounded-2xl bg-gray-50 text-[#1B1B1B] font-bold text-sm hover:bg-gray-100 transition-colors border border-gray-200">Dukung Program</button>
                                 </div>
                             </div>
                             
@@ -113,7 +113,7 @@
                                 <div class="p-8 flex-1 flex flex-col">
                                     <h3 class="text-2xl font-extrabold text-[#1B1B1B] mb-3" style="font-family: 'Plus Jakarta Sans', sans-serif;">Layanan Medis Keliling</h3>
                                     <p class="text-gray-500 text-sm leading-relaxed mb-6 flex-1">Penyediaan ambulans gratis dan tim medis untuk pemeriksaan kesehatan warga di desa terisolir yang minim akses medis.</p>
-                                    <button class="w-full py-3.5 rounded-2xl bg-gray-50 text-[#1B1B1B] font-bold text-sm hover:bg-gray-100 transition-colors border border-gray-200">Dukung Program</button>
+                                    <button onclick="window.location.href='/program/bakti-kesehatan'" class="w-full py-3.5 rounded-2xl bg-gray-50 text-[#1B1B1B] font-bold text-sm hover:bg-gray-100 transition-colors border border-gray-200">Dukung Program</button>
                                 </div>
                             </div>
                             
@@ -127,7 +127,7 @@
                                 <div class="p-8 flex-1 flex flex-col">
                                     <h3 class="text-2xl font-extrabold text-[#1B1B1B] mb-3" style="font-family: 'Plus Jakarta Sans', sans-serif;">Tanggap Darurat Bencana</h3>
                                     <p class="text-gray-500 text-sm leading-relaxed mb-6 flex-1">Distribusi logistik makanan, air bersih, tenda darurat, dan obat-obatan secara cepat ke lokasi terdampak bencana alam.</p>
-                                    <button class="w-full py-3.5 rounded-2xl bg-gray-50 text-[#1B1B1B] font-bold text-sm hover:bg-gray-100 transition-colors border border-gray-200">Dukung Program</button>
+                                    <button onclick="window.location.href='/program/bakti-bencana'" class="w-full py-3.5 rounded-2xl bg-gray-50 text-[#1B1B1B] font-bold text-sm hover:bg-gray-100 transition-colors border border-gray-200">Dukung Program</button>
                                 </div>
                             </div>
                             
@@ -141,7 +141,7 @@
                                 <div class="p-8 flex-1 flex flex-col">
                                     <h3 class="text-2xl font-extrabold text-[#1B1B1B] mb-3" style="font-family: 'Plus Jakarta Sans', sans-serif;">Dapur Umum & Gizi</h3>
                                     <p class="text-gray-500 text-sm leading-relaxed mb-6 flex-1">Pembagian makanan bergizi gratis untuk anak yatim piatu dan paket sembako untuk keluarga prasejahtera.</p>
-                                    <button class="w-full py-3.5 rounded-2xl bg-gray-50 text-[#1B1B1B] font-bold text-sm hover:bg-gray-100 transition-colors border border-gray-200">Dukung Program</button>
+                                    <button onclick="window.location.href='/program/bakti-pangan-gizi'" class="w-full py-3.5 rounded-2xl bg-gray-50 text-[#1B1B1B] font-bold text-sm hover:bg-gray-100 transition-colors border border-gray-200">Dukung Program</button>
                                 </div>
                             </div>
                             
@@ -155,7 +155,7 @@
                                 <div class="p-8 flex-1 flex flex-col">
                                     <h3 class="text-2xl font-extrabold text-[#1B1B1B] mb-3" style="font-family: 'Plus Jakarta Sans', sans-serif;">Sumur Air Bersih</h3>
                                     <p class="text-gray-500 text-sm leading-relaxed mb-6 flex-1">Membangun sumur bor dan fasilitas sanitasi di desa-desa yang mengalami kekeringan ekstrem saat musim kemarau.</p>
-                                    <button class="w-full py-3.5 rounded-2xl bg-gray-50 text-[#1B1B1B] font-bold text-sm hover:bg-gray-100 transition-colors border border-gray-200">Dukung Program</button>
+                                    <button onclick="window.location.href='/program/bakti-lingkungan'" class="w-full py-3.5 rounded-2xl bg-gray-50 text-[#1B1B1B] font-bold text-sm hover:bg-gray-100 transition-colors border border-gray-200">Dukung Program</button>
                                 </div>
                             </div>
                             
@@ -163,13 +163,13 @@
                             <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow border border-gray-100 flex flex-col group">
                                 <div class="h-56 overflow-hidden relative">
                                     <div class="absolute inset-0 bg-[#0D2137]/20 z-10"></div>
-                                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&h=600&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Pemberdayaan UMKM">
-                                    <span class="absolute top-4 left-4 z-20 bg-indigo-600 text-white text-[11px] font-extrabold px-3 py-1.5 rounded-full uppercase tracking-wider">Ekonomi</span>
+                                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&h=600&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bakti Pendidikan">
+                                    <span class="absolute top-4 left-4 z-20 bg-indigo-600 text-white text-[11px] font-extrabold px-3 py-1.5 rounded-full uppercase tracking-wider">Pendidikan</span>
                                 </div>
                                 <div class="p-8 flex-1 flex flex-col">
-                                    <h3 class="text-2xl font-extrabold text-[#1B1B1B] mb-3" style="font-family: 'Plus Jakarta Sans', sans-serif;">Pemberdayaan UMKM</h3>
-                                    <p class="text-gray-500 text-sm leading-relaxed mb-6 flex-1">Pemberian modal usaha tanpa bunga dan pelatihan kewirausahaan untuk perempuan kepala keluarga (janda).</p>
-                                    <button class="w-full py-3.5 rounded-2xl bg-gray-50 text-[#1B1B1B] font-bold text-sm hover:bg-gray-100 transition-colors border border-gray-200">Dukung Program</button>
+                                    <h3 class="text-2xl font-extrabold text-[#1B1B1B] mb-3" style="font-family: 'Plus Jakarta Sans', sans-serif;">Bakti Pendidikan</h3>
+                                    <p class="text-gray-500 text-sm leading-relaxed mb-6 flex-1">Pemberian beasiswa, seragam, dan buku untuk anak-anak prasejahtera agar tidak putus sekolah.</p>
+                                    <button onclick="window.location.href='/program/bakti-pendidikan'" class="w-full py-3.5 rounded-2xl bg-gray-50 text-[#1B1B1B] font-bold text-sm hover:bg-gray-100 transition-colors border border-gray-200">Dukung Program</button>
                                 </div>
                             </div>
                         </div>

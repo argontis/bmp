@@ -12,7 +12,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS (CDN for rapid prototyping) -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com">
+        function selectNominal(btnElement, amount) {
+            // Update buttons
+            document.querySelectorAll('.nominal-btn').forEach(btn => {
+                btn.classList.remove('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
+                btn.classList.add('border-gray-100', 'text-[#1B1B1B]');
+            });
+            btnElement.classList.remove('border-gray-100', 'text-[#1B1B1B]');
+            btnElement.classList.add('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
+            
+            // Clear input
+            document.getElementById('customNominal').value = '';
+        }
+        
+        function clearNominalButtons() {
+            document.querySelectorAll('.nominal-btn').forEach(btn => {
+                btn.classList.remove('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
+                btn.classList.add('border-gray-100', 'text-[#1B1B1B]');
+            });
+        }
+
+    </script>
     <script>
         tailwind.config = {
             theme: {
@@ -28,6 +49,27 @@
                 }
             }
         }
+    
+        function selectNominal(btnElement, amount) {
+            // Update buttons
+            document.querySelectorAll('.nominal-btn').forEach(btn => {
+                btn.classList.remove('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
+                btn.classList.add('border-gray-100', 'text-[#1B1B1B]');
+            });
+            btnElement.classList.remove('border-gray-100', 'text-[#1B1B1B]');
+            btnElement.classList.add('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
+            
+            // Clear input
+            document.getElementById('customNominal').value = '';
+        }
+        
+        function clearNominalButtons() {
+            document.querySelectorAll('.nominal-btn').forEach(btn => {
+                btn.classList.remove('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
+                btn.classList.add('border-gray-100', 'text-[#1B1B1B]');
+            });
+        }
+
     </script>
     
     <style>
@@ -67,11 +109,11 @@
                             <button onclick="window.location.href='/kontak'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">Kontak</button>
                         </nav>
                         <div class="flex items-center gap-3">
-                            <button class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-[#D62828] text-white rounded-full text-[13px] font-bold hover:bg-[#B91C1C] transition-all duration-200 shadow-[0_8px_20px_-8px_rgba(214,40,40,0.7)] hover:shadow-[0_10px_26px_-8px_rgba(214,40,40,0.85)] hover:-translate-y-0.5" onclick="window.location.href='/login'">
+                            <button class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-[#D62828] text-white rounded-full text-[13px] font-bold hover:bg-[#B91C1C] transition-all duration-200 shadow-[0_8px_20px_-8px_rgba(214,40,40,0.7)] hover:shadow-[0_10px_26px_-8px_rgba(214,40,40,0.85)] hover:-translate-y-0.5" onclick="window.location.href='/donasi'">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4 fill-white shrink-0"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
                                 Donasi Sekarang
                             </button>
-                            <button class="xl:hidden p-2.5 rounded-xl hover:bg-black/5 transition-colors" style="color: white;">
+                            <button onclick="window.location.href='/donasi'" class="xl:hidden p-2.5 rounded-xl hover:bg-black/5 transition-colors" style="color: white;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu w-5 h-5"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
                             </button>
                         </div>
@@ -95,7 +137,7 @@
                             <!-- Kiri: Pilihan Program Spesifik -->
                             <div class="lg:col-span-7 space-y-6">
                                 <!-- Card Program Mendesak -->
-                                <div class="bg-white rounded-3xl p-6 shadow-xl border border-gray-100 flex flex-col sm:flex-row gap-6 hover:-translate-y-1 transition-transform duration-300">
+                                <div id="card-bencana" onclick="selectProgram('bencana')" class="program-card cursor-pointer bg-white rounded-3xl p-6 shadow-xl border-2 border-transparent hover:border-[#D62828]/30 flex flex-col sm:flex-row gap-6 hover:-translate-y-1 transition-all duration-300 ring-2 ring-[#D62828]">
                                     <div class="w-full sm:w-48 h-40 rounded-2xl overflow-hidden shrink-0 relative">
                                         <img src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&h=600&fit=crop" class="w-full h-full object-cover" alt="Bencana">
                                         <span class="absolute top-2 left-2 bg-[#D62828] text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">Darurat</span>
@@ -114,7 +156,7 @@
                                 </div>
                                 
                                 <!-- Card Program Umum -->
-                                <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex flex-col sm:flex-row gap-6 hover:shadow-md transition-shadow">
+                                <div id="card-guru" onclick="selectProgram('guru')" class="program-card cursor-pointer bg-white rounded-3xl p-6 shadow-sm border-2 border-transparent hover:border-[#D62828]/30 flex flex-col sm:flex-row gap-6 hover:-translate-y-1 transition-all duration-300">
                                     <div class="w-full sm:w-48 h-40 rounded-2xl overflow-hidden shrink-0 relative">
                                         <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&h=600&fit=crop" class="w-full h-full object-cover" alt="Guru">
                                     </div>
@@ -132,7 +174,7 @@
                                 </div>
                                 
                                 <!-- Card Program Umum 2 -->
-                                <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex flex-col sm:flex-row gap-6 hover:shadow-md transition-shadow">
+                                <div id="card-lingkungan" onclick="selectProgram('lingkungan')" class="program-card cursor-pointer bg-white rounded-3xl p-6 shadow-sm border-2 border-transparent hover:border-[#D62828]/30 flex flex-col sm:flex-row gap-6 hover:-translate-y-1 transition-all duration-300">
                                     <div class="w-full sm:w-48 h-40 rounded-2xl overflow-hidden shrink-0 relative">
                                         <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&h=600&fit=crop" class="w-full h-full object-cover" alt="Air Bersih">
                                     </div>
@@ -153,30 +195,35 @@
                             <!-- Kanan: Form Donasi Cepat -->
                             <div class="lg:col-span-5">
                                 <div class="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 sticky top-32">
-                                    <div class="flex items-center gap-3 mb-6">
-                                        <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center shrink-0">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-5 h-5 text-[#D62828] fill-[#D62828]"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+                                    <div class="mb-6">
+                                        <label class="block text-sm font-bold text-[#1B1B1B] mb-2">Program Pilihan</label>
+                                        <div id="selectedProgramLabel" class="w-full py-3.5 px-4 rounded-xl bg-red-50 border border-[#D62828]/20 text-[#D62828] font-bold text-[15px] flex items-center gap-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-5 h-5 fill-current"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+                                            <span>Donasi Reguler Umum</span>
                                         </div>
-                                        <h3 class="text-xl font-extrabold text-[#1B1B1B]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Donasi Reguler Umum</h3>
+                                        <input type="hidden" id="programInput" name="program" value="umum">
                                     </div>
                                     
-                                    <p class="text-sm text-gray-500 mb-6">Pilih nominal donasi Anda, dana akan didistribusikan ke program yang paling membutuhkan saat ini.</p>
+                                    <div>
+                                        <label class="block text-sm font-bold text-[#1B1B1B] mb-2">Nominal Donasi</label>
+                                        <p class="text-sm text-gray-500 mb-4">Pilih atau masukkan nominal donasi yang ingin Anda berikan.</p>
+                                    </div>
                                     
-                                    <div class="grid grid-cols-2 gap-3 mb-4">
-                                        <button class="py-3 px-4 rounded-xl border-2 border-gray-100 hover:border-[#D62828] hover:bg-red-50 hover:text-[#D62828] text-[#1B1B1B] font-bold transition-all text-sm">Rp 50.000</button>
-                                        <button class="py-3 px-4 rounded-xl border-2 border-[#D62828] bg-red-50 text-[#D62828] font-bold transition-all text-sm">Rp 100.000</button>
-                                        <button class="py-3 px-4 rounded-xl border-2 border-gray-100 hover:border-[#D62828] hover:bg-red-50 hover:text-[#D62828] text-[#1B1B1B] font-bold transition-all text-sm">Rp 250.000</button>
-                                        <button class="py-3 px-4 rounded-xl border-2 border-gray-100 hover:border-[#D62828] hover:bg-red-50 hover:text-[#D62828] text-[#1B1B1B] font-bold transition-all text-sm">Rp 500.000</button>
+                                    <div class="grid grid-cols-2 gap-3 mb-4" id="nominalButtons">
+                                        <button type="button" onclick="selectNominal(this, 50000)" class="nominal-btn py-3 px-4 rounded-xl border-2 border-gray-100 hover:border-[#D62828] hover:bg-red-50 hover:text-[#D62828] text-[#1B1B1B] font-bold transition-all text-sm">Rp 50.000</button>
+                                        <button type="button" onclick="selectNominal(this, 100000)" class="nominal-btn py-3 px-4 rounded-xl border-2 border-[#D62828] bg-red-50 text-[#D62828] font-bold transition-all text-sm">Rp 100.000</button>
+                                        <button type="button" onclick="selectNominal(this, 250000)" class="nominal-btn py-3 px-4 rounded-xl border-2 border-gray-100 hover:border-[#D62828] hover:bg-red-50 hover:text-[#D62828] text-[#1B1B1B] font-bold transition-all text-sm">Rp 250.000</button>
+                                        <button type="button" onclick="selectNominal(this, 500000)" class="nominal-btn py-3 px-4 rounded-xl border-2 border-gray-100 hover:border-[#D62828] hover:bg-red-50 hover:text-[#D62828] text-[#1B1B1B] font-bold transition-all text-sm">Rp 500.000</button>
                                     </div>
                                     
                                     <div class="relative mb-6">
                                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                             <span class="text-gray-500 font-bold">Rp</span>
                                         </div>
-                                        <input type="text" placeholder="Nominal Lainnya" class="w-full py-3.5 pl-12 pr-4 rounded-xl bg-gray-50 border border-gray-200 text-[#1B1B1B] font-bold text-sm outline-none focus:border-[#D62828] focus:bg-white transition-colors">
+                                        <input type="number" id="customNominal" onfocus="clearNominalButtons()" placeholder="Nominal Lainnya" class="w-full py-3.5 pl-12 pr-4 rounded-xl bg-gray-50 border border-gray-200 text-[#1B1B1B] font-bold text-sm outline-none focus:border-[#D62828] focus:bg-white transition-colors">
                                     </div>
                                     
-                                    <button class="w-full py-4 rounded-2xl bg-[#D62828] text-white font-extrabold text-sm hover:bg-[#B91C1C] transition-colors shadow-[0_8px_20px_-8px_rgba(214,40,40,0.7)] hover:-translate-y-0.5" onclick="window.location.href='/login'">Lanjutkan Pembayaran</button>
+                                    <button class="w-full py-4 rounded-2xl bg-[#D62828] text-white font-extrabold text-sm hover:bg-[#B91C1C] transition-colors shadow-[0_8px_20px_-8px_rgba(214,40,40,0.7)] hover:-translate-y-0.5" onclick="window.location.href='/donasi'">Lanjutkan Pembayaran</button>
                                     
                                     <div class="mt-6 pt-6 border-t border-gray-100 flex items-center justify-center gap-4 grayscale opacity-60">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Gopay_logo.svg/2560px-Gopay_logo.svg.png" class="h-4 object-contain" alt="Gopay">
@@ -218,12 +265,12 @@
                             <div>
                                 <h4 class="text-[11px] font-extrabold text-white/40 uppercase tracking-[0.22em] mb-5">Program</h4>
                                 <ul class="space-y-3">
-                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Guru</a></li>
-                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Pendidikan</a></li>
-                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Lingkungan</a></li>
-                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Kesehatan</a></li>
-                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Pangan &amp; Gizi</a></li>
-                                    <li><a href="#" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Bencana</a></li>
+                                    <li><a href="/program/bakti-guru" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Guru</a></li>
+                                    <li><a href="/program/bakti-pendidikan" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Pendidikan</a></li>
+                                    <li><a href="/program/bakti-lingkungan" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Lingkungan</a></li>
+                                    <li><a href="/program/bakti-kesehatan" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Kesehatan</a></li>
+                                    <li><a href="/program/bakti-pangan-gizi" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Pangan &amp; Gizi</a></li>
+                                    <li><a href="/program/bakti-bencana" class="text-white/55 text-[13px] font-medium hover:text-white transition-colors flex items-center gap-1.5 group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-3 h-3 opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"><path d="m9 18 6-6-6-6"></path></svg> Bakti Bencana</a></li>
                                 </ul>
                             </div>
                             <div>
@@ -260,7 +307,7 @@
                 </footer>
 
                 <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 sm:hidden">
-                    <button onclick="window.location.href='/login'" class="flex items-center gap-2 px-7 py-4 bg-[#D62828] text-white rounded-full font-extrabold text-sm shadow-[0_18px_40px_-10px_rgba(214,40,40,0.8)] hover:scale-105 transition-transform active:scale-95">
+                    <button onclick="window.location.href='/donasi'" class="flex items-center gap-2 px-7 py-4 bg-[#D62828] text-white rounded-full font-extrabold text-sm shadow-[0_18px_40px_-10px_rgba(214,40,40,0.8)] hover:scale-105 transition-transform active:scale-95">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4 fill-white"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg> Donasi Sekarang
                     </button>
                 </div>
@@ -303,6 +350,89 @@
                 }
             });
         });
+    
+        function selectNominal(btnElement, amount) {
+            // Update buttons
+            document.querySelectorAll('.nominal-btn').forEach(btn => {
+                btn.classList.remove('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
+                btn.classList.add('border-gray-100', 'text-[#1B1B1B]');
+            });
+            btnElement.classList.remove('border-gray-100', 'text-[#1B1B1B]');
+            btnElement.classList.add('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
+            
+            // Clear input
+            document.getElementById('customNominal').value = '';
+        }
+        
+        function clearNominalButtons() {
+            document.querySelectorAll('.nominal-btn').forEach(btn => {
+                btn.classList.remove('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
+                btn.classList.add('border-gray-100', 'text-[#1B1B1B]');
+            });
+        }
+
     </script>
+
+    <script>
+        const programNames = {
+            'umum': 'Donasi Reguler Umum',
+            'bencana': 'Bantuan Bencana Cianjur',
+            'guru': 'Bakti Guru Pelosok',
+            'lingkungan': 'Pembangunan Sumur Bor'
+        };
+
+        function selectProgram(val) {
+            const input = document.getElementById('programInput');
+            if (input) input.value = val;
+            
+            const labelSpan = document.querySelector('#selectedProgramLabel span');
+            if (labelSpan && programNames[val]) {
+                labelSpan.textContent = programNames[val];
+            }
+            
+            highlightCard(val);
+        }
+        
+        function highlightCard(val) {
+            // Reset all cards
+            document.querySelectorAll('.program-card').forEach(card => {
+                card.classList.remove('ring-2', 'ring-[#D62828]', 'shadow-xl');
+                card.classList.add('shadow-sm');
+                card.classList.remove('border-transparent');
+                card.classList.add('border-gray-100');
+            });
+            
+            // Highlight selected
+            const activeCard = document.getElementById('card-' + val);
+            if (activeCard) {
+                activeCard.classList.remove('shadow-sm', 'border-gray-100');
+                activeCard.classList.add('ring-2', 'ring-[#D62828]', 'shadow-xl', 'border-transparent');
+            }
+        }
+        
+
+    
+        function selectNominal(btnElement, amount) {
+            // Update buttons
+            document.querySelectorAll('.nominal-btn').forEach(btn => {
+                btn.classList.remove('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
+                btn.classList.add('border-gray-100', 'text-[#1B1B1B]');
+            });
+            btnElement.classList.remove('border-gray-100', 'text-[#1B1B1B]');
+            btnElement.classList.add('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
+            
+            // Clear input
+            document.getElementById('customNominal').value = '';
+        }
+        
+        function clearNominalButtons() {
+            document.querySelectorAll('.nominal-btn').forEach(btn => {
+                btn.classList.remove('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
+                btn.classList.add('border-gray-100', 'text-[#1B1B1B]');
+            });
+        }
+
+    </script>
+
 </body>
 </html>
