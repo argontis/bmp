@@ -223,7 +223,7 @@
                                         <input type="number" id="customNominal" onfocus="clearNominalButtons()" placeholder="Nominal Lainnya" class="w-full py-3.5 pl-12 pr-4 rounded-xl bg-gray-50 border border-gray-200 text-[#1B1B1B] font-bold text-sm outline-none focus:border-[#D62828] focus:bg-white transition-colors">
                                     </div>
                                     
-                                    <button class="w-full py-4 rounded-2xl bg-[#D62828] text-white font-extrabold text-sm hover:bg-[#B91C1C] transition-colors shadow-[0_8px_20px_-8px_rgba(214,40,40,0.7)] hover:-translate-y-0.5" onclick="window.location.href='/donasi'">Lanjutkan Pembayaran</button>
+                                    <button class="w-full py-4 rounded-2xl bg-[#D62828] text-white font-extrabold text-sm hover:bg-[#B91C1C] transition-colors shadow-[0_8px_20px_-8px_rgba(214,40,40,0.7)] hover:-translate-y-0.5" onclick="window.location.href='/login'">Lanjutkan Pembayaran</button>
                                     
                                     <div class="mt-6 pt-6 border-t border-gray-100 flex items-center justify-center gap-4 grayscale opacity-60">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Gopay_logo.svg/2560px-Gopay_logo.svg.png" class="h-4 object-contain" alt="Gopay">

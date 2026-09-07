@@ -131,7 +131,7 @@
                                     <h3 class="text-xl font-extrabold text-[#1B1B1B] mb-3 group-hover:text-blue-600 transition-colors line-clamp-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Kisah Pak Budi, 15 Tahun Mengabdi di Pelosok Papua Tanpa Lelah</h3>
                                     <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-2">Dedikasi seorang guru honorer yang menempuh perjalanan 3 jam setiap hari untuk mengajar anak-anak pedalaman agar bisa membaca dan menulis.</p>
                                     <div class="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between">
-                                        <span class="text-blue-600 text-sm font-bold">Baca cerita</span>
+                                        <span class="text-blue-600 text-sm font-bold">Baca selengkapnya</span>
                                         <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                                         </div>
@@ -152,7 +152,7 @@
                                     <h3 class="text-xl font-extrabold text-[#1B1B1B] mb-3 group-hover:text-teal-600 transition-colors line-clamp-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Peresmian 5 Titik Sumur Bor Baru di NTT Akhiri Krisis Air Bersih</h3>
                                     <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-2">Warga Desa Sukamaju, NTT kini tak perlu lagi berjalan kaki 5 kilometer untuk mendapatkan air bersih. Sumur bor sumbangan donatur telah beroperasi.</p>
                                     <div class="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between">
-                                        <span class="text-teal-600 text-sm font-bold">Baca cerita</span>
+                                        <span class="text-teal-600 text-sm font-bold">Baca selengkapnya</span>
                                         <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-teal-50 group-hover:text-teal-600 transition-colors">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                                         </div>
@@ -173,7 +173,7 @@
                                     <h3 class="text-xl font-extrabold text-[#1B1B1B] mb-3 group-hover:text-indigo-600 transition-colors line-clamp-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Pemberdayaan 100 Ibu Tangguh Melalui Program Modal Usaha Bergulir</h3>
                                     <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-2">Program ini membekali janda dan ibu rumah tangga kurang mampu dengan modal usaha tanpa bunga serta pelatihan kewirausahaan agar mandiri.</p>
                                     <div class="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between">
-                                        <span class="text-indigo-600 text-sm font-bold">Baca cerita</span>
+                                        <span class="text-indigo-600 text-sm font-bold">Baca selengkapnya</span>
                                         <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                                         </div>
