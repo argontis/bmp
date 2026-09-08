@@ -38,17 +38,13 @@ Route::get('/dampak', function () {
     return view('dampak');
 })->name('dampak');
 
-Route::get('/zakat', function () {
-    return view('zakat');
-})->name('zakat');
+
 
 Route::get('/darurat', function () {
     return view('darurat');
 })->name('darurat');
 
-Route::get('/asuransi', function () {
-    return view('asuransi');
-})->name('asuransi');
+
 
 Route::get('/pembayaran', function () {
     return view('pembayaran');

@@ -106,7 +106,7 @@
                         </div>
                         
                         <div class="px-4 mt-5">
-                            <div class="grid grid-cols-4 gap-3">
+                            <div class="grid grid-cols-3 gap-3">
                                 <button class="flex flex-col items-center gap-1.5">
                                     <div class="w-14 h-14 rounded-2xl flex items-center justify-center active:scale-90 transition-transform" style="background: rgb(254, 242, 242);">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-6 h-6" style="color: rgb(214, 40, 40);"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
