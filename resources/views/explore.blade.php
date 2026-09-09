@@ -80,7 +80,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell w-4.5 h-4.5 text-[#555]"><path d="M10.268 21a2 2 0 0 0 3.464 0"></path><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"></path></svg>
                             <span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full" style="background: rgb(214, 40, 40);"></span>
                         </button>
-                        <button>
+                        <button hx-get="/account" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true">
                             <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&amp;h=120&amp;fit=crop&amp;auto=format" alt="Ahmad Fauzi" class="w-9 h-9 rounded-2xl object-cover ring-2" style="--tw-ring-color: #D6282833;">
                         </button>
                     </div>
@@ -97,7 +97,7 @@
                             
                             <div class="relative mb-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
-                                <input placeholder="Cari program donasi…" class="w-full pl-10 pr-4 py-3 bg-white rounded-2xl text-[13px] text-[#1B1B1B] placeholder-gray-400 outline-none shadow-[0_1px_6px_-2px_rgba(0,0,0,0.1)] focus:ring-2 transition-all" value="" style="--tw-ring-color: #D6282833;">
+                                <input type="text" id="mobileSearchInput" placeholder="Cari program donasi…" class="w-full pl-10 pr-4 py-3 bg-white rounded-2xl text-[13px] text-[#1B1B1B] placeholder-gray-400 outline-none shadow-[0_1px_6px_-2px_rgba(0,0,0,0.1)] focus:ring-2 transition-all" value="" style="--tw-ring-color: #D6282833;">
                             </div>
                             
                             <div class="space-y-3">
@@ -246,7 +246,7 @@
                             </svg>
                             <span class="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-[#D62828]"></span>
                         </button>
-                        <div class="flex items-center gap-3 border-l border-[#12355B]/10 pl-4">
+                        <div hx-get="/account" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex items-center gap-3 border-l border-[#12355B]/10 pl-4 cursor-pointer hover:bg-black/5 p-1.5 -mr-1.5 rounded-xl transition">
                             <div class="text-right hidden sm:block">
                                 <p class="text-xs font-bold text-[#12355B]">Nabila Arimbi</p>
                                 <p class="text-[10px] text-[#62758A]">Donatur Dermawan</p>
@@ -322,32 +322,32 @@
                                     <circle cx="11" cy="11" r="8"></circle>
                                     <path d="m21 21-4.3-4.3"></path>
                                 </svg>
-                                <input type="text" placeholder="Cari program (contoh: terapi, air bersih, guru, takjil, sajadah)..." class="w-full rounded-2xl border border-[#12355B]/15 bg-white py-3.5 pl-11 pr-4 text-sm outline-none focus:border-[#D62828] focus:ring-1 focus:ring-[#D62828] shadow-sm" value="">
+                                <input type="text" id="desktopSearchInput" placeholder="Cari program (contoh: terapi, air bersih, guru, takjil, sajadah)..." class="w-full rounded-2xl border border-[#12355B]/15 bg-white py-3.5 pl-11 pr-4 text-sm outline-none focus:border-[#D62828] focus:ring-1 focus:ring-[#D62828] shadow-sm" value="">
                             </div>
-                            <div class="grid grid-cols-2 gap-3 sm:grid-cols-5">
-                                <button hx-get="/program/bakti-kesehatan" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex flex-col items-center justify-center rounded-2xl border p-4 text-center transition border-[#12355B]/10 bg-white text-[#12355B] hover:border-[#12355B]/30">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-stethoscope text-[#12355B]"><path d="M11 2v2"></path><path d="M5 2v2"></path><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"></path><path d="M8 15a6 6 0 0 0 12 0v-3"></path><circle cx="20" cy="10" r="2"></circle></svg>
+                            <div class="grid grid-cols-2 gap-3 sm:grid-cols-5" id="categoryFilters">
+                                <button data-category="Kesehatan" class="category-filter-btn flex flex-col items-center justify-center rounded-2xl border p-4 text-center transition border-[#12355B]/10 bg-white text-[#12355B] hover:border-[#12355B]/30">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-stethoscope"><path d="M11 2v2"></path><path d="M5 2v2"></path><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"></path><path d="M8 15a6 6 0 0 0 12 0v-3"></path><circle cx="20" cy="10" r="2"></circle></svg>
                                     <span class="mt-2 text-xs font-semibold leading-tight">Kesehatan</span>
                                 </button>
-                                <button hx-get="/program/bakti-pendidikan" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex flex-col items-center justify-center rounded-2xl border p-4 text-center transition border-[#12355B]/10 bg-white text-[#12355B] hover:border-[#12355B]/30">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-graduation-cap text-[#12355B]"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path><path d="M22 10v6"></path><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path></svg>
+                                <button data-category="Pendidikan" class="category-filter-btn flex flex-col items-center justify-center rounded-2xl border p-4 text-center transition border-[#12355B]/10 bg-white text-[#12355B] hover:border-[#12355B]/30">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-graduation-cap"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path><path d="M22 10v6"></path><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path></svg>
                                     <span class="mt-2 text-xs font-semibold leading-tight">Pendidikan</span>
                                 </button>
-                                <button hx-get="/program/bakti-bencana" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex flex-col items-center justify-center rounded-2xl border p-4 text-center transition border-[#12355B]/10 bg-white text-[#12355B] hover:border-[#12355B]/30">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users text-[#12355B]"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                <button data-category="Sosial" class="category-filter-btn flex flex-col items-center justify-center rounded-2xl border p-4 text-center transition border-[#12355B]/10 bg-white text-[#12355B] hover:border-[#12355B]/30">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                                     <span class="mt-2 text-xs font-semibold leading-tight">Sosial &amp; Kemanusiaan</span>
                                 </button>
-                                <button hx-get="/program/bakti-lingkungan" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex flex-col items-center justify-center rounded-2xl border p-4 text-center transition border-[#12355B]/10 bg-white text-[#12355B] hover:border-[#12355B]/30">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-droplets text-[#12355B]"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"></path><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"></path></svg>
+                                <button data-category="Lingkungan" class="category-filter-btn flex flex-col items-center justify-center rounded-2xl border p-4 text-center transition border-[#12355B]/10 bg-white text-[#12355B] hover:border-[#12355B]/30">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-droplets"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"></path><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"></path></svg>
                                     <span class="mt-2 text-xs font-semibold leading-tight">Lingkungan</span>
                                 </button>
-                                <button hx-get="/program/bakti-kesehatan" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex flex-col items-center justify-center rounded-2xl border p-4 text-center transition border-[#12355B]/10 bg-white text-[#12355B] hover:border-[#12355B]/30">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building2 lucide-building-2 text-[#12355B]"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg>
+                                <button data-category="Fasilitas Ibadah" class="category-filter-btn flex flex-col items-center justify-center rounded-2xl border p-4 text-center transition border-[#12355B]/10 bg-white text-[#12355B] hover:border-[#12355B]/30">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building2 lucide-building-2"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg>
                                     <span class="mt-2 text-xs font-semibold leading-tight">Fasilitas Ibadah</span>
                                 </button>
                             </div>
                             <div class="space-y-4">
-                                <p class="text-xs font-bold text-[#62758A]">Menampilkan 5 Program</p>
+                                <p class="text-xs font-bold text-[#62758A]" id="exploreProgramCount">Menampilkan 5 Program</p>
                                 <div class="grid gap-6 sm:grid-cols-2">
                                     <article class="flex flex-col justify-between overflow-hidden rounded-2xl border border-[#12355B]/10 bg-white shadow-sm transition hover:shadow-md cursor-pointer" hx-get="/program/bakti-kesehatan" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true">
                                         <div>
@@ -461,5 +461,81 @@
 
 
     @include('components.desktop-donation-modal')
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileSearch = document.getElementById('mobileSearchInput');
+            const desktopSearch = document.getElementById('desktopSearchInput');
+            const categoryBtns = document.querySelectorAll('.category-filter-btn');
+            const articles = document.querySelectorAll('article');
+            
+            let currentCategory = 'all';
+            let currentSearch = '';
+
+            function filterCards() {
+                let count = 0;
+                articles.forEach(article => {
+                    const title = article.querySelector('h3')?.textContent.toLowerCase() || '';
+                    const desc = article.querySelector('p')?.textContent.toLowerCase() || '';
+                    const categorySpan = article.querySelector('.absolute.left-3.top-3')?.textContent.toLowerCase() || '';
+                    
+                    const matchSearch = title.includes(currentSearch) || desc.includes(currentSearch);
+                    const matchCategory = currentCategory === 'all' || categorySpan.includes(currentCategory.toLowerCase());
+                    
+                    if (matchSearch && matchCategory) {
+                        article.style.display = 'flex';
+                        count++;
+                    } else {
+                        article.style.display = 'none';
+                    }
+                });
+                const countText = document.getElementById('exploreProgramCount');
+                if (countText) {
+                    countText.textContent = `Menampilkan ${count} Program`;
+                }
+            }
+
+            if (mobileSearch) {
+                mobileSearch.addEventListener('input', (e) => {
+                    currentSearch = e.target.value.toLowerCase();
+                    if (desktopSearch) desktopSearch.value = e.target.value;
+                    filterCards();
+                });
+            }
+            
+            if (desktopSearch) {
+                desktopSearch.addEventListener('input', (e) => {
+                    currentSearch = e.target.value.toLowerCase();
+                    if (mobileSearch) mobileSearch.value = e.target.value;
+                    filterCards();
+                });
+            }
+
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const category = btn.getAttribute('data-category');
+                    if (currentCategory === category) {
+                        currentCategory = 'all';
+                        btn.classList.remove('bg-red-50', 'border-[#D62828]', 'text-[#D62828]');
+                        btn.querySelector('svg').classList.remove('text-[#D62828]');
+                        btn.querySelector('svg').classList.add('text-[#12355B]');
+                        btn.classList.add('bg-white', 'text-[#12355B]', 'border-[#12355B]/10');
+                    } else {
+                        currentCategory = category;
+                        categoryBtns.forEach(b => {
+                            b.classList.remove('bg-red-50', 'border-[#D62828]', 'text-[#D62828]');
+                            b.querySelector('svg').classList.remove('text-[#D62828]');
+                            b.querySelector('svg').classList.add('text-[#12355B]');
+                            b.classList.add('bg-white', 'text-[#12355B]', 'border-[#12355B]/10');
+                        });
+                        btn.classList.add('bg-red-50', 'border-[#D62828]', 'text-[#D62828]');
+                        btn.classList.remove('bg-white', 'text-[#12355B]', 'border-[#12355B]/10');
+                        btn.querySelector('svg').classList.remove('text-[#12355B]');
+                        btn.querySelector('svg').classList.add('text-[#D62828]');
+                    }
+                    filterCards();
+                });
+            });
+        });
+    </script>
 </body>
 </html>

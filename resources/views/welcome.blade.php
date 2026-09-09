@@ -246,7 +246,23 @@
                                 Lihat Semua Program <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                             </button>
                         </div>
-                        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="mb-8 flex flex-col md:flex-row gap-4 justify-between items-center">
+                            <div class="w-full md:w-1/3 relative">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search absolute left-4 top-1/2 -translate-y-1/2 text-[#8192A3]">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="m21 21-4.3-4.3"></path>
+                                </svg>
+                                <input type="text" id="welcomeSearchInput" placeholder="Cari program donasi..." class="w-full rounded-2xl border border-[#12355B]/15 bg-white py-3 pl-11 pr-4 text-sm outline-none focus:border-[#D62828] focus:ring-1 focus:ring-[#D62828] shadow-sm">
+                            </div>
+                            <div class="flex flex-wrap gap-2 justify-center">
+                                <button id="welcomeAllBtn" data-category="all" class="px-4 py-2 rounded-full text-xs font-bold transition-all bg-[#D62828] text-white border border-[#D62828]">Semua</button>
+                                <button data-category="Pendidikan" class="welcome-category-btn px-4 py-2 rounded-full border border-[#12355B]/15 text-[#12355B] text-xs font-bold transition-all hover:bg-[#12355B]/5">Pendidikan</button>
+                                <button data-category="Kesehatan" class="welcome-category-btn px-4 py-2 rounded-full border border-[#12355B]/15 text-[#12355B] text-xs font-bold transition-all hover:bg-[#12355B]/5">Kesehatan</button>
+                                <button data-category="Lingkungan" class="welcome-category-btn px-4 py-2 rounded-full border border-[#12355B]/15 text-[#12355B] text-xs font-bold transition-all hover:bg-[#12355B]/5">Lingkungan</button>
+                                <button data-category="Sosial" class="welcome-category-btn px-4 py-2 rounded-full border border-[#12355B]/15 text-[#12355B] text-xs font-bold transition-all hover:bg-[#12355B]/5">Sosial</button>
+                            </div>
+                        </div>
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" id="programContainer">
                             <div onclick="window.location.href='/program/bakti-guru'" class="group bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.05] hover:ring-black/[0.1] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 cursor-pointer flex flex-col" style="opacity: 1; transform: none;">
                                 <div class="relative h-52 bg-gray-200 overflow-hidden">
                                     <img src="https://images.unsplash.com/photo-1632215861513-130b66fe97f4?w=720&h=480&fit=crop&auto=format" alt="Seorang guru perempuan mendampingi murid-murid sekolah dasar di ruang kelas pedesaan" class="w-full h-full object-cover group-hover:scale-[1.08] transition-transform duration-700">
@@ -872,6 +888,82 @@
                     });
                 }
             });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('welcomeSearchInput');
+            const filterBtns = document.querySelectorAll('.welcome-category-btn');
+            const allBtn = document.getElementById('welcomeAllBtn');
+            const programContainer = document.getElementById('programContainer');
+            
+            if (programContainer && searchInput) {
+                const cards = programContainer.querySelectorAll('.group.bg-white');
+                let currentSearch = '';
+                let currentCategory = 'all';
+
+                const categoryMap = {
+                    'pendidikan': ['pendidikan', 'beasiswa'],
+                    'sosial': ['sosial', 'pangan', 'bencana'],
+                    'lingkungan': ['lingkungan'],
+                    'kesehatan': ['kesehatan']
+                };
+
+                function filterWelcomeCards() {
+                    cards.forEach(card => {
+                        const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+                        const categorySpan = card.querySelector('.absolute.top-4.left-4 span')?.textContent.toLowerCase() || '';
+                        
+                        const matchSearch = title.includes(currentSearch);
+                        
+                        let matchCategory = false;
+                        if (currentCategory === 'all') {
+                            matchCategory = true;
+                        } else {
+                            const allowedTags = categoryMap[currentCategory.toLowerCase()] || [currentCategory.toLowerCase()];
+                            matchCategory = allowedTags.some(tag => categorySpan.includes(tag));
+                        }
+                        
+                        if (matchSearch && matchCategory) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                }
+
+                searchInput.addEventListener('input', (e) => {
+                    currentSearch = e.target.value.toLowerCase();
+                    filterWelcomeCards();
+                });
+
+                function setActiveBtn(btnToActive) {
+                    [allBtn, ...filterBtns].forEach(btn => {
+                        if (btn === btnToActive) {
+                            btn.classList.add('bg-[#D62828]', 'text-white');
+                            btn.classList.remove('text-[#12355B]', 'hover:bg-[#12355B]/5', 'border-[#12355B]/15');
+                            btn.classList.add('border-[#D62828]');
+                        } else {
+                            btn.classList.remove('bg-[#D62828]', 'text-white', 'border-[#D62828]');
+                            btn.classList.add('text-[#12355B]', 'hover:bg-[#12355B]/5', 'border-[#12355B]/15');
+                        }
+                    });
+                }
+
+                allBtn.addEventListener('click', () => {
+                    currentCategory = 'all';
+                    setActiveBtn(allBtn);
+                    filterWelcomeCards();
+                });
+
+                filterBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        currentCategory = btn.getAttribute('data-category');
+                        setActiveBtn(btn);
+                        filterWelcomeCards();
+                    });
+                });
+            }
         });
     </script>
 </body>

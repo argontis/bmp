@@ -75,7 +75,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell w-4.5 h-4.5 text-[#555]"><path d="M10.268 21a2 2 0 0 0 3.464 0"></path><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"></path></svg>
                             <span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full" style="background: rgb(214, 40, 40);"></span>
                         </button>
-                        <button>
+                        <button hx-get="/account" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true">
                             <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&amp;h=120&amp;fit=crop&amp;auto=format" alt="Ahmad Fauzi" class="w-9 h-9 rounded-2xl object-cover ring-2" style="--tw-ring-color: #D6282833;">
                         </button>
                     </div>
@@ -198,25 +198,56 @@
                 <p class="text-[12px] font-extrabold text-gray-500 uppercase tracking-widest mb-3">Pilih Nominal</p>
                 
                 <div class="grid grid-cols-3 gap-2.5 mb-4">
-                    <button class="py-3 rounded-2xl text-[12px] font-extrabold border transition-all bg-gray-50 border-gray-200 text-gray-600 hover:border-gray-300">Rp25.000</button>
-                    <button class="py-3 rounded-2xl text-[12px] font-extrabold border transition-all bg-gray-50 border-gray-200 text-gray-600 hover:border-gray-300">Rp50.000</button>
-                    <button class="py-3 rounded-2xl text-[12px] font-extrabold border transition-all text-white border-transparent shadow-md" style="background: rgb(214, 40, 40); border-color: rgb(214, 40, 40);">Rp100.000</button>
-                    <button class="py-3 rounded-2xl text-[12px] font-extrabold border transition-all bg-gray-50 border-gray-200 text-gray-600 hover:border-gray-300">Rp250.000</button>
-                    <button class="py-3 rounded-2xl text-[12px] font-extrabold border transition-all bg-gray-50 border-gray-200 text-gray-600 hover:border-gray-300">Rp500.000</button>
-                    <button class="py-3 rounded-2xl text-[12px] font-extrabold border transition-all bg-gray-50 border-gray-200 text-gray-600 hover:border-gray-300">Rp1.000.000</button>
+                    <button data-value="25000" class="nominal-btn py-3 rounded-2xl text-[12px] font-extrabold border transition-all bg-gray-50 border-gray-200 text-gray-600 hover:border-gray-300">Rp25.000</button>
+                    <button data-value="50000" class="nominal-btn py-3 rounded-2xl text-[12px] font-extrabold border transition-all bg-gray-50 border-gray-200 text-gray-600 hover:border-gray-300">Rp50.000</button>
+                    <button data-value="100000" class="nominal-btn py-3 rounded-2xl text-[12px] font-extrabold border transition-all text-white border-transparent shadow-md" style="background: rgb(214, 40, 40); border-color: rgb(214, 40, 40);">Rp100.000</button>
+                    <button data-value="250000" class="nominal-btn py-3 rounded-2xl text-[12px] font-extrabold border transition-all bg-gray-50 border-gray-200 text-gray-600 hover:border-gray-300">Rp250.000</button>
+                    <button data-value="500000" class="nominal-btn py-3 rounded-2xl text-[12px] font-extrabold border transition-all bg-gray-50 border-gray-200 text-gray-600 hover:border-gray-300">Rp500.000</button>
+                    <button data-value="1000000" class="nominal-btn py-3 rounded-2xl text-[12px] font-extrabold border transition-all bg-gray-50 border-gray-200 text-gray-600 hover:border-gray-300">Rp1.000.000</button>
                 </div>
                 
                 <div class="relative mb-4">
                     <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[13px] font-bold text-gray-400">Rp</span>
-                    <input type="number" placeholder="Nominal lain" class="w-full pl-10 pr-4 py-3.5 rounded-2xl border border-gray-200 bg-gray-50 text-[13px] placeholder-gray-400 outline-none focus:border-transparent focus:ring-2 transition-all" value="" style="--tw-ring-color: #D62828;">
+                    <input type="number" id="custom-nominal" placeholder="Nominal lain" class="w-full pl-10 pr-4 py-3.5 rounded-2xl border border-gray-200 bg-gray-50 text-[13px] placeholder-gray-400 outline-none focus:border-transparent focus:ring-2 transition-all" value="" style="--tw-ring-color: #D62828;">
                 </div>
                 
-                <div class="flex items-center gap-2.5 bg-red-50 rounded-2xl p-3 mb-4 border border-red-100">
+                <div class="flex items-center gap-2.5 bg-red-50 rounded-2xl p-3 mb-5 border border-red-100">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles w-4 h-4 shrink-0" style="color: rgb(214, 40, 40);"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg>
                     <p class="text-[12px] font-semibold text-gray-700">Menyediakan buku &amp; alat tulis untuk 2 anak</p>
                 </div>
                 
-                <button onclick="window.location.href='/dashboard'" class="w-full py-4 rounded-2xl text-[15px] font-extrabold text-white transition-all disabled:opacity-40 flex items-center justify-center gap-2" style="background: rgb(214, 40, 40);">
+                <p class="text-[12px] font-extrabold text-gray-500 uppercase tracking-widest mb-3">Metode Pembayaran</p>
+                <div class="space-y-2.5 mb-6">
+                    <button data-value="BCA" class="payment-btn w-full flex items-center justify-between p-3 rounded-2xl border transition-all border-red-500 bg-red-50">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-8 rounded-lg bg-white flex items-center justify-center shrink-0 border border-gray-100">
+                                <span class="text-blue-800 font-extrabold text-[10px] italic">BCA</span>
+                            </div>
+                            <span class="text-[13px] font-bold text-gray-700">Transfer BCA</span>
+                        </div>
+                        <div class="w-4 h-4 rounded-full border-4 border-red-500 bg-white check-indicator"></div>
+                    </button>
+                    <button data-value="OVO" class="payment-btn w-full flex items-center justify-between p-3 rounded-2xl border transition-all border-gray-200 bg-gray-50 hover:border-gray-300">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-8 rounded-lg bg-white flex items-center justify-center shrink-0 border border-gray-100">
+                                <span class="text-purple-600 font-extrabold text-[10px] italic">OVO</span>
+                            </div>
+                            <span class="text-[13px] font-bold text-gray-700">OVO</span>
+                        </div>
+                        <div class="w-4 h-4 rounded-full border-2 border-gray-300 bg-white check-indicator"></div>
+                    </button>
+                    <button data-value="GoPay" class="payment-btn w-full flex items-center justify-between p-3 rounded-2xl border transition-all border-gray-200 bg-gray-50 hover:border-gray-300">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-8 rounded-lg bg-white flex items-center justify-center shrink-0 border border-gray-100">
+                                <span class="text-blue-500 font-extrabold text-[10px]">GoPay</span>
+                            </div>
+                            <span class="text-[13px] font-bold text-gray-700">GoPay</span>
+                        </div>
+                        <div class="w-4 h-4 rounded-full border-2 border-gray-300 bg-white check-indicator"></div>
+                    </button>
+                </div>
+
+                <button id="lanjutkan-btn" onclick="window.location.href='/dashboard'" class="w-full py-4 rounded-2xl text-[15px] font-extrabold text-white transition-all disabled:opacity-40 flex items-center justify-center gap-2" style="background: rgb(214, 40, 40);">
                     Lanjutkan · Rp 100.000
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                 </button>
@@ -224,5 +255,81 @@
             
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const nominalButtons = document.querySelectorAll('.nominal-btn');
+            const customNominalInput = document.getElementById('custom-nominal');
+            const lanjutkanBtn = document.getElementById('lanjutkan-btn');
+            const paymentMethods = document.querySelectorAll('.payment-btn');
+            let selectedNominal = 100000;
+            let selectedPayment = 'BCA';
+            
+            function formatRupiah(number) {
+                return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
+            }
+            
+            function updateUI() {
+                nominalButtons.forEach(btn => {
+                    const val = parseInt(btn.dataset.value);
+                    if (val === selectedNominal && !customNominalInput.value) {
+                        btn.className = "nominal-btn py-3 rounded-2xl text-[12px] font-extrabold border transition-all text-white border-transparent shadow-md";
+                        btn.style.background = "rgb(214, 40, 40)";
+                        btn.style.borderColor = "rgb(214, 40, 40)";
+                    } else {
+                        btn.className = "nominal-btn py-3 rounded-2xl text-[12px] font-extrabold border transition-all bg-gray-50 border-gray-200 text-gray-600 hover:border-gray-300";
+                        btn.style.background = "";
+                        btn.style.borderColor = "";
+                    }
+                });
+                
+                paymentMethods.forEach(btn => {
+                    const val = btn.dataset.value;
+                    const indicator = btn.querySelector('.check-indicator');
+                    if (val === selectedPayment) {
+                        btn.classList.add('border-red-500', 'bg-red-50');
+                        btn.classList.remove('border-gray-200', 'bg-gray-50', 'hover:border-gray-300');
+                        indicator.classList.remove('border-2', 'border-gray-300');
+                        indicator.classList.add('border-4', 'border-red-500');
+                    } else {
+                        btn.classList.remove('border-red-500', 'bg-red-50');
+                        btn.classList.add('border-gray-200', 'bg-gray-50', 'hover:border-gray-300');
+                        indicator.classList.remove('border-4', 'border-red-500');
+                        indicator.classList.add('border-2', 'border-gray-300');
+                    }
+                });
+                
+                lanjutkanBtn.innerHTML = \`Lanjutkan · \${formatRupiah(selectedNominal)} <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>\`;
+            }
+            
+            nominalButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    selectedNominal = parseInt(e.currentTarget.dataset.value);
+                    customNominalInput.value = '';
+                    updateUI();
+                });
+            });
+            
+            customNominalInput.addEventListener('input', (e) => {
+                const val = parseInt(e.target.value);
+                if (!isNaN(val) && val > 0) {
+                    selectedNominal = val;
+                } else {
+                    selectedNominal = 0;
+                }
+                updateUI();
+            });
+            
+            paymentMethods.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const targetBtn = e.currentTarget;
+                    selectedPayment = targetBtn.dataset.value;
+                    updateUI();
+                });
+            });
+            
+            updateUI();
+        });
+    </script>
 </body>
 </html>

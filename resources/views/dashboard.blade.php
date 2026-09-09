@@ -80,7 +80,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell w-4.5 h-4.5 text-[#555]"><path d="M10.268 21a2 2 0 0 0 3.464 0"></path><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"></path></svg>
                             <span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full" style="background: rgb(214, 40, 40);"></span>
                         </button>
-                        <button>
+                        <button hx-get="/account" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true">
                             <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&amp;h=120&amp;fit=crop&amp;auto=format" alt="Ahmad Fauzi" class="w-9 h-9 rounded-2xl object-cover ring-2" style="--tw-ring-color: #D6282833;">
                         </button>
                     </div>
@@ -394,7 +394,7 @@
                             </svg>
                             <span class="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-[#D62828]"></span>
                         </button>
-                        <div class="flex items-center gap-3 border-l border-[#12355B]/10 pl-4">
+                        <div hx-get="/account" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex items-center gap-3 border-l border-[#12355B]/10 pl-4 cursor-pointer hover:bg-black/5 p-1.5 -mr-1.5 rounded-xl transition">
                             <div class="text-right hidden sm:block">
                                 <p class="text-xs font-bold text-[#12355B]">Nabila Arimbi</p>
                                 <p class="text-[10px] text-[#62758A]">Donatur Dermawan</p>
@@ -488,19 +488,19 @@
                                     <span class="text-xs text-[#62758A]">5 Kategori Resmi</span>
                                 </div>
                                 <div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
-                                    <button class="shrink-0 rounded-full px-4 py-2 text-xs font-bold transition bg-[#12355B] text-white">Semua Program</button>
-                                    <button hx-get="/program/bakti-kesehatan" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="shrink-0 rounded-full px-4 py-2 text-xs font-bold transition bg-white border border-[#12355B]/10 text-[#12355B] hover:bg-[#F1EEE8]">🩺 Kesehatan</button>
-                                    <button hx-get="/program/bakti-pendidikan" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="shrink-0 rounded-full px-4 py-2 text-xs font-bold transition bg-white border border-[#12355B]/10 text-[#12355B] hover:bg-[#F1EEE8]">🎓 Pendidikan</button>
-                                    <button hx-get="/program/bakti-bencana" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="shrink-0 rounded-full px-4 py-2 text-xs font-bold transition bg-white border border-[#12355B]/10 text-[#12355B] hover:bg-[#F1EEE8]">🤝 Sosial &amp; Kemanusiaan</button>
-                                    <button hx-get="/program/bakti-lingkungan" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="shrink-0 rounded-full px-4 py-2 text-xs font-bold transition bg-white border border-[#12355B]/10 text-[#12355B] hover:bg-[#F1EEE8]">💧 Lingkungan</button>
+                                    <button data-category="all" class="dashboard-category-btn shrink-0 rounded-full px-4 py-2 text-xs font-bold transition bg-[#D62828] text-white border border-[#D62828]">Semua Program</button>
+                                    <button data-category="kesehatan" class="dashboard-category-btn shrink-0 rounded-full px-4 py-2 text-xs font-bold transition bg-white border border-[#12355B]/10 text-[#12355B] hover:bg-[#F1EEE8]">🩺 Kesehatan</button>
+                                    <button data-category="pendidikan" class="dashboard-category-btn shrink-0 rounded-full px-4 py-2 text-xs font-bold transition bg-white border border-[#12355B]/10 text-[#12355B] hover:bg-[#F1EEE8]">🎓 Pendidikan</button>
+                                    <button data-category="sosial" class="dashboard-category-btn shrink-0 rounded-full px-4 py-2 text-xs font-bold transition bg-white border border-[#12355B]/10 text-[#12355B] hover:bg-[#F1EEE8]">🤝 Sosial &amp; Kemanusiaan</button>
+                                    <button data-category="lingkungan" class="dashboard-category-btn shrink-0 rounded-full px-4 py-2 text-xs font-bold transition bg-white border border-[#12355B]/10 text-[#12355B] hover:bg-[#F1EEE8]">💧 Lingkungan</button>
                                 </div>
                             </section>
                             <section class="space-y-4">
                                 <div class="flex items-center justify-between">
                                     <h2 class="font-['Plus_Jakarta_Sans'] text-xl font-extrabold text-[#12355B]">Program Pilihan</h2>
-                                    <span class="text-xs font-semibold text-[#D62828]">5 Program Tersedia</span>
+                                    <span class="text-xs font-semibold text-[#D62828]" id="dashboardProgramCount">5 Program Tersedia</span>
                                 </div>
-                                <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-2">
+                                <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-2" id="dashboardProgramContainer">
                                     <article class="flex flex-col justify-between overflow-hidden rounded-2xl border border-[#12355B]/10 bg-white shadow-sm transition hover:shadow-md cursor-pointer" hx-get="/program/bakti-kesehatan" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true">
                                         <div>
                                             <div class="relative aspect-[16/9] overflow-hidden bg-[#12355B]/10">
@@ -626,5 +626,54 @@
 
 
     @include('components.desktop-donation-modal')
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const categoryBtns = document.querySelectorAll('.dashboard-category-btn');
+            const programContainer = document.getElementById('dashboardProgramContainer');
+            const countText = document.getElementById('dashboardProgramCount');
+            
+            if (programContainer && categoryBtns.length > 0) {
+                const articles = programContainer.querySelectorAll('article');
+                let currentCategory = 'all';
+
+                function filterDashboardCards() {
+                    let count = 0;
+                    articles.forEach(article => {
+                        const categorySpan = article.querySelector('.absolute.left-3.top-3')?.textContent.toLowerCase() || '';
+                        const matchCategory = currentCategory === 'all' || categorySpan.includes(currentCategory.toLowerCase());
+                        
+                        if (matchCategory) {
+                            article.style.display = 'flex';
+                            count++;
+                        } else {
+                            article.style.display = 'none';
+                        }
+                    });
+                    if (countText) {
+                        countText.textContent = `${count} Program Tersedia`;
+                    }
+                }
+
+                categoryBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        currentCategory = btn.getAttribute('data-category');
+                        
+                        // Update active state
+                        categoryBtns.forEach(b => {
+                            if (b === btn) {
+                                b.classList.add('bg-[#D62828]', 'text-white', 'border-[#D62828]');
+                                b.classList.remove('bg-white', 'text-[#12355B]', 'border-[#12355B]/10', 'hover:bg-[#F1EEE8]');
+                            } else {
+                                b.classList.remove('bg-[#D62828]', 'text-white', 'border-[#D62828]');
+                                b.classList.add('bg-white', 'text-[#12355B]', 'border-[#12355B]/10', 'hover:bg-[#F1EEE8]');
+                            }
+                        });
+                        
+                        filterDashboardCards();
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 </html>
