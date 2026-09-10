@@ -69,14 +69,18 @@
                         <div class="flex-1 h-px bg-gray-200"></div>
                     </div>
                     
-                    <form id="form-login" class="space-y-3" onsubmit="event.preventDefault(); window.location.href='/dashboard';" style="opacity: 1; transform: none; display: block;">
+                    <form id="form-login" class="space-y-3" action="{{ route('login') }}" method="POST" style="opacity: 1; transform: none; display: block;">
+                        @csrf
                         <div class="relative">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
-                            <input type="email" placeholder="Alamat email" required="" class="w-full pl-11 pr-4 py-3.5 bg-[#F4F6F9] rounded-2xl text-[13px] text-[#1B1B1B] placeholder-gray-400 outline-none focus:ring-2 transition-all border border-transparent" value="" style="--tw-ring-color: #D6282840;">
+                            <input type="email" name="email" placeholder="Alamat email" required="" class="w-full pl-11 pr-4 py-3.5 bg-[#F4F6F9] rounded-2xl text-[13px] text-[#1B1B1B] placeholder-gray-400 outline-none focus:ring-2 transition-all border border-transparent" value="{{ old('email') }}" style="--tw-ring-color: #D6282840;">
+                            @error('email')
+                                <p class="text-xs text-red-500 mt-1 pl-2">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="relative">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                            <input type="password" placeholder="Kata sandi" required="" class="w-full pl-11 pr-12 py-3.5 bg-[#F4F6F9] rounded-2xl text-[13px] text-[#1B1B1B] placeholder-gray-400 outline-none focus:ring-2 transition-all border border-transparent" value="" style="--tw-ring-color: #D6282840;">
+                            <input type="password" name="password" placeholder="Kata sandi" required="" class="w-full pl-11 pr-12 py-3.5 bg-[#F4F6F9] rounded-2xl text-[13px] text-[#1B1B1B] placeholder-gray-400 outline-none focus:ring-2 transition-all border border-transparent" style="--tw-ring-color: #D6282840;">
                             <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye w-4 h-4"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
                         </div>
                         <div class="text-right">
@@ -90,18 +94,28 @@
                         </div>
                     </form>
 
-                    <form id="form-register" class="space-y-3" onsubmit="event.preventDefault(); window.location.href='/dashboard';" style="opacity: 1; transform: none; display: none;">
+                    <form id="form-register" class="space-y-3" action="{{ route('register') }}" method="POST" style="opacity: 1; transform: none; display: {{ old('name') || $errors->has('name') ? 'block' : 'none' }};">
+                        @csrf
                         <div class="relative">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                            <input type="text" placeholder="Nama lengkap" required="" class="w-full pl-11 pr-4 py-3.5 bg-[#F4F6F9] rounded-2xl text-[13px] text-[#1B1B1B] placeholder-gray-400 outline-none focus:ring-2 transition-all border border-transparent" style="--tw-ring-color: #D6282840;">
+                            <input type="text" name="name" value="{{ old('name') }}" placeholder="Nama lengkap" required="" class="w-full pl-11 pr-4 py-3.5 bg-[#F4F6F9] rounded-2xl text-[13px] text-[#1B1B1B] placeholder-gray-400 outline-none focus:ring-2 transition-all border border-transparent" style="--tw-ring-color: #D6282840;">
+                            @error('name')
+                                <p class="text-xs text-red-500 mt-1 pl-2">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="relative">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
-                            <input type="email" placeholder="Alamat email" required="" class="w-full pl-11 pr-4 py-3.5 bg-[#F4F6F9] rounded-2xl text-[13px] text-[#1B1B1B] placeholder-gray-400 outline-none focus:ring-2 transition-all border border-transparent" style="--tw-ring-color: #D6282840;">
+                            <input type="email" name="email" value="{{ old('email') }}" placeholder="Alamat email" required="" class="w-full pl-11 pr-4 py-3.5 bg-[#F4F6F9] rounded-2xl text-[13px] text-[#1B1B1B] placeholder-gray-400 outline-none focus:ring-2 transition-all border border-transparent" style="--tw-ring-color: #D6282840;">
+                            @error('email')
+                                <p class="text-xs text-red-500 mt-1 pl-2">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="relative">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                            <input type="password" placeholder="Kata sandi" required="" class="w-full pl-11 pr-12 py-3.5 bg-[#F4F6F9] rounded-2xl text-[13px] text-[#1B1B1B] placeholder-gray-400 outline-none focus:ring-2 transition-all border border-transparent" style="--tw-ring-color: #D6282840;">
+                            <input type="password" name="password" placeholder="Kata sandi" required="" class="w-full pl-11 pr-12 py-3.5 bg-[#F4F6F9] rounded-2xl text-[13px] text-[#1B1B1B] placeholder-gray-400 outline-none focus:ring-2 transition-all border border-transparent" style="--tw-ring-color: #D6282840;">
+                            @error('password')
+                                <p class="text-xs text-red-500 mt-1 pl-2">{{ $message }}</p>
+                            @enderror
                             <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye w-4 h-4"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
                         </div>
                         <div class="pt-1">
@@ -197,7 +211,8 @@
                             </div>
                         </div>
                         
-                        <form class="space-y-4" action="{{ route('dashboard') }}" method="GET">
+                        <form class="space-y-4" action="{{ route('login') }}" method="POST">
+                            @csrf
                             <div>
                                 <label class="block text-xs font-bold text-[#12355B] mb-1">Alamat Email</label>
                                 <div class="relative">
@@ -205,8 +220,11 @@
                                         <rect width="20" height="16" x="2" y="4" rx="2"></rect>
                                         <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
                                     </svg>
-                                    <input type="email" required="" placeholder="nama@email.com" class="w-full rounded-xl border border-[#12355B]/15 bg-white py-3 pl-10 pr-4 text-xs outline-none focus:border-[#D62828] focus:ring-1 focus:ring-[#D62828]" value="">
+                                    <input type="email" name="email" required="" placeholder="nama@email.com" class="w-full rounded-xl border border-[#12355B]/15 bg-white py-3 pl-10 pr-4 text-xs outline-none focus:border-[#D62828] focus:ring-1 focus:ring-[#D62828]" value="{{ old('email') }}">
                                 </div>
+                                @error('email')
+                                    <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-[#12355B] mb-1">Kata Sandi</label>
@@ -216,7 +234,7 @@
                                         <rect x="3" y="10" width="18" height="12" rx="2"></rect>
                                         <path d="M7 10V7a5 5 0 0 1 10 0v3"></path>
                                     </svg>
-                                    <input type="password" required="" placeholder="••••••••" class="w-full rounded-xl border border-[#12355B]/15 bg-white py-3 pl-10 pr-10 text-xs outline-none focus:border-[#D62828] focus:ring-1 focus:ring-[#D62828]" value="">
+                                    <input type="password" name="password" required="" placeholder="••••••••" class="w-full rounded-xl border border-[#12355B]/15 bg-white py-3 pl-10 pr-10 text-xs outline-none focus:border-[#D62828] focus:ring-1 focus:ring-[#D62828]" value="">
                                     <button type="button" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#8192A3] hover:text-[#12355B]">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye">
                                             <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path>

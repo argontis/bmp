@@ -855,43 +855,47 @@
     </div>
     
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        (() => {
             const header = document.querySelector('header');
             const logo = document.querySelector('header img');
             const navLinks = document.querySelectorAll('header nav button');
             const mobileMenuBtn = document.querySelector('header .xl\\:hidden');
 
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 20) {
-                    header.classList.remove('bg-transparent');
-                    header.classList.add('bg-white', 'shadow-sm');
-                    logo.src = '/images/logo2.png';
-                    
-                    if (mobileMenuBtn) {
-                        mobileMenuBtn.style.color = '#1B1B1B';
+            // Prevent adding multiple listeners on htmx navigation
+            if (!window.hasWelcomeScrollListener) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 20) {
+                        header.classList.remove('bg-transparent');
+                        header.classList.add('bg-white', 'shadow-sm');
+                        logo.src = '/images/logo2.png';
+                        
+                        if (mobileMenuBtn) {
+                            mobileMenuBtn.style.color = '#1B1B1B';
+                        }
+                        
+                        navLinks.forEach(link => {
+                            link.classList.remove('text-white/80', 'hover:text-white');
+                        });
+                    } else {
+                        header.classList.add('bg-transparent');
+                        header.classList.remove('bg-white', 'shadow-sm');
+                        logo.src = '/images/logo.png';
+                        
+                        if (mobileMenuBtn) {
+                            mobileMenuBtn.style.color = 'white';
+                        }
+                        
+                        navLinks.forEach(link => {
+                            link.classList.add('text-white/80', 'hover:text-white');
+                        });
                     }
-                    
-                    navLinks.forEach(link => {
-                        link.classList.remove('text-white/80', 'hover:text-white');
-                    });
-                } else {
-                    header.classList.add('bg-transparent');
-                    header.classList.remove('bg-white', 'shadow-sm');
-                    logo.src = '/images/logo.png';
-                    
-                    if (mobileMenuBtn) {
-                        mobileMenuBtn.style.color = 'white';
-                    }
-                    
-                    navLinks.forEach(link => {
-                        link.classList.add('text-white/80', 'hover:text-white');
-                    });
-                }
-            });
-        });
+                });
+                window.hasWelcomeScrollListener = true;
+            }
+        })();
     </script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        (() => {
             const searchInput = document.getElementById('welcomeSearchInput');
             const filterBtns = document.querySelectorAll('.welcome-category-btn');
             const allBtn = document.getElementById('welcomeAllBtn');
@@ -964,7 +968,7 @@
                     });
                 });
             }
-        });
+        })();
     </script>
 </body>
 </html>

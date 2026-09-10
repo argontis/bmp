@@ -462,7 +462,7 @@
 
     @include('components.desktop-donation-modal')
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        (() => {
             const mobileSearch = document.getElementById('mobileSearchInput');
             const desktopSearch = document.getElementById('desktopSearchInput');
             const categoryBtns = document.querySelectorAll('.category-filter-btn');
@@ -535,7 +535,7 @@
                     filterCards();
                 });
             });
-        });
+        })();
     </script>
 </body>
 </html>

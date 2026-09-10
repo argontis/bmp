@@ -73,7 +73,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-[11px] text-gray-400 font-medium">Selamat pagi 👋</p>
-                        <p class="text-[15px] font-extrabold text-[#12355B] leading-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">Ahmad Fauzi</p>
+                        <p class="text-[15px] font-extrabold text-[#12355B] leading-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">{{ auth()->user()->name }}</p>
                     </div>
                     <div class="flex items-center gap-2.5">
                         <button hx-get="/login" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="relative w-9 h-9 rounded-2xl bg-[#F4F6F9] flex items-center justify-center">

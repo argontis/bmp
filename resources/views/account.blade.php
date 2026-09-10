@@ -71,7 +71,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-[11px] text-gray-400 font-medium">Selamat pagi 👋</p>
-                        <p class="text-[15px] font-extrabold text-[#12355B] leading-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">Ahmad Fauzi</p>
+                        <p class="text-[15px] font-extrabold text-[#12355B] leading-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">{{ auth()->user()->name }}</p>
                     </div>
                     <div class="flex items-center gap-2.5">
                         <button class="relative w-9 h-9 rounded-2xl bg-[#F4F6F9] flex items-center justify-center">
@@ -102,7 +102,7 @@
                                             <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald-500 rounded-full border-2 border-white"></div>
                                         </div>
                                         <div class="flex-1 pt-1">
-                                            <p class="font-extrabold text-[16px] text-[#12355B]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Ahmad Fauzi</p>
+                                            <p class="font-extrabold text-[16px] text-[#12355B]" style="font-family: 'Plus Jakarta Sans', sans-serif;">{{ auth()->user()->name }}</p>
                                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200 mt-1">🏅 Donatur Setia</span>
                                         </div>
                                     </div>
@@ -191,7 +191,8 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 text-gray-300 shrink-0"><path d="m9 18 6-6-6-6"></path></svg>
                             </button>
                             
-                            <form id="form-logout" onsubmit="event.preventDefault(); window.location.href='/';" class="mt-2 w-full">
+                            <form id="form-logout" action="{{ route('logout') }}" method="POST" class="mt-2 w-full">
+                                @csrf
                                 <button type="submit" class="w-full flex items-center justify-center gap-2 py-3.5 rounded-[16px] border-2 text-[13px] font-bold transition-colors" style="border-color: rgb(214, 40, 40); color: rgb(214, 40, 40);">Keluar dari Akun</button>
                             </form>
                         </div>

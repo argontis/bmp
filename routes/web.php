@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -10,9 +12,19 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+    
+    Route::get('/account', function () {
+        return view('account');
+    })->name('account');
+});
 
 Route::get('/explore', function () {
     return view('explore');
@@ -25,10 +37,6 @@ Route::get('/donate', function () {
 Route::get('/history', function () {
     return view('history');
 })->name('history');
-
-Route::get('/account', function () {
-    return view('account');
-})->name('account');
 
 Route::get('/reward', function () {
     return view('reward');
@@ -137,3 +145,11 @@ Route::get('/artikel/modal-usaha-ibu', function () {
 // Relawan Pages
 Route::get('/relawan/daftar', function () { return view('relawan_pages.daftar'); });
 Route::get('/relawan/video', function () { return view('relawan_pages.video'); });
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+    Route::get('/admin/kegiatan', [AdminController::class, 'kegiatan'])->name('admin.kegiatan');
+    Route::post('/admin/kegiatan', [AdminController::class, 'storeKegiatan'])->name('admin.kegiatan.store');
+    Route::get('/admin/donatur', [AdminController::class, 'donatur'])->name('admin.donatur');
+    Route::get('/admin/transaksi', [AdminController::class, 'transaksi'])->name('admin.transaksi');
+});
