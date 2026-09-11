@@ -381,13 +381,13 @@
                     if (bCat === window.exploreCurrentCategory) {
                         b.classList.add('bg-red-50', 'border-[#D62828]', 'text-[#D62828]');
                         b.classList.remove('bg-white', 'text-[#12355B]', 'border-[#12355B]/10');
-                        b.querySelector('svg').classList.remove('text-[#12355B]');
-                        b.querySelector('svg').classList.add('text-[#D62828]');
+                        
+                        
                     } else {
                         b.classList.remove('bg-red-50', 'border-[#D62828]', 'text-[#D62828]');
                         b.classList.add('bg-white', 'text-[#12355B]', 'border-[#12355B]/10');
-                        b.querySelector('svg').classList.remove('text-[#D62828]');
-                        b.querySelector('svg').classList.add('text-[#12355B]');
+                        
+                        
                     }
                 });
                 if(typeof window.executeExploreFilter === 'function') window.executeExploreFilter();
