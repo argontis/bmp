@@ -13,30 +13,44 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register.page');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-    
-    Route::get('/account', function () {
-        return view('account');
-    })->name('account');
+// Mock Google Auth
+Route::get('/auth/google', function () {
+    return redirect('/auth/google/callback');
+})->name('google.login');
+
+Route::get('/auth/google/callback', function () {
+    $user = \App\Models\User::firstOrCreate(
+        ['email' => 'budi.google@gmail.com'],
+        [
+            'name' => 'Budi Google',
+            'password' => \Illuminate\Support\Facades\Hash::make('password123')
+        ]
+    );
+    \Illuminate\Support\Facades\Auth::login($user);
+    return redirect('/dashboard');
 });
 
-Route::get('/explore', function () {
-    return view('explore');
-})->name('explore');
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+    
+    Route::get('/account', [\App\Http\Controllers\AccountController::class, 'index'])->name('account');
+
+    Route::get('/history', [\App\Http\Controllers\HistoryController::class, 'index'])->name('history');
+});
+
+Route::get('/explore', [\App\Http\Controllers\ExploreController::class, 'index'])->name('explore');
 
 Route::get('/donate', function () {
     return view('donate');
 })->name('donate');
 
-Route::get('/history', function () {
-    return view('history');
-})->name('history');
+
 
 Route::get('/reward', function () {
     return view('reward');
@@ -152,4 +166,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/admin/kegiatan', [AdminController::class, 'storeKegiatan'])->name('admin.kegiatan.store');
     Route::get('/admin/donatur', [AdminController::class, 'donatur'])->name('admin.donatur');
     Route::get('/admin/transaksi', [AdminController::class, 'transaksi'])->name('admin.transaksi');
+    Route::get('/admin/pengeluaran', [AdminController::class, 'pengeluaran'])->name('admin.pengeluaran');
+    Route::post('/admin/pengeluaran', [AdminController::class, 'storePengeluaran'])->name('admin.pengeluaran.store');
 });

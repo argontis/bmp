@@ -47,13 +47,13 @@
                             <img src="/images/logo.png" alt="Bakti Merah Putih" class="h-14 w-auto object-contain transition-opacity duration-300">
                         </a>
                         <nav class="hidden xl:flex items-center gap-0.5">
-                            <button onclick="window.location.href='/login'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#D62828] text-white/80 hover:text-white">
+                            <button onclick="window.location.href='/donasi'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#D62828] text-white/80 hover:text-white">
                                 Beranda
                                 <span class="absolute left-1/2 -translate-x-1/2 -bottom-0.5 w-1.5 h-1.5 rounded-full bg-[#D62828]" style="transform: none; transform-origin: 50% 50% 0px; opacity: 1;"></span>
                             </button>
                             <button onclick="window.location.href='/tentang-kami'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-white/80 hover:text-white">Tentang Kami</button>
                             <button onclick="window.location.href='/program'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-white/80 hover:text-white">Program</button>
-                            <button onclick="window.location.href='/login'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-white/80 hover:text-white">Donasi</button>
+                            <button onclick="window.location.href='/donasi'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-white/80 hover:text-white">Donasi</button>
                             <button onclick="window.location.href='/laporan'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">Laporan</button>
                             <button onclick="window.location.href='/artikel'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">Artikel</button>
                             <button onclick="window.location.href='/galeri'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">Galeri</button>
@@ -62,10 +62,10 @@
                         </nav>
                         <div class="flex items-center gap-3">
                             <button class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-[#D62828] text-white rounded-full text-[13px] font-bold hover:bg-[#B91C1C] transition-all duration-200 shadow-[0_8px_20px_-8px_rgba(214,40,40,0.7)] hover:shadow-[0_10px_26px_-8px_rgba(214,40,40,0.85)] hover:-translate-y-0.5" onclick="window.location.href='/login'">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4 fill-white shrink-0"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
-                                Donasi Sekarang
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-in w-4 h-4 shrink-0"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
+                                Daftar Sekarang
                             </button>
-                            <button onclick="window.location.href='/login'" class="xl:hidden p-2.5 rounded-xl hover:bg-black/5 transition-colors" style="color: white;">
+                            <button onclick="window.location.href='/donasi'" class="xl:hidden p-2.5 rounded-xl hover:bg-black/5 transition-colors" style="color: white;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu w-5 h-5"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
                             </button>
                         </div>
@@ -74,14 +74,16 @@
 
                 <section class="relative overflow-hidden flex items-center" style="min-height: max(100vh, 760px);">
                     <div class="absolute inset-0 bg-[#0a1f3a]">
-                        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1920&h=1080&fit=crop&auto=format" alt="Relawan Bakti Merah Putih bersama anak-anak ceria" class="absolute inset-0 w-full h-full object-cover object-center" style="opacity: 0.62; transform: none;">
+                        <img src="/images/hero1.webp" alt="Bakti Merah Putih Hero 1" class="hero-bg-slide absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000" style="opacity: 0.62;">
+                        <img src="/images/hero2.webp" alt="Bakti Merah Putih Hero 2" class="hero-bg-slide absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000" style="opacity: 0;">
+                        <img src="/images/hero3.webp" alt="Bakti Merah Putih Hero 3" class="hero-bg-slide absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000" style="opacity: 0;">
                         <div class="absolute inset-0 bg-gradient-to-r from-[#0D2137] via-[#0D2137]/85 to-[#0D2137]/25"></div>
                         <div class="absolute inset-0 bg-gradient-to-t from-[#0D2137] via-transparent to-[#0D2137]/40"></div>
                         <div class="absolute inset-0 opacity-[0.05] pointer-events-none" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 22px 22px;"></div>
                         <div class="absolute bottom-8 right-8 flex items-center gap-2 z-10">
-                            <button class="rounded-full transition-all duration-300 w-7 h-2 bg-white"></button>
-                            <button class="rounded-full transition-all duration-300 w-2 h-2 bg-white/40 hover:bg-white/70"></button>
-                            <button class="rounded-full transition-all duration-300 w-2 h-2 bg-white/40 hover:bg-white/70"></button>
+                            <button class="hero-indicator rounded-full transition-all duration-300 w-7 h-2 bg-white"></button>
+                            <button class="hero-indicator rounded-full transition-all duration-300 w-2 h-2 bg-white/40 hover:bg-white/70"></button>
+                            <button class="hero-indicator rounded-full transition-all duration-300 w-2 h-2 bg-white/40 hover:bg-white/70"></button>
                         </div>
                     </div>
                     <div class="relative max-w-[1280px] mx-auto px-6 w-full pt-28 pb-24">
@@ -103,7 +105,7 @@
                                     Bakti Merah Putih bergerak di bidang pendidikan, kesehatan, lingkungan, dan kemanusiaan untuk menghadirkan perubahan nyata bagi jutaan masyarakat di seluruh pelosok Indonesia.
                                 </p>
                                 <div class="flex flex-wrap gap-4" style="opacity: 1; transform: none;">
-                                    <button onclick="window.location.href='/login'" class="group inline-flex items-center gap-2.5 px-8 py-4 bg-[#D62828] text-white rounded-full font-extrabold text-[15px] hover:bg-[#B91C1C] transition-all shadow-[0_18px_40px_-12px_rgba(214,40,40,0.8)] hover:-translate-y-0.5">
+                                    <button onclick="window.location.href='/donasi'" class="group inline-flex items-center gap-2.5 px-8 py-4 bg-[#D62828] text-white rounded-full font-extrabold text-[15px] hover:bg-[#B91C1C] transition-all shadow-[0_18px_40px_-12px_rgba(214,40,40,0.8)] hover:-translate-y-0.5">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4 fill-white"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg> 
                                         Donasi Sekarang
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4 group-hover:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
@@ -256,10 +258,11 @@
                             </div>
                             <div class="flex flex-wrap gap-2 justify-center">
                                 <button id="welcomeAllBtn" data-category="all" class="px-4 py-2 rounded-full text-xs font-bold transition-all bg-[#D62828] text-white border border-[#D62828]">Semua</button>
-                                <button data-category="Pendidikan" class="welcome-category-btn px-4 py-2 rounded-full border border-[#12355B]/15 text-[#12355B] text-xs font-bold transition-all hover:bg-[#12355B]/5">Pendidikan</button>
                                 <button data-category="Kesehatan" class="welcome-category-btn px-4 py-2 rounded-full border border-[#12355B]/15 text-[#12355B] text-xs font-bold transition-all hover:bg-[#12355B]/5">Kesehatan</button>
+                                <button data-category="Pendidikan" class="welcome-category-btn px-4 py-2 rounded-full border border-[#12355B]/15 text-[#12355B] text-xs font-bold transition-all hover:bg-[#12355B]/5">Pendidikan</button>
+                                <button data-category="Sosial & Kemanusiaan" class="welcome-category-btn px-4 py-2 rounded-full border border-[#12355B]/15 text-[#12355B] text-xs font-bold transition-all hover:bg-[#12355B]/5">Sosial & Kemanusiaan</button>
                                 <button data-category="Lingkungan" class="welcome-category-btn px-4 py-2 rounded-full border border-[#12355B]/15 text-[#12355B] text-xs font-bold transition-all hover:bg-[#12355B]/5">Lingkungan</button>
-                                <button data-category="Sosial" class="welcome-category-btn px-4 py-2 rounded-full border border-[#12355B]/15 text-[#12355B] text-xs font-bold transition-all hover:bg-[#12355B]/5">Sosial</button>
+                                <button data-category="Fasilitas Ibadah" class="welcome-category-btn px-4 py-2 rounded-full border border-[#12355B]/15 text-[#12355B] text-xs font-bold transition-all hover:bg-[#12355B]/5">Fasilitas Ibadah</button>
                             </div>
                         </div>
                         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" id="programContainer">
@@ -379,7 +382,7 @@
                                                 <div class="text-[11px] text-[#aaa]">dari Rp 150.000.000</div>
                                             </div>
                                         </div>
-                                        <button onclick="window.location.href='/login'" class="w-full py-3.5 bg-[#D62828] text-white rounded-full text-[13px] font-extrabold hover:bg-[#B91C1C] transition-all shadow-[0_10px_24px_-10px_rgba(214,40,40,0.7)] hover:-translate-y-0.5 mt-2">Donasi Sekarang</button>
+                                        <button onclick="window.location.href='/donasi'" class="w-full py-3.5 bg-[#D62828] text-white rounded-full text-[13px] font-extrabold hover:bg-[#B91C1C] transition-all shadow-[0_10px_24px_-10px_rgba(214,40,40,0.7)] hover:-translate-y-0.5 mt-2">Donasi Sekarang</button>
                                     </div>
                                 </div>
                             </div>
@@ -415,7 +418,7 @@
                                                 <div class="text-[11px] text-[#aaa]">dari Rp 200.000.000</div>
                                             </div>
                                         </div>
-                                        <button onclick="window.location.href='/login'" class="w-full py-3.5 bg-[#D62828] text-white rounded-full text-[13px] font-extrabold hover:bg-[#B91C1C] transition-all shadow-[0_10px_24px_-10px_rgba(214,40,40,0.7)] hover:-translate-y-0.5 mt-2">Donasi Sekarang</button>
+                                        <button onclick="window.location.href='/donasi'" class="w-full py-3.5 bg-[#D62828] text-white rounded-full text-[13px] font-extrabold hover:bg-[#B91C1C] transition-all shadow-[0_10px_24px_-10px_rgba(214,40,40,0.7)] hover:-translate-y-0.5 mt-2">Donasi Sekarang</button>
                                     </div>
                                 </div>
                             </div>
@@ -448,7 +451,7 @@
                                                 <div class="text-[11px] text-[#aaa]">dari Rp 800.000.000</div>
                                             </div>
                                         </div>
-                                        <button onclick="window.location.href='/login'" class="w-full py-3.5 bg-[#D62828] text-white rounded-full text-[13px] font-extrabold hover:bg-[#B91C1C] transition-all shadow-[0_10px_24px_-10px_rgba(214,40,40,0.7)] hover:-translate-y-0.5 mt-2">Donasi Sekarang</button>
+                                        <button onclick="window.location.href='/donasi'" class="w-full py-3.5 bg-[#D62828] text-white rounded-full text-[13px] font-extrabold hover:bg-[#B91C1C] transition-all shadow-[0_10px_24px_-10px_rgba(214,40,40,0.7)] hover:-translate-y-0.5 mt-2">Donasi Sekarang</button>
                                     </div>
                                 </div>
                             </div>
@@ -533,7 +536,7 @@
                                 </span>
                                 <h2 class="text-4xl lg:text-[52px] font-extrabold text-[#12355B] leading-[1.05] tracking-[-0.02em]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Wajah Perubahan<br>Nyata</h2>
                             </div>
-                            <button onclick="window.location.href='/login'" class="hidden md:flex items-center gap-2 text-[13px] font-bold text-[#12355B] hover:text-[#D62828] transition-colors">
+                            <button onclick="window.location.href='/donasi'" class="hidden md:flex items-center gap-2 text-[13px] font-bold text-[#12355B] hover:text-[#D62828] transition-colors">
                                 Lihat Galeri Lengkap <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link w-4 h-4"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
                             </button>
                         </div>
@@ -847,7 +850,7 @@
 
                 <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 sm:hidden">
                     <button onclick="window.location.href='/login'" class="flex items-center gap-2 px-7 py-4 bg-[#D62828] text-white rounded-full font-extrabold text-sm shadow-[0_18px_40px_-10px_rgba(214,40,40,0.8)] hover:scale-105 transition-transform active:scale-95">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4 fill-white"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg> Donasi Sekarang
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-in w-4 h-4"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg> Daftar Sekarang
                     </button>
                 </div>
             </div>
@@ -908,9 +911,10 @@
 
                 const categoryMap = {
                     'pendidikan': ['pendidikan', 'beasiswa'],
-                    'sosial': ['sosial', 'pangan', 'bencana'],
+                    'sosial & kemanusiaan': ['sosial', 'kemanusiaan', 'pangan', 'bencana'],
                     'lingkungan': ['lingkungan'],
-                    'kesehatan': ['kesehatan']
+                    'kesehatan': ['kesehatan'],
+                    'fasilitas ibadah': ['ibadah', 'fasilitas']
                 };
 
                 function filterWelcomeCards() {
@@ -967,6 +971,41 @@
                         filterWelcomeCards();
                     });
                 });
+            }
+        })();
+    </script>
+    <script>
+        (() => {
+            const slides = document.querySelectorAll('.hero-bg-slide');
+            const indicators = document.querySelectorAll('.hero-indicator');
+            if (slides.length > 0) {
+                let currentSlide = 0;
+                
+                function showSlide(index) {
+                    slides.forEach(slide => {
+                        slide.style.opacity = '0';
+                    });
+                    indicators.forEach(ind => {
+                        ind.classList.remove('w-7', 'bg-white');
+                        ind.classList.add('w-2', 'bg-white/40');
+                    });
+                    
+                    slides[index].style.opacity = '0.62';
+                    indicators[index].classList.remove('w-2', 'bg-white/40');
+                    indicators[index].classList.add('w-7', 'bg-white');
+                }
+                
+                indicators.forEach((ind, i) => {
+                    ind.addEventListener('click', () => {
+                        currentSlide = i;
+                        showSlide(currentSlide);
+                    });
+                });
+                
+                setInterval(() => {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    showSlide(currentSlide);
+                }, 5000);
             }
         })();
     </script>

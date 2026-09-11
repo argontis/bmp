@@ -56,7 +56,7 @@
                             <button onclick="window.location.href='/program'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">
                                 Program
                             </button>
-                            <button onclick="window.location.href='/login'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">
+                            <button onclick="window.location.href='/donasi'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">
                                 Donasi
                             </button>
                             <button onclick="window.location.href='/laporan'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">
@@ -72,10 +72,10 @@
                         </nav>
                         <div class="flex items-center gap-3">
                             <button class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-[#D62828] text-white rounded-full text-[13px] font-bold hover:bg-[#B91C1C] transition-all duration-200 shadow-[0_8px_20px_-8px_rgba(214,40,40,0.7)] hover:shadow-[0_10px_26px_-8px_rgba(214,40,40,0.85)] hover:-translate-y-0.5" onclick="window.location.href='/login'">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4 fill-white shrink-0"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
-                                Donasi Sekarang
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-in w-4 h-4 shrink-0"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
+                                Daftar Sekarang
                             </button>
-                            <button onclick="window.location.href='/login'" class="xl:hidden p-2.5 rounded-xl hover:bg-black/5 transition-colors" style="color: white;">
+                            <button onclick="window.location.href='/donasi'" class="xl:hidden p-2.5 rounded-xl hover:bg-black/5 transition-colors" style="color: white;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu w-5 h-5"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
                             </button>
                         </div>
@@ -95,27 +95,6 @@
                     <!-- Content Layout -->
                     <div class="max-w-[1280px] mx-auto px-6 -mt-20 relative z-20 pb-24">
                         
-                        <!-- Featured Article -->
-                        <div class="bg-white rounded-[32px] overflow-hidden shadow-xl border border-gray-100 mb-12 flex flex-col lg:flex-row group cursor-pointer hover:shadow-2xl transition-all duration-300">
-                            <div class="lg:w-1/2 h-[300px] lg:h-auto overflow-hidden relative">
-                                <img src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&h=600&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Bencana Cianjur">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                                <span class="absolute top-6 left-6 bg-[#D62828] text-white text-xs font-bold px-3 py-1.5 rounded-lg uppercase tracking-wider">Kemanusiaan</span>
-                            </div>
-                            <div class="lg:w-1/2 p-8 md:p-12 flex flex-col justify-center">
-                                <div class="flex items-center gap-4 text-sm text-gray-500 mb-4 font-semibold">
-                                    <span class="flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar w-4 h-4"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg> 24 Agustus 2026</span>
-                                    <span>•</span>
-                                    <span>Bakti Merah Putih</span>
-                                </div>
-                                <h2 class="text-3xl font-extrabold text-[#1B1B1B] mb-4 group-hover:text-[#D62828] transition-colors" style="font-family: 'Plus Jakarta Sans', sans-serif;">Penyaluran Bantuan Tahap 3 Untuk Korban Gempa Cianjur Tepat Sasaran</h2>
-                                <p class="text-gray-600 leading-relaxed mb-8 line-clamp-3">Tim tanggap bencana Bakti Merah Putih kembali mendistribusikan 500 paket sembako, tenda darurat, dan obat-obatan ke desa terisolir yang terdampak gempa bumi. Bantuan ini hasil donasi dari ribuan #OrangBaik di seluruh Indonesia.</p>
-                                <div class="flex items-center text-[#D62828] font-bold text-sm gap-2 mt-auto">
-                                    Baca Selengkapnya <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4 group-hover:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                                </div>
-                            </div>
-                        </div>
-
                         <!-- Grid Articles -->
                         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                             <!-- Article 1 -->
@@ -180,14 +159,69 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Load More -->
-                        <div class="flex justify-center">
-                            <button class="px-8 py-4 rounded-full border-2 border-gray-200 text-[#1B1B1B] font-bold text-sm hover:border-[#D62828] hover:text-[#D62828] transition-colors bg-white shadow-sm flex items-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-refresh-cw w-4 h-4"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
-                                Tampilkan Lebih Banyak
-                            </button>
+                            
+                            <!-- Article 4 -->
+                            <div onclick="window.location.href='/artikel/klinik-terapung-maluku'" class="bg-white rounded-[24px] overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 group cursor-pointer flex flex-col">
+                                <div class="h-56 overflow-hidden relative">
+                                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=600&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Kesehatan">
+                                    <span class="absolute top-4 left-4 bg-amber-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">Kesehatan</span>
+                                </div>
+                                <div class="p-6 flex-1 flex flex-col">
+                                    <div class="flex items-center gap-3 text-xs text-gray-500 mb-3 font-semibold">
+                                        <span>25 Juli 2026</span>
+                                    </div>
+                                    <h3 class="text-xl font-extrabold text-[#1B1B1B] mb-3 group-hover:text-amber-600 transition-colors line-clamp-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Akses Kesehatan Gratis Jangkau 5 Desa di Pedalaman Maluku</h3>
+                                    <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-2">Klinik terapung Bakti Merah Putih berhasil memberikan pengobatan gratis kepada 800 warga di wilayah terluar kepulauan Maluku.</p>
+                                    <div class="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between">
+                                        <span class="text-amber-600 text-sm font-bold">Baca selengkapnya</span>
+                                        <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-amber-50 group-hover:text-amber-600 transition-colors">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Article 5 -->
+                            <div onclick="window.location.href='/artikel/renovasi-masjid'" class="bg-white rounded-[24px] overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 group cursor-pointer flex flex-col">
+                                <div class="h-56 overflow-hidden relative">
+                                    <img src="https://images.unsplash.com/photo-1564769625905-50e93615e769?w=800&h=600&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Fasilitas Ibadah">
+                                    <span class="absolute top-4 left-4 bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">Fasilitas Ibadah</span>
+                                </div>
+                                <div class="p-6 flex-1 flex flex-col">
+                                    <div class="flex items-center gap-3 text-xs text-gray-500 mb-3 font-semibold">
+                                        <span>12 Juli 2026</span>
+                                    </div>
+                                    <h3 class="text-xl font-extrabold text-[#1B1B1B] mb-3 group-hover:text-emerald-600 transition-colors line-clamp-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Renovasi Masjid Al-Hidayah Rampung, Warga Pelosok Kini Nyaman Beribadah</h3>
+                                    <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-2">Setelah 10 tahun menanti, warga desa akhirnya memiliki tempat ibadah yang layak dengan fasilitas wudu yang bersih dan memadai.</p>
+                                    <div class="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between">
+                                        <span class="text-emerald-600 text-sm font-bold">Baca selengkapnya</span>
+                                        <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-emerald-50 group-hover:text-emerald-600 transition-colors">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Article 6 -->
+                            <div onclick="window.location.href='/artikel/bantuan-gempa-lombok'" class="bg-white rounded-[24px] overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 group cursor-pointer flex flex-col">
+                                <div class="h-56 overflow-hidden relative">
+                                    <img src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&h=600&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Sosial & Kemanusiaan">
+                                    <span class="absolute top-4 left-4 bg-[#D62828] text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">Sosial & Kemanusiaan</span>
+                                </div>
+                                <div class="p-6 flex-1 flex flex-col">
+                                    <div class="flex items-center gap-3 text-xs text-gray-500 mb-3 font-semibold">
+                                        <span>5 Juli 2026</span>
+                                    </div>
+                                    <h3 class="text-xl font-extrabold text-[#1B1B1B] mb-3 group-hover:text-[#D62828] transition-colors line-clamp-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Bantuan Logistik dan Dapur Umum untuk Korban Gempa di Lombok</h3>
+                                    <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-2">Tim relawan bergerak cepat mendirikan tenda pengungsian dan membagikan 2.000 paket makanan siap saji bagi warga terdampak.</p>
+                                    <div class="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between">
+                                        <span class="text-[#D62828] text-sm font-bold">Baca selengkapnya</span>
+                                        <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-[#D62828]/10 group-hover:text-[#D62828] transition-colors">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -265,7 +299,7 @@
 
                 <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 sm:hidden">
                     <button onclick="window.location.href='/login'" class="flex items-center gap-2 px-7 py-4 bg-[#D62828] text-white rounded-full font-extrabold text-sm shadow-[0_18px_40px_-10px_rgba(214,40,40,0.8)] hover:scale-105 transition-transform active:scale-95">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4 fill-white"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg> Donasi Sekarang
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-in w-4 h-4"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg> Daftar Sekarang
                     </button>
                 </div>
             </div>

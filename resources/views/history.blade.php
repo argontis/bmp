@@ -94,91 +94,30 @@
                         <h2 class="font-extrabold text-[16px] text-[#1B1B1B] mb-4" style="font-family: 'Plus Jakarta Sans', sans-serif;">Riwayat Donasi</h2>
                         
                         <div class="space-y-2.5">
-                            
+                            @forelse($donations as $donation)
                             <div class="bg-white rounded-[16px] flex items-center gap-3 p-3.5 shadow-[0_1px_8px_-2px_rgba(0,0,0,0.08)]">
-                                <div class="w-12 h-12 rounded-2xl overflow-hidden shrink-0 bg-gray-100">
-                                    <img src="https://images.unsplash.com/photo-1641886000798-41c1adbebb3b?w=80&amp;h=80&amp;fit=crop&amp;auto=format" alt="Beasiswa Anak NTT" class="w-full h-full object-cover">
+                                <div class="w-12 h-12 rounded-2xl overflow-hidden shrink-0 bg-gray-100 relative">
+                                    <img src="{{ asset($donation->campaign->image ?? 'images/donasi-bencana.png') }}" alt="{{ $donation->campaign->name ?? 'Program Donasi' }}" class="w-full h-full object-cover">
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <p class="text-[13px] font-bold text-[#1B1B1B] truncate" style="font-family: 'Plus Jakarta Sans', sans-serif;">Beasiswa Anak NTT</p>
-                                    <p class="text-[11px] text-gray-400 mt-0.5">Juli 2026</p>
+                                    <p class="text-[13px] font-bold text-[#1B1B1B] truncate" style="font-family: 'Plus Jakarta Sans', sans-serif;">{{ $donation->campaign->name ?? 'Program Donasi' }}</p>
+                                    <p class="text-[11px] text-gray-400 mt-0.5">{{ $donation->created_at->translatedFormat('d M Y') }}</p>
                                 </div>
                                 <div class="shrink-0 text-right">
-                                    <p class="text-[13px] font-extrabold" style="color: rgb(214, 40, 40);">Rp 250.000</p>
-                                    <span class="text-[10px] text-emerald-600 font-bold flex items-center gap-0.5 justify-end mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big w-2.5 h-2.5"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Berhasil</span>
+                                    <p class="text-[13px] font-extrabold" style="color: rgb(214, 40, 40);">Rp {{ number_format($donation->amount, 0, ',', '.') }}</p>
+                                    <span class="text-[10px] {{ $donation->status == 'Berhasil' ? 'text-emerald-600' : 'text-amber-500' }} font-bold flex items-center gap-0.5 justify-end mt-0.5">
+                                        @if($donation->status == 'Berhasil')
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big w-2.5 h-2.5"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> 
+                                        @endif
+                                        {{ $donation->status }}
+                                    </span>
                                 </div>
                             </div>
-                            
-                            <div class="bg-white rounded-[16px] flex items-center gap-3 p-3.5 shadow-[0_1px_8px_-2px_rgba(0,0,0,0.08)]">
-                                <div class="w-12 h-12 rounded-2xl overflow-hidden shrink-0 bg-gray-100">
-                                    <img src="https://images.unsplash.com/photo-1625236601674-8702e197b5b4?w=80&amp;h=80&amp;fit=crop&amp;auto=format" alt="Dapur Umum Pangan" class="w-full h-full object-cover">
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-[13px] font-bold text-[#1B1B1B] truncate" style="font-family: 'Plus Jakarta Sans', sans-serif;">Dapur Umum Pangan</p>
-                                    <p class="text-[11px] text-gray-400 mt-0.5">Juli 2026</p>
-                                </div>
-                                <div class="shrink-0 text-right">
-                                    <p class="text-[13px] font-extrabold" style="color: rgb(214, 40, 40);">Rp 100.000</p>
-                                    <span class="text-[10px] text-emerald-600 font-bold flex items-center gap-0.5 justify-end mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big w-2.5 h-2.5"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Berhasil</span>
-                                </div>
+                            @empty
+                            <div class="text-center py-10">
+                                <p class="text-[13px] text-gray-500">Belum ada riwayat donasi.</p>
                             </div>
-                            
-                            <div class="bg-white rounded-[16px] flex items-center gap-3 p-3.5 shadow-[0_1px_8px_-2px_rgba(0,0,0,0.08)]">
-                                <div class="w-12 h-12 rounded-2xl overflow-hidden shrink-0 bg-gray-100">
-                                    <img src="https://images.unsplash.com/photo-1728320771441-17a19df0fe4c?w=80&amp;h=80&amp;fit=crop&amp;auto=format" alt="Banjir Kalimantan" class="w-full h-full object-cover">
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-[13px] font-bold text-[#1B1B1B] truncate" style="font-family: 'Plus Jakarta Sans', sans-serif;">Banjir Kalimantan</p>
-                                    <p class="text-[11px] text-gray-400 mt-0.5">Juli 2026</p>
-                                </div>
-                                <div class="shrink-0 text-right">
-                                    <p class="text-[13px] font-extrabold" style="color: rgb(214, 40, 40);">Rp 500.000</p>
-                                    <span class="text-[10px] text-emerald-600 font-bold flex items-center gap-0.5 justify-end mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big w-2.5 h-2.5"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Berhasil</span>
-                                </div>
-                            </div>
-                            
-                            <div class="bg-white rounded-[16px] flex items-center gap-3 p-3.5 shadow-[0_1px_8px_-2px_rgba(0,0,0,0.08)]">
-                                <div class="w-12 h-12 rounded-2xl overflow-hidden shrink-0 bg-gray-100">
-                                    <img src="https://images.unsplash.com/photo-1641886000798-41c1adbebb3b?w=80&amp;h=80&amp;fit=crop&amp;auto=format" alt="Beasiswa Anak NTT" class="w-full h-full object-cover">
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-[13px] font-bold text-[#1B1B1B] truncate" style="font-family: 'Plus Jakarta Sans', sans-serif;">Beasiswa Anak NTT</p>
-                                    <p class="text-[11px] text-gray-400 mt-0.5">Juli 2026</p>
-                                </div>
-                                <div class="shrink-0 text-right">
-                                    <p class="text-[13px] font-extrabold" style="color: rgb(214, 40, 40);">Rp 250.000</p>
-                                    <span class="text-[10px] text-emerald-600 font-bold flex items-center gap-0.5 justify-end mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big w-2.5 h-2.5"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Berhasil</span>
-                                </div>
-                            </div>
-                            
-                            <div class="bg-white rounded-[16px] flex items-center gap-3 p-3.5 shadow-[0_1px_8px_-2px_rgba(0,0,0,0.08)]">
-                                <div class="w-12 h-12 rounded-2xl overflow-hidden shrink-0 bg-gray-100">
-                                    <img src="https://images.unsplash.com/photo-1625236601674-8702e197b5b4?w=80&amp;h=80&amp;fit=crop&amp;auto=format" alt="Dapur Umum Pangan" class="w-full h-full object-cover">
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-[13px] font-bold text-[#1B1B1B] truncate" style="font-family: 'Plus Jakarta Sans', sans-serif;">Dapur Umum Pangan</p>
-                                    <p class="text-[11px] text-gray-400 mt-0.5">Juli 2026</p>
-                                </div>
-                                <div class="shrink-0 text-right">
-                                    <p class="text-[13px] font-extrabold" style="color: rgb(214, 40, 40);">Rp 100.000</p>
-                                    <span class="text-[10px] text-emerald-600 font-bold flex items-center gap-0.5 justify-end mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big w-2.5 h-2.5"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Berhasil</span>
-                                </div>
-                            </div>
-                            
-                            <div class="bg-white rounded-[16px] flex items-center gap-3 p-3.5 shadow-[0_1px_8px_-2px_rgba(0,0,0,0.08)]">
-                                <div class="w-12 h-12 rounded-2xl overflow-hidden shrink-0 bg-gray-100">
-                                    <img src="https://images.unsplash.com/photo-1728320771441-17a19df0fe4c?w=80&amp;h=80&amp;fit=crop&amp;auto=format" alt="Banjir Kalimantan" class="w-full h-full object-cover">
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-[13px] font-bold text-[#1B1B1B] truncate" style="font-family: 'Plus Jakarta Sans', sans-serif;">Banjir Kalimantan</p>
-                                    <p class="text-[11px] text-gray-400 mt-0.5">Juli 2026</p>
-                                </div>
-                                <div class="shrink-0 text-right">
-                                    <p class="text-[13px] font-extrabold" style="color: rgb(214, 40, 40);">Rp 500.000</p>
-                                    <span class="text-[10px] text-emerald-600 font-bold flex items-center gap-0.5 justify-end mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big w-2.5 h-2.5"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Berhasil</span>
-                                </div>
-                            </div>
-                            
+                            @endforelse
                         </div>
                     </div>
                 </div>
@@ -306,45 +245,29 @@
                                 <p class="mt-1 text-xs text-[#62758A]">Setiap transaksi tersimpan dengan kuitansi resmi dan link penelusuran program.</p>
                             </div>
                             <div class="space-y-4">
+                                @forelse($donations as $donation)
                                 <div class="rounded-2xl border border-[#12355B]/10 bg-white p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                                     <div class="space-y-1">
-                                        <span class="inline-block rounded-md bg-[#F1EEE8] px-2.5 py-0.5 text-[10px] font-bold text-[#12355B]">Kesehatan</span>
-                                        <h3 class="font-['Plus_Jakarta_Sans'] text-base font-bold text-[#12355B]">Terapi Medis Gratis &amp; Pasien Bawaan</h3>
-                                        <p class="text-xs text-[#62758A]">15 Juli 2026 • Bank Transfer QRIS</p>
+                                        <span class="inline-block rounded-md bg-[#F1EEE8] px-2.5 py-0.5 text-[10px] font-bold text-[#12355B]">{{ $donation->campaign->category ?? 'Donasi' }}</span>
+                                        <h3 class="font-['Plus_Jakarta_Sans'] text-base font-bold text-[#12355B]">{{ $donation->campaign->name ?? 'Program Donasi' }}</h3>
+                                        <p class="text-xs text-[#62758A]">{{ $donation->created_at->translatedFormat('d F Y') }} • {{ $donation->payment_method ?? 'Transfer Bank' }}</p>
                                     </div>
                                     <div class="flex items-center justify-between sm:flex-col sm:items-end gap-2 border-t border-[#12355B]/10 sm:border-0 pt-3 sm:pt-0">
-                                        <span class="font-['Plus_Jakarta_Sans'] text-lg font-extrabold text-[#D62828]">Rp 500.000</span>
-                                        <span class="inline-flex items-center gap-1 text-xs font-bold text-[#16A34A]">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg> Tersalurkan
+                                        <span class="font-['Plus_Jakarta_Sans'] text-lg font-extrabold text-[#D62828]">Rp {{ number_format($donation->amount, 0, ',', '.') }}</span>
+                                        <span class="inline-flex items-center gap-1 text-xs font-bold {{ $donation->status == 'Berhasil' ? 'text-[#16A34A]' : 'text-[#F59E0B]' }}">
+                                            @if($donation->status == 'Berhasil')
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg> 
+                                            @endif
+                                            {{ $donation->status }}
                                         </span>
                                     </div>
                                 </div>
-                                <div class="rounded-2xl border border-[#12355B]/10 bg-white p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                                    <div class="space-y-1">
-                                        <span class="inline-block rounded-md bg-[#F1EEE8] px-2.5 py-0.5 text-[10px] font-bold text-[#12355B]">Pendidikan</span>
-                                        <h3 class="font-['Plus_Jakarta_Sans'] text-base font-bold text-[#12355B]">Dukungan Insentif Guru Honor NTT</h3>
-                                        <p class="text-xs text-[#62758A]">02 Juli 2026 • Bank Transfer QRIS</p>
-                                    </div>
-                                    <div class="flex items-center justify-between sm:flex-col sm:items-end gap-2 border-t border-[#12355B]/10 sm:border-0 pt-3 sm:pt-0">
-                                        <span class="font-['Plus_Jakarta_Sans'] text-lg font-extrabold text-[#D62828]">Rp 250.000</span>
-                                        <span class="inline-flex items-center gap-1 text-xs font-bold text-[#16A34A]">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg> Tersalurkan
-                                        </span>
-                                    </div>
+                                @empty
+                                <div class="text-center py-10">
+                                    <p class="text-sm text-[#62758A]">Anda belum memiliki riwayat donasi.</p>
+                                    <button hx-get="/explore" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="mt-4 px-4 py-2 bg-[#D62828] text-white rounded-lg text-sm font-bold shadow hover:bg-[#b91e26] transition">Mulai Donasi</button>
                                 </div>
-                                <div class="rounded-2xl border border-[#12355B]/10 bg-white p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                                    <div class="space-y-1">
-                                        <span class="inline-block rounded-md bg-[#F1EEE8] px-2.5 py-0.5 text-[10px] font-bold text-[#12355B]">Lingkungan</span>
-                                        <h3 class="font-['Plus_Jakarta_Sans'] text-base font-bold text-[#12355B]">Sumur Bor Air Bersih</h3>
-                                        <p class="text-xs text-[#62758A]">18 Juni 2026 • Bank Transfer QRIS</p>
-                                    </div>
-                                    <div class="flex items-center justify-between sm:flex-col sm:items-end gap-2 border-t border-[#12355B]/10 sm:border-0 pt-3 sm:pt-0">
-                                        <span class="font-['Plus_Jakarta_Sans'] text-lg font-extrabold text-[#D62828]">Rp 500.000</span>
-                                        <span class="inline-flex items-center gap-1 text-xs font-bold text-[#16A34A]">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg> Tersalurkan
-                                        </span>
-                                    </div>
-                                </div>
+                                @endforelse
                             </div>
                         </div>
                     </section>

@@ -108,15 +108,15 @@
                                     </div>
                                     <div class="grid grid-cols-3 divide-x divide-gray-100">
                                         <div class="flex flex-col items-center py-2 px-1">
-                                            <p class="text-[13px] font-extrabold text-[#12355B]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Rp 2.750.000</p>
+                                            <p class="text-[13px] font-extrabold text-[#12355B]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Rp {{ number_format($totalDonation, 0, ',', '.') }}</p>
                                             <p class="text-[9px] text-gray-400 font-semibold text-center mt-0.5 leading-tight">Total Donasi</p>
                                         </div>
                                         <div class="flex flex-col items-center py-2 px-1">
-                                            <p class="text-[13px] font-extrabold text-[#12355B]" style="font-family: 'Plus Jakarta Sans', sans-serif;">14x</p>
+                                            <p class="text-[13px] font-extrabold text-[#12355B]" style="font-family: 'Plus Jakarta Sans', sans-serif;">{{ $totalTransactions }}x</p>
                                             <p class="text-[9px] text-gray-400 font-semibold text-center mt-0.5 leading-tight">Jumlah Donasi</p>
                                         </div>
                                         <div class="flex flex-col items-center py-2 px-1">
-                                            <p class="text-[13px] font-extrabold text-[#12355B]" style="font-family: 'Plus Jakarta Sans', sans-serif;">8 program</p>
+                                            <p class="text-[13px] font-extrabold text-[#12355B]" style="font-family: 'Plus Jakarta Sans', sans-serif;">{{ $supportedPrograms }} program</p>
                                             <p class="text-[9px] text-gray-400 font-semibold text-center mt-0.5 leading-tight">Program Didukung</p>
                                         </div>
                                     </div>
@@ -175,7 +175,7 @@
                                 </div>
                                 <div class="flex-1 min-w-0">
                                     <p class="text-[13px] font-bold text-[#1B1B1B]">Riwayat Transaksi</p>
-                                    <p class="text-[11px] text-gray-400">14 transaksi</p>
+                                    <p class="text-[11px] text-gray-400">{{ $totalTransactions }} transaksi</p>
                                 </div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 text-gray-300 shrink-0"><path d="m9 18 6-6-6-6"></path></svg>
                             </button>
@@ -252,10 +252,10 @@
                         </button>
                         <div hx-get="/account" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex items-center gap-3 border-l border-[#12355B]/10 pl-4 cursor-pointer hover:bg-black/5 p-1.5 -mr-1.5 rounded-xl transition">
                             <div class="text-right hidden sm:block">
-                                <p class="text-xs font-bold text-[#12355B]">Nabila Arimbi</p>
+                                <p class="text-xs font-bold text-[#12355B]">{{ $user->name }}</p>
                                 <p class="text-[10px] text-[#62758A]">Donatur Dermawan</p>
                             </div>
-                            <button class="grid h-9 w-9 place-items-center rounded-full bg-[#12355B] text-xs font-bold text-white shadow">NA</button>
+                            <button class="grid h-9 w-9 place-items-center rounded-full bg-[#12355B] text-xs font-bold text-white shadow">{{ strtoupper(substr($user->name, 0, 1)) }}</button>
                         </div>
                     </div>
                 </div>
@@ -265,9 +265,9 @@
                     <aside class="hidden lg:block space-y-6">
                         <div class="rounded-2xl border border-[#12355B]/10 bg-white p-5 shadow-sm">
                             <div class="flex items-center gap-3 pb-4 border-b border-[#12355B]/10">
-                                <div class="grid h-12 w-12 place-items-center rounded-full bg-[#12355B] font-bold text-white text-base">NA</div>
+                                <div class="grid h-12 w-12 place-items-center rounded-full bg-[#12355B] font-bold text-white text-base">{{ strtoupper(substr($user->name, 0, 1)) }}</div>
                                 <div>
-                                    <p class="font-['Plus_Jakarta_Sans'] font-bold text-sm text-[#12355B]">Nabila Arimbi</p>
+                                    <p class="font-['Plus_Jakarta_Sans'] font-bold text-sm text-[#12355B]">{{ $user->name }}</p>
                                     <span class="inline-block rounded-full bg-[#16A34A]/10 px-2 py-0.5 text-[10px] font-bold text-[#16A34A]">✓ Akun Terverifikasi</span>
                                 </div>
                             </div>
@@ -319,11 +319,11 @@
                         <div class="space-y-6 pb-8">
                             <div class="rounded-3xl bg-[#12355B] p-6 text-white shadow-lg sm:p-8">
                                 <div class="flex items-center gap-4">
-                                    <div class="grid h-16 w-16 place-items-center rounded-full bg-[#D62828] font-['Plus_Jakarta_Sans'] text-2xl font-extrabold text-white shadow">NA</div>
+                                    <div class="grid h-16 w-16 place-items-center rounded-full bg-[#D62828] font-['Plus_Jakarta_Sans'] text-2xl font-extrabold text-white shadow">{{ strtoupper(substr($user->name, 0, 1)) }}</div>
                                     <div>
-                                        <h2 class="font-['Plus_Jakarta_Sans'] text-2xl font-extrabold">Nabila Arimbi</h2>
-                                        <p class="text-xs text-white/70">nabila.arimbi@email.com</p>
-                                        <span class="mt-2 inline-block rounded-full bg-white/10 px-3 py-1 text-[10px] font-bold text-[#F4AAAA] border border-white/15">Donatur Aktif sejak 2025</span>
+                                        <h2 class="font-['Plus_Jakarta_Sans'] text-2xl font-extrabold">{{ $user->name }}</h2>
+                                        <p class="text-xs text-white/70">{{ $user->email }}</p>
+                                        <span class="mt-2 inline-block rounded-full bg-white/10 px-3 py-1 text-[10px] font-bold text-[#F4AAAA] border border-white/15">Donatur Aktif sejak {{ $user->created_at->format('Y') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -344,13 +344,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <button onclick="window.location.href='/login'" class="flex w-full items-center justify-start text-left justify-center gap-2 rounded-2xl border border-[#D62828]/20 bg-[#FFF1F1] py-3.5 text-sm font-bold text-[#D62828] transition hover:bg-[#D62828] hover:text-white">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out">
-                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                                    <polyline points="16 17 21 12 16 7"></polyline>
-                                    <line x1="21" x2="9" y1="12" y2="12"></line>
-                                </svg> Keluar Sesi Portal Donatur
-                            </button>
+                            <form id="form-logout-desktop" action="{{ route('logout') }}" method="POST" class="w-full">
+                                @csrf
+                                <button type="submit" class="flex w-full items-center justify-start text-left justify-center gap-2 rounded-2xl border border-[#D62828]/20 bg-[#FFF1F1] py-3.5 text-sm font-bold text-[#D62828] transition hover:bg-[#D62828] hover:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out">
+                                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                        <polyline points="16 17 21 12 16 7"></polyline>
+                                        <line x1="21" x2="9" y1="12" y2="12"></line>
+                                    </svg> Keluar Sesi Portal Donatur
+                                </button>
+                            </form>
                         </div>
                     </section>
                 </div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Kegiatan - Admin BMP</title>
+    <title>Daftar Pengeluaran - Admin BMP</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,7 +53,7 @@
                 Dashboard
             </a>
             
-            <a href="/admin/kegiatan" class="flex items-center gap-3 px-4 py-3 bg-red-50 text-primary rounded-xl font-bold transition-all">
+            <a href="/admin/kegiatan" class="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-gray-50 hover:text-secondary rounded-xl font-medium transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-megaphone"><path d="m3 11 18-5v12L3 14v-3z"></path><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"></path></svg>
                 Daftar Kegiatan
             </a>
@@ -68,7 +68,7 @@
                 Transaksi Donasi
             </a>
 
-            <a href="/admin/pengeluaran" class="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-gray-50 hover:text-secondary rounded-xl font-medium transition-all">
+            <a href="/admin/pengeluaran" class="flex items-center gap-3 px-4 py-3 bg-red-50 text-primary rounded-xl font-bold transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wallet"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path></svg>
                 Pengeluaran
             </a>
@@ -90,8 +90,8 @@
         <!-- Topbar -->
         <header class="h-20 bg-white shadow-sm flex items-center justify-between px-10 relative z-10 border-b border-gray-100">
             <div>
-                <h1 class="text-2xl font-extrabold text-secondary font-heading tracking-tight">Daftar Kegiatan</h1>
-                <p class="text-sm text-gray-500 font-medium">Kelola seluruh kegiatan donasi Anda di sini.</p>
+                <h1 class="text-2xl font-extrabold text-secondary font-heading tracking-tight">Daftar Pengeluaran</h1>
+                <p class="text-sm text-gray-500 font-medium">Kelola seluruh pengeluaran kegiatan di sini.</p>
             </div>
             <div class="flex items-center gap-6">
                 <div class="relative">
@@ -119,16 +119,16 @@
             </div>
             @endif
 
-            <!-- Campaign Table Section -->
+            <!-- Pengeluaran Table Section -->
             <div class="bg-white rounded-3xl shadow-[0_4px_24px_-8px_rgba(0,0,0,0.08)] border border-gray-50 overflow-hidden">
                 <div class="p-8 border-b border-gray-100 flex items-center justify-between bg-white sticky top-0 z-10">
                     <div>
-                        <h2 class="text-lg font-extrabold text-secondary font-heading">Semua Kegiatan</h2>
-                        <p class="text-sm text-gray-500 mt-1">Daftar lengkap kegiatan yang sedang, akan, dan telah berlangsung.</p>
+                        <h2 class="text-lg font-extrabold text-secondary font-heading">Semua Pengeluaran</h2>
+                        <p class="text-sm text-gray-500 mt-1">Daftar lengkap riwayat pengeluaran yang telah dicatat.</p>
                     </div>
-                    <button onclick="toggleModal('modal-add-kegiatan')" class="flex items-center gap-2 px-5 py-2.5 bg-primary text-white rounded-xl font-bold shadow-lg shadow-red-200 hover:-translate-y-0.5 transition-transform">
+                    <button onclick="toggleModal('modal-add-pengeluaran')" class="flex items-center gap-2 px-5 py-2.5 bg-primary text-white rounded-xl font-bold shadow-lg shadow-red-200 hover:-translate-y-0.5 transition-transform">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
-                        Tambah Kegiatan
+                        Tambah Pengeluaran
                     </button>
                 </div>
                 
@@ -136,45 +136,30 @@
                     <table class="w-full text-left border-collapse">
                         <thead>
                             <tr class="bg-gray-50/50">
-                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Nama Kegiatan</th>
+                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Nama Pengeluaran</th>
                                 <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Lokasi</th>
-                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Jumlah Nominal</th>
-                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Status</th>
-                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">RFM Score</th>
+                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Jumlah Pengeluaran</th>
+                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Tanggal</th>
                                 <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider text-right">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-50">
-                            @forelse($campaigns as $campaign)
+                            @forelse($pengeluarans as $pengeluaran)
                             <tr class="hover:bg-gray-50/50 transition-colors group">
                                 <td class="py-5 px-8">
-                                    <p class="font-bold text-secondary">{{ $campaign->name }}</p>
+                                    <p class="font-bold text-secondary">{{ $pengeluaran->nama_pengeluaran }}</p>
                                 </td>
                                 <td class="py-5 px-8">
                                     <div class="flex items-center gap-2 text-gray-600 font-medium text-sm">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                        {{ $campaign->location }}
+                                        {{ $pengeluaran->lokasi }}
                                     </div>
                                 </td>
                                 <td class="py-5 px-8">
-                                    <p class="font-extrabold text-secondary">Rp {{ number_format($campaign->nominal, 0, ',', '.') }}</p>
+                                    <p class="font-extrabold text-red-500">Rp {{ number_format($pengeluaran->jumlah, 0, ',', '.') }}</p>
                                 </td>
                                 <td class="py-5 px-8">
-                                    @if($campaign->status == 'Aktif')
-                                        <span class="inline-flex px-3 py-1 bg-emerald-50 text-emerald-600 font-bold text-xs rounded-lg border border-emerald-100">{{ $campaign->status }}</span>
-                                    @elseif($campaign->status == 'Berjalan')
-                                        <span class="inline-flex px-3 py-1 bg-amber-50 text-amber-600 font-bold text-xs rounded-lg border border-amber-100">{{ $campaign->status }}</span>
-                                    @else
-                                        <span class="inline-flex px-3 py-1 bg-gray-100 text-gray-600 font-bold text-xs rounded-lg border border-gray-200">{{ $campaign->status }}</span>
-                                    @endif
-                                </td>
-                                <td class="py-5 px-8">
-                                    <div class="flex items-center gap-2">
-                                        <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm
-                                            {{ str_contains($campaign->rfm_score, 'A') ? 'bg-emerald-100 text-emerald-700' : 'bg-blue-100 text-blue-700' }}">
-                                            {{ $campaign->rfm_score }}
-                                        </div>
-                                    </div>
+                                    <p class="text-gray-500 text-sm">{{ $pengeluaran->created_at->format('d M Y') }}</p>
                                 </td>
                                 <td class="py-5 px-8 text-right">
                                     <div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -189,7 +174,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="6" class="py-12 text-center text-gray-400 font-medium">Belum ada data kegiatan.</td>
+                                <td colspan="5" class="py-12 text-center text-gray-400 font-medium">Belum ada data pengeluaran.</td>
                             </tr>
                             @endforelse
                         </tbody>
@@ -200,78 +185,58 @@
         </div>
     </main>
 
-    <!-- Modal Tambah Kegiatan -->
-    <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex" id="modal-add-kegiatan">
+    <!-- Modal Tambah Pengeluaran -->
+    <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex" id="modal-add-pengeluaran">
         <div class="relative w-auto my-6 mx-auto max-w-2xl w-full">
             <!-- Modal Content -->
             <div class="border-0 rounded-3xl shadow-2xl relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 <!-- Header -->
                 <div class="flex items-start justify-between p-8 border-b border-solid border-gray-100 rounded-t">
                     <h3 class="text-2xl font-extrabold text-secondary font-heading">
-                        Tambah Kegiatan Baru
+                        Tambah Pengeluaran Baru
                     </h3>
-                    <button class="p-1 ml-auto bg-transparent border-0 text-gray-400 float-right text-3xl leading-none font-semibold outline-none focus:outline-none hover:text-gray-700 transition" onclick="toggleModal('modal-add-kegiatan')">
+                    <button class="p-1 ml-auto bg-transparent border-0 text-gray-400 float-right text-3xl leading-none font-semibold outline-none focus:outline-none hover:text-gray-700 transition" onclick="toggleModal('modal-add-pengeluaran')">
                         <span class="bg-transparent h-6 w-6 text-2xl block outline-none focus:outline-none">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
                         </span>
                     </button>
                 </div>
                 <!-- Body -->
-                <form action="{{ route('admin.kegiatan.store') }}" method="POST">
+                <form action="{{ route('admin.pengeluaran.store') }}" method="POST">
                     @csrf
                     <div class="relative p-8 flex-auto space-y-5">
                         
                         <div>
-                            <label class="block text-sm font-bold text-secondary mb-2">Nama Kegiatan</label>
-                            <input type="text" name="name" required placeholder="Contoh: Beasiswa Anak Pedalaman" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                            <label class="block text-sm font-bold text-secondary mb-2">Nama Pengeluaran</label>
+                            <input type="text" name="nama_pengeluaran" required placeholder="Contoh: Pembelian Sembako" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
                         </div>
                         
                         <div class="grid grid-cols-2 gap-5">
                             <div>
                                 <label class="block text-sm font-bold text-secondary mb-2">Lokasi</label>
-                                <input type="text" name="location" required placeholder="Contoh: Papua Barat" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                                <input type="text" name="lokasi" required placeholder="Contoh: Desa Suka Maju" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
                             </div>
                             <div>
-                                <label class="block text-sm font-bold text-secondary mb-2">Jumlah Nominal (Rp)</label>
-                                <input type="number" name="nominal" required placeholder="100000000" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
-                            </div>
-                        </div>
-                        
-                        <div class="grid grid-cols-2 gap-5">
-                            <div>
-                                <label class="block text-sm font-bold text-secondary mb-2">RFM Score</label>
-                                <select name="rfm_score" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all bg-white appearance-none">
-                                    <option value="A+">A+</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-bold text-secondary mb-2">Status</label>
-                                <select name="status" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all bg-white appearance-none">
-                                    <option value="Aktif">Aktif</option>
-                                    <option value="Berjalan">Berjalan</option>
-                                    <option value="Selesai">Selesai</option>
-                                </select>
+                                <label class="block text-sm font-bold text-secondary mb-2">Jumlah Pengeluaran (Rp)</label>
+                                <input type="number" name="jumlah" required placeholder="5000000" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
                             </div>
                         </div>
 
                     </div>
                     <!-- Footer -->
                     <div class="flex items-center justify-end p-6 border-t border-solid border-gray-100 rounded-b gap-3 bg-gray-50/50">
-                        <button class="px-6 py-3 text-gray-500 bg-transparent font-bold uppercase text-sm rounded-xl outline-none focus:outline-none hover:bg-gray-100 transition-colors" type="button" onclick="toggleModal('modal-add-kegiatan')">
+                        <button class="px-6 py-3 text-gray-500 bg-transparent font-bold uppercase text-sm rounded-xl outline-none focus:outline-none hover:bg-gray-100 transition-colors" type="button" onclick="toggleModal('modal-add-pengeluaran')">
                             Batal
                         </button>
                         <button class="px-8 py-3 bg-primary text-white font-bold uppercase text-sm rounded-xl shadow-lg shadow-red-200 hover:-translate-y-0.5 transition-transform outline-none focus:outline-none" type="submit">
-                            Simpan Kegiatan
+                            Simpan Pengeluaran
                         </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <div class="hidden opacity-50 fixed inset-0 z-40 bg-black" id="modal-add-kegiatan-backdrop"></div>
+    <div class="hidden opacity-50 fixed inset-0 z-40 bg-black" id="modal-add-pengeluaran-backdrop"></div>
 
 </body>
 </html>

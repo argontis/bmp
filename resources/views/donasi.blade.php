@@ -110,10 +110,10 @@
                         </nav>
                         <div class="flex items-center gap-3">
                             <button class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-[#D62828] text-white rounded-full text-[13px] font-bold hover:bg-[#B91C1C] transition-all duration-200 shadow-[0_8px_20px_-8px_rgba(214,40,40,0.7)] hover:shadow-[0_10px_26px_-8px_rgba(214,40,40,0.85)] hover:-translate-y-0.5" onclick="window.location.href='/login'">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4 fill-white shrink-0"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
-                                Donasi Sekarang
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-in w-4 h-4 shrink-0"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
+                                Daftar Sekarang
                             </button>
-                            <button onclick="window.location.href='/login'" class="xl:hidden p-2.5 rounded-xl hover:bg-black/5 transition-colors" style="color: white;">
+                            <button onclick="window.location.href='/donasi'" class="xl:hidden p-2.5 rounded-xl hover:bg-black/5 transition-colors" style="color: white;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu w-5 h-5"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
                             </button>
                         </div>
@@ -139,7 +139,7 @@
                                 <!-- Card Program Mendesak -->
                                 <div id="card-bencana" onclick="selectProgram('bencana')" class="program-card cursor-pointer bg-white rounded-3xl p-6 shadow-xl border-2 border-transparent hover:border-[#D62828]/30 flex flex-col sm:flex-row gap-6 hover:-translate-y-1 transition-all duration-300 ring-2 ring-[#D62828]">
                                     <div class="w-full sm:w-48 h-40 rounded-2xl overflow-hidden shrink-0 relative">
-                                        <img src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&h=600&fit=crop" class="w-full h-full object-cover" alt="Bencana">
+                                        <img src="/images/donasi-bencana.png" class="w-full h-full object-cover" alt="Bencana">
                                         <span class="absolute top-2 left-2 bg-[#D62828] text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">Darurat</span>
                                     </div>
                                     <div class="flex-1 flex flex-col justify-center">
@@ -158,7 +158,7 @@
                                 <!-- Card Program Umum -->
                                 <div id="card-guru" onclick="selectProgram('guru')" class="program-card cursor-pointer bg-white rounded-3xl p-6 shadow-sm border-2 border-transparent hover:border-[#D62828]/30 flex flex-col sm:flex-row gap-6 hover:-translate-y-1 transition-all duration-300">
                                     <div class="w-full sm:w-48 h-40 rounded-2xl overflow-hidden shrink-0 relative">
-                                        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&h=600&fit=crop" class="w-full h-full object-cover" alt="Guru">
+                                        <img src="/images/program-guru.png" class="w-full h-full object-cover" alt="Guru">
                                     </div>
                                     <div class="flex-1 flex flex-col justify-center">
                                         <h3 class="text-xl font-extrabold text-[#1B1B1B] mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Bakti Guru Pelosok</h3>
@@ -176,7 +176,7 @@
                                 <!-- Card Program Umum 2 -->
                                 <div id="card-lingkungan" onclick="selectProgram('lingkungan')" class="program-card cursor-pointer bg-white rounded-3xl p-6 shadow-sm border-2 border-transparent hover:border-[#D62828]/30 flex flex-col sm:flex-row gap-6 hover:-translate-y-1 transition-all duration-300">
                                     <div class="w-full sm:w-48 h-40 rounded-2xl overflow-hidden shrink-0 relative">
-                                        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&h=600&fit=crop" class="w-full h-full object-cover" alt="Air Bersih">
+                                        <img src="/images/program-lingkungan.png" class="w-full h-full object-cover" alt="Air Bersih">
                                     </div>
                                     <div class="flex-1 flex flex-col justify-center">
                                         <h3 class="text-xl font-extrabold text-[#1B1B1B] mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Pembangunan Sumur Bor</h3>
@@ -308,7 +308,7 @@
 
                 <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 sm:hidden">
                     <button onclick="window.location.href='/login'" class="flex items-center gap-2 px-7 py-4 bg-[#D62828] text-white rounded-full font-extrabold text-sm shadow-[0_18px_40px_-10px_rgba(214,40,40,0.8)] hover:scale-105 transition-transform active:scale-95">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4 fill-white"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg> Donasi Sekarang
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-in w-4 h-4"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg> Daftar Sekarang
                     </button>
                 </div>
             </div>

@@ -57,7 +57,7 @@
                                 Program
                                 <span class="absolute left-1/2 -translate-x-1/2 -bottom-0.5 w-1.5 h-1.5 rounded-full bg-[#D62828]"></span>
                             </button>
-                            <button onclick="window.location.href='/login'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">Donasi</button>
+                            <button onclick="window.location.href='/donasi'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">Donasi</button>
                             <button onclick="window.location.href='/laporan'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">Laporan</button>
                             <button onclick="window.location.href='/artikel'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">Artikel</button>
                             <button onclick="window.location.href='/galeri'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">Galeri</button>
@@ -66,8 +66,8 @@
                         </nav>
                         <div class="flex items-center gap-3">
                             <button class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-[#D62828] text-white rounded-full text-[13px] font-bold hover:bg-[#B91C1C] transition-all duration-200 shadow-[0_8px_20px_-8px_rgba(214,40,40,0.7)] hover:shadow-[0_10px_26px_-8px_rgba(214,40,40,0.85)] hover:-translate-y-0.5" onclick="window.location.href='/login'">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4 fill-white shrink-0"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
-                                Donasi Sekarang
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-in w-4 h-4 shrink-0"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
+                                Daftar Sekarang
                             </button>
                             <button class="xl:hidden p-2.5 rounded-xl hover:bg-black/5 transition-colors" style="color: white;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu w-5 h-5"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
@@ -93,7 +93,7 @@
                             <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow border border-gray-100 flex flex-col group">
                                 <div class="h-56 overflow-hidden relative">
                                     <div class="absolute inset-0 bg-[#0D2137]/20 z-10"></div>
-                                    <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&h=600&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bakti Guru">
+                                    <img src="/images/program-guru.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bakti Guru">
                                     <span class="absolute top-4 left-4 z-20 bg-blue-600 text-white text-[11px] font-extrabold px-3 py-1.5 rounded-full uppercase tracking-wider">Pendidikan</span>
                                 </div>
                                 <div class="p-8 flex-1 flex flex-col">
@@ -107,7 +107,7 @@
                             <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow border border-gray-100 flex flex-col group">
                                 <div class="h-56 overflow-hidden relative">
                                     <div class="absolute inset-0 bg-[#0D2137]/20 z-10"></div>
-                                    <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=800&h=600&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bakti Kesehatan">
+                                    <img src="/images/program-kesehatan.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bakti Kesehatan">
                                     <span class="absolute top-4 left-4 z-20 bg-rose-600 text-white text-[11px] font-extrabold px-3 py-1.5 rounded-full uppercase tracking-wider">Kesehatan</span>
                                 </div>
                                 <div class="p-8 flex-1 flex flex-col">
@@ -121,8 +121,8 @@
                             <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow border border-gray-100 flex flex-col group">
                                 <div class="h-56 overflow-hidden relative">
                                     <div class="absolute inset-0 bg-[#0D2137]/20 z-10"></div>
-                                    <img src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&h=600&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bakti Bencana">
-                                    <span class="absolute top-4 left-4 z-20 bg-amber-600 text-white text-[11px] font-extrabold px-3 py-1.5 rounded-full uppercase tracking-wider">Kemanusiaan</span>
+                                    <img src="/images/donasi-bencana.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bakti Bencana">
+                                    <span class="absolute top-4 left-4 z-20 bg-amber-600 text-white text-[11px] font-extrabold px-3 py-1.5 rounded-full uppercase tracking-wider">Sosial & Kemanusiaan</span>
                                 </div>
                                 <div class="p-8 flex-1 flex flex-col">
                                     <h3 class="text-2xl font-extrabold text-[#1B1B1B] mb-3" style="font-family: 'Plus Jakarta Sans', sans-serif;">Tanggap Darurat Bencana</h3>
@@ -135,8 +135,8 @@
                             <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow border border-gray-100 flex flex-col group">
                                 <div class="h-56 overflow-hidden relative">
                                     <div class="absolute inset-0 bg-[#0D2137]/20 z-10"></div>
-                                    <img src="https://images.unsplash.com/photo-1593113514676-5911f93010f3?w=800&h=600&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bakti Pangan">
-                                    <span class="absolute top-4 left-4 z-20 bg-emerald-600 text-white text-[11px] font-extrabold px-3 py-1.5 rounded-full uppercase tracking-wider">Sosial</span>
+                                    <img src="/images/donasi-pangan.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bakti Pangan">
+                                    <span class="absolute top-4 left-4 z-20 bg-emerald-600 text-white text-[11px] font-extrabold px-3 py-1.5 rounded-full uppercase tracking-wider">Sosial & Kemanusiaan</span>
                                 </div>
                                 <div class="p-8 flex-1 flex flex-col">
                                     <h3 class="text-2xl font-extrabold text-[#1B1B1B] mb-3" style="font-family: 'Plus Jakarta Sans', sans-serif;">Dapur Umum & Gizi</h3>
@@ -149,7 +149,7 @@
                             <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow border border-gray-100 flex flex-col group">
                                 <div class="h-56 overflow-hidden relative">
                                     <div class="absolute inset-0 bg-[#0D2137]/20 z-10"></div>
-                                    <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&h=600&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bakti Lingkungan">
+                                    <img src="/images/program-lingkungan.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bakti Lingkungan">
                                     <span class="absolute top-4 left-4 z-20 bg-teal-600 text-white text-[11px] font-extrabold px-3 py-1.5 rounded-full uppercase tracking-wider">Lingkungan</span>
                                 </div>
                                 <div class="p-8 flex-1 flex flex-col">
@@ -163,7 +163,7 @@
                             <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow border border-gray-100 flex flex-col group">
                                 <div class="h-56 overflow-hidden relative">
                                     <div class="absolute inset-0 bg-[#0D2137]/20 z-10"></div>
-                                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&h=600&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bakti Pendidikan">
+                                    <img src="/images/program-beasiswa.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bakti Pendidikan">
                                     <span class="absolute top-4 left-4 z-20 bg-indigo-600 text-white text-[11px] font-extrabold px-3 py-1.5 rounded-full uppercase tracking-wider">Pendidikan</span>
                                 </div>
                                 <div class="p-8 flex-1 flex flex-col">
@@ -248,7 +248,7 @@
 
                 <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 sm:hidden">
                     <button onclick="window.location.href='/login'" class="flex items-center gap-2 px-7 py-4 bg-[#D62828] text-white rounded-full font-extrabold text-sm shadow-[0_18px_40px_-10px_rgba(214,40,40,0.8)] hover:scale-105 transition-transform active:scale-95">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4 fill-white"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg> Donasi Sekarang
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-in w-4 h-4"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg> Daftar Sekarang
                     </button>
                 </div>
             </div>

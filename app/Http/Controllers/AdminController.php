@@ -45,4 +45,23 @@ class AdminController extends Controller
         $donations = \App\Models\Donation::with(['user', 'campaign'])->orderBy('created_at', 'desc')->get();
         return view('admin_transaksi', compact('donations'));
     }
+
+    public function pengeluaran()
+    {
+        $pengeluarans = \App\Models\Pengeluaran::orderBy('created_at', 'desc')->get();
+        return view('admin_pengeluaran', compact('pengeluarans'));
+    }
+
+    public function storePengeluaran(Request $request)
+    {
+        $validated = $request->validate([
+            'nama_pengeluaran' => 'required|string|max:255',
+            'lokasi' => 'required|string|max:255',
+            'jumlah' => 'required|integer|min:0',
+        ]);
+
+        \App\Models\Pengeluaran::create($validated);
+
+        return redirect()->route('admin.pengeluaran')->with('success', 'Pengeluaran berhasil ditambahkan!');
+    }
 }

@@ -101,95 +101,43 @@
                             </div>
                             
                             <div class="space-y-3">
-                                
-                                <div class="bg-white rounded-[18px] overflow-hidden shadow-[0_2px_12px_-4px_rgba(0,0,0,0.1)] flex gap-3 p-3">
-                                    <div class="w-20 h-20 rounded-2xl overflow-hidden shrink-0 bg-gray-100">
-                                        <img src="https://images.unsplash.com/photo-1641886000798-41c1adbebb3b?w=600&amp;h=360&amp;fit=crop&amp;auto=format" alt="Beasiswa untuk 100 Anak Berprestasi di NTT" class="w-full h-full object-cover">
-                                    </div>
-                                    <div class="flex-1 min-w-0 flex flex-col justify-between">
-                                        <div>
-                                            <span class="text-[10px] font-bold" style="color: rgb(29, 78, 216);">Pendidikan</span>
-                                            <p class="text-[12px] font-bold text-[#1B1B1B] leading-snug mt-0.5 line-clamp-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Beasiswa untuk 100 Anak Berprestasi di NTT</p>
+                                @forelse($campaigns as $campaign)
+                                    @php
+                                        $percentage = $campaign->nominal > 0 ? min(100, round(($campaign->donations_sum_amount ?? 0) / $campaign->nominal * 100)) : 0;
+                                        
+                                        $catColor = match($campaign->category) {
+                                            'Kesehatan' => 'rgb(22, 163, 74)',
+                                            'Pendidikan' => 'rgb(29, 78, 216)',
+                                            'Sosial & Kemanusiaan' => 'rgb(217, 119, 6)',
+                                            'Lingkungan' => 'rgb(214, 40, 40)',
+                                            'Fasilitas Ibadah' => 'rgb(107, 33, 168)',
+                                            default => 'rgb(100, 116, 139)',
+                                        };
+                                    @endphp
+                                    <div data-category="{{ $campaign->category }}" class="explore-item bg-white rounded-[18px] overflow-hidden shadow-[0_2px_12px_-4px_rgba(0,0,0,0.1)] flex gap-3 p-3 cursor-pointer" hx-get="/program/{{ $campaign->slug ?? 'bakti-kesehatan' }}" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true">
+                                        <div class="w-20 h-20 rounded-2xl overflow-hidden shrink-0 bg-gray-100 relative">
+                                            <img src="{{ asset($campaign->image ?? 'images/donasi-bencana.png') }}" alt="{{ $campaign->name }}" class="w-full h-full object-cover">
                                         </div>
-                                        <div>
-                                            <div class="h-1.5 rounded-full bg-gray-100 overflow-hidden">
-                                                <div class="h-full rounded-full" style="width: 75%; background: linear-gradient(90deg, rgb(185, 28, 28), rgb(214, 40, 40));"></div>
+                                        <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                            <div>
+                                                <span class="text-[10px] font-bold category-badge" style="color: {{ $catColor }};">{{ $campaign->category }}</span>
+                                                <p class="text-[12px] font-bold text-[#1B1B1B] leading-snug mt-0.5 line-clamp-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">{{ $campaign->name }}</p>
                                             </div>
-                                            <div class="flex justify-between mt-1 mb-2">
-                                                <span class="text-[11px] font-bold" style="color: rgb(214, 40, 40);">Rp 112.500.000</span>
-                                                <span class="text-[10px] text-gray-400">75%</span>
+                                            <div>
+                                                <div class="h-1.5 rounded-full bg-gray-100 overflow-hidden">
+                                                    <div class="h-full rounded-full" style="width: {{ $percentage }}%; background: linear-gradient(90deg, rgb(185, 28, 28), rgb(214, 40, 40));"></div>
+                                                </div>
+                                                <div class="flex justify-between mt-1 mb-2">
+                                                    <span class="text-[11px] font-bold" style="color: rgb(214, 40, 40);">Rp {{ number_format($campaign->donations_sum_amount ?? 0, 0, ',', '.') }}</span>
+                                                    <span class="text-[10px] text-gray-400">{{ $percentage }}%</span>
+                                                </div>
+                                                <button onclick="event.stopPropagation(); event.preventDefault();" class="w-full py-1.5 rounded-full text-[11px] font-extrabold text-white" style="background: rgb(214, 40, 40);">Donasi</button>
                                             </div>
-                                            <button class="w-full py-1.5 rounded-full text-[11px] font-extrabold text-white" style="background: rgb(214, 40, 40);">Donasi</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="bg-white rounded-[18px] overflow-hidden shadow-[0_2px_12px_-4px_rgba(0,0,0,0.1)] flex gap-3 p-3">
-                                    <div class="w-20 h-20 rounded-2xl overflow-hidden shrink-0 bg-gray-100">
-                                        <img src="https://images.unsplash.com/photo-1625236601674-8702e197b5b4?w=600&amp;h=360&amp;fit=crop&amp;auto=format" alt="Dapur Umum untuk 500 Keluarga Miskin Ekstrem" class="w-full h-full object-cover">
-                                    </div>
-                                    <div class="flex-1 min-w-0 flex flex-col justify-between">
-                                        <div>
-                                            <span class="text-[10px] font-bold" style="color: rgb(217, 119, 6);">Pangan</span>
-                                            <p class="text-[12px] font-bold text-[#1B1B1B] leading-snug mt-0.5 line-clamp-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Dapur Umum untuk 500 Keluarga Miskin Ekstrem</p>
-                                        </div>
-                                        <div>
-                                            <div class="h-1.5 rounded-full bg-gray-100 overflow-hidden">
-                                                <div class="h-full rounded-full" style="width: 82%; background: linear-gradient(90deg, rgb(185, 28, 28), rgb(214, 40, 40));"></div>
-                                            </div>
-                                            <div class="flex justify-between mt-1 mb-2">
-                                                <span class="text-[11px] font-bold" style="color: rgb(214, 40, 40);">Rp 163.000.000</span>
-                                                <span class="text-[10px] text-gray-400">82%</span>
-                                            </div>
-                                            <button class="w-full py-1.5 rounded-full text-[11px] font-extrabold text-white" style="background: rgb(214, 40, 40);">Donasi</button>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <div class="bg-white rounded-[18px] overflow-hidden shadow-[0_2px_12px_-4px_rgba(0,0,0,0.1)] flex gap-3 p-3">
-                                    <div class="w-20 h-20 rounded-2xl overflow-hidden shrink-0 bg-gray-100">
-                                        <img src="https://images.unsplash.com/photo-1728320771441-17a19df0fe4c?w=600&amp;h=360&amp;fit=crop&amp;auto=format" alt="Pulihkan 120 Rumah Korban Banjir Kalimantan" class="w-full h-full object-cover">
-                                    </div>
-                                    <div class="flex-1 min-w-0 flex flex-col justify-between">
-                                        <div>
-                                            <span class="text-[10px] font-bold" style="color: rgb(214, 40, 40);">Bencana</span>
-                                            <p class="text-[12px] font-bold text-[#1B1B1B] leading-snug mt-0.5 line-clamp-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Pulihkan 120 Rumah Korban Banjir Kalimantan</p>
-                                        </div>
-                                        <div>
-                                            <div class="h-1.5 rounded-full bg-gray-100 overflow-hidden">
-                                                <div class="h-full rounded-full" style="width: 43%; background: linear-gradient(90deg, rgb(185, 28, 28), rgb(214, 40, 40));"></div>
-                                            </div>
-                                            <div class="flex justify-between mt-1 mb-2">
-                                                <span class="text-[11px] font-bold" style="color: rgb(214, 40, 40);">Rp 344.000.000</span>
-                                                <span class="text-[10px] text-gray-400">43%</span>
-                                            </div>
-                                            <button class="w-full py-1.5 rounded-full text-[11px] font-extrabold text-white" style="background: rgb(214, 40, 40);">Donasi</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="bg-white rounded-[18px] overflow-hidden shadow-[0_2px_12px_-4px_rgba(0,0,0,0.1)] flex gap-3 p-3">
-                                    <div class="w-20 h-20 rounded-2xl overflow-hidden shrink-0 bg-gray-100">
-                                        <img src="https://images.unsplash.com/photo-1621353880071-4752fa42cbc7?w=600&amp;h=360&amp;fit=crop&amp;auto=format" alt="Klinik Keliling Gratis untuk 10 Desa Terpencil" class="w-full h-full object-cover">
-                                    </div>
-                                    <div class="flex-1 min-w-0 flex flex-col justify-between">
-                                        <div>
-                                            <span class="text-[10px] font-bold" style="color: rgb(22, 163, 74);">Kesehatan</span>
-                                            <p class="text-[12px] font-bold text-[#1B1B1B] leading-snug mt-0.5 line-clamp-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Klinik Keliling Gratis untuk 10 Desa Terpencil</p>
-                                        </div>
-                                        <div>
-                                            <div class="h-1.5 rounded-full bg-gray-100 overflow-hidden">
-                                                <div class="h-full rounded-full" style="width: 65%; background: linear-gradient(90deg, rgb(185, 28, 28), rgb(214, 40, 40));"></div>
-                                            </div>
-                                            <div class="flex justify-between mt-1 mb-2">
-                                                <span class="text-[11px] font-bold" style="color: rgb(214, 40, 40);">Rp 78.000.000</span>
-                                                <span class="text-[10px] text-gray-400">65%</span>
-                                            </div>
-                                            <button class="w-full py-1.5 rounded-full text-[11px] font-extrabold text-white" style="background: rgb(214, 40, 40);">Donasi</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                
+                                @empty
+                                    <p class="text-[12px] text-gray-500 text-center py-5">Belum ada program saat ini.</p>
+                                @endforelse
                             </div>
                         </div>
                     </div>
@@ -326,122 +274,57 @@
                             </div>
                             <div class="grid grid-cols-2 gap-3 sm:grid-cols-5" id="categoryFilters">
                                 <button data-category="Kesehatan" class="category-filter-btn flex flex-col items-center justify-center rounded-2xl border p-4 text-center transition border-[#12355B]/10 bg-white text-[#12355B] hover:border-[#12355B]/30">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-stethoscope"><path d="M11 2v2"></path><path d="M5 2v2"></path><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"></path><path d="M8 15a6 6 0 0 0 12 0v-3"></path><circle cx="20" cy="10" r="2"></circle></svg>
-                                    <span class="mt-2 text-xs font-semibold leading-tight">Kesehatan</span>
+                                    <span class="mb-2 text-2xl">🩺</span>
+                                    <span class="text-[11px] font-bold">Kesehatan</span>
                                 </button>
                                 <button data-category="Pendidikan" class="category-filter-btn flex flex-col items-center justify-center rounded-2xl border p-4 text-center transition border-[#12355B]/10 bg-white text-[#12355B] hover:border-[#12355B]/30">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-graduation-cap"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path><path d="M22 10v6"></path><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path></svg>
-                                    <span class="mt-2 text-xs font-semibold leading-tight">Pendidikan</span>
+                                    <span class="mb-2 text-2xl">🎓</span>
+                                    <span class="text-[11px] font-bold">Pendidikan</span>
                                 </button>
-                                <button data-category="Sosial" class="category-filter-btn flex flex-col items-center justify-center rounded-2xl border p-4 text-center transition border-[#12355B]/10 bg-white text-[#12355B] hover:border-[#12355B]/30">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                                    <span class="mt-2 text-xs font-semibold leading-tight">Sosial &amp; Kemanusiaan</span>
+                                <button data-category="Sosial & Kemanusiaan" class="category-filter-btn flex flex-col items-center justify-center rounded-2xl border p-4 text-center transition border-[#12355B]/10 bg-white text-[#12355B] hover:border-[#12355B]/30">
+                                    <span class="mb-2 text-2xl">🤝</span>
+                                    <span class="text-[11px] font-bold">Sosial & Kemanusiaan</span>
                                 </button>
                                 <button data-category="Lingkungan" class="category-filter-btn flex flex-col items-center justify-center rounded-2xl border p-4 text-center transition border-[#12355B]/10 bg-white text-[#12355B] hover:border-[#12355B]/30">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-droplets"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"></path><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"></path></svg>
-                                    <span class="mt-2 text-xs font-semibold leading-tight">Lingkungan</span>
+                                    <span class="mb-2 text-2xl">💧</span>
+                                    <span class="text-[11px] font-bold">Lingkungan</span>
                                 </button>
                                 <button data-category="Fasilitas Ibadah" class="category-filter-btn flex flex-col items-center justify-center rounded-2xl border p-4 text-center transition border-[#12355B]/10 bg-white text-[#12355B] hover:border-[#12355B]/30">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building2 lucide-building-2"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg>
-                                    <span class="mt-2 text-xs font-semibold leading-tight">Fasilitas Ibadah</span>
+                                    <span class="mb-2 text-2xl">🕌</span>
+                                    <span class="text-[11px] font-bold">Fasilitas Ibadah</span>
                                 </button>
                             </div>
                             <div class="space-y-4">
                                 <p class="text-xs font-bold text-[#62758A]" id="exploreProgramCount">Menampilkan 5 Program</p>
                                 <div class="grid gap-6 sm:grid-cols-2">
-                                    <article class="flex flex-col justify-between overflow-hidden rounded-2xl border border-[#12355B]/10 bg-white shadow-sm transition hover:shadow-md cursor-pointer" hx-get="/program/bakti-kesehatan" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true">
-                                        <div>
-                                            <div class="relative aspect-[16/9] overflow-hidden bg-[#12355B]/10">
-                                                <img src="{{ asset('images/program-kesehatan.png') }}" alt="Terapi Medis Gratis" class="h-full w-full object-cover">
-                                                <span class="absolute left-3 top-3 flex items-center gap-1 rounded-full bg-[#12355B] px-3 py-1 text-[10px] font-bold text-white shadow">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-stethoscope text-[#F4AAAA]"><path d="M11 2v2"></path><path d="M5 2v2"></path><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"></path><path d="M8 15a6 6 0 0 0 12 0v-3"></path><circle cx="20" cy="10" r="2"></circle></svg> Kesehatan
-                                                </span>
-                                                <span class="absolute right-3 top-3 rounded-full bg-[#D62828] px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-wider text-white">Darurat Medis</span>
-                                            </div>
-                                            <div class="p-5">
-                                                <h3 class="font-['Plus_Jakarta_Sans'] text-base font-extrabold text-[#12355B] leading-snug line-clamp-2">Terapi Medis Gratis (Listrik &amp; Laser) &amp; Pengobatan Pasien Bawaan</h3>
-                                                <p class="mt-2 text-xs leading-relaxed text-[#62758A] line-clamp-2">Memfasilitasi terapi laser &amp; elektro-medis gratis bagi penderita pasca-stroke, kelumpuhan, serta balita penyakit bawaan di pelosok.</p>
-                                                <div class="mt-4">
-                                                    <div class="flex justify-between text-xs font-semibold"><span class="text-[#62758A]">Terkumpul</span><span class="text-[#D62828] font-bold">74%</span></div>
-                                                    <div class="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-[#EEEAE4]"><div class="h-full rounded-full bg-[#D62828]" style="width: 74%;"></div></div>
-                                                    <div class="mt-2 flex justify-between text-xs"><span class="font-extrabold text-[#12355B]">Rp 185.400.000</span><span class="text-[#62758A]">dari Rp 250.000.000</span></div>
+                                    @forelse($campaigns as $campaign)
+                                        @php
+                                            $percentage = $campaign->nominal > 0 ? min(100, round(($campaign->donations_sum_amount ?? 0) / $campaign->nominal * 100)) : 0;
+                                        @endphp
+                                        <article class="explore-item flex flex-col justify-between overflow-hidden rounded-2xl border border-[#12355B]/10 bg-white shadow-sm transition hover:shadow-md cursor-pointer" hx-get="/program/{{ $campaign->slug ?? 'bakti-kesehatan' }}" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" data-category="{{ $campaign->category }}">
+                                            <div>
+                                                <div class="relative aspect-[16/9] overflow-hidden bg-[#12355B]/10">
+                                                    <img src="{{ asset($campaign->image ?? 'images/donasi-bencana.png') }}" alt="{{ $campaign->name }}" class="h-full w-full object-cover">
+                                                    <span class="absolute left-3 top-3 flex items-center gap-1 rounded-full bg-[#12355B] px-3 py-1 text-[10px] font-bold text-white shadow category-badge">
+                                                        {{ $campaign->category }}
+                                                    </span>
+                                                    <span class="absolute right-3 top-3 rounded-full bg-[#D62828] px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-wider text-white">{{ $campaign->label ?? 'Program' }}</span>
+                                                </div>
+                                                <div class="p-5">
+                                                    <h3 class="font-['Plus_Jakarta_Sans'] text-base font-extrabold text-[#12355B] leading-snug line-clamp-2">{{ $campaign->name }}</h3>
+                                                    <p class="mt-2 text-xs leading-relaxed text-[#62758A] line-clamp-2">{{ $campaign->description }}</p>
+                                                    <div class="mt-4">
+                                                        <div class="flex justify-between text-xs font-semibold"><span class="text-[#62758A]">Terkumpul</span><span class="text-[#D62828] font-bold">{{ $percentage }}%</span></div>
+                                                        <div class="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-[#EEEAE4]"><div class="h-full rounded-full bg-[#D62828]" style="width: {{ $percentage }}%;"></div></div>
+                                                        <div class="mt-2 flex justify-between text-xs"><span class="font-extrabold text-[#12355B]">Rp {{ number_format($campaign->donations_sum_amount ?? 0, 0, ',', '.') }}</span><span class="text-[#62758A]">dari Rp {{ number_format($campaign->nominal, 0, ',', '.') }}</span></div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="p-5 pt-0"><button onclick="openDesktopDonationModal(); event.stopPropagation(); event.preventDefault();" class="w-full rounded-xl bg-[#D62828] py-3 text-xs font-bold text-white transition hover:bg-[#b91e26]">Donasi Sekarang</button></div>
-                                    </article>
-                                    <article class="flex flex-col justify-between overflow-hidden rounded-2xl border border-[#12355B]/10 bg-white shadow-sm transition hover:shadow-md cursor-pointer" hx-get="/program/bakti-pendidikan" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true">
-                                        <div>
-                                            <div class="relative aspect-[16/9] overflow-hidden bg-[#12355B]/10">
-                                                <img src="{{ asset('images/program-guru.png') }}" alt="Dukungan Insentif Guru" class="h-full w-full object-cover">
-                                                <span class="absolute left-3 top-3 flex items-center gap-1 rounded-full bg-[#12355B] px-3 py-1 text-[10px] font-bold text-white shadow"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-graduation-cap text-[#F4AAAA]"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path><path d="M22 10v6"></path><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path></svg> Pendidikan</span><span class="absolute right-3 top-3 rounded-full bg-[#D62828] px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-wider text-white">Pendidikan Bersama</span>
-                                            </div>
-                                            <div class="p-5">
-                                                <h3 class="font-['Plus_Jakarta_Sans'] text-base font-extrabold text-[#12355B] leading-snug line-clamp-2">Dukungan Insentif Guru Honor &amp; Bantuan Operasional Sekolah Terpencil</h3>
-                                                <p class="mt-2 text-xs leading-relaxed text-[#62758A] line-clamp-2">Apresiasi pahlawan tanpa tanda jasa dan pemenuhan sarana belajar bagi 200 murid di wilayah pelosok Indonesia Timur.</p>
-                                                <div class="mt-4">
-                                                    <div class="flex justify-between text-xs font-semibold"><span class="text-[#62758A]">Terkumpul</span><span class="text-[#D62828] font-bold">75%</span></div>
-                                                    <div class="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-[#EEEAE4]"><div class="h-full rounded-full bg-[#D62828]" style="width: 75%;"></div></div>
-                                                    <div class="mt-2 flex justify-between text-xs"><span class="font-extrabold text-[#12355B]">Rp 135.000.000</span><span class="text-[#62758A]">dari Rp 180.000.000</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="p-5 pt-0"><button onclick="openDesktopDonationModal(); event.stopPropagation(); event.preventDefault();" class="w-full rounded-xl bg-[#D62828] py-3 text-xs font-bold text-white transition hover:bg-[#b91e26]">Donasi Sekarang</button></div>
-                                    </article>
-                                    <article class="flex flex-col justify-between overflow-hidden rounded-2xl border border-[#12355B]/10 bg-white shadow-sm transition hover:shadow-md cursor-pointer" hx-get="/program/bakti-bencana" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true">
-                                        <div>
-                                            <div class="relative aspect-[16/9] overflow-hidden bg-[#12355B]/10">
-                                                <img src="{{ asset('images/donasi-bencana.png') }}" alt="Berbagi Takjil" class="h-full w-full object-cover">
-                                                <span class="absolute left-3 top-3 flex items-center gap-1 rounded-full bg-[#12355B] px-3 py-1 text-[10px] font-bold text-white shadow"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users text-[#F4AAAA]"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> Sosial &amp; Kemanusiaan</span><span class="absolute right-3 top-3 rounded-full bg-[#D62828] px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-wider text-white">Tanggap Darurat</span>
-                                            </div>
-                                            <div class="p-5">
-                                                <h3 class="font-['Plus_Jakarta_Sans'] text-base font-extrabold text-[#12355B] leading-snug line-clamp-2">Berbagi Takjil Gratis, Dapur Umum Bencana &amp; Santunan Lansia-Duafa</h3>
-                                                <p class="mt-2 text-xs leading-relaxed text-[#62758A] line-clamp-2">Distribusi makanan siap saji, kebutuhan pokok lansia sebatang kara, serta dapur darurat untuk korban bencana alam.</p>
-                                                <div class="mt-4">
-                                                    <div class="flex justify-between text-xs font-semibold"><span class="text-[#62758A]">Terkumpul</span><span class="text-[#D62828] font-bold">87%</span></div>
-                                                    <div class="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-[#EEEAE4]"><div class="h-full rounded-full bg-[#D62828]" style="width: 87%;"></div></div>
-                                                    <div class="mt-2 flex justify-between text-xs"><span class="font-extrabold text-[#12355B]">Rp 280.000.000</span><span class="text-[#62758A]">dari Rp 320.000.000</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="p-5 pt-0"><button onclick="openDesktopDonationModal(); event.stopPropagation(); event.preventDefault();" class="w-full rounded-xl bg-[#D62828] py-3 text-xs font-bold text-white transition hover:bg-[#b91e26]">Donasi Sekarang</button></div>
-                                    </article>
-                                    <article class="flex flex-col justify-between overflow-hidden rounded-2xl border border-[#12355B]/10 bg-white shadow-sm transition hover:shadow-md cursor-pointer" hx-get="/program/bakti-lingkungan" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true">
-                                        <div>
-                                            <div class="relative aspect-[16/9] overflow-hidden bg-[#12355B]/10">
-                                                <img src="{{ asset('images/program-lingkungan.png') }}" alt="Sumur Bor" class="h-full w-full object-cover">
-                                                <span class="absolute left-3 top-3 flex items-center gap-1 rounded-full bg-[#12355B] px-3 py-1 text-[10px] font-bold text-white shadow"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-droplets text-[#F4AAAA]"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"></path><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"></path></svg> Lingkungan</span><span class="absolute right-3 top-3 rounded-full bg-[#D62828] px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-wider text-white">Infrastruktur Air</span>
-                                            </div>
-                                            <div class="p-5">
-                                                <h3 class="font-['Plus_Jakarta_Sans'] text-base font-extrabold text-[#12355B] leading-snug line-clamp-2">Sumur Bor &amp; Instalasi Air Bersih untuk Daerah Rawan Kekeringan</h3>
-                                                <p class="mt-2 text-xs leading-relaxed text-[#62758A] line-clamp-2">Pembangunan sistem filtrasi dan pemipaan air bersih untuk 3 desa di Nusa Tenggara Timur yang mengalami krisis air tahunan.</p>
-                                                <div class="mt-4">
-                                                    <div class="flex justify-between text-xs font-semibold"><span class="text-[#62758A]">Terkumpul</span><span class="text-[#D62828] font-bold">65%</span></div>
-                                                    <div class="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-[#EEEAE4]"><div class="h-full rounded-full bg-[#D62828]" style="width: 65%;"></div></div>
-                                                    <div class="mt-2 flex justify-between text-xs"><span class="font-extrabold text-[#12355B]">Rp 98.000.000</span><span class="text-[#62758A]">dari Rp 150.000.000</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="p-5 pt-0"><button onclick="openDesktopDonationModal(); event.stopPropagation(); event.preventDefault();" class="w-full rounded-xl bg-[#D62828] py-3 text-xs font-bold text-white transition hover:bg-[#b91e26]">Donasi Sekarang</button></div>
-                                    </article>
-                                    <article class="flex flex-col justify-between overflow-hidden rounded-2xl border border-[#12355B]/10 bg-white shadow-sm transition hover:shadow-md cursor-pointer" hx-get="/program/bakti-kesehatan" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true">
-                                        <div>
-                                            <div class="relative aspect-[16/9] overflow-hidden bg-[#12355B]/10">
-                                                <img src="{{ asset('images/donasi-pendidikan.png') }}" alt="Pengadaan Karpet &amp; Sajadah" class="h-full w-full object-cover">
-                                                <span class="absolute left-3 top-3 flex items-center gap-1 rounded-full bg-[#12355B] px-3 py-1 text-[10px] font-bold text-white shadow"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building2 lucide-building-2 text-[#F4AAAA]"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg> Fasilitas Ibadah</span><span class="absolute right-3 top-3 rounded-full bg-[#D62828] px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-wider text-white">Terkurasi Amanah</span>
-                                            </div>
-                                            <div class="p-5">
-                                                <h3 class="font-['Plus_Jakarta_Sans'] text-base font-extrabold text-[#12355B] leading-snug line-clamp-2">Pengadaan Karpet &amp; Sajadah Musala Terkurasi Non-Komersial</h3>
-                                                <p class="mt-2 text-xs leading-relaxed text-[#62758A] line-clamp-2">Penyediaan karpet dan sajadah berkualitas untuk musala pedesaan yang membutuhkan, dikurasi secara akuntabel tanpa komersialisasi.</p>
-                                                <div class="mt-4">
-                                                    <div class="flex justify-between text-xs font-semibold"><span class="text-[#62758A]">Terkumpul</span><span class="text-[#D62828] font-bold">90%</span></div>
-                                                    <div class="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-[#EEEAE4]"><div class="h-full rounded-full bg-[#D62828]" style="width: 90%;"></div></div>
-                                                    <div class="mt-2 flex justify-between text-xs"><span class="font-extrabold text-[#12355B]">Rp 81.000.000</span><span class="text-[#62758A]">dari Rp 90.000.000</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="p-5 pt-0"><button onclick="openDesktopDonationModal(); event.stopPropagation(); event.preventDefault();" class="w-full rounded-xl bg-[#D62828] py-3 text-xs font-bold text-white transition hover:bg-[#b91e26]">Donasi Sekarang</button></div>
-                                    </article>
+                                            <div class="p-5 pt-0"><button onclick="openDesktopDonationModal(); event.stopPropagation(); event.preventDefault();" class="w-full rounded-xl bg-[#D62828] py-3 text-xs font-bold text-white transition hover:bg-[#b91e26]">Donasi Sekarang</button></div>
+                                        </article>
+                                    @empty
+                                        <p class="text-sm text-gray-500 col-span-2 text-center py-10">Belum ada program saat ini.</p>
+                                    @endforelse
                                 </div>
                             </div>
                         </div>
@@ -466,7 +349,7 @@
             const mobileSearch = document.getElementById('mobileSearchInput');
             const desktopSearch = document.getElementById('desktopSearchInput');
             const categoryBtns = document.querySelectorAll('.category-filter-btn');
-            const articles = document.querySelectorAll('article');
+            const articles = document.querySelectorAll('.explore-item');
             
             let currentCategory = 'all';
             let currentSearch = '';
@@ -474,9 +357,10 @@
             function filterCards() {
                 let count = 0;
                 articles.forEach(article => {
-                    const title = article.querySelector('h3')?.textContent.toLowerCase() || '';
-                    const desc = article.querySelector('p')?.textContent.toLowerCase() || '';
-                    const categorySpan = article.querySelector('.absolute.left-3.top-3')?.textContent.toLowerCase() || '';
+                    // Coba cari h3 untuk desktop, p untuk mobile
+                    const title = (article.querySelector('h3') || article.querySelector('p'))?.textContent.toLowerCase() || '';
+                    const desc = article.querySelector('p.line-clamp-2.text-[#62758A]')?.textContent.toLowerCase() || '';
+                    const categorySpan = article.querySelector('.category-badge')?.textContent.toLowerCase() || '';
                     
                     const matchSearch = title.includes(currentSearch) || desc.includes(currentSearch);
                     const matchCategory = currentCategory === 'all' || categorySpan.includes(currentCategory.toLowerCase());

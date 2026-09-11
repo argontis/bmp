@@ -15,6 +15,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => \App\Http\Middleware\IsAdmin::class,
         ]);
+        
+        $middleware->redirectGuestsTo('/login');
+        $middleware->redirectUsersTo(function (Request $request) {
+            return auth()->check() && auth()->user()->is_admin ? '/admin' : '/dashboard';
+        });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

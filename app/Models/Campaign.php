@@ -15,6 +15,11 @@ class Campaign extends Model
         'nominal',
         'rfm_score',
         'status',
+        'category',
+        'image',
+        'description',
+        'label',
+        'slug',
     ];
 
     public function donations()

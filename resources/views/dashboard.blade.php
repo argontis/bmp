@@ -99,7 +99,7 @@
                             <div class="absolute inset-0 bg-gradient-to-r from-[#12355B]/90 to-[#D62828]/60"></div>
                             <div class="relative p-5 h-full flex flex-col justify-between">
                                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 border border-white/25 text-white text-[10px] font-bold w-fit">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>78 program aktif
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>{{ $programAktifCount }} program aktif
                                 </span>
                                 <div>
                                     <p class="text-white font-extrabold text-[17px] leading-snug mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Bersama Menebar<br>Kebaikan untuk Indonesia</p>
@@ -155,8 +155,8 @@
                             <div class="flex items-center justify-between p-4">
                                 <div>
                                     <p class="text-white/60 text-[10px] font-bold uppercase tracking-widest mb-0.5">Total donasi Anda</p>
-                                    <p class="text-white font-extrabold text-[20px]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Rp 2.750.000</p>
-                                    <p class="text-white/60 text-[10px] mt-0.5">14 kali donasi · Donatur Setia</p>
+                                    <p class="text-white font-extrabold text-[20px]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Rp {{ number_format($totalDonasi, 0, ',', '.') }}</p>
+                                    <p class="text-white/60 text-[10px] mt-0.5">{{ $donasiCount }} kali donasi · Donatur Setia</p>
                                 </div>
                                 <div class="w-12 h-12 rounded-2xl bg-white/15 flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles w-6 h-6 text-amber-300"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg>
@@ -396,10 +396,10 @@
                         </button>
                         <div hx-get="/account" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex items-center gap-3 border-l border-[#12355B]/10 pl-4 cursor-pointer hover:bg-black/5 p-1.5 -mr-1.5 rounded-xl transition">
                             <div class="text-right hidden sm:block">
-                                <p class="text-xs font-bold text-[#12355B]">Nabila Arimbi</p>
+                                <p class="text-xs font-bold text-[#12355B]">{{ auth()->user()->name }}</p>
                                 <p class="text-[10px] text-[#62758A]">Donatur Dermawan</p>
                             </div>
-                            <button class="grid h-9 w-9 place-items-center rounded-full bg-[#12355B] text-xs font-bold text-white shadow">NA</button>
+                            <button class="grid h-9 w-9 place-items-center rounded-full bg-[#12355B] text-xs font-bold text-white shadow">{{ strtoupper(substr(auth()->user()->name, 0, 2)) }}</button>
                         </div>
                     </div>
                 </div>
@@ -409,9 +409,9 @@
                     <aside class="hidden lg:block space-y-6">
                         <div class="rounded-2xl border border-[#12355B]/10 bg-white p-5 shadow-sm">
                             <div class="flex items-center gap-3 pb-4 border-b border-[#12355B]/10">
-                                <div class="grid h-12 w-12 place-items-center rounded-full bg-[#12355B] font-bold text-white text-base">NA</div>
+                                <div class="grid h-12 w-12 place-items-center rounded-full bg-[#12355B] font-bold text-white text-base">{{ strtoupper(substr(auth()->user()->name, 0, 2)) }}</div>
                                 <div>
-                                    <p class="font-['Plus_Jakarta_Sans'] font-bold text-sm text-[#12355B]">Nabila Arimbi</p>
+                                    <p class="font-['Plus_Jakarta_Sans'] font-bold text-sm text-[#12355B]">{{ auth()->user()->name }}</p>
                                     <span class="inline-block rounded-full bg-[#16A34A]/10 px-2 py-0.5 text-[10px] font-bold text-[#16A34A]">✓ Akun Terverifikasi</span>
                                 </div>
                             </div>
@@ -475,9 +475,9 @@
                                         </svg> Jejak Kebaikan Nabila
                                     </div>
                                     <p class="mt-4 text-xs text-white/70">Total Kontribusi Tersalurkan</p>
-                                    <p class="font-['Plus_Jakarta_Sans'] text-3xl sm:text-4xl font-extrabold tracking-tight mt-1">Rp 1.250.000</p>
+                                    <p class="font-['Plus_Jakarta_Sans'] text-3xl sm:text-4xl font-extrabold tracking-tight mt-1">Rp {{ number_format($totalDonasi, 0, ',', '.') }}</p>
                                     <div class="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-white/20 pt-4 text-xs text-white/90">
-                                        <div class="flex items-center gap-4"><span><strong>8</strong> Program Didukung</span><span>•</span><span><strong>100%</strong> Tersalurkan Amanah</span></div>
+                                        <div class="flex items-center gap-4"><span><strong>{{ $donasiCount }}</strong> Program Didukung</span><span>•</span><span><strong>100%</strong> Tersalurkan Amanah</span></div>
                                         <button class="flex items-center gap-1 font-bold text-[#F4AAAA] hover:underline">Unduh Sertifikat Kebaikan <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></button>
                                     </div>
                                 </div>
@@ -491,8 +491,9 @@
                                     <button data-category="all" class="dashboard-category-btn shrink-0 rounded-full px-4 py-2 text-xs font-bold transition bg-[#D62828] text-white border border-[#D62828]">Semua Program</button>
                                     <button data-category="kesehatan" class="dashboard-category-btn shrink-0 rounded-full px-4 py-2 text-xs font-bold transition bg-white border border-[#12355B]/10 text-[#12355B] hover:bg-[#F1EEE8]">🩺 Kesehatan</button>
                                     <button data-category="pendidikan" class="dashboard-category-btn shrink-0 rounded-full px-4 py-2 text-xs font-bold transition bg-white border border-[#12355B]/10 text-[#12355B] hover:bg-[#F1EEE8]">🎓 Pendidikan</button>
-                                    <button data-category="sosial" class="dashboard-category-btn shrink-0 rounded-full px-4 py-2 text-xs font-bold transition bg-white border border-[#12355B]/10 text-[#12355B] hover:bg-[#F1EEE8]">🤝 Sosial &amp; Kemanusiaan</button>
+                                    <button data-category="sosial & kemanusiaan" class="dashboard-category-btn shrink-0 rounded-full px-4 py-2 text-xs font-bold transition bg-white border border-[#12355B]/10 text-[#12355B] hover:bg-[#F1EEE8]">🤝 Sosial &amp; Kemanusiaan</button>
                                     <button data-category="lingkungan" class="dashboard-category-btn shrink-0 rounded-full px-4 py-2 text-xs font-bold transition bg-white border border-[#12355B]/10 text-[#12355B] hover:bg-[#F1EEE8]">💧 Lingkungan</button>
+                                    <button data-category="fasilitas ibadah" class="dashboard-category-btn shrink-0 rounded-full px-4 py-2 text-xs font-bold transition bg-white border border-[#12355B]/10 text-[#12355B] hover:bg-[#F1EEE8]">🕌 Fasilitas Ibadah</button>
                                 </div>
                             </section>
                             <section class="space-y-4">
