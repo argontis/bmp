@@ -22,7 +22,7 @@ class DashboardController extends Controller
             
         $programAktifCount = Campaign::where('status', 'Aktif')->count();
         
-        $programTerbaru = Campaign::latest()->take(3)->get();
+        $programTerbaru = Campaign::latest()->take(4)->get();
         
         $donasiTerakhir = Donation::with('campaign')
             ->where('user_id', $user->id)
