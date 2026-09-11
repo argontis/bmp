@@ -627,54 +627,49 @@
 
 
     @include('components.desktop-donation-modal')
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const categoryBtns = document.querySelectorAll('.dashboard-category-btn');
-            const programContainer = document.getElementById('dashboardProgramContainer');
-            const countText = document.getElementById('dashboardProgramCount');
-            
-            if (programContainer && categoryBtns.length > 0) {
+        <script>
+        if (!window.dashboardFilterInitialized) {
+            window.dashboardFilterInitialized = true;
+            document.addEventListener('click', function(e) {
+                const btn = e.target.closest('.dashboard-category-btn');
+                if (!btn) return;
+                
+                const programContainer = document.getElementById('dashboardProgramContainer');
+                if (!programContainer) return;
+                
                 const articles = programContainer.querySelectorAll('article');
-                let currentCategory = 'all';
-
-                function filterDashboardCards() {
-                    let count = 0;
-                    articles.forEach(article => {
-                        const categorySpan = article.querySelector('.absolute.left-3.top-3')?.textContent.toLowerCase() || '';
-                        const matchCategory = currentCategory === 'all' || categorySpan.includes(currentCategory.toLowerCase());
-                        
-                        if (matchCategory) {
-                            article.style.display = 'flex';
-                            count++;
-                        } else {
-                            article.style.display = 'none';
-                        }
-                    });
-                    if (countText) {
-                        countText.textContent = `${count} Program Tersedia`;
+                const countText = document.getElementById('dashboardProgramCount');
+                const category = btn.getAttribute('data-category');
+                
+                // Update active state
+                const allBtns = document.querySelectorAll('.dashboard-category-btn');
+                allBtns.forEach(b => {
+                    if (b === btn) {
+                        b.classList.add('bg-[#D62828]', 'text-white', 'border-[#D62828]');
+                        b.classList.remove('bg-white', 'text-[#12355B]', 'border-[#12355B]/10', 'hover:bg-[#F1EEE8]');
+                    } else {
+                        b.classList.remove('bg-[#D62828]', 'text-white', 'border-[#D62828]');
+                        b.classList.add('bg-white', 'text-[#12355B]', 'border-[#12355B]/10', 'hover:bg-[#F1EEE8]');
                     }
-                }
-
-                categoryBtns.forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        currentCategory = btn.getAttribute('data-category');
-                        
-                        // Update active state
-                        categoryBtns.forEach(b => {
-                            if (b === btn) {
-                                b.classList.add('bg-[#D62828]', 'text-white', 'border-[#D62828]');
-                                b.classList.remove('bg-white', 'text-[#12355B]', 'border-[#12355B]/10', 'hover:bg-[#F1EEE8]');
-                            } else {
-                                b.classList.remove('bg-[#D62828]', 'text-white', 'border-[#D62828]');
-                                b.classList.add('bg-white', 'text-[#12355B]', 'border-[#12355B]/10', 'hover:bg-[#F1EEE8]');
-                            }
-                        });
-                        
-                        filterDashboardCards();
-                    });
                 });
-            }
-        });
+                
+                let count = 0;
+                articles.forEach(article => {
+                    const categorySpan = article.querySelector('.absolute.left-3.top-3')?.textContent.toLowerCase() || '';
+                    const matchCategory = category === 'all' || categorySpan.includes(category.toLowerCase());
+                    
+                    if (matchCategory) {
+                        article.style.display = 'flex';
+                        count++;
+                    } else {
+                        article.style.display = 'none';
+                    }
+                });
+                if (countText) {
+                    countText.textContent = `${count} Program Tersedia`;
+                }
+            });
+        }
     </script>
 </body>
 </html>

@@ -344,82 +344,85 @@
 
 
     @include('components.desktop-donation-modal')
-    <script>
-        (() => {
-            const mobileSearch = document.getElementById('mobileSearchInput');
-            const desktopSearch = document.getElementById('desktopSearchInput');
-            const categoryBtns = document.querySelectorAll('.category-filter-btn');
-            const articles = document.querySelectorAll('.explore-item');
+        <script>
+        if (!window.exploreFilterInitialized) {
+            window.exploreFilterInitialized = true;
             
-            let currentCategory = 'all';
-            let currentSearch = '';
-
-            function filterCards() {
-                let count = 0;
-                articles.forEach(article => {
-                    // Coba cari h3 untuk desktop, p untuk mobile
-                    const title = (article.querySelector('h3') || article.querySelector('p'))?.textContent.toLowerCase() || '';
-                    const desc = article.querySelector('p.line-clamp-2.text-[#62758A]')?.textContent.toLowerCase() || '';
-                    const categorySpan = article.querySelector('.category-badge')?.textContent.toLowerCase() || '';
-                    
-                    const matchSearch = title.includes(currentSearch) || desc.includes(currentSearch);
-                    const matchCategory = currentCategory === 'all' || categorySpan.includes(currentCategory.toLowerCase());
-                    
-                    if (matchSearch && matchCategory) {
-                        article.style.display = 'flex';
-                        count++;
-                    } else {
-                        article.style.display = 'none';
+            // For Search inputs (Input event)
+            document.addEventListener('input', function(e) {
+                if (e.target.id === 'mobileSearchInput' || e.target.id === 'desktopSearchInput') {
+                    window.exploreCurrentSearch = e.target.value.toLowerCase();
+                    // sync the other input
+                    const otherId = e.target.id === 'mobileSearchInput' ? 'desktopSearchInput' : 'mobileSearchInput';
+                    const otherInput = document.getElementById(otherId);
+                    if (otherInput && otherInput.value !== e.target.value) {
+                        otherInput.value = e.target.value;
                     }
-                });
-                const countText = document.getElementById('exploreProgramCount');
-                if (countText) {
-                    countText.textContent = `Menampilkan ${count} Program`;
+                    if(typeof window.executeExploreFilter === 'function') window.executeExploreFilter();
                 }
-            }
-
-            if (mobileSearch) {
-                mobileSearch.addEventListener('input', (e) => {
-                    currentSearch = e.target.value.toLowerCase();
-                    if (desktopSearch) desktopSearch.value = e.target.value;
-                    filterCards();
-                });
-            }
-            
-            if (desktopSearch) {
-                desktopSearch.addEventListener('input', (e) => {
-                    currentSearch = e.target.value.toLowerCase();
-                    if (mobileSearch) mobileSearch.value = e.target.value;
-                    filterCards();
-                });
-            }
-
-            categoryBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const category = btn.getAttribute('data-category');
-                    if (currentCategory === category) {
-                        currentCategory = 'all';
-                        btn.classList.remove('bg-red-50', 'border-[#D62828]', 'text-[#D62828]');
-                        btn.querySelector('svg').classList.remove('text-[#D62828]');
-                        btn.querySelector('svg').classList.add('text-[#12355B]');
-                        btn.classList.add('bg-white', 'text-[#12355B]', 'border-[#12355B]/10');
-                    } else {
-                        currentCategory = category;
-                        categoryBtns.forEach(b => {
-                            b.classList.remove('bg-red-50', 'border-[#D62828]', 'text-[#D62828]');
-                            b.querySelector('svg').classList.remove('text-[#D62828]');
-                            b.querySelector('svg').classList.add('text-[#12355B]');
-                            b.classList.add('bg-white', 'text-[#12355B]', 'border-[#12355B]/10');
-                        });
-                        btn.classList.add('bg-red-50', 'border-[#D62828]', 'text-[#D62828]');
-                        btn.classList.remove('bg-white', 'text-[#12355B]', 'border-[#12355B]/10');
-                        btn.querySelector('svg').classList.remove('text-[#12355B]');
-                        btn.querySelector('svg').classList.add('text-[#D62828]');
-                    }
-                    filterCards();
-                });
             });
-        })();
+
+            // For Category Buttons (Click event)
+            document.addEventListener('click', function(e) {
+                const btn = e.target.closest('.category-filter-btn');
+                if (!btn) return;
+                
+                const category = btn.getAttribute('data-category');
+                if (window.exploreCurrentCategory === category) {
+                    window.exploreCurrentCategory = 'all';
+                } else {
+                    window.exploreCurrentCategory = category;
+                }
+                
+                // Update active state
+                const categoryBtns = document.querySelectorAll('.category-filter-btn');
+                categoryBtns.forEach(b => {
+                    const bCat = b.getAttribute('data-category');
+                    if (bCat === window.exploreCurrentCategory) {
+                        b.classList.add('bg-red-50', 'border-[#D62828]', 'text-[#D62828]');
+                        b.classList.remove('bg-white', 'text-[#12355B]', 'border-[#12355B]/10');
+                        b.querySelector('svg').classList.remove('text-[#12355B]');
+                        b.querySelector('svg').classList.add('text-[#D62828]');
+                    } else {
+                        b.classList.remove('bg-red-50', 'border-[#D62828]', 'text-[#D62828]');
+                        b.classList.add('bg-white', 'text-[#12355B]', 'border-[#12355B]/10');
+                        b.querySelector('svg').classList.remove('text-[#D62828]');
+                        b.querySelector('svg').classList.add('text-[#12355B]');
+                    }
+                });
+                if(typeof window.executeExploreFilter === 'function') window.executeExploreFilter();
+            });
+        }
+
+        // We run this outside so if page is swapped we reset variables for this page instance
+        window.exploreCurrentCategory = 'all';
+        window.exploreCurrentSearch = '';
+
+        window.executeExploreFilter = function() {
+            const articles = document.querySelectorAll('.explore-item');
+            let count = 0;
+            articles.forEach(article => {
+                const title = (article.querySelector('h3') || article.querySelector('p'))?.textContent.toLowerCase() || '';
+                const desc = article.querySelector('p.line-clamp-2.text-[#62758A]')?.textContent.toLowerCase() || '';
+                const categorySpan = article.querySelector('.category-badge')?.textContent.toLowerCase() || '';
+                
+                const matchSearch = title.includes(window.exploreCurrentSearch) || desc.includes(window.exploreCurrentSearch);
+                const matchCategory = window.exploreCurrentCategory === 'all' || categorySpan.includes(window.exploreCurrentCategory.toLowerCase());
+                
+                if (matchSearch && matchCategory) {
+                    article.style.display = 'flex';
+                    count++;
+                } else {
+                    article.style.display = 'none';
+                }
+            });
+            const countText = document.getElementById('exploreProgramCount');
+            if (countText) {
+                countText.textContent = `Menampilkan ${count} Program`;
+            }
+        };
+        // Initial run for when swapped in
+        window.executeExploreFilter();
     </script>
 </body>
 </html>
