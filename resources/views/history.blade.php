@@ -161,7 +161,7 @@
             <header class="sticky top-0 z-40 border-b border-[#12355B]/10 bg-[#FBFAF7]/95 backdrop-blur-md">
                 <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
                     <div class="flex items-center gap-6">
-                        <button class="flex items-center gap-2"><img src="{{ asset('images/logo.png') }}" alt="Bakti Merah Putih" class="h-9 w-auto"></button>
+                        <button class="flex items-center gap-2"><img src="{{ asset('images/logo2.png') }}" alt="Bakti Merah Putih" class="h-9 w-auto"></button>
                         <span class="hidden h-5 w-px bg-[#12355B]/15 sm:inline-block"></span>
                         <span class="hidden text-xs font-bold uppercase tracking-wider text-[#D62828] sm:inline-block">Portal Donatur Terverifikasi</span>
                     </div>
@@ -175,10 +175,10 @@
                         </button>
                         <div hx-get="/account" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex items-center gap-3 border-l border-[#12355B]/10 pl-4 cursor-pointer hover:bg-black/5 p-1.5 -mr-1.5 rounded-xl transition">
                             <div class="text-right hidden sm:block">
-                                <p class="text-xs font-bold text-[#12355B]">Nabila Arimbi</p>
+                                <p class="text-xs font-bold text-[#12355B]">{{ auth()->user()->name }}</p>
                                 <p class="text-[10px] text-[#62758A]">Donatur Dermawan</p>
                             </div>
-                            <button class="grid h-9 w-9 place-items-center rounded-full bg-[#12355B] text-xs font-bold text-white shadow">NA</button>
+                            <button class="grid h-9 w-9 place-items-center rounded-full bg-[#12355B] text-xs font-bold text-white shadow">{{ strtoupper(substr(auth()->user()->name, 0, 2)) }}</button>
                         </div>
                     </div>
                 </div>
@@ -188,9 +188,9 @@
                     <aside class="hidden lg:block space-y-6">
                         <div class="rounded-2xl border border-[#12355B]/10 bg-white p-5 shadow-sm">
                             <div class="flex items-center gap-3 pb-4 border-b border-[#12355B]/10">
-                                <div class="grid h-12 w-12 place-items-center rounded-full bg-[#12355B] font-bold text-white text-base">NA</div>
+                                <div class="grid h-12 w-12 place-items-center rounded-full bg-[#12355B] font-bold text-white text-base">{{ strtoupper(substr(auth()->user()->name, 0, 2)) }}</div>
                                 <div>
-                                    <p class="font-['Plus_Jakarta_Sans'] font-bold text-sm text-[#12355B]">Nabila Arimbi</p>
+                                    <p class="font-['Plus_Jakarta_Sans'] font-bold text-sm text-[#12355B]">{{ auth()->user()->name }}</p>
                                     <span class="inline-block rounded-full bg-[#16A34A]/10 px-2 py-0.5 text-[10px] font-bold text-[#16A34A]">✓ Akun Terverifikasi</span>
                                 </div>
                             </div>
@@ -231,7 +231,7 @@
                             <p class="text-[10px] font-extrabold uppercase tracking-widest text-white/80">Donasi Cepat</p>
                             <h3 class="mt-1 font-['Plus_Jakarta_Sans'] text-lg font-bold">Salurkan Kepedulian Hari Ini</h3>
                             <p class="mt-2 text-xs text-white/80 leading-relaxed">Pilih program terkurasi dan pantau perkembangan dampaknya secara transparan.</p>
-                            <button onclick="openDesktopDonationModal(); event.preventDefault();" class="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-white py-2.5 text-xs font-bold text-[#D62828] transition hover:bg-[#fff1f1]">
+                            <button hx-get="/explore" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-white py-2.5 text-xs font-bold text-[#D62828] transition hover:bg-[#fff1f1]">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart">
                                     <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
                                 </svg> Donasi Sekarang

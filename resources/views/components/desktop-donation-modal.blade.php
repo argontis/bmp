@@ -2,8 +2,8 @@
     <div class="w-full max-w-lg rounded-3xl bg-[#FBFAF7] p-6 sm:p-8 shadow-2xl relative" onclick="event.stopPropagation();">
         <div class="flex items-start justify-between pb-4 border-b border-[#12355B]/10">
             <div>
-                <span class="text-[10px] font-extrabold uppercase tracking-wider text-[#D62828]">Kesehatan</span>
-                <h3 class="font-['Plus_Jakarta_Sans'] text-lg font-extrabold text-[#12355B] leading-snug">Terapi Medis Gratis (Listrik &amp; Laser) &amp; Pengobatan Pasien Bawaan</h3>
+                <span id="desktop-modal-category" class="text-[10px] font-extrabold uppercase tracking-wider text-[#D62828]">Kesehatan</span>
+                <h3 id="desktop-modal-title" class="font-['Plus_Jakarta_Sans'] text-lg font-extrabold text-[#12355B] leading-snug">Terapi Medis Gratis (Listrik &amp; Laser) &amp; Pengobatan Pasien Bawaan</h3>
             </div>
             <button onclick="closeDesktopDonationModal()" class="rounded-full p-1 text-[#62758A] hover:bg-[#E5E0D8]">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
@@ -47,9 +47,14 @@
 </div>
 
 <script>
-function openDesktopDonationModal() {
+window.activeCampaignId = null;
+
+function openDesktopDonationModal(category = 'Kesehatan', title = 'Donasi Program Kebaikan', campaignId = null) {
     const modal = document.getElementById('desktopDonationModal');
     if (modal) {
+        window.activeCampaignId = campaignId;
+        document.getElementById('desktop-modal-category').innerText = category;
+        document.getElementById('desktop-modal-title').innerText = title;
         modal.classList.remove('hidden');
     }
 }
@@ -62,7 +67,7 @@ function closeDesktopDonationModal() {
 }
 
 // Close when clicking outside
-document.addEventListener('DOMContentLoaded', () => {
+(function initDesktopDonationModal() {
     const modal = document.getElementById('desktopDonationModal');
     if (modal) {
         modal.addEventListener('click', function(e) {
@@ -104,6 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         desktopLanjutkanBtn.innerHTML = `Lanjutkan Pembayaran ${formatRupiah(dSelectedNominal)}`;
+        const categoryText = document.getElementById('desktop-modal-category').innerText;
+        const titleText = document.getElementById('desktop-modal-title').innerText;
+        desktopLanjutkanBtn.setAttribute('onclick', `window.location.href='/pembayaran?nominal=${dSelectedNominal}&payment=${dSelectedPayment}&category=${encodeURIComponent(categoryText)}&title=${encodeURIComponent(titleText)}&campaign_id=${window.activeCampaignId}'`);
     }
     
     desktopNominalBtns.forEach(btn => {
@@ -133,5 +141,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     updateDesktopUI();
-});
+})();
 </script>

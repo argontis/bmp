@@ -244,7 +244,7 @@
                                 </span>
                                 <h2 class="text-4xl lg:text-[52px] font-extrabold text-[#12355B] leading-[1.05] tracking-[-0.02em]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Bersama Hadirkan<br>Perubahan Nyata</h2>
                             </div>
-                            <button class="hidden md:inline-flex items-center gap-2 px-5 py-3 border border-[#12355B]/20 text-[#12355B] rounded-full text-[13px] font-bold hover:bg-[#12355B] hover:text-white hover:border-[#12355B] transition-all duration-200">
+                            <button onclick="window.location.href='/program'" class="hidden md:inline-flex items-center gap-2 px-5 py-3 border border-[#12355B]/20 text-[#12355B] rounded-full text-[13px] font-bold hover:bg-[#12355B] hover:text-white hover:border-[#12355B] transition-all duration-200">
                                 Lihat Semua Program <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                             </button>
                         </div>
@@ -536,7 +536,7 @@
                                 </span>
                                 <h2 class="text-4xl lg:text-[52px] font-extrabold text-[#12355B] leading-[1.05] tracking-[-0.02em]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Wajah Perubahan<br>Nyata</h2>
                             </div>
-                            <button onclick="window.location.href='/donasi'" class="hidden md:flex items-center gap-2 text-[13px] font-bold text-[#12355B] hover:text-[#D62828] transition-colors">
+                            <button onclick="window.location.href='/galeri'" class="hidden md:flex items-center gap-2 text-[13px] font-bold text-[#12355B] hover:text-[#D62828] transition-colors">
                                 Lihat Galeri Lengkap <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link w-4 h-4"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
                             </button>
                         </div>
@@ -697,7 +697,7 @@
                                 </span>
                                 <h2 class="text-4xl lg:text-[52px] font-extrabold text-[#12355B] tracking-[-0.02em]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Dari Lapangan</h2>
                             </div>
-                            <button class="hidden md:flex items-center gap-2 text-[13px] font-bold text-[#12355B] hover:text-[#D62828] transition-colors">
+                            <button onclick="window.location.href='/artikel'" class="hidden md:flex items-center gap-2 text-[13px] font-bold text-[#12355B] hover:text-[#D62828] transition-colors">
                                 Semua Artikel <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                             </button>
                         </div>

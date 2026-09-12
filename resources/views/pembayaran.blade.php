@@ -65,6 +65,42 @@
                 <div class="flex-1 flex flex-col overflow-hidden" style="opacity: 1; transform: none;">
                     <div class="flex-1 overflow-y-auto pb-24">
                         
+                        <!-- Active Checkout -->
+                        @if(!empty($nominal) && !empty($campaign_id))
+                        <div class="mx-4 mt-5">
+                            <h3 class="font-extrabold text-[14px] text-[#1B1B1B] mb-3" style="font-family: 'Plus Jakarta Sans', sans-serif;">Selesaikan Donasi Anda</h3>
+                            <form method="POST" action="{{ route('pembayaran.process') }}" class="bg-white rounded-[20px] p-5 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.08)] border border-[#D62828]/20">
+                                @csrf
+                                <input type="hidden" name="campaign_id" value="{{ $campaign_id }}">
+                                <input type="hidden" name="nominal" value="{{ $nominal }}">
+                                <input type="hidden" name="payment" value="{{ $payment }}">
+                                
+                                <div class="flex items-start gap-3">
+                                    <div class="w-12 h-12 rounded-full bg-[#FFF1F1] flex items-center justify-center shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-6 h-6 text-[#D62828]"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="text-[10px] font-extrabold uppercase tracking-wider text-[#D62828] mb-1">{{ $category ?? 'Donasi' }}</p>
+                                        <p class="text-[14px] font-bold text-[#12355B] leading-snug mb-3">{{ $title ?? 'Program Kebaikan' }}</p>
+                                        
+                                        <div class="flex items-center justify-between py-2 border-t border-dashed border-gray-200">
+                                            <span class="text-xs text-gray-500 font-semibold">Total Donasi</span>
+                                            <span class="text-[15px] font-extrabold text-[#1B1B1B]">Rp {{ number_format($nominal, 0, ',', '.') }}</span>
+                                        </div>
+                                        <div class="flex items-center justify-between py-2 border-b border-dashed border-gray-200 mb-4">
+                                            <span class="text-xs text-gray-500 font-semibold">Metode</span>
+                                            <span class="text-xs font-bold text-[#12355B] bg-[#F1EEE8] px-2 py-1 rounded-md">{{ str_replace('_', ' ', $payment ?? 'QRIS') }}</span>
+                                        </div>
+                                        
+                                        <button type="submit" class="w-full bg-[#D62828] text-white py-3 rounded-xl text-sm font-bold active:scale-95 transition hover:bg-[#b91e26]">
+                                            Bayar Sekarang
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        @endif
+
                         <!-- Saldo E-Wallet -->
                         <div class="mx-4 mt-5">
                             <h3 class="font-extrabold text-[14px] text-[#1B1B1B] mb-3" style="font-family: 'Plus Jakarta Sans', sans-serif;">Saldo Kebaikan</h3>

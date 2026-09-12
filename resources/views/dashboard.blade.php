@@ -103,7 +103,7 @@
                                 </span>
                                 <div>
                                     <p class="text-white font-extrabold text-[17px] leading-snug mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Bersama Menebar<br>Kebaikan untuk Indonesia</p>
-                                    <button class="flex items-center gap-1.5 px-4 py-2 bg-white rounded-full text-[11px] font-extrabold" style="color: rgb(214, 40, 40);">
+                                    <button hx-get="/explore" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex items-center gap-1.5 px-4 py-2 bg-white rounded-full text-[11px] font-extrabold" style="color: rgb(214, 40, 40);">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-3 h-3 fill-current"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg> Donasi Sekarang
                                     </button>
                                 </div>
@@ -382,7 +382,7 @@
             <header class="sticky top-0 z-40 border-b border-[#12355B]/10 bg-[#FBFAF7]/95 backdrop-blur-md">
                 <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
                     <div class="flex items-center gap-6">
-                        <button class="flex items-center gap-2"><img src="{{ asset('images/logo.png') }}" alt="Bakti Merah Putih" class="h-9 w-auto"></button>
+                        <button class="flex items-center gap-2"><img src="{{ asset('images/logo2.png') }}" alt="Bakti Merah Putih" class="h-9 w-auto"></button>
                         <span class="hidden h-5 w-px bg-[#12355B]/15 sm:inline-block"></span>
                         <span class="hidden text-xs font-bold uppercase tracking-wider text-[#D62828] sm:inline-block">Portal Donatur Terverifikasi</span>
                     </div>
@@ -452,7 +452,7 @@
                             <p class="text-[10px] font-extrabold uppercase tracking-widest text-white/80">Donasi Cepat</p>
                             <h3 class="mt-1 font-['Plus_Jakarta_Sans'] text-lg font-bold">Salurkan Kepedulian Hari Ini</h3>
                             <p class="mt-2 text-xs text-white/80 leading-relaxed">Pilih program terkurasi dan pantau perkembangan dampaknya secara transparan.</p>
-                            <button onclick="openDesktopDonationModal(); event.preventDefault();" class="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-white py-2.5 text-xs font-bold text-[#D62828] transition hover:bg-[#fff1f1]">
+                            <button hx-get="/explore" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-white py-2.5 text-xs font-bold text-[#D62828] transition hover:bg-[#fff1f1]">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart">
                                     <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
                                 </svg> Donasi Sekarang
@@ -472,7 +472,7 @@
                                             <path d="M22 5h-4"></path>
                                             <path d="M4 17v2"></path>
                                             <path d="M5 18H3"></path>
-                                        </svg> Jejak Kebaikan Nabila
+                                        </svg> Jejak Kebaikan {{ explode(' ', auth()->user()->name)[0] }}
                                     </div>
                                     <p class="mt-4 text-xs text-white/70">Total Kontribusi Tersalurkan</p>
                                     <p class="font-['Plus_Jakarta_Sans'] text-3xl sm:text-4xl font-extrabold tracking-tight mt-1">Rp {{ number_format($totalDonasi, 0, ',', '.') }}</p>
@@ -538,7 +538,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="p-5 pt-0"><button onclick="openDesktopDonationModal(); event.stopPropagation(); event.preventDefault();" class="w-full rounded-xl bg-[#D62828] py-3 text-xs font-bold text-white transition hover:bg-[#b91e26]">Donasi Sekarang</button></div>
+                                            <div class="p-5 pt-0"><button onclick="openDesktopDonationModal('{{ $campaign->category ?? 'Kebaikan' }}', '{{ addslashes($campaign->name) }}', '{{ $campaign->id }}'); event.stopPropagation(); event.preventDefault();" class="w-full rounded-xl bg-[#D62828] py-3 text-xs font-bold text-white transition hover:bg-[#b91e26]">Donasi Sekarang</button></div>
                                         </article>
                                     @empty
                                         <p class="text-sm text-gray-500 col-span-2 text-center py-10">Belum ada program saat ini.</p>

@@ -42,6 +42,34 @@ Route::middleware('auth')->group(function () {
     Route::get('/account', [\App\Http\Controllers\AccountController::class, 'index'])->name('account');
 
     Route::get('/history', [\App\Http\Controllers\HistoryController::class, 'index'])->name('history');
+
+    Route::get('/pembayaran', function (\Illuminate\Http\Request $request) {
+        return view('pembayaran', [
+            'nominal' => $request->query('nominal'),
+            'payment' => $request->query('payment'),
+            'category' => $request->query('category'),
+            'title' => $request->query('title'),
+            'campaign_id' => $request->query('campaign_id'),
+        ]);
+    })->name('pembayaran');
+
+    Route::post('/pembayaran/process', function (\Illuminate\Http\Request $request) {
+        $request->validate([
+            'campaign_id' => 'required|exists:campaigns,id',
+            'nominal' => 'required|numeric|min:1000',
+            'payment' => 'required|string'
+        ]);
+        
+        \App\Models\Donation::create([
+            'user_id' => auth()->id(),
+            'campaign_id' => $request->campaign_id,
+            'amount' => $request->nominal,
+            'payment_method' => $request->payment,
+            'status' => 'Berhasil'
+        ]);
+        
+        return redirect('/history')->with('success', 'Pembayaran Berhasil! Terima kasih atas donasi Anda.');
+    })->name('pembayaran.process');
 });
 
 Route::get('/explore', [\App\Http\Controllers\ExploreController::class, 'index'])->name('explore');
@@ -49,8 +77,6 @@ Route::get('/explore', [\App\Http\Controllers\ExploreController::class, 'index']
 Route::get('/donate', function () {
     return view('donate');
 })->name('donate');
-
-
 
 Route::get('/reward', function () {
     return view('reward');
@@ -60,17 +86,9 @@ Route::get('/dampak', function () {
     return view('dampak');
 })->name('dampak');
 
-
-
 Route::get('/darurat', function () {
     return view('darurat');
 })->name('darurat');
-
-
-
-Route::get('/pembayaran', function () {
-    return view('pembayaran');
-})->name('pembayaran');
 
 Route::get('/tentang-kami', function () {
     return view('tentang-kami');
@@ -156,6 +174,18 @@ Route::get('/artikel/modal-usaha-ibu', function () {
     return view('artikel.modal-usaha-ibu');
 })->name('artikel.modal-usaha-ibu');
 
+Route::get('/artikel/klinik-terapung-maluku', function () {
+    return view('artikel.klinik-terapung-maluku');
+})->name('artikel.klinik-terapung-maluku');
+
+Route::get('/artikel/renovasi-masjid', function () {
+    return view('artikel.renovasi-masjid');
+})->name('artikel.renovasi-masjid');
+
+Route::get('/artikel/bantuan-gempa-lombok', function () {
+    return view('artikel.bantuan-gempa-lombok');
+})->name('artikel.bantuan-gempa-lombok');
+
 // Relawan Pages
 Route::get('/relawan/daftar', function () { return view('relawan_pages.daftar'); });
 Route::get('/relawan/video', function () { return view('relawan_pages.video'); });
@@ -166,6 +196,4 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/admin/kegiatan', [AdminController::class, 'storeKegiatan'])->name('admin.kegiatan.store');
     Route::get('/admin/donatur', [AdminController::class, 'donatur'])->name('admin.donatur');
     Route::get('/admin/transaksi', [AdminController::class, 'transaksi'])->name('admin.transaksi');
-    Route::get('/admin/pengeluaran', [AdminController::class, 'pengeluaran'])->name('admin.pengeluaran');
-    Route::post('/admin/pengeluaran', [AdminController::class, 'storePengeluaran'])->name('admin.pengeluaran.store');
 });
