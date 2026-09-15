@@ -182,6 +182,7 @@
                                 <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Nama Kegiatan</th>
                                 <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Lokasi</th>
                                 <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Jumlah Nominal</th>
+                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Kategori</th>
                                 <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Status</th>
                                 <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">RFM Score</th>
                                 <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider text-right">Aksi</th>
@@ -201,6 +202,9 @@
                                 </td>
                                 <td class="py-5 px-8">
                                     <p class="font-extrabold text-secondary">Rp {{ number_format($campaign->nominal, 0, ',', '.') }}</p>
+                                </td>
+                                <td class="py-5 px-8">
+                                    <span class="inline-flex px-3 py-1 bg-gray-100 text-gray-600 font-bold text-xs rounded-lg border border-gray-200">{{ $campaign->category ?? '-' }}</span>
                                 </td>
                                 <td class="py-5 px-8">
                                     @if($campaign->status == 'Aktif')
@@ -273,6 +277,11 @@
                             <input type="text" name="name" required placeholder="Contoh: Beasiswa Anak Pedalaman" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
                         </div>
                         
+                        <div>
+                            <label class="block text-sm font-bold text-secondary mb-2">Kategori Kegiatan</label>
+                            <input type="text" name="category" placeholder="Contoh: Pendidikan, Kesehatan, Lingkungan" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                        </div>
+                        
                         <div class="grid grid-cols-2 gap-5">
                             <div>
                                 <label class="block text-sm font-bold text-secondary mb-2">Lokasi</label>
@@ -340,6 +349,10 @@
                         <div>
                             <label class="block text-sm font-bold text-secondary mb-2">Nama Kegiatan</label>
                             <input type="text" name="name" value="{{ $campaign->name }}" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-secondary mb-2">Kategori Kegiatan</label>
+                            <input type="text" name="category" value="{{ $campaign->category }}" placeholder="Contoh: Pendidikan, Kesehatan, Lingkungan" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
                         </div>
                         <div class="grid grid-cols-2 gap-5">
                             <div>

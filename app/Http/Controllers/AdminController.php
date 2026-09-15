@@ -37,6 +37,7 @@ class AdminController extends Controller
             'nominal' => 'required|numeric|min:0',
             'rfm_score' => 'required|string|max:10',
             'status' => 'required|string|in:Aktif,Berjalan,Selesai',
+            'category' => 'nullable|string|max:255',
         ]);
 
         Campaign::create($validated);
@@ -54,6 +55,7 @@ class AdminController extends Controller
             'nominal' => 'required|numeric|min:0',
             'rfm_score' => 'required|string|max:10',
             'status' => 'required|string|in:Aktif,Berjalan,Selesai',
+            'category' => 'nullable|string|max:255',
         ]);
 
         $campaign->update($validated);
