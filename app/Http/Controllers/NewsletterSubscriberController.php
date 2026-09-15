@@ -26,6 +26,11 @@ class NewsletterSubscriberController extends Controller
             'email' => $request->email
         ]);
 
-        return redirect()->back()->with('newsletter_success', 'Terima kasih telah berlangganan update kegiatan kami!');
+        try {
+            \Illuminate\Support\Facades\Mail::to($request->email)->send(new \App\Mail\WelcomeNewsletterMail($request->email));
+            return redirect()->back()->with('newsletter_success', 'Terima kasih telah berlangganan! Email konfirmasi telah dikirim.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('newsletter_success', 'Terima kasih telah berlangganan update kegiatan kami!');
+        }
     }
 }
