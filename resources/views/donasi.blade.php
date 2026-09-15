@@ -226,9 +226,9 @@
                                     <button class="w-full py-4 rounded-2xl bg-[#D62828] text-white font-extrabold text-sm hover:bg-[#B91C1C] transition-colors shadow-[0_8px_20px_-8px_rgba(214,40,40,0.7)] hover:-translate-y-0.5" onclick="window.location.href='/login'">Lanjutkan Pembayaran</button>
                                     
                                     <div class="mt-6 pt-6 border-t border-gray-100 flex items-center justify-center gap-4 grayscale opacity-60">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Gopay_logo.svg/2560px-Gopay_logo.svg.png" class="h-4 object-contain" alt="Gopay">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Logo_dana_blue.svg/2560px-Logo_dana_blue.svg.png" class="h-4 object-contain" alt="Dana">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Bank_Central_Asia.svg/2560px-Bank_Central_Asia.svg.png" class="h-5 object-contain" alt="BCA">
+                                        <img src="/logo/GoPay Logo - Colored - zonalogo.com.png" class="h-4 object-contain" alt="Gopay">
+                                        <img src="/logo/Dana App Icon - Colored - zonalogo.com.png" class="h-4 object-contain" alt="Dana">
+                                        <img src="/logo/Bank Central Asia (BCA) Logo - Colored - 818x256 - zonalogo.com.png" class="h-5 object-contain" alt="BCA">
                                     </div>
                                 </div>
                             </div>
