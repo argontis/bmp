@@ -148,17 +148,31 @@
                             <div class="lg:col-span-3">
                                 <div class="bg-white p-8 md:p-10 rounded-3xl shadow-xl shadow-black/5 border border-gray-100">
                                     <h2 class="text-2xl font-extrabold text-[#1B1B1B] mb-6" style="font-family: 'Plus Jakarta Sans', sans-serif;">Kirim Pesan Langsung</h2>
-                                    <form action="#" method="POST" class="space-y-6">
+                                    
+                                    @if(session('contact_success'))
+                                        <div class="bg-green-500/20 border border-green-500 text-[#1B1B1B] px-4 py-3 rounded-lg mb-6 text-sm font-medium">
+                                            {{ session('contact_success') }}
+                                        </div>
+                                    @endif
+
+                                    @if(session('contact_error'))
+                                        <div class="bg-red-500/20 border border-red-500 text-[#1B1B1B] px-4 py-3 rounded-lg mb-6 text-sm font-medium">
+                                            {{ session('contact_error') }}
+                                        </div>
+                                    @endif
+
+                                    <form action="{{ route('kontak.send') }}" method="POST" class="space-y-6">
+                                        @csrf
                                         <div class="grid md:grid-cols-2 gap-6">
                                             <!-- Name -->
                                             <div>
                                                 <label for="name" class="block text-sm font-bold text-gray-700 mb-2">Nama Lengkap <span class="text-[#D62828]">*</span></label>
-                                                <input type="text" id="name" name="name" placeholder="John Doe" class="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D62828]/20 focus:border-[#D62828] transition-colors text-sm font-medium" required>
+                                                <input type="text" id="name" name="name" placeholder="John Doe" class="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D62828]/20 focus:border-[#D62828] transition-colors text-sm font-medium" value="{{ old('name') }}" required>
                                             </div>
                                             <!-- Email -->
                                             <div>
                                                 <label for="email" class="block text-sm font-bold text-gray-700 mb-2">Alamat Email <span class="text-[#D62828]">*</span></label>
-                                                <input type="email" id="email" name="email" placeholder="john@example.com" class="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D62828]/20 focus:border-[#D62828] transition-colors text-sm font-medium" required>
+                                                <input type="email" id="email" name="email" placeholder="john@example.com" class="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D62828]/20 focus:border-[#D62828] transition-colors text-sm font-medium" value="{{ old('email') }}" required>
                                             </div>
                                         </div>
                                         
@@ -219,7 +233,7 @@
                                 <p class="text-white/50 text-[13px] leading-relaxed mb-6">Bergerak bersama untuk Indonesia yang lebih baik. Sejak 2015, kami telah menyentuh jutaan kehidupan di 28 provinsi.</p>
                                 <div class="flex items-center gap-2.5">
                                     <button class="w-9 h-9 rounded-xl bg-white/[0.08] hover:bg-[#D62828] hover:-translate-y-0.5 flex items-center justify-center transition-all duration-200"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook w-4 h-4"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></button>
-                                    <button class="w-9 h-9 rounded-xl bg-white/[0.08] hover:bg-[#D62828] hover:-translate-y-0.5 flex items-center justify-center transition-all duration-200"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram w-4 h-4"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></button>
+                                    <a href="https://www.instagram.com/baktimerahputih?stkn=d3JqeTlka2FzNnFv" target="_blank" class="w-9 h-9 rounded-xl bg-white/[0.08] hover:bg-[#D62828] hover:-translate-y-0.5 flex items-center justify-center transition-all duration-200"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram w-4 h-4"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a>
                                     <button class="w-9 h-9 rounded-xl bg-white/[0.08] hover:bg-[#D62828] hover:-translate-y-0.5 flex items-center justify-center transition-all duration-200"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter w-4 h-4"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></button>
                                     <button class="w-9 h-9 rounded-xl bg-white/[0.08] hover:bg-[#D62828] hover:-translate-y-0.5 flex items-center justify-center transition-all duration-200"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube w-4 h-4"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></button>
                                 </div>

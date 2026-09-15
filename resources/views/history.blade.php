@@ -269,6 +269,10 @@
                                 </div>
                                 @endforelse
                             </div>
+                            
+                            <div class="mt-6">
+                                {{ $donations->links() }}
+                            </div>
                         </div>
                     </section>
                 </div>

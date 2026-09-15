@@ -51,7 +51,7 @@
                 Daftar Kegiatan
             </a>
             
-            <a href="/admin/donatur" class="flex items-center gap-3 px-4 py-3 bg-red-50 text-primary rounded-xl font-bold transition-all">
+            <a href="/admin/donatur" class="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-gray-50 hover:text-secondary rounded-xl font-medium transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 Donatur & RFM
             </a>
@@ -61,7 +61,7 @@
                 Transaksi Donasi
             </a>
 
-            <a href="/admin/relawan" class="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-gray-50 hover:text-secondary rounded-xl font-bold transition-all">
+            <a href="/admin/relawan" class="flex items-center gap-3 px-4 py-3 bg-red-50 text-primary rounded-xl font-bold transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-handshake"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08v0c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"></path><path d="m18 15-2-2"></path><path d="m15 18-2-2"></path></svg>
                 Daftar Relawan
             </a>
@@ -110,13 +110,13 @@
             <div class="bg-white rounded-3xl shadow-[0_4px_24px_-8px_rgba(0,0,0,0.08)] border border-gray-50 overflow-hidden">
                 <div class="p-8 border-b border-gray-100 flex items-center justify-between bg-white sticky top-0 z-10">
                     <div>
-                        <h2 class="text-lg font-extrabold text-secondary font-heading">Daftar Donatur</h2>
-                        <p class="text-sm text-gray-500 mt-1">Daftar pengguna terdaftar dan performa donasi mereka.</p>
+                        <h2 class="text-lg font-extrabold text-secondary font-heading">Daftar Relawan</h2>
+                        <p class="text-sm text-gray-500 mt-1">Daftar orang-orang yang mendaftar menjadi relawan.</p>
                     </div>
                     <!-- Future feature: Export to Excel/PDF -->
                     <div class="flex items-center gap-4">
-                        <form action="{{ route('admin.donatur') }}" method="GET" class="relative">
-                            <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari donatur..." class="pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm w-64 transition-all">
+                        <form action="{{ route('admin.relawan') }}" method="GET" class="relative">
+                            <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari relawan..." class="pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm w-64 transition-all">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-3.5 top-3 text-gray-400"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
                         </form>
                         <button class="flex items-center gap-2 px-5 py-2.5 bg-white border border-gray-200 text-gray-700 rounded-xl font-bold hover:bg-gray-50 transition-colors">
@@ -130,41 +130,67 @@
                     <table class="w-full text-left border-collapse">
                         <thead>
                             <tr class="bg-gray-50/50">
-                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Nama Donatur</th>
-                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Email Akun</th>
-                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Total Donasi (All-time)</th>
-                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">RFM Score</th>
-                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Terdaftar Sejak</th>
+                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Nama Relawan</th>
+                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Kontak</th>
+                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Peran & Motivasi</th>
+                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Status</th>
+                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider text-right">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-50">
-                            @forelse($donors as $donor)
+                            @forelse($volunteers as $volunteer)
                             <tr class="hover:bg-gray-50/50 transition-colors group">
                                 <td class="py-5 px-8">
                                     <div class="flex items-center gap-4">
-                                        <img src="https://ui-avatars.com/api/?name={{ urlencode($donor->name) }}&background=random" class="w-10 h-10 rounded-full shadow-sm">
-                                        <p class="font-bold text-secondary">{{ $donor->name }}</p>
+                                        <img src="https://ui-avatars.com/api/?name={{ urlencode($volunteer->name) }}&background=random" class="w-10 h-10 rounded-full shadow-sm">
+                                        <p class="font-bold text-secondary">{{ $volunteer->name }}</p>
                                     </div>
                                 </td>
                                 <td class="py-5 px-8">
-                                    <p class="text-gray-500 font-medium">{{ $donor->email }}</p>
+                                    <p class="text-gray-500 font-medium text-sm">{{ $volunteer->email }}</p>
+                                    <p class="text-gray-400 text-xs">{{ $volunteer->phone }}</p>
+                                </td>
+                                <td class="py-5 px-8 max-w-xs">
+                                    <p class="font-bold text-secondary text-sm">{{ $volunteer->role }}</p>
+                                    <p class="text-gray-500 text-xs truncate" title="{{ $volunteer->motivation }}">{{ $volunteer->motivation }}</p>
                                 </td>
                                 <td class="py-5 px-8">
-                                    <p class="font-extrabold text-secondary">Rp {{ number_format($donor->total_donation ?? 0, 0, ',', '.') }}</p>
-                                </td>
-                                <td class="py-5 px-8">
-                                    @if($donor->rfm_score)
-                                        <div class="inline-flex w-10 h-10 rounded-xl items-center justify-center font-bold text-sm
-                                            {{ str_contains($donor->rfm_score, 'A') ? 'bg-emerald-100 text-emerald-700' : 
-                                               (str_contains($donor->rfm_score, 'B') ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-700') }}">
-                                            {{ $donor->rfm_score }}
-                                        </div>
+                                    @if($volunteer->status == 'Diterima')
+                                        <span class="inline-flex px-3 py-1 bg-emerald-50 text-emerald-600 font-bold text-xs rounded-lg border border-emerald-100">Diterima</span>
+                                    @elseif($volunteer->status == 'Ditolak')
+                                        <span class="inline-flex px-3 py-1 bg-red-50 text-red-600 font-bold text-xs rounded-lg border border-red-100">Ditolak</span>
                                     @else
-                                        <span class="text-gray-400 text-sm italic">Belum tersedia</span>
+                                        <span class="inline-flex px-3 py-1 bg-amber-50 text-amber-600 font-bold text-xs rounded-lg border border-amber-100">Menunggu</span>
                                     @endif
                                 </td>
-                                <td class="py-5 px-8">
-                                    <p class="text-gray-500 font-medium text-sm">{{ $donor->created_at->format('d M Y') }}</p>
+                                <td class="py-5 px-8 text-right">
+                                    <div class="flex items-center justify-end gap-2">
+                                        @if($volunteer->status == 'Menunggu')
+                                        <form action="{{ route('admin.relawan.update', $volunteer->id) }}" method="POST" class="inline">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="status" value="Diterima">
+                                            <button type="submit" class="p-2 text-emerald-500 hover:bg-emerald-50 rounded-lg transition-colors" title="Terima">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+                                            </button>
+                                        </form>
+                                        <form action="{{ route('admin.relawan.update', $volunteer->id) }}" method="POST" class="inline">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="status" value="Ditolak">
+                                            <button type="submit" class="p-2 text-amber-500 hover:bg-amber-50 rounded-lg transition-colors" title="Tolak">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+                                            </button>
+                                        </form>
+                                        @endif
+                                        <form action="{{ route('admin.relawan.destroy', $volunteer->id) }}" method="POST" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors" title="Hapus">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                             @empty
@@ -176,7 +202,7 @@
                     </table>
                 </div>
                 <div class="p-6 border-t border-gray-100">
-                    {{ $donors->links() }}
+                    {{ $volunteers->links() }}
                 </div>
             </div>
             

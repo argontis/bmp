@@ -11,7 +11,7 @@ class ExploreController extends Controller
     {
         $campaigns = Campaign::withSum(['donations' => function($query) {
             $query->where('status', 'Berhasil');
-        }], 'amount')->get();
+        }], 'amount')->paginate(20);
         
         return view('explore', compact('campaigns'));
     }

@@ -139,6 +139,10 @@
                                     <p class="text-[12px] text-gray-500 text-center py-5">Belum ada program saat ini.</p>
                                 @endforelse
                             </div>
+                            
+                            <div class="mt-6 px-4">
+                                {{ $campaigns->links() }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -338,6 +342,10 @@
                                     @empty
                                         <p class="text-sm text-gray-500 col-span-2 text-center py-10">Belum ada program saat ini.</p>
                                     @endforelse
+                                </div>
+                                
+                                <div class="mt-8">
+                                    {{ $campaigns->links() }}
                                 </div>
                             </div>
                         </div>

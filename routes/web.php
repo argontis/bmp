@@ -12,6 +12,8 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
+Route::post('/newsletter/subscribe', [\App\Http\Controllers\NewsletterSubscriberController::class, 'subscribe'])->name('newsletter.subscribe');
+
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', function () {
     return view('auth.register');
@@ -158,6 +160,8 @@ Route::get('/kontak', function () {
     return view('kontak');
 })->name('kontak');
 
+Route::post('/kontak/send', [\App\Http\Controllers\ContactController::class, 'sendMessage'])->name('kontak.send');
+
 Route::get('/privasi', function () {
     return view('privasi');
 })->name('privasi');
@@ -188,12 +192,20 @@ Route::get('/artikel/bantuan-gempa-lombok', function () {
 
 // Relawan Pages
 Route::get('/relawan/daftar', function () { return view('relawan_pages.daftar'); });
+Route::post('/relawan/daftar', [\App\Http\Controllers\VolunteerController::class, 'store']);
 Route::get('/relawan/video', function () { return view('relawan_pages.video'); });
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
     Route::get('/admin/kegiatan', [AdminController::class, 'kegiatan'])->name('admin.kegiatan');
     Route::post('/admin/kegiatan', [AdminController::class, 'storeKegiatan'])->name('admin.kegiatan.store');
+    Route::put('/admin/kegiatan/{id}', [AdminController::class, 'updateKegiatan'])->name('admin.kegiatan.update');
+    Route::delete('/admin/kegiatan/{id}', [AdminController::class, 'destroyKegiatan'])->name('admin.kegiatan.destroy');
     Route::get('/admin/donatur', [AdminController::class, 'donatur'])->name('admin.donatur');
     Route::get('/admin/transaksi', [AdminController::class, 'transaksi'])->name('admin.transaksi');
+    
+    // Relawan Admin Routes
+    Route::get('/admin/relawan', [AdminController::class, 'relawan'])->name('admin.relawan');
+    Route::put('/admin/relawan/{id}', [AdminController::class, 'updateRelawan'])->name('admin.relawan.update');
+    Route::delete('/admin/relawan/{id}', [AdminController::class, 'destroyRelawan'])->name('admin.relawan.destroy');
 });

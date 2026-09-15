@@ -35,27 +35,35 @@
                 <p class="text-gray-500 text-sm">Bergabunglah bersama kami untuk membawa perubahan positif bagi Indonesia.</p>
             </div>
             
-            <form action="/relawan" method="GET" class="space-y-5">
+            @if(session('success'))
+            <div class="mb-6 bg-emerald-50 text-emerald-700 px-6 py-4 rounded-2xl border border-emerald-100 flex items-center gap-3 font-medium">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="M22 4L12 14.01l-3-3"></path></svg>
+                {{ session('success') }}
+            </div>
+            @endif
+
+            <form action="/relawan/daftar" method="POST" class="space-y-5">
+                @csrf
                 <div>
                     <label class="block text-sm font-bold text-[#1B1B1B] mb-2">Nama Lengkap</label>
-                    <input type="text" placeholder="Masukkan nama lengkap Anda" class="w-full py-3.5 px-4 rounded-xl bg-gray-50 border border-gray-200 text-[#1B1B1B] text-sm outline-none focus:border-[#D62828] focus:bg-white transition-colors" required>
+                    <input type="text" name="name" placeholder="Masukkan nama lengkap Anda" class="w-full py-3.5 px-4 rounded-xl bg-gray-50 border border-gray-200 text-[#1B1B1B] text-sm outline-none focus:border-[#D62828] focus:bg-white transition-colors" required>
                 </div>
                 <div>
                     <label class="block text-sm font-bold text-[#1B1B1B] mb-2">Alamat Email</label>
-                    <input type="email" placeholder="contoh@email.com" class="w-full py-3.5 px-4 rounded-xl bg-gray-50 border border-gray-200 text-[#1B1B1B] text-sm outline-none focus:border-[#D62828] focus:bg-white transition-colors" required>
+                    <input type="email" name="email" placeholder="contoh@email.com" class="w-full py-3.5 px-4 rounded-xl bg-gray-50 border border-gray-200 text-[#1B1B1B] text-sm outline-none focus:border-[#D62828] focus:bg-white transition-colors" required>
                 </div>
                 <div>
                     <label class="block text-sm font-bold text-[#1B1B1B] mb-2">Nomor Telepon/WhatsApp</label>
-                    <input type="tel" placeholder="08xxxxxxxxxx" class="w-full py-3.5 px-4 rounded-xl bg-gray-50 border border-gray-200 text-[#1B1B1B] text-sm outline-none focus:border-[#D62828] focus:bg-white transition-colors" required>
+                    <input type="tel" name="phone" placeholder="08xxxxxxxxxx" class="w-full py-3.5 px-4 rounded-xl bg-gray-50 border border-gray-200 text-[#1B1B1B] text-sm outline-none focus:border-[#D62828] focus:bg-white transition-colors" required>
                 </div>
                 <div>
                     <label class="block text-sm font-bold text-[#1B1B1B] mb-2">Pilihan Peran Relawan</label>
                     <div class="relative">
-                        <select id="roleSelect" class="w-full py-3.5 pl-4 pr-10 rounded-xl bg-gray-50 border border-gray-200 text-[#1B1B1B] font-bold text-sm outline-none focus:border-[#D62828] focus:bg-white transition-colors appearance-none cursor-pointer">
-                            <option value="umum">Relawan Umum</option>
-                            <option value="pengajar">Pengajar / Edukator</option>
-                            <option value="medis">Tim Medis</option>
-                            <option value="logistik">Tim Logistik & Dapur Umum</option>
+                        <select id="roleSelect" name="role" class="w-full py-3.5 pl-4 pr-10 rounded-xl bg-gray-50 border border-gray-200 text-[#1B1B1B] font-bold text-sm outline-none focus:border-[#D62828] focus:bg-white transition-colors appearance-none cursor-pointer">
+                            <option value="Umum">Relawan Umum</option>
+                            <option value="Pengajar">Pengajar / Edukator</option>
+                            <option value="Medis">Tim Medis</option>
+                            <option value="Logistik">Tim Logistik & Dapur Umum</option>
                         </select>
                         <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-gray-500"><path d="m6 9 6 6 6-6"></path></svg>
@@ -64,7 +72,7 @@
                 </div>
                 <div>
                     <label class="block text-sm font-bold text-[#1B1B1B] mb-2">Motivasi Bergabung</label>
-                    <textarea rows="4" placeholder="Ceritakan singkat mengapa Anda ingin bergabung..." class="w-full py-3.5 px-4 rounded-xl bg-gray-50 border border-gray-200 text-[#1B1B1B] text-sm outline-none focus:border-[#D62828] focus:bg-white transition-colors resize-none" required></textarea>
+                    <textarea name="motivation" rows="4" placeholder="Ceritakan singkat mengapa Anda ingin bergabung..." class="w-full py-3.5 px-4 rounded-xl bg-gray-50 border border-gray-200 text-[#1B1B1B] text-sm outline-none focus:border-[#D62828] focus:bg-white transition-colors resize-none" required></textarea>
                 </div>
                 
                 <button type="submit" class="w-full py-4 mt-4 rounded-2xl bg-[#D62828] text-white font-extrabold text-sm hover:bg-[#B91C1C] transition-colors shadow-[0_8px_20px_-8px_rgba(214,40,40,0.7)] hover:-translate-y-0.5">Kirim Pendaftaran</button>

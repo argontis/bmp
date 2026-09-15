@@ -68,6 +68,11 @@
                 Transaksi Donasi
             </a>
 
+            <a href="/admin/relawan" class="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-gray-50 hover:text-secondary rounded-xl font-bold transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-handshake"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08v0c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"></path><path d="m18 15-2-2"></path><path d="m15 18-2-2"></path></svg>
+                Daftar Relawan
+            </a>
+
         </nav>
         
         <div class="p-4 border-t border-gray-100">
@@ -122,10 +127,16 @@
                         <h2 class="text-lg font-extrabold text-secondary font-heading">Semua Kegiatan</h2>
                         <p class="text-sm text-gray-500 mt-1">Daftar lengkap kegiatan yang sedang, akan, dan telah berlangsung.</p>
                     </div>
-                    <button onclick="toggleModal('modal-add-kegiatan')" class="flex items-center gap-2 px-5 py-2.5 bg-primary text-white rounded-xl font-bold shadow-lg shadow-red-200 hover:-translate-y-0.5 transition-transform">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
-                        Tambah Kegiatan
-                    </button>
+                    <div class="flex items-center gap-4">
+                        <form action="{{ route('admin.kegiatan') }}" method="GET" class="relative">
+                            <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari kegiatan..." class="pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm w-64 transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-3.5 top-3 text-gray-400"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                        </form>
+                        <button onclick="toggleModal('modal-add-kegiatan')" class="flex items-center gap-2 px-5 py-2.5 bg-primary text-white rounded-xl font-bold shadow-lg shadow-red-200 hover:-translate-y-0.5 transition-transform">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
+                            Tambah Kegiatan
+                        </button>
+                    </div>
                 </div>
                 
                 <div class="overflow-x-auto">
@@ -174,12 +185,16 @@
                                 </td>
                                 <td class="py-5 px-8 text-right">
                                     <div class="flex items-center justify-end gap-2 transition-opacity">
-                                        <button class="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors" title="Edit">
+                                        <button onclick="toggleModal('modal-edit-kegiatan-{{ $campaign->id }}')" class="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors" title="Edit">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
                                         </button>
-                                        <button class="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors" title="Hapus">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
-                                        </button>
+                                        <form action="{{ route('admin.kegiatan.destroy', $campaign->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kegiatan ini?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors" title="Hapus">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+                                            </button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
@@ -268,6 +283,68 @@
         </div>
     </div>
     <div class="hidden opacity-50 fixed inset-0 z-40 bg-black" id="modal-add-kegiatan-backdrop"></div>
+
+    <!-- Modals Edit Kegiatan -->
+    @foreach($campaigns as $campaign)
+    <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex" id="modal-edit-kegiatan-{{ $campaign->id }}">
+        <div class="relative w-auto my-6 mx-auto max-w-2xl w-full">
+            <div class="border-0 rounded-3xl shadow-2xl relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <div class="flex items-start justify-between p-8 border-b border-solid border-gray-100 rounded-t">
+                    <h3 class="text-2xl font-extrabold text-secondary font-heading">Edit Kegiatan</h3>
+                    <button class="p-1 ml-auto bg-transparent border-0 text-gray-400 float-right text-3xl leading-none font-semibold outline-none focus:outline-none hover:text-gray-700 transition" onclick="toggleModal('modal-edit-kegiatan-{{ $campaign->id }}')">
+                        <span class="bg-transparent h-6 w-6 text-2xl block outline-none focus:outline-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+                        </span>
+                    </button>
+                </div>
+                <form action="{{ route('admin.kegiatan.update', $campaign->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="relative p-8 flex-auto space-y-5">
+                        <div>
+                            <label class="block text-sm font-bold text-secondary mb-2">Nama Kegiatan</label>
+                            <input type="text" name="name" value="{{ $campaign->name }}" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                        </div>
+                        <div class="grid grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-sm font-bold text-secondary mb-2">Lokasi</label>
+                                <input type="text" name="location" value="{{ $campaign->location }}" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-secondary mb-2">Jumlah Nominal (Rp)</label>
+                                <input type="number" name="nominal" value="{{ $campaign->nominal }}" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-sm font-bold text-secondary mb-2">RFM Score</label>
+                                <select name="rfm_score" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all bg-white appearance-none">
+                                    <option value="A+" {{ $campaign->rfm_score == 'A+' ? 'selected' : '' }}>A+</option>
+                                    <option value="A" {{ $campaign->rfm_score == 'A' ? 'selected' : '' }}>A</option>
+                                    <option value="B" {{ $campaign->rfm_score == 'B' ? 'selected' : '' }}>B</option>
+                                    <option value="C" {{ $campaign->rfm_score == 'C' ? 'selected' : '' }}>C</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-secondary mb-2">Status</label>
+                                <select name="status" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all bg-white appearance-none">
+                                    <option value="Aktif" {{ $campaign->status == 'Aktif' ? 'selected' : '' }}>Aktif</option>
+                                    <option value="Berjalan" {{ $campaign->status == 'Berjalan' ? 'selected' : '' }}>Berjalan</option>
+                                    <option value="Selesai" {{ $campaign->status == 'Selesai' ? 'selected' : '' }}>Selesai</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-end p-6 border-t border-solid border-gray-100 rounded-b gap-3 bg-gray-50/50">
+                        <button class="px-6 py-3 text-gray-500 bg-transparent font-bold uppercase text-sm rounded-xl outline-none focus:outline-none hover:bg-gray-100 transition-colors" type="button" onclick="toggleModal('modal-edit-kegiatan-{{ $campaign->id }}')">Batal</button>
+                        <button class="px-8 py-3 bg-primary text-white font-bold uppercase text-sm rounded-xl shadow-lg shadow-red-200 hover:-translate-y-0.5 transition-transform outline-none focus:outline-none" type="submit">Simpan Perubahan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="hidden opacity-50 fixed inset-0 z-40 bg-black" id="modal-edit-kegiatan-{{ $campaign->id }}-backdrop"></div>
+    @endforeach
 
 </body>
 </html>
