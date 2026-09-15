@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <title>Kisah Pak Budi, 15 Tahun Mengabdi di Pelosok Papua Tanpa Lelah - Bakti Merah Putih</title>
+    <title>{{ $article->title }} - Bakti Merah Putih</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -86,26 +86,20 @@
         <div class="max-w-[800px] mx-auto px-6 py-12 md:py-16">
             <div class="mb-8">
                 <div class="flex items-center gap-3 mb-6">
-                    <span class="px-4 py-1.5 rounded-full text-xs font-bold text-white" style="background: rgb(214, 40, 40);">Program</span>
-                    <span class="text-sm font-semibold text-gray-500">20 Agustus 2026</span>
-                    <span class="text-gray-300">•</span>
-                    <span class="text-sm font-semibold text-gray-500">4 menit baca</span>
+                    <span class="px-4 py-1.5 rounded-full text-xs font-bold text-white" style="background: rgb(214, 40, 40);">Artikel</span>
+                    <span class="text-sm font-semibold text-gray-500">{{ \Carbon\Carbon::parse($article->published_at ?? $article->created_at)->format('d M Y') }}</span>
                 </div>
-                <h1 class="text-4xl md:text-[42px] font-extrabold text-[#12355B] leading-[1.2] mb-6" style="font-family: 'Plus Jakarta Sans', sans-serif;">500 Anak NTT Terima Beasiswa Bakti Merah Putih 2026</h1>
+                <h1 class="text-4xl md:text-[42px] font-extrabold text-[#12355B] leading-[1.2] mb-6" style="font-family: 'Plus Jakarta Sans', sans-serif;">{{ $article->title }}</h1>
             </div>
             
+            @if($article->image)
             <div class="w-full h-[400px] md:h-[500px] rounded-[24px] overflow-hidden mb-12 shadow-lg">
-                <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=1200&h=600&fit=crop" class="w-full h-full object-cover">
+                <img src="{{ $article->image }}" class="w-full h-full object-cover" alt="{{ $article->title }}">
             </div>
+            @endif
             
             <div class="prose prose-lg max-w-none text-[#555] leading-relaxed">
-                
-            <p class="mb-6">Program beasiswa tahunan Bakti Merah Putih kembali disalurkan. Tahun ini, 500 anak dari berbagai kabupaten di Nusa Tenggara Timur (NTT) telah terpilih untuk menerima dukungan penuh biaya pendidikan dan fasilitas belajar selama satu tahun ajaran ke depan.</p>
-            <p class="mb-6">Pemilihan para penerima manfaat dilakukan dengan proses seleksi yang ketat dengan memprioritaskan anak-anak berprestasi dari keluarga prasejahtera yang berada di wilayah terluar dan terdalam di NTT. "Kami ingin memastikan bahwa tidak ada anak yang harus putus sekolah hanya karena masalah biaya," ungkap Budi Santoso, Direktur Program Pendidikan Bakti Merah Putih.</p>
-            <h3 class="text-2xl font-bold text-[#12355B] mt-8 mb-4">Harapan Baru bagi Pendidikan NTT</h3>
-            <p class="mb-6">Bantuan beasiswa ini meliputi biaya SPP, seragam, buku tulis, hingga subsidi transportasi bagi mereka yang harus menempuh jarak jauh menuju sekolah. Selain itu, program ini juga mencakup bimbingan belajar tambahan dan kelas motivasi secara berkala.</p>
-            <p class="mb-6">Kami mengucapkan terima kasih yang sebesar-besarnya kepada seluruh donatur yang telah menyisihkan rezekinya untuk masa depan anak-anak ini. Setiap donasi Anda bukan sekadar uang, melainkan tiket bagi mereka untuk meraih cita-cita.</p>
-        
+                {!! $article->content !!}
             </div>
             
             <div class="mt-16 pt-8 border-t border-gray-200">
@@ -119,6 +113,40 @@
                 </div>
             </div>
         </div>
+        
+        @if($related_articles->count() > 0)
+        <div class="max-w-[1280px] mx-auto px-6 py-12 md:py-16">
+            <h2 class="text-3xl font-extrabold text-[#1B1B1B] mb-8" style="font-family: 'Plus Jakarta Sans', sans-serif;">Artikel Terkait</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @foreach($related_articles as $related)
+                <div onclick="window.location.href='{{ route('artikel.show', $related->slug) }}'" class="bg-white rounded-[24px] overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 group cursor-pointer flex flex-col">
+                    <div class="h-56 overflow-hidden relative bg-gray-100">
+                        @if($related->image)
+                        <img src="{{ $related->image }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="{{ $related->title }}">
+                        @else
+                        <div class="w-full h-full flex items-center justify-center text-gray-400 group-hover:scale-105 transition-transform duration-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                        </div>
+                        @endif
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex items-center gap-3 text-xs text-gray-500 mb-3 font-semibold">
+                            <span>{{ \Carbon\Carbon::parse($related->published_at ?? $related->created_at)->format('d M Y') }}</span>
+                        </div>
+                        <h3 class="text-xl font-extrabold text-[#1B1B1B] mb-3 group-hover:text-blue-600 transition-colors line-clamp-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">{{ $related->title }}</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-2">{{ Str::limit(strip_tags($related->content), 120) }}</p>
+                        <div class="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between">
+                            <span class="text-blue-600 text-sm font-bold">Baca selengkapnya</span>
+                            <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        @endif
     </main>
 <footer class="relative bg-[#0D1F35] text-white pt-16 pb-8 overflow-hidden">
                     <div class="absolute top-0 inset-x-0 h-[3px]" style="background: linear-gradient(90deg, rgb(214, 40, 40), rgb(214, 40, 40) 50%, rgb(255, 255, 255) 50%);"></div>

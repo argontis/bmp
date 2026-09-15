@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Campaign;
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -135,7 +136,13 @@ class AdminController extends Controller
 
     public function galeri(Request $request)
     {
-        $galleries = \App\Models\Gallery::orderBy('created_at', 'desc')->get();
+        $query = \App\Models\Gallery::query();
+        if ($request->has('search')) {
+            $query->where('title', 'like', '%' . $request->search . '%')
+                  ->orWhere('category', 'like', '%' . $request->search . '%')
+                  ->orWhere('description', 'like', '%' . $request->search . '%');
+        }
+        $galleries = $query->orderBy('created_at', 'desc')->paginate(20)->withQueryString();
         return view('admin_galeri', compact('galleries'));
     }
 
@@ -145,6 +152,7 @@ class AdminController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
             'title' => 'required|string|max:255',
             'category' => 'required|string|max:255',
+            'description' => 'nullable|string',
         ]);
 
         $imageName = time().'.'.$request->image->extension();
@@ -154,6 +162,7 @@ class AdminController extends Controller
             'image' => '/images/gallery/' . $imageName,
             'title' => $request->title,
             'category' => $request->category,
+            'description' => $request->description,
         ]);
 
         return redirect()->back()->with('success', 'Galeri berhasil ditambahkan!');
@@ -167,6 +176,7 @@ class AdminController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'title' => 'required|string|max:255',
             'category' => 'required|string|max:255',
+            'description' => 'nullable|string',
         ]);
 
         if ($request->hasFile('image')) {
@@ -178,12 +188,19 @@ class AdminController extends Controller
                 @unlink(public_path($gallery->image));
             }
             
-            $gallery->image = '/images/gallery/' . $imageName;
+            $gallery->update([
+                'image' => '/images/gallery/' . $imageName,
+                'title' => $request->title,
+                'category' => $request->category,
+                'description' => $request->description,
+            ]);
+        } else {
+            $gallery->update([
+                'title' => $request->title,
+                'category' => $request->category,
+                'description' => $request->description,
+            ]);
         }
-
-        $gallery->title = $request->title;
-        $gallery->category = $request->category;
-        $gallery->save();
 
         return redirect()->back()->with('success', 'Galeri berhasil diperbarui!');
     }
@@ -197,5 +214,90 @@ class AdminController extends Controller
         $gallery->delete();
 
         return redirect()->back()->with('success', 'Galeri berhasil dihapus!');
+    }
+
+    public function artikel(Request $request)
+    {
+        $query = Article::query();
+        if ($request->has('search')) {
+            $query->where('title', 'like', '%' . $request->search . '%')
+                  ->orWhere('content', 'like', '%' . $request->search . '%');
+        }
+        $articles = $query->orderBy('created_at', 'desc')->paginate(20)->withQueryString();
+        return view('admin_artikel', compact('articles'));
+    }
+
+    public function storeArtikel(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'status' => 'required|string|in:draft,published',
+            'image' => 'nullable|image|max:2048'
+        ]);
+
+        $validated['slug'] = \Illuminate\Support\Str::slug($validated['title']) . '-' . time();
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/artikel'), $filename);
+            $validated['image'] = '/uploads/artikel/' . $filename;
+        }
+
+        if ($validated['status'] === 'published') {
+            $validated['published_at'] = now();
+        }
+
+        Article::create($validated);
+
+        return redirect()->back()->with('success', 'Artikel berhasil ditambahkan!');
+    }
+
+    public function updateArtikel(Request $request, $id)
+    {
+        $article = Article::findOrFail($id);
+        
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'status' => 'required|string|in:draft,published',
+            'image' => 'nullable|image|max:2048'
+        ]);
+
+        if ($request->title !== $article->title) {
+            $validated['slug'] = \Illuminate\Support\Str::slug($validated['title']) . '-' . time();
+        }
+
+        if ($request->hasFile('image')) {
+            if ($article->image && file_exists(public_path($article->image))) {
+                @unlink(public_path($article->image));
+            }
+            $file = $request->file('image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/artikel'), $filename);
+            $validated['image'] = '/uploads/artikel/' . $filename;
+        }
+
+        if ($validated['status'] === 'published' && !$article->published_at) {
+            $validated['published_at'] = now();
+        } elseif ($validated['status'] === 'draft') {
+            $validated['published_at'] = null;
+        }
+
+        $article->update($validated);
+
+        return redirect()->back()->with('success', 'Artikel berhasil diupdate!');
+    }
+
+    public function destroyArtikel($id)
+    {
+        $article = Article::findOrFail($id);
+        if ($article->image && file_exists(public_path($article->image))) {
+            @unlink(public_path($article->image));
+        }
+        $article->delete();
+
+        return redirect()->back()->with('success', 'Artikel berhasil dihapus!');
     }
 }

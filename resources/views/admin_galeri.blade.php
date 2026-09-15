@@ -78,6 +78,11 @@
                 Daftar Galeri
             </a>
 
+            <a href="/admin/artikel" class="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-gray-50 hover:text-secondary rounded-xl font-medium transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+                Kelola Artikel
+            </a>
+
         </nav>
         
         <div class="p-4 border-t border-gray-100">
@@ -190,7 +195,9 @@
                     </table>
                 </div>
             </div>
-            
+            <div class="mt-8">
+                {{ $galleries->links() }}
+            </div>
         </div>
     </main>
 
@@ -225,6 +232,10 @@
                         <div>
                             <label class="block text-sm font-bold text-secondary mb-2">Kategori</label>
                             <input type="text" name="category" required placeholder="Contoh: Pendidikan, Kesehatan, Bencana Alam" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-secondary mb-2">Deskripsi (Opsional)</label>
+                            <textarea name="description" rows="3" placeholder="Tuliskan deskripsi galeri..." class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"></textarea>
                         </div>
                     </div>
                     <!-- Footer -->
@@ -274,6 +285,10 @@
                         <div>
                             <label class="block text-sm font-bold text-secondary mb-2">Kategori</label>
                             <input type="text" name="category" value="{{ $gallery->category }}" required placeholder="Contoh: Pendidikan, Kesehatan, Bencana Alam" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-secondary mb-2">Deskripsi (Opsional)</label>
+                            <textarea name="description" rows="3" placeholder="Tuliskan deskripsi galeri..." class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">{{ $gallery->description }}</textarea>
                         </div>
                     </div>
                     <div class="flex items-center justify-end p-6 border-t border-solid border-gray-100 rounded-b gap-3 bg-gray-50/50">

@@ -134,21 +134,8 @@ Route::get('/laporan', function () {
 
 Route::get('/laporan/download/{year}', [\App\Http\Controllers\ReportController::class, 'download'])->name('laporan.download');
 
-Route::get('/artikel', function () {
-    return view('artikel');
-})->name('artikel');
-
-Route::get('/berita/beasiswa-ntt', function () {
-    return view('berita.beasiswa-ntt');
-})->name('berita.beasiswa-ntt');
-
-Route::get('/berita/relawan-banjir', function () {
-    return view('berita.relawan-banjir');
-})->name('berita.relawan-banjir');
-
-Route::get('/berita/gerakan-pohon', function () {
-    return view('berita.gerakan-pohon');
-})->name('berita.gerakan-pohon');
+Route::get('/artikel', [\App\Http\Controllers\ArticleController::class, 'index'])->name('artikel');
+Route::get('/artikel/{slug}', [\App\Http\Controllers\ArticleController::class, 'show'])->name('artikel.show');
 
 Route::get('/galeri', function () {
     $galleries = \App\Models\Gallery::orderBy('created_at', 'desc')->get();
@@ -170,29 +157,7 @@ Route::get('/privasi', function () {
     return view('privasi');
 })->name('privasi');
 
-Route::get('/artikel/kisah-pak-budi', function () {
-    return view('artikel.kisah-pak-budi');
-})->name('artikel.kisah-pak-budi');
 
-Route::get('/artikel/sumur-bor-ntt', function () {
-    return view('artikel.sumur-bor-ntt');
-})->name('artikel.sumur-bor-ntt');
-
-Route::get('/artikel/modal-usaha-ibu', function () {
-    return view('artikel.modal-usaha-ibu');
-})->name('artikel.modal-usaha-ibu');
-
-Route::get('/artikel/klinik-terapung-maluku', function () {
-    return view('artikel.klinik-terapung-maluku');
-})->name('artikel.klinik-terapung-maluku');
-
-Route::get('/artikel/renovasi-masjid', function () {
-    return view('artikel.renovasi-masjid');
-})->name('artikel.renovasi-masjid');
-
-Route::get('/artikel/bantuan-gempa-lombok', function () {
-    return view('artikel.bantuan-gempa-lombok');
-})->name('artikel.bantuan-gempa-lombok');
 
 // Relawan Pages
 Route::middleware('auth')->group(function () {
@@ -224,4 +189,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/admin/galeri', [AdminController::class, 'storeGaleri'])->name('admin.galeri.store');
     Route::put('/admin/galeri/{id}', [AdminController::class, 'updateGaleri'])->name('admin.galeri.update');
     Route::delete('/admin/galeri/{id}', [AdminController::class, 'destroyGaleri'])->name('admin.galeri.destroy');
+    
+    // Artikel Admin Routes
+    Route::get('/admin/artikel', [AdminController::class, 'artikel'])->name('admin.artikel');
+    Route::post('/admin/artikel', [AdminController::class, 'storeArtikel'])->name('admin.artikel.store');
+    Route::put('/admin/artikel/{id}', [AdminController::class, 'updateArtikel'])->name('admin.artikel.update');
+    Route::delete('/admin/artikel/{id}', [AdminController::class, 'destroyArtikel'])->name('admin.artikel.destroy');
 });
