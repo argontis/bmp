@@ -35,7 +35,7 @@
     <!-- Sidebar -->
     <aside class="w-72 bg-white shadow-xl flex flex-col h-full border-r border-gray-100 relative z-20">
         <div class="p-8 border-b border-gray-100 flex items-center justify-center">
-            <h2 class="text-xl font-extrabold text-[#D62828] font-heading">Admin BMP</h2>
+            <img src="/images/logo2.png" alt="Admin BMP" class="h-16 w-auto object-contain">
         </div>
         
         <nav class="flex-1 overflow-y-auto py-6 px-4 space-y-2">
@@ -156,7 +156,46 @@
                                     <p class="font-extrabold text-secondary">Rp {{ number_format($donation->amount, 0, ',', '.') }}</p>
                                 </td>
                                 <td class="py-5 px-8">
-                                    <span class="text-sm font-medium text-gray-500 border border-gray-200 px-2 py-1 rounded-md">{{ $donation->payment_method ?? 'Transfer' }}</span>
+                                    @php
+                                        $pm = strtolower($donation->payment_method ?? 'transfer');
+                                    @endphp
+                                    @if(str_contains($pm, 'gopay'))
+                                        <img src="/logo/GoPay Logo - Colored - zonalogo.com.png" class="h-4 object-contain" alt="GoPay" title="GoPay">
+                                    @elseif(str_contains($pm, 'dana'))
+                                        <img src="/logo/Dana App Icon - Colored - zonalogo.com.png" class="h-4 object-contain" alt="DANA" title="DANA">
+                                    @elseif(str_contains($pm, 'bca'))
+                                        <img src="/logo/Bank Central Asia (BCA) Logo - Colored - 818x256 - zonalogo.com.png" class="h-4 object-contain" alt="BCA" title="BCA">
+                                    @elseif(str_contains($pm, 'ovo'))
+                                        <img src="/logo/OVO Logo - Colored - zonalogo.com.png" class="h-4 object-contain" alt="OVO" title="OVO">
+                                    @elseif(str_contains($pm, 'shopee') || str_contains($pm, 'spay'))
+                                        <img src="/logo/ShopeePay Logo - Colored - zonalogo.com.png" class="h-4 object-contain" alt="ShopeePay" title="ShopeePay">
+                                    @elseif(str_contains($pm, 'mandiri'))
+                                        <img src="/logo/Bank Mandiri Logo - Colored - 873x256 - zonalogo.com.png" class="h-4 object-contain" alt="Mandiri" title="Mandiri">
+                                    @elseif(str_contains($pm, 'bri'))
+                                        <img src="/logo/Bank Rakyat Indonesia (BRI) Logo - Horizontal With Full Name Colored - 505x256 - zonalogo.com.png" class="h-4 object-contain" alt="BRI" title="BRI">
+                                    @elseif(str_contains($pm, 'bni'))
+                                        <img src="/logo/Bank Negara Indonesia (BNI) Logo - Colored - 883x256 - zonalogo.com.png" class="h-4 object-contain" alt="BNI" title="BNI">
+                                    @elseif(str_contains($pm, 'bsi') || str_contains($pm, 'syariah'))
+                                        <img src="/logo/Bank BSI Logo - Horizontal Colored - 462x128 - zonalogo.com.png" class="h-4 object-contain" alt="BSI" title="BSI">
+                                    @elseif(str_contains($pm, 'cimb'))
+                                        <img src="/logo/Bank CIMB Niaga Logo - Colored - 1674x256 - zonalogo.com.png" class="h-4 object-contain" alt="CIMB Niaga" title="CIMB Niaga">
+                                    @elseif(str_contains($pm, 'permata'))
+                                        <img src="/logo/Bank Permata Logo - Colored - 1032x256 - zonalogo.com.png" class="h-4 object-contain" alt="Permata" title="Permata">
+                                    @elseif(str_contains($pm, 'linkaja'))
+                                        <img src="/logo/LinkAja Logo - Colored - zonalogo.com.png" class="h-4 object-contain" alt="LinkAja" title="LinkAja">
+                                    @elseif(str_contains($pm, 'qris'))
+                                        <img src="/logo/QRIS Logo - Black - 675x256 - zonalogo.com.png" class="h-4 object-contain" alt="QRIS" title="QRIS">
+                                    @elseif(str_contains($pm, 'indomaret'))
+                                        <img src="/logo/Indomaret Logo - Colored - zonalogo.com.png" class="h-4 object-contain" alt="Indomaret" title="Indomaret">
+                                    @elseif(str_contains($pm, 'alfamart'))
+                                        <img src="/logo/Alfamart Logo - Colored - 800x256 - zonalogo.com.png" class="h-4 object-contain" alt="Alfamart" title="Alfamart">
+                                    @elseif(str_contains($pm, 'visa'))
+                                        <img src="/logo/Visa Logo - Colored - 792x256 - zonalogo.com.png" class="h-4 object-contain" alt="Visa" title="Visa">
+                                    @elseif(str_contains($pm, 'mastercard'))
+                                        <img src="/logo/Mastercard Logo - Colored - 415x256 - zonalogo.com.png" class="h-4 object-contain" alt="Mastercard" title="Mastercard">
+                                    @else
+                                        <span class="text-sm font-medium text-gray-500 border border-gray-200 px-2 py-1 rounded-md">{{ $donation->payment_method ?? 'Transfer' }}</span>
+                                    @endif
                                 </td>
                                 <td class="py-5 px-8">
                                     @if($donation->status == 'Berhasil')

@@ -35,7 +35,7 @@
     <!-- Sidebar -->
     <aside class="w-72 bg-white shadow-xl flex flex-col h-full border-r border-gray-100 relative z-20">
         <div class="p-8 border-b border-gray-100 flex items-center justify-center">
-            <h2 class="text-xl font-extrabold text-[#D62828] font-heading">Admin BMP</h2>
+            <img src="/images/logo2.png" alt="Admin BMP" class="h-16 w-auto object-contain">
         </div>
         
         <nav class="flex-1 overflow-y-auto py-6 px-4 space-y-2">
