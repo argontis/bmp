@@ -132,6 +132,8 @@ Route::get('/laporan', function () {
     return view('laporan');
 })->name('laporan');
 
+Route::get('/laporan/download/{year}', [\App\Http\Controllers\ReportController::class, 'download'])->name('laporan.download');
+
 Route::get('/artikel', function () {
     return view('artikel');
 })->name('artikel');

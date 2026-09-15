@@ -198,12 +198,12 @@
                                     </div>
                                     <div>
                                         <h3 class="font-extrabold text-[#1B1B1B]">Laporan Audited 2025</h3>
-                                        <p class="text-xs text-gray-500">PDF • 2.4 MB</p>
+                                        <p class="text-xs text-gray-500">CSV Laporan Tahunan</p>
                                     </div>
                                 </div>
-                                <button class="w-10 h-10 rounded-full bg-gray-50 hover:bg-[#D62828] text-gray-500 hover:text-white flex items-center justify-center transition-colors">
+                                <a href="{{ route('laporan.download', 2025) }}" class="w-10 h-10 rounded-full bg-gray-50 hover:bg-[#D62828] text-gray-500 hover:text-white flex items-center justify-center transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download w-4 h-4"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
-                                </button>
+                                </a>
                             </div>
                             
                             <!-- Laporan 2024 -->
@@ -214,12 +214,12 @@
                                     </div>
                                     <div>
                                         <h3 class="font-extrabold text-[#1B1B1B]">Laporan Audited 2024</h3>
-                                        <p class="text-xs text-gray-500">PDF • 1.8 MB</p>
+                                        <p class="text-xs text-gray-500">CSV Laporan Tahunan</p>
                                     </div>
                                 </div>
-                                <button class="w-10 h-10 rounded-full bg-gray-50 hover:bg-[#D62828] text-gray-500 hover:text-white flex items-center justify-center transition-colors">
+                                <a href="{{ route('laporan.download', 2024) }}" class="w-10 h-10 rounded-full bg-gray-50 hover:bg-[#D62828] text-gray-500 hover:text-white flex items-center justify-center transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download w-4 h-4"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
-                                </button>
+                                </a>
                             </div>
                             
                             <!-- Laporan 2023 -->
@@ -230,12 +230,12 @@
                                     </div>
                                     <div>
                                         <h3 class="font-extrabold text-[#1B1B1B]">Laporan Audited 2023</h3>
-                                        <p class="text-xs text-gray-500">PDF • 2.1 MB</p>
+                                        <p class="text-xs text-gray-500">CSV Laporan Tahunan</p>
                                     </div>
                                 </div>
-                                <button class="w-10 h-10 rounded-full bg-gray-50 hover:bg-[#D62828] text-gray-500 hover:text-white flex items-center justify-center transition-colors">
+                                <a href="{{ route('laporan.download', 2023) }}" class="w-10 h-10 rounded-full bg-gray-50 hover:bg-[#D62828] text-gray-500 hover:text-white flex items-center justify-center transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download w-4 h-4"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
