@@ -20,10 +20,16 @@ class Campaign extends Model
         'description',
         'label',
         'slug',
+        'volunteer_target',
     ];
 
     public function donations()
     {
         return $this->hasMany(Donation::class);
+    }
+
+    public function volunteers()
+    {
+        return $this->hasMany(Volunteer::class);
     }
 }

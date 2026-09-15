@@ -10,6 +10,7 @@ class VolunteerController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'campaign_id' => 'nullable|exists:campaigns,id',
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:20',

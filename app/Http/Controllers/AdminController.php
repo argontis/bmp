@@ -38,6 +38,7 @@ class AdminController extends Controller
             'rfm_score' => 'required|string|max:10',
             'status' => 'required|string|in:Aktif,Berjalan,Selesai',
             'category' => 'nullable|string|max:255',
+            'volunteer_target' => 'nullable|integer|min:0',
         ]);
 
         Campaign::create($validated);
@@ -56,6 +57,7 @@ class AdminController extends Controller
             'rfm_score' => 'required|string|max:10',
             'status' => 'required|string|in:Aktif,Berjalan,Selesai',
             'category' => 'nullable|string|max:255',
+            'volunteer_target' => 'nullable|integer|min:0',
         ]);
 
         $campaign->update($validated);
@@ -92,7 +94,7 @@ class AdminController extends Controller
 
     public function relawan(Request $request)
     {
-        $query = \App\Models\Volunteer::query();
+        $query = \App\Models\Volunteer::with('campaign');
         if ($request->has('search')) {
             $query->where(function($q) use ($request) {
                 $q->where('name', 'like', '%' . $request->search . '%')

@@ -57,6 +57,20 @@
                     <input type="tel" name="phone" placeholder="08xxxxxxxxxx" class="w-full py-3.5 px-4 rounded-xl bg-gray-50 border border-gray-200 text-[#1B1B1B] text-sm outline-none focus:border-[#D62828] focus:bg-white transition-colors" required>
                 </div>
                 <div>
+                    <label class="block text-sm font-bold text-[#1B1B1B] mb-2">Pilihan Kegiatan (Opsional)</label>
+                    <div class="relative">
+                        <select id="campaignSelect" name="campaign_id" class="w-full py-3.5 pl-4 pr-10 rounded-xl bg-gray-50 border border-gray-200 text-[#1B1B1B] font-bold text-sm outline-none focus:border-[#D62828] focus:bg-white transition-colors appearance-none cursor-pointer">
+                            <option value="">Relawan Umum (Tidak terikat kegiatan khusus)</option>
+                            @foreach($campaigns as $campaign)
+                                <option value="{{ $campaign->id }}">{{ $campaign->name }}</option>
+                            @endforeach
+                        </select>
+                        <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-gray-500"><path d="m6 9 6 6 6-6"></path></svg>
+                        </div>
+                    </div>
+                </div>
+                <div>
                     <label class="block text-sm font-bold text-[#1B1B1B] mb-2">Pilihan Peran Relawan</label>
                     <div class="relative">
                         <select id="roleSelect" name="role" class="w-full py-3.5 pl-4 pr-10 rounded-xl bg-gray-50 border border-gray-200 text-[#1B1B1B] font-bold text-sm outline-none focus:border-[#D62828] focus:bg-white transition-colors appearance-none cursor-pointer">
@@ -81,7 +95,7 @@
     </main>
     
     <script>
-        // Pre-select role if passed in URL (e.g. ?role=pengajar)
+        // Pre-select role and campaign if passed in URL
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
             const role = urlParams.get('role');
@@ -90,6 +104,19 @@
                 if(select) {
                     for(let i=0; i<select.options.length; i++) {
                         if(select.options[i].value === role) {
+                            select.selectedIndex = i;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            const campaignId = urlParams.get('campaign_id');
+            if(campaignId) {
+                const select = document.getElementById('campaignSelect');
+                if(select) {
+                    for(let i=0; i<select.options.length; i++) {
+                        if(select.options[i].value === campaignId) {
                             select.selectedIndex = i;
                             break;
                         }

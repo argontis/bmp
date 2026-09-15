@@ -173,46 +173,52 @@
                             </div>
                             
                             <div class="grid md:grid-cols-2 gap-8">
-                                <!-- Program 1 -->
+                                @forelse($campaigns as $campaign)
                                 <div class="bg-[#FBFAF7] rounded-3xl p-8 border border-gray-100 flex flex-col md:flex-row gap-6 items-center">
                                     <div class="w-full md:w-40 h-40 rounded-2xl overflow-hidden shrink-0 relative">
-                                        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&h=600&fit=crop" class="w-full h-full object-cover" alt="Medis">
-                                        <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wider">Mendesak</span>
+                                        <img src="{{ $campaign->image ? asset('storage/'.$campaign->image) : 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&h=600&fit=crop' }}" class="w-full h-full object-cover" alt="{{ $campaign->name }}">
+                                        @if($campaign->status == 'Berjalan')
+                                            <span class="absolute top-2 left-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wider">Sedang Berjalan</span>
+                                        @else
+                                            <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wider">Mendesak</span>
+                                        @endif
                                     </div>
-                                    <div>
-                                        <h3 class="text-xl font-extrabold text-[#1B1B1B] mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Tim Medis Bencana Alam</h3>
-                                        <p class="text-sm text-gray-500 mb-4 line-clamp-2">Dibutuhkan tenaga perawat, dokter, dan apoteker untuk diterjunkan ke camp pengungsian selama 1 minggu.</p>
-                                        <div class="flex items-center gap-4 mb-4">
-                                            <div class="flex items-center gap-1.5 text-xs font-semibold text-gray-500">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg> Cianjur, Jabar
+                                    <div class="flex-1 w-full">
+                                        <h3 class="text-xl font-extrabold text-[#1B1B1B] mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">{{ $campaign->name }}</h3>
+                                        <p class="text-sm text-gray-500 mb-4 line-clamp-2">{{ $campaign->description ?? 'Mari bergabung menjadi relawan untuk menyukseskan kegiatan ini.' }}</p>
+                                        
+                                        <!-- Progress Bar -->
+                                        @php
+                                            $progress = $campaign->volunteer_target > 0 ? min(100, round(($campaign->volunteers->count() / $campaign->volunteer_target) * 100)) : 0;
+                                        @endphp
+                                        <div class="mb-4">
+                                            <div class="flex justify-between items-center mb-1 text-xs font-bold">
+                                                <span class="text-[#D62828]">{{ $progress }}% Terpenuhi</span>
+                                                <span class="text-gray-500">{{ $campaign->volunteers->count() }} / {{ $campaign->volunteer_target }} SDM</span>
                                             </div>
-                                            <div class="flex items-center gap-1.5 text-xs font-semibold text-gray-500">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users w-4 h-4"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> Butuh 25 Orang
-                                            </div>
-                                        </div>
-                                        <button onclick="window.location.href='/relawan/daftar?role=medis'" class="px-5 py-2.5 rounded-full bg-white border-2 border-gray-200 hover:border-[#D62828] hover:text-[#D62828] text-[#1B1B1B] font-bold text-sm transition-colors">Daftar Tim Medis</button>
-                                    </div>
-                                </div>
-                                
-                                <!-- Program 2 -->
-                                <div class="bg-[#FBFAF7] rounded-3xl p-8 border border-gray-100 flex flex-col md:flex-row gap-6 items-center">
-                                    <div class="w-full md:w-40 h-40 rounded-2xl overflow-hidden shrink-0">
-                                        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&h=600&fit=crop" class="w-full h-full object-cover" alt="Pengajar">
-                                    </div>
-                                    <div>
-                                        <h3 class="text-xl font-extrabold text-[#1B1B1B] mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Pengajar Muda Pelosok</h3>
-                                        <p class="text-sm text-gray-500 mb-4 line-clamp-2">Berbagi ilmu dasar membaca, menulis, dan berhitung untuk anak-anak putus sekolah di daerah pesisir pantai.</p>
-                                        <div class="flex items-center gap-4 mb-4">
-                                            <div class="flex items-center gap-1.5 text-xs font-semibold text-gray-500">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg> Lombok Timur
-                                            </div>
-                                            <div class="flex items-center gap-1.5 text-xs font-semibold text-gray-500">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users w-4 h-4"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> Butuh 50 Orang
+                                            <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                                                <div class="bg-[#D62828] h-2 rounded-full" style="width: {{ $progress }}%"></div>
                                             </div>
                                         </div>
-                                        <button onclick="window.location.href='/relawan/daftar?role=pengajar'" class="px-5 py-2.5 rounded-full bg-white border-2 border-gray-200 hover:border-[#D62828] hover:text-[#D62828] text-[#1B1B1B] font-bold text-sm transition-colors">Daftar Pengajar</button>
+
+                                        <div class="flex flex-col sm:flex-row items-center gap-4 justify-between mt-4">
+                                            <div class="flex items-center gap-1.5 text-xs font-semibold text-gray-500">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg> {{ $campaign->location }}
+                                            </div>
+                                            <button onclick="window.location.href='/relawan/daftar?campaign_id={{ $campaign->id }}'" class="w-full sm:w-auto px-5 py-2.5 rounded-full bg-white border-2 border-gray-200 hover:border-[#D62828] hover:text-[#D62828] text-[#1B1B1B] font-bold text-sm transition-colors">Daftar Relawan</button>
+                                        </div>
                                     </div>
                                 </div>
+                                @empty
+                                <div class="col-span-1 md:col-span-2 text-center py-12">
+                                    <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400 w-8 h-8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="22" y1="11" x2="16" y2="11"></line></svg>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-[#1B1B1B] mb-2">Belum ada panggilan relawan saat ini</h3>
+                                    <p class="text-gray-500 text-sm">Terima kasih atas antusiasme Anda. Silakan daftar sebagai Relawan Umum melalui tautan di bawah ini.</p>
+                                    <button onclick="window.location.href='/relawan/daftar'" class="mt-4 px-5 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-[#1B1B1B] font-bold text-sm transition-colors">Daftar Relawan Umum</button>
+                                </div>
+                                @endforelse
                             </div>
                         </div>
                     </div>

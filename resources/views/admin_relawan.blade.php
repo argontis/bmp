@@ -138,6 +138,7 @@
                                 <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Nama Relawan</th>
                                 <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Kontak</th>
                                 <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Peran & Motivasi</th>
+                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Kegiatan</th>
                                 <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Status</th>
                                 <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider text-right">Aksi</th>
                             </tr>
@@ -158,6 +159,13 @@
                                 <td class="py-5 px-8 max-w-xs">
                                     <p class="font-bold text-secondary text-sm">{{ $volunteer->role }}</p>
                                     <p class="text-gray-500 text-xs truncate" title="{{ $volunteer->motivation }}">{{ $volunteer->motivation }}</p>
+                                </td>
+                                <td class="py-5 px-8">
+                                    @if($volunteer->campaign)
+                                        <span class="inline-flex px-3 py-1 bg-blue-50 text-blue-600 font-bold text-xs rounded-lg border border-blue-100">{{ $volunteer->campaign->name }}</span>
+                                    @else
+                                        <span class="inline-flex px-3 py-1 bg-gray-100 text-gray-500 font-bold text-xs rounded-lg border border-gray-200">Umum</span>
+                                    @endif
                                 </td>
                                 <td class="py-5 px-8">
                                     @if($volunteer->status == 'Diterima')

@@ -154,7 +154,8 @@ Route::get('/galeri', function () {
 })->name('galeri');
 
 Route::get('/relawan', function () {
-    return view('relawan');
+    $campaigns = \App\Models\Campaign::where('volunteer_target', '>', 0)->with('volunteers')->orderBy('created_at', 'desc')->get();
+    return view('relawan', compact('campaigns'));
 })->name('relawan');
 
 Route::get('/kontak', function () {
@@ -192,7 +193,10 @@ Route::get('/artikel/bantuan-gempa-lombok', function () {
 })->name('artikel.bantuan-gempa-lombok');
 
 // Relawan Pages
-Route::get('/relawan/daftar', function () { return view('relawan_pages.daftar'); });
+Route::get('/relawan/daftar', function () { 
+    $campaigns = \App\Models\Campaign::where('volunteer_target', '>', 0)->get();
+    return view('relawan_pages.daftar', compact('campaigns')); 
+});
 Route::post('/relawan/daftar', [\App\Http\Controllers\VolunteerController::class, 'store']);
 Route::get('/relawan/video', function () { return view('relawan_pages.video'); });
 
