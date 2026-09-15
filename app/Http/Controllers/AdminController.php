@@ -29,6 +29,12 @@ class AdminController extends Controller
         return view('admin_kegiatan', compact('campaigns'));
     }
 
+    public function showKegiatan($id)
+    {
+        $campaign = Campaign::with('volunteers')->findOrFail($id);
+        return view('admin_kegiatan_detail', compact('campaign'));
+    }
+
     public function storeKegiatan(Request $request)
     {
         $validated = $request->validate([

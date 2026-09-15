@@ -156,7 +156,7 @@ Route::get('/galeri', function () {
 })->name('galeri');
 
 Route::get('/relawan', function () {
-    $campaigns = \App\Models\Campaign::where('volunteer_target', '>', 0)->with('volunteers')->orderBy('created_at', 'desc')->get();
+    $campaigns = \App\Models\Campaign::where('volunteer_target', '>', 0)->with('volunteers')->orderBy('created_at', 'desc')->paginate(2);
     return view('relawan', compact('campaigns'));
 })->name('relawan');
 
@@ -195,16 +195,19 @@ Route::get('/artikel/bantuan-gempa-lombok', function () {
 })->name('artikel.bantuan-gempa-lombok');
 
 // Relawan Pages
-Route::get('/relawan/daftar', function () { 
-    $campaigns = \App\Models\Campaign::where('volunteer_target', '>', 0)->get();
-    return view('relawan_pages.daftar', compact('campaigns')); 
+Route::middleware('auth')->group(function () {
+    Route::get('/relawan/daftar', function () { 
+        $campaigns = \App\Models\Campaign::where('volunteer_target', '>', 0)->get();
+        return view('relawan_pages.daftar', compact('campaigns')); 
+    })->name('relawan.daftar');
+    Route::post('/relawan/daftar', [\App\Http\Controllers\VolunteerController::class, 'store']);
 });
-Route::post('/relawan/daftar', [\App\Http\Controllers\VolunteerController::class, 'store']);
 Route::get('/relawan/video', function () { return view('relawan_pages.video'); });
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
     Route::get('/admin/kegiatan', [AdminController::class, 'kegiatan'])->name('admin.kegiatan');
+    Route::get('/admin/kegiatan/{id}', [AdminController::class, 'showKegiatan'])->name('admin.kegiatan.show');
     Route::post('/admin/kegiatan', [AdminController::class, 'storeKegiatan'])->name('admin.kegiatan.store');
     Route::put('/admin/kegiatan/{id}', [AdminController::class, 'updateKegiatan'])->name('admin.kegiatan.update');
     Route::delete('/admin/kegiatan/{id}', [AdminController::class, 'destroyKegiatan'])->name('admin.kegiatan.destroy');
