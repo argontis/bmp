@@ -124,4 +124,70 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'Data relawan berhasil dihapus!');
     }
+
+    public function galeri(Request $request)
+    {
+        $galleries = \App\Models\Gallery::orderBy('created_at', 'desc')->get();
+        return view('admin_galeri', compact('galleries'));
+    }
+
+    public function storeGaleri(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'title' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+        ]);
+
+        $imageName = time().'.'.$request->image->extension();
+        $request->image->move(public_path('images/gallery'), $imageName);
+
+        \App\Models\Gallery::create([
+            'image' => '/images/gallery/' . $imageName,
+            'title' => $request->title,
+            'category' => $request->category,
+        ]);
+
+        return redirect()->back()->with('success', 'Galeri berhasil ditambahkan!');
+    }
+
+    public function updateGaleri(Request $request, $id)
+    {
+        $gallery = \App\Models\Gallery::findOrFail($id);
+
+        $request->validate([
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'title' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images/gallery'), $imageName);
+            
+            // Delete old image if exists
+            if (file_exists(public_path($gallery->image))) {
+                @unlink(public_path($gallery->image));
+            }
+            
+            $gallery->image = '/images/gallery/' . $imageName;
+        }
+
+        $gallery->title = $request->title;
+        $gallery->category = $request->category;
+        $gallery->save();
+
+        return redirect()->back()->with('success', 'Galeri berhasil diperbarui!');
+    }
+
+    public function destroyGaleri($id)
+    {
+        $gallery = \App\Models\Gallery::findOrFail($id);
+        if (file_exists(public_path($gallery->image))) {
+            @unlink(public_path($gallery->image));
+        }
+        $gallery->delete();
+
+        return redirect()->back()->with('success', 'Galeri berhasil dihapus!');
+    }
 }

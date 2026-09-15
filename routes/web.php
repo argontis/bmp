@@ -149,7 +149,8 @@ Route::get('/berita/gerakan-pohon', function () {
 })->name('berita.gerakan-pohon');
 
 Route::get('/galeri', function () {
-    return view('galeri');
+    $galleries = \App\Models\Gallery::orderBy('created_at', 'desc')->get();
+    return view('galeri', compact('galleries'));
 })->name('galeri');
 
 Route::get('/relawan', function () {
@@ -208,4 +209,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/relawan', [AdminController::class, 'relawan'])->name('admin.relawan');
     Route::put('/admin/relawan/{id}', [AdminController::class, 'updateRelawan'])->name('admin.relawan.update');
     Route::delete('/admin/relawan/{id}', [AdminController::class, 'destroyRelawan'])->name('admin.relawan.destroy');
+
+    // Galeri Admin Routes
+    Route::get('/admin/galeri', [AdminController::class, 'galeri'])->name('admin.galeri');
+    Route::post('/admin/galeri', [AdminController::class, 'storeGaleri'])->name('admin.galeri.store');
+    Route::put('/admin/galeri/{id}', [AdminController::class, 'updateGaleri'])->name('admin.galeri.update');
+    Route::delete('/admin/galeri/{id}', [AdminController::class, 'destroyGaleri'])->name('admin.galeri.destroy');
 });

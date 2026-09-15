@@ -109,60 +109,23 @@
 
                         <!-- Masonry/Grid Gallery -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-16" id="gallery-container">
-                            
-                            <!-- Image 1 -->
-                            <div data-category="sosial & kemanusiaan" class="gallery-item group relative rounded-2xl overflow-hidden cursor-pointer h-64 md:h-80 shadow-sm border border-gray-100 transition-all duration-300">
-                                <img src="/images/galeri-1.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Galeri 1">
+                            @forelse($galleries as $gallery)
+                            <div data-category="{{ strtolower($gallery->category) }}" class="gallery-item group relative rounded-2xl overflow-hidden cursor-pointer h-64 md:h-80 shadow-sm border border-gray-100 transition-all duration-300">
+                                <img src="{{ $gallery->image }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="{{ $gallery->title }}">
                                 <div class="absolute inset-0 bg-gradient-to-t from-[#12355B]/90 via-[#12355B]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                                    <span class="text-white text-xs font-bold uppercase tracking-wider mb-2 text-[#D62828]">Bencana Alam</span>
-                                    <h3 class="text-white font-bold text-lg leading-tight">Distribusi Bantuan Logistik Cianjur</h3>
+                                    <span class="text-white text-xs font-bold uppercase tracking-wider mb-2 text-[#D62828]">{{ $gallery->category }}</span>
+                                    <h3 class="text-white font-bold text-lg leading-tight">{{ $gallery->title }}</h3>
                                 </div>
                             </div>
-
-                            <!-- Image 2 -->
-                            <div data-category="pendidikan" class="gallery-item group relative rounded-2xl overflow-hidden cursor-pointer h-64 md:h-80 shadow-sm border border-gray-100 transition-all duration-300">
-                                <img src="/images/galeri-2.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Galeri 2">
-                                <div class="absolute inset-0 bg-gradient-to-t from-[#12355B]/90 via-[#12355B]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                                    <span class="text-white text-xs font-bold uppercase tracking-wider mb-2 text-blue-400">Pendidikan</span>
-                                    <h3 class="text-white font-bold text-xl leading-tight">Peresmian Gedung Sekolah Harapan Bangsa di Pelosok Papua</h3>
+                            @empty
+                            <div class="col-span-full py-12 text-center">
+                                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>
                                 </div>
+                                <h3 class="text-xl font-bold text-gray-700 mb-2 font-heading">Belum ada foto galeri</h3>
+                                <p class="text-gray-500 max-w-md mx-auto">Nantikan pembaruan dokumentasi kegiatan kami di sini.</p>
                             </div>
-
-                            <!-- Image 3 -->
-                            <div data-category="lingkungan" class="gallery-item group relative rounded-2xl overflow-hidden cursor-pointer h-64 md:h-80 shadow-sm border border-gray-100 transition-all duration-300">
-                                <img src="/images/galeri-3.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Galeri 3">
-                                <div class="absolute inset-0 bg-gradient-to-t from-[#12355B]/90 via-[#12355B]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                                    <span class="text-white text-xs font-bold uppercase tracking-wider mb-2 text-teal-400">Lingkungan</span>
-                                    <h3 class="text-white font-bold text-lg leading-tight">Pembuatan Fasilitas Sumur Bor Desa Sukamaju</h3>
-                                </div>
-                            </div>
-                            
-                            <!-- Image 4 -->
-                            <div data-category="fasilitas ibadah" class="gallery-item group relative rounded-2xl overflow-hidden cursor-pointer h-64 md:h-80 shadow-sm border border-gray-100 transition-all duration-300">
-                                <img src="/images/galeri-4.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Galeri 4">
-                                <div class="absolute inset-0 bg-gradient-to-t from-[#12355B]/90 via-[#12355B]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                                    <span class="text-white text-xs font-bold uppercase tracking-wider mb-2 text-yellow-400">Fasilitas Ibadah</span>
-                                    <h3 class="text-white font-bold text-lg leading-tight">Pembangunan Masjid As-Salam di Pelosok</h3>
-                                </div>
-                            </div>
-                            
-                            <!-- Image 5 -->
-                            <div data-category="kesehatan" class="gallery-item group relative rounded-2xl overflow-hidden cursor-pointer h-64 md:h-80 shadow-sm border border-gray-100 transition-all duration-300">
-                                <img src="/images/program-kesehatan.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Galeri 5">
-                                <div class="absolute inset-0 bg-gradient-to-t from-[#12355B]/90 via-[#12355B]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                                    <span class="text-white text-xs font-bold uppercase tracking-wider mb-2 text-rose-400">Kesehatan</span>
-                                    <h3 class="text-white font-bold text-lg leading-tight">Pelayanan Medis Gratis di Pengungsian</h3>
-                                </div>
-                            </div>
-                            
-                            <!-- Image 6 -->
-                            <div data-category="sosial & kemanusiaan" class="gallery-item group relative rounded-2xl overflow-hidden cursor-pointer h-64 md:h-80 shadow-sm border border-gray-100 transition-all duration-300">
-                                <img src="/images/donasi-pangan.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Galeri 6">
-                                <div class="absolute inset-0 bg-gradient-to-t from-[#12355B]/90 via-[#12355B]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                                    <span class="text-white text-xs font-bold uppercase tracking-wider mb-2 text-[#D62828]">Pemberdayaan Sosial</span>
-                                    <h3 class="text-white font-bold text-xl leading-tight">Tebar Hewan Kurban ke Pelosok Nusantara</h3>
-                                </div>
-                            </div>
+                            @endforelse
 
                         </div>
 
