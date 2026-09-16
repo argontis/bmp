@@ -34,7 +34,7 @@
         <!-- Sidebar -->
     <aside class="w-[280px] bg-secondary flex flex-col h-screen shrink-0 relative overflow-hidden hidden md:flex">
         <div class="p-8 border-b border-white/10 relative z-10 flex items-center justify-center">
-            <img src="/images/logo.png" alt="Logo BMP" class="h-16 w-auto object-contain">
+            <img src="/images/logo.webp" alt="Logo BMP" class="h-16 w-auto object-contain">
         </div>
         
         <nav class="flex-1 py-8 px-4 overflow-y-auto relative z-10 space-y-2">
@@ -49,10 +49,6 @@
             <a href="{{ route('admin.donatur') }}" class="flex items-center gap-4 px-4 py-3.5 rounded-xl text-white/70 hover:text-white hover:bg-white/10 transition-all font-medium">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 Data Donatur
-            </a>
-            <a href="{{ route('admin.relawan') }}" class="flex items-center gap-4 px-4 py-3.5 rounded-xl text-white/70 hover:text-white hover:bg-white/10 transition-all font-medium">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-handshake"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08v0c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"/><path d="m18 15-2-2"/><path d="m15 18-2-2"/></svg>
-                Data Relawan
             </a>
             <a href="{{ route('admin.galeri') }}" class="flex items-center gap-4 px-4 py-3.5 rounded-xl text-white/70 hover:text-white hover:bg-white/10 transition-all font-medium">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
@@ -133,25 +129,66 @@
                         <thead>
                             <tr class="bg-gray-50/50">
                                 <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Nama Relawan</th>
-                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Email</th>
-                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Telepon</th>
-                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Peran</th>
+                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Kontak</th>
+                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Peran & Motivasi</th>
+                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Status</th>
+                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider text-right">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-50">
                             @forelse($campaign->volunteers as $volunteer)
                             <tr class="hover:bg-gray-50/50 transition-colors group">
                                 <td class="py-5 px-8">
-                                    <p class="font-bold text-secondary">{{ $volunteer->name }}</p>
+                                    <div class="flex items-center gap-4">
+                                        <img src="https://ui-avatars.com/api/?name={{ urlencode($volunteer->name) }}&background=random" class="w-10 h-10 rounded-full shadow-sm">
+                                        <p class="font-bold text-secondary">{{ $volunteer->name }}</p>
+                                    </div>
                                 </td>
                                 <td class="py-5 px-8">
-                                    <p class="text-gray-600 font-medium text-sm">{{ $volunteer->email }}</p>
+                                    <p class="text-gray-500 font-medium text-sm">{{ $volunteer->email }}</p>
+                                    <p class="text-gray-400 text-xs">{{ $volunteer->phone }}</p>
+                                </td>
+                                <td class="py-5 px-8 max-w-xs">
+                                    <p class="font-bold text-secondary text-sm">{{ $volunteer->role }}</p>
+                                    <p class="text-gray-500 text-xs truncate" title="{{ $volunteer->motivation }}">{{ $volunteer->motivation }}</p>
                                 </td>
                                 <td class="py-5 px-8">
-                                    <p class="text-gray-600 font-medium text-sm">{{ $volunteer->phone }}</p>
+                                    @if($volunteer->status == 'Diterima')
+                                        <span class="inline-flex px-3 py-1 bg-emerald-50 text-emerald-600 font-bold text-xs rounded-lg border border-emerald-100">Diterima</span>
+                                    @elseif($volunteer->status == 'Ditolak')
+                                        <span class="inline-flex px-3 py-1 bg-red-50 text-red-600 font-bold text-xs rounded-lg border border-red-100">Ditolak</span>
+                                    @else
+                                        <span class="inline-flex px-3 py-1 bg-amber-50 text-amber-600 font-bold text-xs rounded-lg border border-amber-100">Menunggu</span>
+                                    @endif
                                 </td>
-                                <td class="py-5 px-8">
-                                    <span class="inline-flex px-3 py-1 bg-gray-100 text-gray-600 font-bold text-xs rounded-lg border border-gray-200">{{ $volunteer->role }}</span>
+                                <td class="py-5 px-8 text-right">
+                                    <div class="flex items-center justify-end gap-2">
+                                        @if($volunteer->status == 'Menunggu')
+                                        <form action="{{ route('admin.relawan.update', $volunteer->id) }}" method="POST" class="inline">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="status" value="Diterima">
+                                            <button type="submit" class="p-2 text-emerald-500 hover:bg-emerald-50 rounded-lg transition-colors" title="Terima">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+                                            </button>
+                                        </form>
+                                        <form action="{{ route('admin.relawan.update', $volunteer->id) }}" method="POST" class="inline">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="status" value="Ditolak">
+                                            <button type="submit" class="p-2 text-amber-500 hover:bg-amber-50 rounded-lg transition-colors" title="Tolak">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+                                            </button>
+                                        </form>
+                                        @endif
+                                        <form action="{{ route('admin.relawan.destroy', $volunteer->id) }}" method="POST" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors" title="Hapus">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                             @empty

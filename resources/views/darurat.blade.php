@@ -141,59 +141,54 @@
                                 <h3 class="font-extrabold text-[14px] text-[#1B1B1B]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Bantuan Mendesak</h3>
                             </div>
                             
-                            <!-- Bencana Card 1 -->
-                            <div class="bg-white rounded-[16px] overflow-hidden shadow-[0_2px_12px_-4px_rgba(0,0,0,0.08)] mb-4">
-                                <div class="h-[130px] bg-gray-100 relative">
-                                    <img src="https://images.unsplash.com/photo-1728320771441-17a19df0fe4c?w=600&h=300&fit=crop" class="w-full h-full object-cover" alt="Banjir">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                    <div class="absolute top-3 left-3 bg-rose-600 px-2.5 py-1 rounded-md text-[10px] font-extrabold text-white flex items-center gap-1">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping absolute"></span>
-                                        <span class="w-1.5 h-1.5 rounded-full bg-white relative"></span>
-                                        Darurat
+                            <!-- Bencana Cards -->
+                            @forelse($campaigns as $campaign)
+                                @php
+                                    $terkumpul = $campaign->donations->where('status', 'Berhasil')->sum('amount');
+                                    $target = $campaign->nominal;
+                                    $persentase = $target > 0 ? min(100, round(($terkumpul / $target) * 100)) : 0;
+                                    $isUrgent = stripos($campaign->label, 'Darurat') !== false;
+                                    $bgColor = $isUrgent ? 'rose-600' : 'amber-500';
+                                @endphp
+                                <div class="bg-white rounded-[16px] overflow-hidden shadow-[0_2px_12px_-4px_rgba(0,0,0,0.08)] mb-4 cursor-pointer hover:scale-[1.02] transition-transform" onclick="window.location.href='/program/{{ $campaign->slug }}'">
+                                    <div class="h-[130px] bg-gray-100 relative">
+                                        <img src="{{ asset($campaign->image) }}" class="w-full h-full object-cover" alt="{{ $campaign->name }}">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                        <div class="absolute top-3 left-3 bg-{{ $bgColor }} px-2.5 py-1 rounded-md text-[10px] font-extrabold text-white flex items-center gap-1">
+                                            @if($isUrgent)
+                                            <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping absolute"></span>
+                                            <span class="w-1.5 h-1.5 rounded-full bg-white relative"></span>
+                                            @endif
+                                            {{ $campaign->label ?? 'Siaga' }}
+                                        </div>
+                                        <div class="absolute bottom-3 left-3 right-3 text-white">
+                                            <h4 class="text-[13px] font-bold leading-snug mb-1 line-clamp-1" style="font-family: 'Plus Jakarta Sans', sans-serif;">{{ $campaign->name }}</h4>
+                                        </div>
                                     </div>
-                                    <div class="absolute bottom-3 left-3 right-3 text-white">
-                                        <h4 class="text-[13px] font-bold leading-snug mb-1" style="font-family: 'Plus Jakarta Sans', sans-serif;">Tanggap Darurat Banjir Bandang Demak</h4>
+                                    <div class="p-4">
+                                        @if(!empty($campaign->activity_date))
+                                        <div class="mb-3 flex items-center gap-1.5 text-xs font-semibold text-gray-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-days"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+                                            {{ \Carbon\Carbon::parse($campaign->activity_date)->translatedFormat('d F Y') }}
+                                        </div>
+                                        @endif
+                                        <div class="h-1.5 rounded-full bg-gray-100 overflow-hidden mb-2">
+                                            <div class="h-full rounded-full bg-{{ $bgColor }}" style="width: {{ $persentase }}%;"></div>
+                                        </div>
+                                        <div class="flex justify-between items-center mb-4">
+                                            <span class="text-[11px] font-extrabold text-{{ $bgColor }}">Terkumpul Rp {{ number_format($terkumpul, 0, ',', '.') }}</span>
+                                            <span class="text-[10px] text-gray-500 font-semibold">dari Rp {{ number_format($target, 0, ',', '.') }}</span>
+                                        </div>
+                                        <button onclick="window.location.href='/donasi'" class="w-full py-2.5 rounded-full text-[12px] font-extrabold text-white transition-all active:scale-95 bg-{{ $bgColor }}">
+                                            Donasi Sekarang
+                                        </button>
                                     </div>
                                 </div>
-                                <div class="p-4">
-                                    <div class="h-1.5 rounded-full bg-gray-100 overflow-hidden mb-2">
-                                        <div class="h-full rounded-full bg-rose-600" style="width: 45%;"></div>
-                                    </div>
-                                    <div class="flex justify-between items-center mb-4">
-                                        <span class="text-[11px] font-extrabold text-rose-600">Terkumpul Rp 450 Jt</span>
-                                        <span class="text-[10px] text-gray-500 font-semibold">dari Rp 1 Miliar</span>
-                                    </div>
-                                    <button class="w-full py-2.5 rounded-full text-[12px] font-extrabold text-white transition-all active:scale-95 bg-rose-600">
-                                        Donasi Sekarang
-                                    </button>
+                            @empty
+                                <div class="bg-white rounded-[16px] p-6 text-center shadow-[0_2px_12px_-4px_rgba(0,0,0,0.08)] mb-4">
+                                    <p class="text-gray-500 text-sm font-medium">Saat ini tidak ada kondisi darurat.</p>
                                 </div>
-                            </div>
-                            
-                            <!-- Bencana Card 2 -->
-                            <div class="bg-white rounded-[16px] overflow-hidden shadow-[0_2px_12px_-4px_rgba(0,0,0,0.08)]">
-                                <div class="h-[130px] bg-gray-100 relative">
-                                    <img src="https://images.unsplash.com/photo-1625236601674-8702e197b5b4?w=600&h=300&fit=crop" class="w-full h-full object-cover" alt="Dapur Umum">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                    <div class="absolute top-3 left-3 bg-amber-500 px-2.5 py-1 rounded-md text-[10px] font-extrabold text-white flex items-center gap-1">
-                                        Siaga
-                                    </div>
-                                    <div class="absolute bottom-3 left-3 right-3 text-white">
-                                        <h4 class="text-[13px] font-bold leading-snug mb-1" style="font-family: 'Plus Jakarta Sans', sans-serif;">Dapur Umum untuk Pengungsi Erupsi Marapi</h4>
-                                    </div>
-                                </div>
-                                <div class="p-4">
-                                    <div class="h-1.5 rounded-full bg-gray-100 overflow-hidden mb-2">
-                                        <div class="h-full rounded-full bg-amber-500" style="width: 82%;"></div>
-                                    </div>
-                                    <div class="flex justify-between items-center mb-4">
-                                        <span class="text-[11px] font-extrabold text-amber-600">Terkumpul Rp 164 Jt</span>
-                                        <span class="text-[10px] text-gray-500 font-semibold">dari Rp 200 Juta</span>
-                                    </div>
-                                    <button class="w-full py-2.5 rounded-full text-[12px] font-extrabold text-white transition-all active:scale-95 bg-amber-500">
-                                        Bantu Pengungsi
-                                    </button>
-                                </div>
-                            </div>
+                            @endforelse
 
                         </div>
                     </div>

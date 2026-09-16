@@ -81,7 +81,7 @@
                     </div>
                 </div>
                 <div class="flex items-center justify-center mt-2 pt-2 border-t border-gray-100">
-                    <img src="/images/logo.png" alt="Bakti Merah Putih" class="h-7 w-auto object-contain" style="filter: invert(1) sepia(1) saturate(3) hue-rotate(330deg) brightness(0.6);">
+                    <img src="/images/logo.webp" alt="Bakti Merah Putih" class="h-7 w-auto object-contain" style="filter: invert(1) sepia(1) saturate(3) hue-rotate(330deg) brightness(0.6);">
                 </div>
             </div>
             

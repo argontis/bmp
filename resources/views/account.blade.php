@@ -84,7 +84,7 @@
                     </div>
                 </div>
                 <div class="flex items-center justify-center mt-2 pt-2 border-t border-gray-100">
-                    <img src="/images/logo.png" alt="Bakti Merah Putih" class="h-7 w-auto object-contain" style="filter: invert(1) sepia(1) saturate(3) hue-rotate(330deg) brightness(0.6);">
+                    <img src="/images/logo.webp" alt="Bakti Merah Putih" class="h-7 w-auto object-contain" style="filter: invert(1) sepia(1) saturate(3) hue-rotate(330deg) brightness(0.6);">
                 </div>
             </div>
             
@@ -154,6 +154,17 @@
                                 <div class="flex-1 min-w-0">
                                     <p class="text-[13px] font-bold text-[#1B1B1B]">Dampak Donasi Saya</p>
                                     <p class="text-[11px] text-gray-400">38 orang terbantu</p>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 text-gray-300 shrink-0"><path d="m9 18 6-6-6-6"></path></svg>
+                            </button>
+                            
+                            <button onclick="window.location.href='/user/relawan'" class="w-full flex items-center gap-3.5 bg-white rounded-[16px] px-4 py-3.5 shadow-[0_1px_6px_-2px_rgba(0,0,0,0.08)] hover:shadow-md transition-shadow text-left">
+                                <div class="w-10 h-10 rounded-2xl bg-[#F4F6F9] flex items-center justify-center shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users w-5 h-5 text-[#555]"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-[13px] font-bold text-[#1B1B1B]">Riwayat Relawan</p>
+                                    <p class="text-[11px] text-gray-400">Daftar kegiatan Anda</p>
                                 </div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 text-gray-300 shrink-0"><path d="m9 18 6-6-6-6"></path></svg>
                             </button>
@@ -238,7 +249,7 @@
             <header class="sticky top-0 z-40 border-b border-[#12355B]/10 bg-[#FBFAF7]/95 backdrop-blur-md">
                 <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
                     <div class="flex items-center gap-6">
-                        <button class="flex items-center gap-2"><img src="{{ asset('images/logo2.png') }}" alt="Bakti Merah Putih" class="h-9 w-auto"></button>
+                        <button class="flex items-center gap-2"><img src="{{ asset('images/logo2.webp') }}" alt="Bakti Merah Putih" class="h-9 w-auto"></button>
                         <span class="hidden h-5 w-px bg-[#12355B]/15 sm:inline-block"></span>
                         <span class="hidden text-xs font-bold uppercase tracking-wider text-[#D62828] sm:inline-block">Portal Donatur Terverifikasi</span>
                     </div>
@@ -294,6 +305,26 @@
                                         <path d="M13 16H8"></path>
                                     </svg>
                                     Riwayat &amp; Bukti Donasi
+                                </button>
+                                <button hx-get="/user/relawan" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex w-full items-center justify-start text-left gap-3 rounded-xl px-4 py-3 text-xs font-bold transition text-[#62758A] hover:bg-[#F1EEE8] hover:text-[#12355B]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                    Riwayat Relawan
+                                </button>
+
+                                <button hx-get="/laporan" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex w-full items-center justify-start text-left gap-3 rounded-xl px-4 py-3 text-xs font-bold transition text-[#62758A] hover:bg-[#F1EEE8] hover:text-[#12355B]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text">
+                                        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                        <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                        <path d="M10 9H8"></path>
+                                        <path d="M16 13H8"></path>
+                                        <path d="M16 17H8"></path>
+                                    </svg>
+                                    Laporan Tahunan
                                 </button>
                                 <button hx-get="/account" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex w-full items-center justify-start text-left gap-3 rounded-xl px-4 py-3 text-xs font-bold transition bg-[#12355B] text-white shadow-sm">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round">

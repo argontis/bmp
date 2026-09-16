@@ -31,8 +31,8 @@
     </script>
     
     <style>
-        .css-uwf2km {position: relative; flex: 1 0 0; display: block;}
-        .css-fou3uo {min-height: 1px; width: 100%; height: 100dvh;}
+        .css-uwf2km {position: relative; flex: 1 0 0; display: flex; flex-direction: column;}
+        .css-fou3uo {min-height: 100vh; width: 100%;}
     </style>
 </head>
 <body>
@@ -44,7 +44,7 @@
                     <div class="absolute top-0 inset-x-0 h-[3px] transition-opacity duration-300 opacity-100" style="background: linear-gradient(90deg, rgb(214, 40, 40), rgb(214, 40, 40) 50%, rgb(255, 255, 255) 50%);"></div>
                     <div class="max-w-[1280px] mx-auto px-6 h-full flex items-center justify-between gap-6">
                         <a href="#" class="shrink-0 block">
-                            <img src="/images/logo.png" alt="Bakti Merah Putih" class="h-14 w-auto object-contain transition-opacity duration-300">
+                            <img src="/images/logo.webp" alt="Bakti Merah Putih" class="h-14 w-auto object-contain transition-opacity duration-300">
                         </a>
                         <nav class="hidden xl:flex items-center gap-0.5">
                             <button onclick="window.location.href='/donasi'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#D62828] text-white/80 hover:text-white">
@@ -72,7 +72,7 @@
                     </div>
                 </header>
 
-                <section class="relative overflow-hidden flex items-center" style="min-height: max(100vh, 760px);">
+                <section class="relative overflow-hidden flex items-center min-h-screen lg:min-h-[max(100vh,760px)] pt-20 lg:pt-0">
                     <div class="absolute inset-0 bg-[#0a1f3a]">
                         <img src="/images/hero1.webp" alt="Bakti Merah Putih Hero 1" class="hero-bg-slide absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000" style="opacity: 0.62;">
                         <img src="/images/hero2.webp" alt="Bakti Merah Putih Hero 2" class="hero-bg-slide absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000" style="opacity: 0;">
@@ -130,7 +130,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="hidden lg:block" style="opacity: 1; transform: none;">
+                            <div class="block w-full mt-12 lg:mt-0" style="opacity: 1; transform: none;">
                                 <div class="rounded-[28px] p-7 border border-white/15 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.5)]" style="background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(24px);">
                                     <div class="flex items-center gap-2 mb-6">
                                         <div class="w-7 h-7 rounded-lg bg-amber-400/20 flex items-center justify-center">
@@ -144,7 +144,7 @@
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wallet w-5 h-5" style="color: rgb(214, 40, 40);"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path></svg>
                                             </div>
                                             <div>
-                                                <div class="text-white font-extrabold text-xl leading-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">Rp 12,85 M</div>
+                                                <div class="text-white font-extrabold text-lg lg:text-xl leading-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">Rp 12,85 M</div>
                                                 <div class="text-white/55 text-xs font-medium">Total Donasi</div>
                                             </div>
                                         </div>
@@ -153,7 +153,7 @@
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users w-5 h-5" style="color: rgb(37, 99, 235);"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                                             </div>
                                             <div>
-                                                <div class="text-white font-extrabold text-xl leading-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">12.500+</div>
+                                                <div class="text-white font-extrabold text-lg lg:text-xl leading-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">12.500+</div>
                                                 <div class="text-white/55 text-xs font-medium">Penerima Manfaat</div>
                                             </div>
                                         </div>
@@ -162,7 +162,7 @@
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open w-5 h-5" style="color: rgb(22, 163, 74);"><path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path></svg>
                                             </div>
                                             <div>
-                                                <div class="text-white font-extrabold text-xl leading-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">78</div>
+                                                <div class="text-white font-extrabold text-lg lg:text-xl leading-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">78</div>
                                                 <div class="text-white/55 text-xs font-medium">Program Aktif</div>
                                             </div>
                                         </div>
@@ -171,7 +171,7 @@
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hand-heart w-5 h-5" style="color: rgb(245, 158, 11);"><path d="M11 14h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 16"></path><path d="m7 20 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"></path><path d="m2 15 6 6"></path><path d="M19.5 8.5c.7-.7 1.5-1.6 1.5-2.7A2.73 2.73 0 0 0 16 4a2.78 2.78 0 0 0-5 1.8c0 1.2.8 2 1.5 2.8L16 12Z"></path></svg>
                                             </div>
                                             <div>
-                                                <div class="text-white font-extrabold text-xl leading-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">5.000+</div>
+                                                <div class="text-white font-extrabold text-lg lg:text-xl leading-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">5.000+</div>
                                                 <div class="text-white/55 text-xs font-medium">Donatur Setia</div>
                                             </div>
                                         </div>
@@ -213,7 +213,7 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-6 h-6" style="color: rgb(22, 163, 74);"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
                                     </div>
                                     <div class="text-[30px] font-extrabold text-[#12355B] leading-none mb-1.5" style="font-family: 'Plus Jakarta Sans', sans-serif;">28</div>
-                                    <div class="text-xs text-[#8A8A8A] font-semibold">Provinsi</div>
+                                    <div class="text-xs text-[#8A8A8A] font-semibold whitespace-nowrap lg:whitespace-normal">Provinsi</div>
                                 </div>
                                 <div class="flex flex-col items-center text-center px-6 py-8 group hover:bg-[#FBFAF7] transition-colors" style="opacity: 1; transform: none;">
                                     <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300" style="background: rgb(254, 242, 242);">
@@ -355,106 +355,55 @@
                             <p class="text-[#888] mt-3 text-base max-w-lg mx-auto">Pilih program yang menyentuh hati Anda. Setiap donasi tercatat transparan.</p>
                         </div>
                         <div class="grid md:grid-cols-3 gap-6">
+                            @forelse($campaigns as $campaign)
+                            @php
+                                $terkumpul = $campaign->donations->where('status', 'Berhasil')->sum('amount');
+                                $target = $campaign->nominal;
+                                $persentase = $target > 0 ? min(100, round(($terkumpul / $target) * 100)) : 0;
+                                $donatur = $campaign->donations->where('status', 'Berhasil')->count();
+                            @endphp
                             <div class="bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.06] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 flex flex-col" style="opacity: 1; transform: none;">
                                 <div class="relative h-52 bg-gray-200 overflow-hidden group">
-                                    <img src="https://images.unsplash.com/photo-1641886000798-41c1adbebb3b?w=720&h=440&fit=crop&auto=format" alt="Anak-anak kecil di Asia Tenggara duduk bersama dengan tatapan penuh harap" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent"></div>
-                                    <div class="absolute top-4 left-4 flex items-center gap-2"><span class="px-3 py-1.5 rounded-full text-[11px] font-extrabold backdrop-blur-sm" style="background: rgb(239, 246, 255); color: rgb(29, 78, 216);">Pendidikan</span></div>
-                                    <div class="absolute bottom-4 right-4">
-                                        <span class="px-3 py-1.5 bg-white/15 backdrop-blur-md border border-white/20 rounded-full text-white text-[11px] font-bold flex items-center gap-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-3 h-3"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 18 hari lagi
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="p-6 flex flex-col flex-1">
-                                    <h3 class="font-extrabold text-[#12355B] text-[15px] leading-snug mb-5" style="font-family: 'Plus Jakarta Sans', sans-serif;">Beasiswa untuk 100 Anak Berprestasi di NTT</h3>
-                                    <div class="mt-auto space-y-3">
-                                        <div class="flex items-center justify-between text-xs text-[#888] mb-1">
-                                            <span>Terkumpul <strong class="text-[#D62828]">75%</strong></span>
-                                            <span>843 donatur</span>
-                                        </div>
-                                        <div class="relative h-2.5 rounded-full bg-[#EFEBE6] overflow-hidden">
-                                            <div class="h-full rounded-full transition-all duration-[1200ms] ease-out" style="width: 75%; background: linear-gradient(90deg, rgb(185, 28, 28), rgb(214, 40, 40) 60%, rgb(248, 113, 113));"></div>
-                                        </div>
-                                        <div class="flex justify-between items-end">
-                                            <div>
-                                                <div class="text-[17px] font-extrabold text-[#12355B]">Rp 112.500.000</div>
-                                                <div class="text-[11px] text-[#aaa]">dari Rp 150.000.000</div>
-                                            </div>
-                                        </div>
-                                        <button onclick="window.location.href='/donasi'" class="w-full py-3.5 bg-[#D62828] text-white rounded-full text-[13px] font-extrabold hover:bg-[#B91C1C] transition-all shadow-[0_10px_24px_-10px_rgba(214,40,40,0.7)] hover:-translate-y-0.5 mt-2">Donasi Sekarang</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.06] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 flex flex-col" style="opacity: 1; transform: none;">
-                                <div class="relative h-52 bg-gray-200 overflow-hidden group">
-                                    <img src="https://images.unsplash.com/photo-1625236601674-8702e197b5b4?w=720&h=440&fit=crop&auto=format" alt="Relawan mendistribusikan bantuan makanan kepada warga yang membutuhkan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    <img src="{{ asset($campaign->image) }}" alt="{{ $campaign->name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent"></div>
                                     <div class="absolute top-4 left-4 flex items-center gap-2">
-                                        <span class="px-3 py-1.5 rounded-full text-[11px] font-extrabold backdrop-blur-sm" style="background: rgb(255, 251, 235); color: rgb(217, 119, 6);">Pangan</span>
+                                        <span class="px-3 py-1.5 rounded-full text-[11px] font-extrabold backdrop-blur-sm" style="background: rgb(239, 246, 255); color: rgb(29, 78, 216);">{{ $campaign->category ?? 'Program Sosial' }}</span>
+                                        @if($campaign->label)
                                         <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-amber-400 text-white flex items-center gap-1 animate-pulse">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert w-2.5 h-2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg> Mendesak
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert w-2.5 h-2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg> {{ $campaign->label }}
                                         </span>
-                                    </div>
-                                    <div class="absolute bottom-4 right-4">
-                                        <span class="px-3 py-1.5 bg-white/15 backdrop-blur-md border border-white/20 rounded-full text-white text-[11px] font-bold flex items-center gap-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-3 h-3"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 9 hari lagi
-                                        </span>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="p-6 flex flex-col flex-1">
-                                    <h3 class="font-extrabold text-[#12355B] text-[15px] leading-snug mb-5" style="font-family: 'Plus Jakarta Sans', sans-serif;">Dapur Umum &amp; Distribusi Pangan Untuk 500 KK Miskin Ekstrem</h3>
+                                    <h3 class="font-extrabold text-[#12355B] text-[15px] leading-snug mb-3" style="font-family: 'Plus Jakarta Sans', sans-serif;">{{ Str::limit($campaign->name, 60) }}</h3>
+                                    @if(!empty($campaign->activity_date))
+                                    <div class="mb-4 flex items-center gap-1.5 text-xs font-semibold text-gray-500">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-days"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+                                        {{ \Carbon\Carbon::parse($campaign->activity_date)->translatedFormat('d F Y') }}
+                                    </div>
+                                    @endif
                                     <div class="mt-auto space-y-3">
                                         <div class="flex items-center justify-between text-xs text-[#888] mb-1">
-                                            <span>Terkumpul <strong class="text-[#D62828]">82%</strong></span>
-                                            <span>1,204 donatur</span>
+                                            <span>Terkumpul <strong class="text-[#D62828]">{{ $persentase }}%</strong></span>
+                                            <span>{{ number_format($donatur, 0, ',', '.') }} donatur</span>
                                         </div>
                                         <div class="relative h-2.5 rounded-full bg-[#EFEBE6] overflow-hidden">
-                                            <div class="h-full rounded-full transition-all duration-[1200ms] ease-out" style="width: 82%; background: linear-gradient(90deg, rgb(185, 28, 28), rgb(214, 40, 40) 60%, rgb(248, 113, 113));"></div>
+                                            <div class="h-full rounded-full transition-all duration-[1200ms] ease-out" style="width: {{ $persentase }}%; background: linear-gradient(90deg, rgb(185, 28, 28), rgb(214, 40, 40) 60%, rgb(248, 113, 113));"></div>
                                         </div>
                                         <div class="flex justify-between items-end">
                                             <div>
-                                                <div class="text-[17px] font-extrabold text-[#12355B]">Rp 163.000.000</div>
-                                                <div class="text-[11px] text-[#aaa]">dari Rp 200.000.000</div>
+                                                <div class="text-[17px] font-extrabold text-[#12355B]">Rp {{ number_format($terkumpul, 0, ',', '.') }}</div>
+                                                <div class="text-[11px] text-[#aaa]">dari Rp {{ number_format($target, 0, ',', '.') }}</div>
                                             </div>
                                         </div>
                                         <button onclick="window.location.href='/donasi'" class="w-full py-3.5 bg-[#D62828] text-white rounded-full text-[13px] font-extrabold hover:bg-[#B91C1C] transition-all shadow-[0_10px_24px_-10px_rgba(214,40,40,0.7)] hover:-translate-y-0.5 mt-2">Donasi Sekarang</button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="bg-white rounded-[24px] overflow-hidden ring-1 ring-black/[0.06] shadow-[0_10px_30px_-18px_rgba(13,33,55,0.3)] hover:shadow-[0_28px_50px_-24px_rgba(13,33,55,0.45)] hover:-translate-y-1.5 transition-all duration-400 flex flex-col" style="opacity: 1; transform: none;">
-                                <div class="relative h-52 bg-gray-200 overflow-hidden group">
-                                    <img src="https://images.unsplash.com/photo-1728320771441-17a19df0fe4c?w=720&h=440&fit=crop&auto=format" alt="Tenda pengungsian korban bencana alam berdiri di lapangan terbuka" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent"></div>
-                                    <div class="absolute top-4 left-4 flex items-center gap-2">
-                                        <span class="px-3 py-1.5 rounded-full text-[11px] font-extrabold backdrop-blur-sm" style="background: rgb(254, 242, 242); color: rgb(214, 40, 40);">Kebencanaan</span>
-                                    </div>
-                                    <div class="absolute bottom-4 right-4">
-                                        <span class="px-3 py-1.5 bg-white/15 backdrop-blur-md border border-white/20 rounded-full text-white text-[11px] font-bold flex items-center gap-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-3 h-3"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 30 hari lagi
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="p-6 flex flex-col flex-1">
-                                    <h3 class="font-extrabold text-[#12355B] text-[15px] leading-snug mb-5" style="font-family: 'Plus Jakarta Sans', sans-serif;">Pemulihan Pasca Banjir — Membangun Kembali 120 Rumah Warga</h3>
-                                    <div class="mt-auto space-y-3">
-                                        <div class="flex items-center justify-between text-xs text-[#888] mb-1">
-                                            <span>Terkumpul <strong class="text-[#D62828]">43%</strong></span>
-                                            <span>3,102 donatur</span>
-                                        </div>
-                                        <div class="relative h-2.5 rounded-full bg-[#EFEBE6] overflow-hidden">
-                                            <div class="h-full rounded-full transition-all duration-[1200ms] ease-out" style="width: 43%; background: linear-gradient(90deg, rgb(185, 28, 28), rgb(214, 40, 40) 60%, rgb(248, 113, 113));"></div>
-                                        </div>
-                                        <div class="flex justify-between items-end">
-                                            <div>
-                                                <div class="text-[17px] font-extrabold text-[#12355B]">Rp 344.000.000</div>
-                                                <div class="text-[11px] text-[#aaa]">dari Rp 800.000.000</div>
-                                            </div>
-                                        </div>
-                                        <button onclick="window.location.href='/donasi'" class="w-full py-3.5 bg-[#D62828] text-white rounded-full text-[13px] font-extrabold hover:bg-[#B91C1C] transition-all shadow-[0_10px_24px_-10px_rgba(214,40,40,0.7)] hover:-translate-y-0.5 mt-2">Donasi Sekarang</button>
-                                    </div>
-                                </div>
-                            </div>
+                            @empty
+                            <div class="col-span-3 text-center text-gray-500 py-10">Belum ada program saat ini.</div>
+                            @endforelse
                         </div>
                     </div>
                 </section>
@@ -798,7 +747,7 @@
                         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 pb-12 border-b border-white/[0.08]">
                             <div>
                                 <div class="mb-5">
-                                    <img src="/images/logo.png" alt="Bakti Merah Putih" class="h-14 w-auto object-contain">
+                                    <img src="/images/logo.webp" alt="Bakti Merah Putih" class="h-14 w-auto object-contain">
                                 </div>
                                 <p class="text-white/50 text-[13px] leading-relaxed mb-6">Bergerak bersama untuk Indonesia yang lebih baik. Sejak 2015, kami telah menyentuh jutaan kehidupan di 28 provinsi.</p>
                                 <div class="flex items-center gap-2.5">
@@ -834,7 +783,7 @@
                                 <ul class="space-y-4">
                                     <li class="flex items-start gap-3 text-white/55 text-[13px]">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 shrink-0 mt-0.5 text-white/30"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                        <a href="https://maps.app.goo.gl/UVL5JZcLoiSfMHMb6" target="_blank" class="hover:text-white transition-colors">Jl. RS. Fatmawati Raya No.28 AA 1, RT.1/RW.5, Cipete Sel., Kec. Cilandak, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12420</a>
+                                        <a href="https://maps.app.goo.gl/bVA5qdGNFRjgWd2d9" target="_blank" class="hover:text-white transition-colors">Jl. RS. Fatmawati Raya No.28 AA 1, RT.1/RW.5, Cipete Sel., Kec. Cilandak, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12420</a>
                                     </li>
                                     <li class="flex items-center gap-3 text-white/55 text-[13px]">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone w-4 h-4 text-white/30"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
@@ -884,7 +833,7 @@
                     if (window.scrollY > 20) {
                         header.classList.remove('bg-transparent');
                         header.classList.add('bg-white', 'shadow-sm');
-                        logo.src = '/images/logo2.png';
+                        logo.src = '/images/logo2.webp';
                         
                         if (mobileMenuBtn) {
                             mobileMenuBtn.style.color = '#1B1B1B';
@@ -896,7 +845,7 @@
                     } else {
                         header.classList.add('bg-transparent');
                         header.classList.remove('bg-white', 'shadow-sm');
-                        logo.src = '/images/logo.png';
+                        logo.src = '/images/logo.webp';
                         
                         if (mobileMenuBtn) {
                             mobileMenuBtn.style.color = 'white';

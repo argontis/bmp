@@ -80,13 +80,14 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell w-4.5 h-4.5 text-[#555]"><path d="M10.268 21a2 2 0 0 0 3.464 0"></path><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"></path></svg>
                             <span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full" style="background: rgb(214, 40, 40);"></span>
                         </button>
-                        <button hx-get="/account" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true">
+                                                        
+                                <button hx-get="/account" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true">
                             <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&amp;h=120&amp;fit=crop&amp;auto=format" alt="Ahmad Fauzi" class="w-9 h-9 rounded-2xl object-cover ring-2" style="--tw-ring-color: #D6282833;">
                         </button>
                     </div>
                 </div>
                 <div class="flex items-center justify-center mt-2 pt-2 border-t border-gray-100">
-                    <img src="/images/logo.png" alt="Bakti Merah Putih" class="h-7 w-auto object-contain" style="filter: invert(1) sepia(1) saturate(3) hue-rotate(330deg) brightness(0.6);">
+                    <img src="/images/logo.webp" alt="Bakti Merah Putih" class="h-7 w-auto object-contain" style="filter: invert(1) sepia(1) saturate(3) hue-rotate(330deg) brightness(0.6);">
                 </div>
             </div>
             
@@ -116,12 +117,18 @@
                                     @endphp
                                     <div data-category="{{ $campaign->category }}" class="explore-item bg-white rounded-[18px] overflow-hidden shadow-[0_2px_12px_-4px_rgba(0,0,0,0.1)] flex gap-3 p-3 cursor-pointer" hx-get="/program/{{ $campaign->slug ?? 'bakti-kesehatan' }}" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true">
                                         <div class="w-20 h-20 rounded-2xl overflow-hidden shrink-0 bg-gray-100 relative">
-                                            <img src="{{ asset($campaign->image ?? 'images/donasi-bencana.png') }}" alt="{{ $campaign->name }}" class="w-full h-full object-cover">
+                                            <img src="{{ asset($campaign->image ?? 'images/donasi-bencana.webp') }}" alt="{{ $campaign->name }}" class="w-full h-full object-cover">
                                         </div>
                                         <div class="flex-1 min-w-0 flex flex-col justify-between">
                                             <div>
                                                 <span class="text-[10px] font-bold category-badge" style="color: {{ $catColor }};">{{ $campaign->category }}</span>
                                                 <p class="text-[12px] font-bold text-[#1B1B1B] leading-snug mt-0.5 line-clamp-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">{{ $campaign->name }}</p>
+                                                @if(!empty($campaign->activity_date))
+                                                <div class="mt-1 flex items-center gap-1 text-[10px] text-gray-500">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-days"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+                                                    {{ \Carbon\Carbon::parse($campaign->activity_date)->translatedFormat('d M Y') }}
+                                                </div>
+                                                @endif
                                             </div>
                                             <div>
                                                 <div class="h-1.5 rounded-full bg-gray-100 overflow-hidden">
@@ -132,6 +139,20 @@
                                                     <span class="text-[10px] text-gray-400">{{ $percentage }}%</span>
                                                 </div>
                                                 <button onclick="event.stopPropagation(); event.preventDefault();" class="w-full py-1.5 rounded-full text-[11px] font-extrabold text-white" style="background: rgb(214, 40, 40);">Donasi</button>
+                                                @if($campaign->volunteer_target > 0)
+                                                    @php
+                                                        $volPercentage = min(100, round(($campaign->volunteers_count / $campaign->volunteer_target) * 100));
+                                                    @endphp
+                                                    <div class="border-t border-gray-100 pt-1.5 mt-1.5">
+                                                        <div class="flex justify-between text-[10px] mb-1"><span class="font-bold text-[#12355B]">{{ $campaign->volunteers_count }} Relawan</span><span class="text-gray-400">{{ $volPercentage }}%</span></div>
+                                                        <div class="h-1 w-full overflow-hidden rounded-full bg-[#EEEAE4] mb-1.5"><div class="h-full rounded-full bg-[#12355B]" style="width: {{ $volPercentage }}%;"></div></div>
+                                                        @if(in_array($campaign->id, $registeredCampaignIds ?? []))
+                                                            <button onclick="event.stopPropagation(); event.preventDefault();" class="w-full rounded-full bg-gray-100 py-1.5 text-[11px] font-bold text-gray-400 cursor-not-allowed">Terdaftar</button>
+                                                        @else
+                                                            <button onclick="window.location.href='/relawan/daftar?campaign_id={{ $campaign->id }}'; event.stopPropagation(); event.preventDefault();" class="w-full rounded-full bg-white border border-[#12355B] py-1.5 text-[11px] font-bold text-[#12355B] transition hover:bg-gray-50">Daftar Relawan</button>
+                                                        @endif
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -141,7 +162,6 @@
                             </div>
                             
                             <div class="mt-6 px-4">
-                                {{ $campaigns->links() }}
                             </div>
                         </div>
                     </div>
@@ -168,7 +188,8 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-history w-5 h-5 transition-colors" style="color: rgb(156, 163, 175);"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path><path d="M12 7v5l4 2"></path></svg>
                         <span class="text-[9px] font-bold transition-colors text-gray-400">Riwayat</span>
                     </button>
-                    <button hx-get="/account" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex flex-col items-center gap-1 px-3 py-1 rounded-2xl transition-all active:scale-90">
+                                                    
+                                <button hx-get="/account" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex flex-col items-center gap-1 px-3 py-1 rounded-2xl transition-all active:scale-90">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user w-5 h-5 transition-colors" style="color: rgb(156, 163, 175);"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                         <span class="text-[9px] font-bold transition-colors text-gray-400">Akun</span>
                     </button>
@@ -186,7 +207,7 @@
             <header class="sticky top-0 z-40 border-b border-[#12355B]/10 bg-[#FBFAF7]/95 backdrop-blur-md">
                 <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
                     <div class="flex items-center gap-6">
-                        <button class="flex items-center gap-2"><img src="{{ asset('images/logo2.png') }}" alt="Bakti Merah Putih" class="h-9 w-auto"></button>
+                        <button class="flex items-center gap-2"><img src="{{ asset('images/logo2.webp') }}" alt="Bakti Merah Putih" class="h-9 w-auto"></button>
                         <span class="hidden h-5 w-px bg-[#12355B]/15 sm:inline-block"></span>
                         <span class="hidden text-xs font-bold uppercase tracking-wider text-[#D62828] sm:inline-block">Portal Donatur Terverifikasi</span>
                     </div>
@@ -242,6 +263,26 @@
                                         <path d="M13 16H8"></path>
                                     </svg>
                                     Riwayat &amp; Bukti Donasi
+                                </button>
+                                <button hx-get="/user/relawan" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex w-full items-center justify-start text-left gap-3 rounded-xl px-4 py-3 text-xs font-bold transition text-[#62758A] hover:bg-[#F1EEE8] hover:text-[#12355B]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                    Riwayat Relawan
+                                </button>
+
+                                <button hx-get="/laporan" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex w-full items-center justify-start text-left gap-3 rounded-xl px-4 py-3 text-xs font-bold transition text-[#62758A] hover:bg-[#F1EEE8] hover:text-[#12355B]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text">
+                                        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                        <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                        <path d="M10 9H8"></path>
+                                        <path d="M16 13H8"></path>
+                                        <path d="M16 17H8"></path>
+                                    </svg>
+                                    Laporan Tahunan
                                 </button>
                                 <button hx-get="/account" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex w-full items-center justify-start text-left gap-3 rounded-xl px-4 py-3 text-xs font-bold transition text-[#62758A] hover:bg-[#F1EEE8] hover:text-[#12355B]">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round">
@@ -308,7 +349,7 @@
                                         <article class="explore-item flex flex-col justify-between overflow-hidden rounded-2xl border border-[#12355B]/10 bg-white shadow-sm transition hover:shadow-md cursor-pointer group" hx-get="/program/{{ $campaign->slug ?? 'bakti-kesehatan' }}" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" data-category="{{ $campaign->category }}">
                                             <div>
                                                 <div class="relative aspect-[16/9] overflow-hidden bg-[#12355B]/10">
-                                                    <img src="{{ asset($campaign->image ?? 'images/donasi-bencana.png') }}" alt="{{ $campaign->name }}" class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
+                                                    <img src="{{ asset($campaign->image ?? 'images/donasi-bencana.webp') }}" alt="{{ $campaign->name }}" class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
                                                     <span class="absolute left-3 top-3 flex items-center gap-1 rounded-full bg-[#12355B] px-3 py-1 text-[10px] font-bold text-white shadow category-badge">
                                                         @if(strtolower($campaign->category) == 'kesehatan')
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-stethoscope text-[#F4AAAA]"><path d="M11 2v2"></path><path d="M5 2v2"></path><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"></path><path d="M8 15a6 6 0 0 0 12 0v-3"></path><circle cx="20" cy="10" r="2"></circle></svg>
@@ -329,6 +370,12 @@
                                                 </div>
                                                 <div class="p-5">
                                                     <h3 class="font-['Plus_Jakarta_Sans'] text-base font-extrabold text-[#12355B] leading-snug line-clamp-2 group-hover:text-[#D62828] transition-colors">{{ $campaign->name }}</h3>
+                                                    @if(!empty($campaign->activity_date))
+                                                    <div class="mt-2 flex items-center gap-1.5 text-xs font-semibold text-gray-500">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-days"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg>
+                                                        {{ \Carbon\Carbon::parse($campaign->activity_date)->translatedFormat('d F Y') }}
+                                                    </div>
+                                                    @endif
                                                     <p class="mt-2 text-xs leading-relaxed text-[#62758A] line-clamp-2">{{ !empty($campaign->description) ? $campaign->description : 'Mari bersama wujudkan kebaikan melalui program donasi ini. Salurkan kepedulian Anda untuk mereka yang membutuhkan.' }}</p>
                                                     <div class="mt-4">
                                                         <div class="flex justify-between text-xs font-semibold"><span class="text-[#62758A]">Terkumpul</span><span class="text-[#D62828] font-bold">{{ $percentage }}%</span></div>
@@ -337,7 +384,30 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="p-5 pt-0"><button onclick="openDesktopDonationModal('{{ $campaign->category ?? 'Kebaikan' }}', '{{ addslashes($campaign->name) }}', '{{ $campaign->id }}'); event.stopPropagation(); event.preventDefault();" class="w-full rounded-xl bg-[#D62828] py-3 text-xs font-bold text-white transition hover:bg-[#b91e26]">Donasi Sekarang</button></div>
+                                            <div class="p-5 pt-0 flex flex-col gap-2">
+                                                <button onclick="openDesktopDonationModal('{{ $campaign->category ?? 'Kebaikan' }}', '{{ addslashes($campaign->name) }}', '{{ $campaign->id }}'); event.stopPropagation(); event.preventDefault();" class="w-full rounded-xl bg-[#D62828] py-3 text-xs font-bold text-white transition hover:bg-[#b91e26]">Donasi Sekarang</button>
+                                                
+                                                @if($campaign->volunteer_target > 0)
+                                                    @php
+                                                        $volPercentage = min(100, round(($campaign->volunteers_count / $campaign->volunteer_target) * 100));
+                                                    @endphp
+                                                    <div class="border-t border-gray-100 mt-2 pt-3">
+                                                        <div class="flex justify-between text-xs mb-1.5"><span class="font-bold text-[#12355B]">{{ $campaign->volunteers_count }} Relawan</span><span class="text-[#62758A]">dari {{ $campaign->volunteer_target }}</span></div>
+                                                        <div class="h-1.5 w-full overflow-hidden rounded-full bg-[#EEEAE4] mb-3"><div class="h-full rounded-full bg-[#12355B]" style="width: {{ $volPercentage }}%;"></div></div>
+                                                        @if(in_array($campaign->id, $registeredCampaignIds ?? []))
+                                                            <button onclick="event.stopPropagation(); event.preventDefault();" class="w-full rounded-xl bg-gray-100 py-2.5 text-xs font-bold text-gray-400 cursor-not-allowed flex justify-center items-center gap-1.5">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                                                Terdaftar
+                                                            </button>
+                                                        @else
+                                                            <button onclick="window.location.href='/relawan/daftar?campaign_id={{ $campaign->id }}'; event.stopPropagation(); event.preventDefault();" class="w-full rounded-xl bg-white border border-[#12355B] py-2.5 text-xs font-bold text-[#12355B] transition hover:bg-gray-50 flex justify-center items-center gap-1.5">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-plus"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="22" y1="11" x2="16" y2="11"></line></svg>
+                                                                Daftar Relawan
+                                                            </button>
+                                                        @endif
+                                                    </div>
+                                                @endif
+                                            </div>
                                         </article>
                                     @empty
                                         <p class="text-sm text-gray-500 col-span-2 text-center py-10">Belum ada program saat ini.</p>
@@ -345,7 +415,6 @@
                                 </div>
                                 
                                 <div class="mt-8">
-                                    {{ $campaigns->links() }}
                                 </div>
                             </div>
                         </div>
@@ -358,7 +427,8 @@
                 <button hx-get="/explore" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex flex-1 flex-col items-center gap-1 text-[10px] font-bold text-[#D62828]"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>Jelajah</button>
                 <button hx-get="/donate" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="-mt-5 grid h-13 w-13 place-items-center rounded-full border-4 border-[#FBFAF7] bg-[#D62828] text-white shadow-lg active:scale-95 transition-transform" aria-label="Donasi Cepat"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg></button>
                 <button hx-get="/history" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex flex-1 flex-col items-center gap-1 text-[10px] font-bold text-[#8192A3] hover:text-[#D62828]"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-receipt-text"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"></path><path d="M14 8H8"></path><path d="M16 12H8"></path><path d="M13 16H8"></path></svg>Riwayat</button>
-                <button hx-get="/account" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex flex-1 flex-col items-center gap-1 text-[10px] font-bold text-[#8192A3] hover:text-[#D62828]"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 0 0-16 0"></path></svg>Akun</button>
+                                                
+                                <button hx-get="/account" hx-push-url="true" hx-target="body" hx-swap="outerHTML transition:true" class="flex flex-1 flex-col items-center gap-1 text-[10px] font-bold text-[#8192A3] hover:text-[#D62828]"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 0 0-16 0"></path></svg>Akun</button>
             </nav>
         </main>
     </div>

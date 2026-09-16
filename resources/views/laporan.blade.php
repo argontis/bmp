@@ -31,8 +31,8 @@
     </script>
     
     <style>
-        .css-uwf2km {position: relative; flex: 1 0 0; display: block;}
-        .css-fou3uo {min-height: 1px; width: 100%; height: 100dvh;}
+        .css-uwf2km {position: relative; flex: 1 0 0; display: flex; flex-direction: column;}
+        .css-fou3uo {min-height: 100vh; width: 100%;}
     </style>
 </head>
 <body>
@@ -44,7 +44,7 @@
                     <div class="absolute top-0 inset-x-0 h-[3px] transition-opacity duration-300 opacity-100" style="background: linear-gradient(90deg, rgb(214, 40, 40), rgb(214, 40, 40) 50%, rgb(255, 255, 255) 50%);"></div>
                     <div class="max-w-[1280px] mx-auto px-6 h-full flex items-center justify-between gap-6">
                         <a href="#" class="shrink-0 block">
-                            <img src="/images/logo.png" alt="Bakti Merah Putih" class="h-14 w-auto object-contain transition-opacity duration-300">
+                            <img src="/images/logo.webp" alt="Bakti Merah Putih" class="h-14 w-auto object-contain transition-opacity duration-300">
                         </a>
                         <nav class="hidden xl:flex items-center gap-0.5">
                             <button onclick="window.location.href='/'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">
@@ -247,7 +247,7 @@
                         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 pb-12 border-b border-white/[0.08]">
                             <div>
                                 <div class="mb-5">
-                                    <img src="/images/logo.png" alt="Bakti Merah Putih" class="h-14 w-auto object-contain">
+                                    <img src="/images/logo.webp" alt="Bakti Merah Putih" class="h-14 w-auto object-contain">
                                 </div>
                                 <p class="text-white/50 text-[13px] leading-relaxed mb-6">Bergerak bersama untuk Indonesia yang lebih baik. Sejak 2015, kami telah menyentuh jutaan kehidupan di 28 provinsi.</p>
                                 <div class="flex items-center gap-2.5">
@@ -283,7 +283,7 @@
                                 <ul class="space-y-4">
                                     <li class="flex items-start gap-3 text-white/55 text-[13px]">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 shrink-0 mt-0.5 text-white/30"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                        <a href="https://maps.app.goo.gl/UVL5JZcLoiSfMHMb6" target="_blank" class="hover:text-white transition-colors">Jl. RS. Fatmawati Raya No.28 AA 1, RT.1/RW.5, Cipete Sel., Kec. Cilandak, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12420</a>
+                                        <a href="https://maps.app.goo.gl/UVL5JZcLoiSfMHMb6" target="_blank" class="hover:text-white transition-colors">Jl. Sudirman No. 45, Kel. Karet Semanggi, Jakarta Pusat 10220</a>
                                     </li>
                                     <li class="flex items-center gap-3 text-white/55 text-[13px]">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone w-4 h-4 text-white/30"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
@@ -331,7 +331,7 @@
                 if (window.scrollY > 20) {
                     header.classList.remove('bg-transparent');
                     header.classList.add('bg-white', 'shadow-sm');
-                    logo.src = '/images/logo2.png';
+                    logo.src = '/images/logo2.webp';
                     
                     if (mobileMenuBtn) {
                         mobileMenuBtn.style.color = '#1B1B1B';
@@ -343,7 +343,7 @@
                 } else {
                     header.classList.add('bg-transparent');
                     header.classList.remove('bg-white', 'shadow-sm');
-                    logo.src = '/images/logo.png';
+                    logo.src = '/images/logo.webp';
                     
                     if (mobileMenuBtn) {
                         mobileMenuBtn.style.color = 'white';

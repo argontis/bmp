@@ -55,4 +55,51 @@ class ReportController extends Controller
 
         return response()->stream($callback, 200, $headers);
     }
+
+    public function index(Request $request)
+    {
+        $year = $request->query('year', date('Y'));
+        
+        $globalDonations = \App\Models\Donation::whereYear('created_at', $year)
+                                              ->where('status', 'Berhasil')
+                                              ->count();
+                                              
+        $globalNominal = \App\Models\Donation::whereYear('created_at', $year)
+                                            ->where('status', 'Berhasil')
+                                            ->sum('amount');
+                                            
+        $globalVolunteers = \App\Models\Volunteer::whereYear('created_at', $year)->count();
+        $globalCampaigns = \App\Models\Campaign::whereYear('created_at', $year)->count();
+
+        $userDonations = 0;
+        $userNominal = 0;
+        $userVolunteered = 0;
+
+        if (auth()->check()) {
+            $userDonations = \App\Models\Donation::where('user_id', auth()->id())
+                                ->whereYear('created_at', $year)
+                                ->where('status', 'Berhasil')
+                                ->count();
+                                
+            $userNominal = \App\Models\Donation::where('user_id', auth()->id())
+                                ->whereYear('created_at', $year)
+                                ->where('status', 'Berhasil')
+                                ->sum('amount');
+                                
+            $userVolunteered = \App\Models\Volunteer::where('email', auth()->user()->email)
+                                ->whereYear('created_at', $year)
+                                ->count();
+        }
+
+        return view('laporan', compact(
+            'year', 
+            'globalDonations', 
+            'globalNominal', 
+            'globalVolunteers', 
+            'globalCampaigns',
+            'userDonations',
+            'userNominal',
+            'userVolunteered'
+        ));
+    }
 }

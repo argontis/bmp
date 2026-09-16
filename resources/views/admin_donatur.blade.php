@@ -35,7 +35,7 @@
         <!-- Sidebar -->
     <aside class="w-[280px] bg-secondary flex flex-col h-screen shrink-0 relative overflow-hidden hidden md:flex">
         <div class="p-8 border-b border-white/10 relative z-10 flex items-center justify-center">
-            <img src="/images/logo.png" alt="Logo BMP" class="h-16 w-auto object-contain">
+            <img src="/images/logo.webp" alt="Logo BMP" class="h-16 w-auto object-contain">
         </div>
         
         <nav class="flex-1 py-8 px-4 overflow-y-auto relative z-10 space-y-2">
@@ -50,10 +50,6 @@
             <a href="{{ route('admin.donatur') }}" class="flex items-center gap-4 px-4 py-3.5 rounded-xl bg-primary text-white font-bold shadow-lg shadow-red-500/20 transition-all font-medium">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 Data Donatur
-            </a>
-            <a href="{{ route('admin.relawan') }}" class="flex items-center gap-4 px-4 py-3.5 rounded-xl text-white/70 hover:text-white hover:bg-white/10 transition-all font-medium">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-handshake"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08v0c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"/><path d="m18 15-2-2"/><path d="m15 18-2-2"/></svg>
-                Data Relawan
             </a>
             <a href="{{ route('admin.galeri') }}" class="flex items-center gap-4 px-4 py-3.5 rounded-xl text-white/70 hover:text-white hover:bg-white/10 transition-all font-medium">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
@@ -151,7 +147,7 @@
                                     <p class="text-gray-500 font-medium">{{ $donor->email }}</p>
                                 </td>
                                 <td class="py-5 px-8">
-                                    <p class="font-extrabold text-secondary">Rp {{ number_format($donor->total_donation ?? 0, 0, ',', '.') }}</p>
+                                    <p class="font-extrabold text-secondary">Rp {{ number_format($donor->donations_sum_amount ?? 0, 0, ',', '.') }}</p>
                                 </td>
                                 <td class="py-5 px-8">
                                     @if($donor->rfm_score)

@@ -21,6 +21,7 @@ class Campaign extends Model
         'label',
         'slug',
         'volunteer_target',
+        'activity_date',
     ];
 
     public function donations()

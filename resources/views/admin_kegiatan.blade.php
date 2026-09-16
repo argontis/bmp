@@ -42,7 +42,7 @@
         <!-- Sidebar -->
     <aside class="w-[280px] bg-secondary flex flex-col h-screen shrink-0 relative overflow-hidden hidden md:flex">
         <div class="p-8 border-b border-white/10 relative z-10 flex items-center justify-center">
-            <img src="/images/logo.png" alt="Logo BMP" class="h-16 w-auto object-contain">
+            <img src="/images/logo.webp" alt="Logo BMP" class="h-16 w-auto object-contain">
         </div>
         
         <nav class="flex-1 py-8 px-4 overflow-y-auto relative z-10 space-y-2">
@@ -57,10 +57,6 @@
             <a href="{{ route('admin.donatur') }}" class="flex items-center gap-4 px-4 py-3.5 rounded-xl text-white/70 hover:text-white hover:bg-white/10 transition-all font-medium">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 Data Donatur
-            </a>
-            <a href="{{ route('admin.relawan') }}" class="flex items-center gap-4 px-4 py-3.5 rounded-xl text-white/70 hover:text-white hover:bg-white/10 transition-all font-medium">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-handshake"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08v0c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"/><path d="m18 15-2-2"/><path d="m15 18-2-2"/></svg>
-                Data Relawan
             </a>
             <a href="{{ route('admin.galeri') }}" class="flex items-center gap-4 px-4 py-3.5 rounded-xl text-white/70 hover:text-white hover:bg-white/10 transition-all font-medium">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
@@ -146,7 +142,7 @@
                             <tr class="bg-gray-50/50">
                                 <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Nama Kegiatan</th>
                                 <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Lokasi</th>
-                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Jumlah Nominal</th>
+                                <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Donasi (Terkumpul / Target)</th>
                                 <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Kategori</th>
                                 <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">Status</th>
                                 <th class="py-4 px-8 font-bold text-gray-500 text-sm border-b border-gray-100 uppercase tracking-wider">RFM Score</th>
@@ -158,7 +154,24 @@
                             @forelse($campaigns as $campaign)
                             <tr class="hover:bg-gray-50/50 transition-colors group">
                                 <td class="py-5 px-8">
-                                    <p class="font-bold text-secondary">{{ $campaign->name }}</p>
+                                    <div class="flex items-center gap-4">
+                                        @if($campaign->image)
+                                            <img src="{{ Str::startsWith($campaign->image, 'images/') ? asset($campaign->image) : Storage::url($campaign->image) }}" alt="{{ $campaign->name }}" class="w-12 h-12 rounded-xl object-cover shadow-sm">
+                                        @else
+                                            <div class="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center shadow-sm">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>
+                                            </div>
+                                        @endif
+                                        <div>
+                                            <p class="font-bold text-secondary">{{ $campaign->name }}</p>
+                                            @if($campaign->activity_date)
+                                                <p class="text-xs text-gray-500 mt-1 flex items-center gap-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-days"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+                                                    {{ \Carbon\Carbon::parse($campaign->activity_date)->translatedFormat('d M Y') }}
+                                                </p>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </td>
                                 <td class="py-5 px-8">
                                     <div class="flex items-center gap-2 text-gray-600 font-medium text-sm">
@@ -167,7 +180,10 @@
                                     </div>
                                 </td>
                                 <td class="py-5 px-8">
-                                    <p class="font-extrabold text-secondary">Rp {{ number_format($campaign->nominal, 0, ',', '.') }}</p>
+                                    <div class="flex flex-col">
+                                        <span class="font-extrabold text-[#D62828]">Rp {{ number_format($campaign->donations->where('status', 'Berhasil')->sum('amount'), 0, ',', '.') }}</span>
+                                        <span class="text-xs text-gray-500 font-medium mt-1">Target: Rp {{ number_format($campaign->nominal, 0, ',', '.') }}</span>
+                                    </div>
                                 </td>
                                 <td class="py-5 px-8">
                                     <span class="inline-flex px-3 py-1 bg-gray-100 text-gray-600 font-bold text-xs rounded-lg border border-gray-200">{{ $campaign->category ?? '-' }}</span>
@@ -248,7 +264,7 @@
                     </button>
                 </div>
                 <!-- Body -->
-                <form action="{{ route('admin.kegiatan.store') }}" method="POST">
+                <form action="{{ route('admin.kegiatan.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="relative p-8 flex-auto space-y-5">
                         
@@ -299,6 +315,21 @@
                             </div>
                         </div>
 
+                        <div>
+                            <label class="block text-sm font-bold text-secondary mb-2">Tanggal Kegiatan</label>
+                            <input type="date" name="activity_date" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-bold text-secondary mb-2">Deskripsi Kegiatan</label>
+                            <textarea name="description" rows="3" placeholder="Tuliskan detail kegiatan di sini..." class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-secondary mb-2">Gambar / Thumbnail</label>
+                            <input type="file" name="image" accept="image/*" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all bg-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20">
+                        </div>
+
                     </div>
                     <!-- Footer -->
                     <div class="flex items-center justify-end p-6 border-t border-solid border-gray-100 rounded-b gap-3 bg-gray-50/50">
@@ -328,7 +359,7 @@
                         </span>
                     </button>
                 </div>
-                <form action="{{ route('admin.kegiatan.update', $campaign->id) }}" method="POST">
+                <form action="{{ route('admin.kegiatan.update', $campaign->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="relative p-8 flex-auto space-y-5">
@@ -374,6 +405,26 @@
                                     <option value="Selesai" {{ $campaign->status == 'Selesai' ? 'selected' : '' }}>Selesai</option>
                                 </select>
                             </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-bold text-secondary mb-2">Tanggal Kegiatan</label>
+                            <input type="date" name="activity_date" value="{{ $campaign->activity_date }}" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-bold text-secondary mb-2">Deskripsi Kegiatan</label>
+                            <textarea name="description" rows="3" placeholder="Tuliskan detail kegiatan di sini..." class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">{{ $campaign->description }}</textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-secondary mb-2">Gambar / Thumbnail</label>
+                            @if($campaign->image)
+                                <div class="mb-3">
+                                    <img src="{{ Str::startsWith($campaign->image, 'images/') ? asset($campaign->image) : Storage::url($campaign->image) }}" alt="{{ $campaign->name }}" class="w-32 h-32 rounded-xl object-cover shadow-sm border border-gray-200">
+                                </div>
+                            @endif
+                            <input type="file" name="image" accept="image/*" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all bg-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20">
                         </div>
                     </div>
                     <div class="flex items-center justify-end p-6 border-t border-solid border-gray-100 rounded-b gap-3 bg-gray-50/50">

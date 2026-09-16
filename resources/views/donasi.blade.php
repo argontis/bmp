@@ -12,28 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS (CDN for rapid prototyping) -->
-    <script src="https://cdn.tailwindcss.com">
-        function selectNominal(btnElement, amount) {
-            // Update buttons
-            document.querySelectorAll('.nominal-btn').forEach(btn => {
-                btn.classList.remove('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
-                btn.classList.add('border-gray-100', 'text-[#1B1B1B]');
-            });
-            btnElement.classList.remove('border-gray-100', 'text-[#1B1B1B]');
-            btnElement.classList.add('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
-            
-            // Clear input
-            document.getElementById('customNominal').value = '';
-        }
-        
-        function clearNominalButtons() {
-            document.querySelectorAll('.nominal-btn').forEach(btn => {
-                btn.classList.remove('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
-                btn.classList.add('border-gray-100', 'text-[#1B1B1B]');
-            });
-        }
-
-    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -49,32 +28,11 @@
                 }
             }
         }
-    
-        function selectNominal(btnElement, amount) {
-            // Update buttons
-            document.querySelectorAll('.nominal-btn').forEach(btn => {
-                btn.classList.remove('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
-                btn.classList.add('border-gray-100', 'text-[#1B1B1B]');
-            });
-            btnElement.classList.remove('border-gray-100', 'text-[#1B1B1B]');
-            btnElement.classList.add('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
-            
-            // Clear input
-            document.getElementById('customNominal').value = '';
-        }
-        
-        function clearNominalButtons() {
-            document.querySelectorAll('.nominal-btn').forEach(btn => {
-                btn.classList.remove('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
-                btn.classList.add('border-gray-100', 'text-[#1B1B1B]');
-            });
-        }
-
     </script>
     
     <style>
-        .css-uwf2km {position: relative; flex: 1 0 0; display: block;}
-        .css-fou3uo {min-height: 1px; width: 100%; height: 100dvh;}
+        .css-uwf2km {position: relative; flex: 1 0 0; display: flex; flex-direction: column;}
+        .css-fou3uo {min-height: 100vh; width: 100%;}
     </style>
 </head>
 <body>
@@ -86,7 +44,7 @@
                     <div class="absolute top-0 inset-x-0 h-[3px] transition-opacity duration-300 opacity-100" style="background: linear-gradient(90deg, rgb(214, 40, 40), rgb(214, 40, 40) 50%, rgb(255, 255, 255) 50%);"></div>
                     <div class="max-w-[1280px] mx-auto px-6 h-full flex items-center justify-between gap-6">
                         <a href="#" class="shrink-0 block">
-                            <img src="/images/logo.png" alt="Bakti Merah Putih" class="h-14 w-auto object-contain transition-opacity duration-300">
+                            <img src="/images/logo.webp" alt="Bakti Merah Putih" class="h-14 w-auto object-contain transition-opacity duration-300">
                         </a>
                         <nav class="hidden xl:flex items-center gap-0.5">
                             <button onclick="window.location.href='/'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">
@@ -134,62 +92,46 @@
                     <div class="max-w-[1280px] mx-auto px-6 -mt-20 relative z-20 pb-24">
                         <div class="grid lg:grid-cols-12 gap-10">
                             
-                            <!-- Kiri: Pilihan Program Spesifik -->
+                            <!-- Loop Program Dinamis -->
                             <div class="lg:col-span-7 space-y-6">
-                                <!-- Card Program Mendesak -->
-                                <div id="card-bencana" onclick="selectProgram('bencana')" class="program-card cursor-pointer bg-white rounded-3xl p-6 shadow-xl border-2 border-transparent hover:border-[#D62828]/30 flex flex-col sm:flex-row gap-6 hover:-translate-y-1 transition-all duration-300 ring-2 ring-[#D62828]">
-                                    <div class="w-full sm:w-48 h-40 rounded-2xl overflow-hidden shrink-0 relative">
-                                        <img src="/images/donasi-bencana.png" class="w-full h-full object-cover" alt="Bencana">
-                                        <span class="absolute top-2 left-2 bg-[#D62828] text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">Darurat</span>
-                                    </div>
-                                    <div class="flex-1 flex flex-col justify-center">
-                                        <h3 class="text-xl font-extrabold text-[#1B1B1B] mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Bantuan Bencana Cianjur</h3>
-                                        <p class="text-sm text-gray-500 mb-4 line-clamp-2">Ribuan keluarga masih mengungsi akibat gempa. Bantuan makanan, tenda darurat, dan selimut sangat dibutuhkan.</p>
-                                        <div class="w-full bg-gray-100 h-2 rounded-full mb-2">
-                                            <div class="bg-[#D62828] h-full rounded-full" style="width: 78%"></div>
+                                @forelse($campaigns as $index => $campaign)
+                                    @php
+                                        $terkumpul = $campaign->donations->where('status', 'Berhasil')->sum('amount');
+                                        $target = $campaign->nominal;
+                                        $persentase = $target > 0 ? min(100, round(($terkumpul / $target) * 100)) : 0;
+                                        $bgColorClass = $index % 3 == 0 ? 'bg-[#D62828]' : ($index % 3 == 1 ? 'bg-blue-600' : 'bg-teal-600');
+                                        $textColorClass = $index % 3 == 0 ? 'text-[#D62828]' : ($index % 3 == 1 ? 'text-blue-600' : 'text-teal-600');
+                                    @endphp
+                                    <div id="card-{{ $campaign->slug }}" onclick="selectProgram('{{ $campaign->slug }}', '{{ addslashes($campaign->name) }}')" class="program-card cursor-pointer bg-white rounded-3xl p-6 shadow-sm border-2 border-transparent hover:border-[#D62828]/30 flex flex-col sm:flex-row gap-6 hover:-translate-y-1 transition-all duration-300 {{ $loop->first ? 'ring-2 ring-[#D62828] shadow-xl' : '' }}">
+                                        <div class="w-full sm:w-48 h-40 rounded-2xl overflow-hidden shrink-0 relative bg-[#12355B]/5">
+                                            <img src="{{ asset($campaign->image) }}" class="w-full h-full object-cover" alt="{{ $campaign->name }}">
+                                            @if($campaign->label)
+                                            <span class="absolute top-2 left-2 bg-[#D62828] text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">{{ $campaign->label }}</span>
+                                            @endif
                                         </div>
-                                        <div class="flex items-center justify-between text-xs font-semibold">
-                                            <span class="text-[#D62828]">Terkumpul: Rp 78.500.000</span>
-                                            <span class="text-gray-400">Target: 100 Juta</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Card Program Umum -->
-                                <div id="card-guru" onclick="selectProgram('guru')" class="program-card cursor-pointer bg-white rounded-3xl p-6 shadow-sm border-2 border-transparent hover:border-[#D62828]/30 flex flex-col sm:flex-row gap-6 hover:-translate-y-1 transition-all duration-300">
-                                    <div class="w-full sm:w-48 h-40 rounded-2xl overflow-hidden shrink-0 relative">
-                                        <img src="/images/program-guru.png" class="w-full h-full object-cover" alt="Guru">
-                                    </div>
-                                    <div class="flex-1 flex flex-col justify-center">
-                                        <h3 class="text-xl font-extrabold text-[#1B1B1B] mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Bakti Guru Pelosok</h3>
-                                        <p class="text-sm text-gray-500 mb-4 line-clamp-2">Pemberian tunjangan kepada 500 guru honorer di daerah 3T untuk menunjang semangat mendidik anak bangsa.</p>
-                                        <div class="w-full bg-gray-100 h-2 rounded-full mb-2">
-                                            <div class="bg-blue-600 h-full rounded-full" style="width: 45%"></div>
-                                        </div>
-                                        <div class="flex items-center justify-between text-xs font-semibold">
-                                            <span class="text-blue-600">Terkumpul: Rp 45.000.000</span>
-                                            <span class="text-gray-400">Target: 100 Juta</span>
+                                        <div class="flex-1 flex flex-col justify-center">
+                                            <h3 class="text-xl font-extrabold text-[#1B1B1B] mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">{{ $campaign->name }}</h3>
+                                            @if(!empty($campaign->activity_date))
+                                            <div class="mb-2 flex items-center gap-1.5 text-xs font-semibold text-gray-500">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-days"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg>
+                                                {{ \Carbon\Carbon::parse($campaign->activity_date)->translatedFormat('d F Y') }}
+                                            </div>
+                                            @endif
+                                            <p class="text-sm text-gray-500 mb-4 line-clamp-2">{{ $campaign->description }}</p>
+                                            <div class="w-full bg-gray-100 h-2 rounded-full mb-2">
+                                                <div class="{{ $bgColorClass }} h-full rounded-full" style="width: {{ $persentase }}%"></div>
+                                            </div>
+                                            <div class="flex items-center justify-between text-xs font-semibold">
+                                                <span class="{{ $textColorClass }}">Terkumpul: Rp {{ number_format($terkumpul, 0, ',', '.') }}</span>
+                                                <span class="text-gray-400">Target: Rp {{ number_format($target, 0, ',', '.') }}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <!-- Card Program Umum 2 -->
-                                <div id="card-lingkungan" onclick="selectProgram('lingkungan')" class="program-card cursor-pointer bg-white rounded-3xl p-6 shadow-sm border-2 border-transparent hover:border-[#D62828]/30 flex flex-col sm:flex-row gap-6 hover:-translate-y-1 transition-all duration-300">
-                                    <div class="w-full sm:w-48 h-40 rounded-2xl overflow-hidden shrink-0 relative">
-                                        <img src="/images/program-lingkungan.png" class="w-full h-full object-cover" alt="Air Bersih">
+                                @empty
+                                    <div class="text-center py-10 bg-white rounded-3xl border border-gray-100">
+                                        <p class="text-gray-500 font-medium">Belum ada program donasi aktif.</p>
                                     </div>
-                                    <div class="flex-1 flex flex-col justify-center">
-                                        <h3 class="text-xl font-extrabold text-[#1B1B1B] mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Pembangunan Sumur Bor</h3>
-                                        <p class="text-sm text-gray-500 mb-4 line-clamp-2">Desa-desa di NTT mengalami krisis air bersih berkepanjangan. Mari patungan bangun 10 titik sumur bor air.</p>
-                                        <div class="w-full bg-gray-100 h-2 rounded-full mb-2">
-                                            <div class="bg-teal-600 h-full rounded-full" style="width: 25%"></div>
-                                        </div>
-                                        <div class="flex items-center justify-between text-xs font-semibold">
-                                            <span class="text-teal-600">Terkumpul: Rp 25.000.000</span>
-                                            <span class="text-gray-400">Target: 100 Juta</span>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforelse
                             </div>
                             
                             <!-- Kanan: Form Donasi Cepat -->
@@ -198,10 +140,11 @@
                                     <div class="mb-6">
                                         <label class="block text-sm font-bold text-[#1B1B1B] mb-2">Program Pilihan</label>
                                         <div id="selectedProgramLabel" class="w-full py-3.5 px-4 rounded-xl bg-red-50 border border-[#D62828]/20 text-[#D62828] font-bold text-[15px] flex items-center gap-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-5 h-5 fill-current"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
-                                            <span>Donasi Reguler Umum</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle-2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                                            <span>{{ $campaigns->first()->name ?? 'Pilih Program' }}</span>
                                         </div>
-                                        <input type="hidden" id="programInput" name="program" value="umum">
+                                        <input type="hidden" id="programInput" name="program" value="{{ $campaigns->first()->id ?? 1 }}">
+                                        <input type="hidden" id="programTitle" value="{{ $campaigns->first()->name ?? 'Program Donasi' }}">
                                     </div>
                                     
                                     <div>
@@ -223,12 +166,12 @@
                                         <input type="number" id="customNominal" onfocus="clearNominalButtons()" placeholder="Nominal Lainnya" class="w-full py-3.5 pl-12 pr-4 rounded-xl bg-gray-50 border border-gray-200 text-[#1B1B1B] font-bold text-sm outline-none focus:border-[#D62828] focus:bg-white transition-colors">
                                     </div>
                                     
-                                    <button class="w-full py-4 rounded-2xl bg-[#D62828] text-white font-extrabold text-sm hover:bg-[#B91C1C] transition-colors shadow-[0_8px_20px_-8px_rgba(214,40,40,0.7)] hover:-translate-y-0.5" onclick="window.location.href='/login'">Lanjutkan Pembayaran</button>
+                                    <button class="w-full py-4 rounded-2xl bg-[#D62828] text-white font-extrabold text-sm hover:bg-[#B91C1C] transition-colors shadow-[0_8px_20px_-8px_rgba(214,40,40,0.7)] hover:-translate-y-0.5" onclick="prosesPembayaran()">Lanjutkan Pembayaran</button>
                                     
                                     <div class="mt-6 pt-6 border-t border-gray-100 flex items-center justify-center gap-4 grayscale opacity-60">
-                                        <img src="/logo/GoPay Logo - Colored - zonalogo.com.png" class="h-4 object-contain" alt="Gopay">
-                                        <img src="/logo/Dana App Icon - Colored - zonalogo.com.png" class="h-4 object-contain" alt="Dana">
-                                        <img src="/logo/Bank Central Asia (BCA) Logo - Colored - 818x256 - zonalogo.com.png" class="h-5 object-contain" alt="BCA">
+                                        <img src="/logo/GoPay Logo - Colored - zonalogo.com.webp" class="h-4 object-contain" alt="Gopay">
+                                        <img src="/logo/Dana App Icon - Colored - zonalogo.com.webp" class="h-4 object-contain" alt="Dana">
+                                        <img src="/logo/Bank Central Asia (BCA) Logo - Colored - 818x256 - zonalogo.com.webp" class="h-5 object-contain" alt="BCA">
                                     </div>
                                 </div>
                             </div>
@@ -242,7 +185,7 @@
                         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 pb-12 border-b border-white/[0.08]">
                             <div>
                                 <div class="mb-5">
-                                    <img src="/images/logo.png" alt="Bakti Merah Putih" class="h-14 w-auto object-contain">
+                                    <img src="/images/logo.webp" alt="Bakti Merah Putih" class="h-14 w-auto object-contain">
                                 </div>
                                 <p class="text-white/50 text-[13px] leading-relaxed mb-6">Bergerak bersama untuk Indonesia yang lebih baik. Sejak 2015, kami telah menyentuh jutaan kehidupan di 28 provinsi.</p>
                                 <div class="flex items-center gap-2.5">
@@ -278,7 +221,7 @@
                                 <ul class="space-y-4">
                                     <li class="flex items-start gap-3 text-white/55 text-[13px]">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 shrink-0 mt-0.5 text-white/30"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                        <a href="https://maps.app.goo.gl/UVL5JZcLoiSfMHMb6" target="_blank" class="hover:text-white transition-colors">Jl. RS. Fatmawati Raya No.28 AA 1, RT.1/RW.5, Cipete Sel., Kec. Cilandak, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12420</a>
+                                        <a href="https://maps.app.goo.gl/bVA5qdGNFRjgWd2d9" target="_blank" class="hover:text-white transition-colors">Jl. RS. Fatmawati Raya No.28 AA 1, RT.1/RW.5, Cipete Sel., Kec. Cilandak, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12420</a>
                                     </li>
                                     <li class="flex items-center gap-3 text-white/55 text-[13px]">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone w-4 h-4 text-white/30"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
@@ -326,7 +269,7 @@
                 if (window.scrollY > 20) {
                     header.classList.remove('bg-transparent');
                     header.classList.add('bg-white', 'shadow-sm');
-                    logo.src = '/images/logo2.png';
+                    logo.src = '/images/logo2.webp';
                     
                     if (mobileMenuBtn) {
                         mobileMenuBtn.style.color = '#1B1B1B';
@@ -338,7 +281,7 @@
                 } else {
                     header.classList.add('bg-transparent');
                     header.classList.remove('bg-white', 'shadow-sm');
-                    logo.src = '/images/logo.png';
+                    logo.src = '/images/logo.webp';
                     
                     if (mobileMenuBtn) {
                         mobileMenuBtn.style.color = 'white';
@@ -350,47 +293,21 @@
                 }
             });
         });
-    
-        function selectNominal(btnElement, amount) {
-            // Update buttons
-            document.querySelectorAll('.nominal-btn').forEach(btn => {
-                btn.classList.remove('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
-                btn.classList.add('border-gray-100', 'text-[#1B1B1B]');
-            });
-            btnElement.classList.remove('border-gray-100', 'text-[#1B1B1B]');
-            btnElement.classList.add('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
-            
-            // Clear input
-            document.getElementById('customNominal').value = '';
-        }
-        
-        function clearNominalButtons() {
-            document.querySelectorAll('.nominal-btn').forEach(btn => {
-                btn.classList.remove('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
-                btn.classList.add('border-gray-100', 'text-[#1B1B1B]');
-            });
-        }
-
     </script>
 
     <script>
-        const programNames = {
-            'umum': 'Donasi Reguler Umum',
-            'bencana': 'Bantuan Bencana Cianjur',
-            'guru': 'Bakti Guru Pelosok',
-            'lingkungan': 'Pembangunan Sumur Bor'
-        };
-
-        function selectProgram(val) {
+        function selectProgram(id, slug, name) {
             const input = document.getElementById('programInput');
-            if (input) input.value = val;
+            if (input) input.value = id;
+            const titleInput = document.getElementById('programTitle');
+            if (titleInput && name) titleInput.value = name;
             
             const labelSpan = document.querySelector('#selectedProgramLabel span');
-            if (labelSpan && programNames[val]) {
-                labelSpan.textContent = programNames[val];
+            if (labelSpan && name) {
+                labelSpan.textContent = name;
             }
             
-            highlightCard(val);
+            highlightCard(slug);
         }
         
         function highlightCard(val) {
@@ -409,10 +326,13 @@
                 activeCard.classList.add('ring-2', 'ring-[#D62828]', 'shadow-xl', 'border-transparent');
             }
         }
-        
+    </script>
 
-    
+<script>
+
+        let selectedAmount = 0;
         function selectNominal(btnElement, amount) {
+            selectedAmount = amount;
             // Update buttons
             document.querySelectorAll('.nominal-btn').forEach(btn => {
                 btn.classList.remove('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
@@ -426,13 +346,29 @@
         }
         
         function clearNominalButtons() {
+            selectedAmount = 0;
             document.querySelectorAll('.nominal-btn').forEach(btn => {
                 btn.classList.remove('border-[#D62828]', 'bg-red-50', 'text-[#D62828]');
                 btn.classList.add('border-gray-100', 'text-[#1B1B1B]');
             });
         }
+        
+        function prosesPembayaran() {
+            let nominal = document.getElementById('customNominal').value;
+            if (!nominal || nominal <= 0) {
+                nominal = selectedAmount;
+            }
+            if (!nominal || nominal <= 0) {
+                alert("Silakan pilih atau masukkan nominal donasi");
+                return;
+            }
+            
+            let campaignId = document.getElementById('programInput').value;
+            let title = document.getElementById('programTitle').value;
+            
+            window.location.href = `/pembayaran?nominal=${nominal}&campaign_id=${campaignId}&payment=QRIS&category=Donasi&title=${encodeURIComponent(title)}`;
+        }
 
-    </script>
-
+</script>
 </body>
 </html>

@@ -5,7 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
-    return view('welcome');
+    $campaigns = \App\Models\Campaign::with('donations')->orderBy('created_at', 'desc')->take(3)->get();
+    return view('welcome', compact('campaigns'));
 });
 
 Route::get('/login', function () {
@@ -40,11 +41,24 @@ Route::get('/auth/google/callback', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/explore', [\App\Http\Controllers\ExploreController::class, 'index'])->name('explore');
     
     Route::get('/account', [\App\Http\Controllers\AccountController::class, 'index'])->name('account');
 
     Route::get('/history', [\App\Http\Controllers\HistoryController::class, 'index'])->name('history');
 
+    Route::get('/sertifikat/download', function () {
+        $pdf = Barryvdh\DomPDF\Facade\Pdf::loadView('sertifikat');
+        return $pdf->download('Sertifikat_Kebaikan_' . auth()->user()->name . '.pdf');
+    })->name('sertifikat.download');
+
+
+    Route::get('/user/relawan', function () {
+        $volunteers = \App\Models\Volunteer::where('email', auth()->user()->email)->with('campaign')->orderBy('created_at', 'desc')->get();
+        return view('user_relawan', compact('volunteers'));
+    })->name('user.relawan');
+
+    Route::post('/user/relawan/{id}/konfirmasi', [\App\Http\Controllers\VolunteerController::class, 'konfirmasi'])->name('user.relawan.konfirmasi');
     Route::get('/pembayaran', function (\Illuminate\Http\Request $request) {
         return view('pembayaran', [
             'nominal' => $request->query('nominal'),
@@ -74,8 +88,6 @@ Route::middleware('auth')->group(function () {
     })->name('pembayaran.process');
 });
 
-Route::get('/explore', [\App\Http\Controllers\ExploreController::class, 'index'])->name('explore');
-
 Route::get('/donate', function () {
     return view('donate');
 })->name('donate');
@@ -89,7 +101,12 @@ Route::get('/dampak', function () {
 })->name('dampak');
 
 Route::get('/darurat', function () {
-    return view('darurat');
+    $campaigns = \App\Models\Campaign::with('donations')
+        ->where('label', 'like', '%Darurat%')
+        ->orWhere('category', 'Kebencanaan')
+        ->orWhere('category', 'Sosial & Kemanusiaan')
+        ->get();
+    return view('darurat', compact('campaigns'));
 })->name('darurat');
 
 Route::get('/tentang-kami', function () {
@@ -125,12 +142,11 @@ Route::get('/program/bakti-bencana', function () {
 })->name('program.bakti-bencana');
 
 Route::get('/donasi', function () {
-    return view('donasi');
+    $campaigns = \App\Models\Campaign::with('donations')->where('status', 'Aktif')->latest()->take(3)->get();
+    return view('donasi', compact('campaigns'));
 })->name('donasi');
 
-Route::get('/laporan', function () {
-    return view('laporan');
-})->name('laporan');
+Route::get('/laporan', [\App\Http\Controllers\ReportController::class, 'index'])->name('laporan');
 
 Route::get('/laporan/download/{year}', [\App\Http\Controllers\ReportController::class, 'download'])->name('laporan.download');
 
@@ -143,7 +159,7 @@ Route::get('/galeri', function () {
 })->name('galeri');
 
 Route::get('/relawan', function () {
-    $campaigns = \App\Models\Campaign::where('volunteer_target', '>', 0)->with('volunteers')->orderBy('created_at', 'desc')->paginate(2);
+    $campaigns = \App\Models\Campaign::where('volunteer_target', '>', 0)->with('volunteers')->orderBy('created_at', 'desc')->take(4)->get();
     return view('relawan', compact('campaigns'));
 })->name('relawan');
 
@@ -171,6 +187,7 @@ Route::get('/relawan/video', function () { return view('relawan_pages.video'); }
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+    Route::get('/admin/laporan', [AdminController::class, 'laporan'])->name('admin.laporan');
     Route::get('/admin/kegiatan', [AdminController::class, 'kegiatan'])->name('admin.kegiatan');
     Route::get('/admin/kegiatan/{id}', [AdminController::class, 'showKegiatan'])->name('admin.kegiatan.show');
     Route::post('/admin/kegiatan', [AdminController::class, 'storeKegiatan'])->name('admin.kegiatan.store');
@@ -180,7 +197,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/transaksi', [AdminController::class, 'transaksi'])->name('admin.transaksi');
     
     // Relawan Admin Routes
-    Route::get('/admin/relawan', [AdminController::class, 'relawan'])->name('admin.relawan');
+
     Route::put('/admin/relawan/{id}', [AdminController::class, 'updateRelawan'])->name('admin.relawan.update');
     Route::delete('/admin/relawan/{id}', [AdminController::class, 'destroyRelawan'])->name('admin.relawan.destroy');
 

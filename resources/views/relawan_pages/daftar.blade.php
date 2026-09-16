@@ -21,8 +21,8 @@
     <!-- Simple Header -->
     <header class="bg-white shadow-sm py-4">
         <div class="max-w-[1280px] mx-auto px-6 flex items-center justify-between">
-            <a href="/" class="shrink-0 block"><img src="/images/logo2.png" alt="Bakti Merah Putih" class="h-10 w-auto object-contain"></a>
-            <a href="/relawan" class="text-sm font-bold text-gray-500 hover:text-[#D62828] transition-colors flex items-center gap-2">
+            <a href="/" class="shrink-0 block"><img src="/images/logo2.webp" alt="Bakti Merah Putih" class="h-10 w-auto object-contain"></a>
+            <a href="{{ url()->previous() }}" class="text-sm font-bold text-gray-500 hover:text-[#D62828] transition-colors flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="m15 18-6-6 6-6"/></svg> Kembali
             </a>
         </div>
@@ -46,11 +46,11 @@
                 @csrf
                 <div>
                     <label class="block text-sm font-bold text-[#1B1B1B] mb-2">Nama Lengkap</label>
-                    <input type="text" name="name" placeholder="Masukkan nama lengkap Anda" class="w-full py-3.5 px-4 rounded-xl bg-gray-50 border border-gray-200 text-[#1B1B1B] text-sm outline-none focus:border-[#D62828] focus:bg-white transition-colors" required>
+                    <input type="text" name="name" value="{{ auth()->user()->name }}" readonly class="w-full py-3.5 px-4 rounded-xl bg-gray-100 border border-gray-200 text-gray-500 text-sm outline-none cursor-not-allowed">
                 </div>
                 <div>
                     <label class="block text-sm font-bold text-[#1B1B1B] mb-2">Alamat Email</label>
-                    <input type="email" name="email" placeholder="contoh@email.com" class="w-full py-3.5 px-4 rounded-xl bg-gray-50 border border-gray-200 text-[#1B1B1B] text-sm outline-none focus:border-[#D62828] focus:bg-white transition-colors" required>
+                    <input type="email" name="email" value="{{ auth()->user()->email }}" readonly class="w-full py-3.5 px-4 rounded-xl bg-gray-100 border border-gray-200 text-gray-500 text-sm outline-none cursor-not-allowed">
                 </div>
                 <div>
                     <label class="block text-sm font-bold text-[#1B1B1B] mb-2">Nomor Telepon/WhatsApp</label>

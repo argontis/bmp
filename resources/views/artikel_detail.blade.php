@@ -31,8 +31,8 @@
     </script>
     
     <style>
-        .css-uwf2km {position: relative; flex: 1 0 0; display: block;}
-        .css-fou3uo {min-height: 1px; width: 100%; height: 100dvh;}
+        .css-uwf2km {position: relative; flex: 1 0 0; display: flex; flex-direction: column;}
+        .css-fou3uo {min-height: 100vh; width: 100%;}
     </style>
 </head>
 <body>
@@ -44,7 +44,7 @@
                     <div class="absolute top-0 inset-x-0 h-[3px] transition-opacity duration-300 opacity-100" style="background: linear-gradient(90deg, rgb(214, 40, 40), rgb(214, 40, 40) 50%, rgb(255, 255, 255) 50%);"></div>
                     <div class="max-w-[1280px] mx-auto px-6 h-full flex items-center justify-between gap-6">
                         <a href="#" class="shrink-0 block">
-                            <img src="/images/logo2.png" alt="Bakti Merah Putih" class="h-14 w-auto object-contain transition-opacity duration-300">
+                            <img src="/images/logo2.webp" alt="Bakti Merah Putih" class="h-14 w-auto object-contain transition-opacity duration-300">
                         </a>
                         <nav class="hidden xl:flex items-center gap-0.5">
                             <button onclick="window.location.href='/'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] ">
@@ -94,11 +94,11 @@
             
             @if($article->image)
             <div class="w-full h-[400px] md:h-[500px] rounded-[24px] overflow-hidden mb-12 shadow-lg">
-                <img src="{{ $article->image }}" class="w-full h-full object-cover" alt="{{ $article->title }}">
+                <img src="{{ asset($article->image) }}" class="w-full h-full object-cover" alt="{{ $article->title }}">
             </div>
             @endif
             
-            <div class="prose prose-lg max-w-none text-[#555] leading-relaxed">
+            <div class="prose prose-lg max-w-none text-[#555] leading-relaxed [&>p]:mb-6">
                 {!! $article->content !!}
             </div>
             
@@ -122,7 +122,7 @@
                 <div onclick="window.location.href='{{ route('artikel.show', $related->slug) }}'" class="bg-white rounded-[24px] overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 group cursor-pointer flex flex-col">
                     <div class="h-56 overflow-hidden relative bg-gray-100">
                         @if($related->image)
-                        <img src="{{ $related->image }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="{{ $related->title }}">
+                        <img src="{{ asset($related->image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="{{ $related->title }}">
                         @else
                         <div class="w-full h-full flex items-center justify-center text-gray-400 group-hover:scale-105 transition-transform duration-500">
                             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
@@ -154,7 +154,7 @@
                         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 pb-12 border-b border-white/[0.08]">
                             <div>
                                 <div class="mb-5">
-                                    <img src="/images/logo2.png" alt="Bakti Merah Putih" class="h-14 w-auto object-contain">
+                                    <img src="/images/logo2.webp" alt="Bakti Merah Putih" class="h-14 w-auto object-contain">
                                 </div>
                                 <p class="text-white/50 text-[13px] leading-relaxed mb-6">Bergerak bersama untuk Indonesia yang lebih baik. Sejak 2015, kami telah menyentuh jutaan kehidupan di 28 provinsi.</p>
                                 <div class="flex items-center gap-2.5">
@@ -190,7 +190,7 @@
                                 <ul class="space-y-4">
                                     <li class="flex items-start gap-3 text-white/55 text-[13px]">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 shrink-0 mt-0.5 text-white/30"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                        <a href="https://maps.app.goo.gl/UVL5JZcLoiSfMHMb6" target="_blank" class="hover:text-white transition-colors">Jl. RS. Fatmawati Raya No.28 AA 1, RT.1/RW.5, Cipete Sel., Kec. Cilandak, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12420</a>
+                                        <a href="https://maps.app.goo.gl/bVA5qdGNFRjgWd2d9" target="_blank" class="hover:text-white transition-colors">Jl. RS. Fatmawati Raya No.28 AA 1, RT.1/RW.5, Cipete Sel., Kec. Cilandak, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12420</a>
                                     </li>
                                     <li class="flex items-center gap-3 text-white/55 text-[13px]">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone w-4 h-4 text-white/30"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
@@ -239,20 +239,6 @@
                     header.classList.add('shadow-md');
                 } else {
                     header.classList.remove('shadow-md');
-                }
-            });
-                } else {
-                    header.classList.add('bg-transparent');
-                    header.classList.remove('bg-white', 'shadow-sm');
-                    logo.src = '/images/logo.png';
-                    
-                    if (mobileMenuBtn) {
-                        mobileMenuBtn.style.color = 'white';
-                    }
-                    
-                    navLinks.forEach(link => {
-                        link.classList.add('text-white/80', 'hover:text-white');
-                    });
                 }
             });
         });

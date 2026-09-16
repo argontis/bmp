@@ -11,8 +11,15 @@ class ExploreController extends Controller
     {
         $campaigns = Campaign::withSum(['donations' => function($query) {
             $query->where('status', 'Berhasil');
-        }], 'amount')->paginate(20);
+        }], 'amount')->withCount('volunteers')->get();
         
-        return view('explore', compact('campaigns'));
+        $registeredCampaignIds = [];
+        if (auth()->check()) {
+            $registeredCampaignIds = \App\Models\Volunteer::where('email', auth()->user()->email)
+                ->pluck('campaign_id')
+                ->toArray();
+        }
+        
+        return view('explore', compact('campaigns', 'registeredCampaignIds'));
     }
 }

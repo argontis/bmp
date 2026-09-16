@@ -28,7 +28,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left w-4 h-4"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg> Kembali
                     </button>
                     <div class="absolute inset-0 flex flex-col items-center justify-center gap-3">
-                        <img src="/images/logo.png" alt="Bakti Merah Putih" class="h-16 w-auto object-contain drop-shadow-lg">
+                        <img src="/images/logo.webp" alt="Bakti Merah Putih" class="h-16 w-auto object-contain drop-shadow-lg">
                         <p class="text-white/75 text-[13px] font-medium tracking-wide">Bersama Menebar Kebaikan untuk Indonesia</p>
                     </div>
                     <svg class="absolute bottom-0 left-0 w-full" viewBox="0 0 430 32" preserveAspectRatio="none"><path d="M0 32 Q215 0 430 32 L430 32 L0 32Z" fill="white"></path></svg>
@@ -104,7 +104,7 @@
                 <div class="relative flex h-full flex-col justify-between p-12 text-white">
                     <div>
                         <a href="{{ url('/') }}">
-                            <img src="{{ asset('images/logo.png') }}" alt="Bakti Merah Putih White Logo" class="h-12 w-auto object-contain cursor-pointer">
+                            <img src="{{ asset('images/logo.webp') }}" alt="Bakti Merah Putih White Logo" class="h-12 w-auto object-contain cursor-pointer">
                         </a>
                     </div>
                     <div class="max-w-xl">
@@ -136,7 +136,7 @@
                                 <path d="M19 12H5"></path>
                             </svg> Kembali ke Beranda
                         </a>
-                        <img src="{{ asset('images/logo.png') }}" alt="Bakti Merah Putih Logo" class="h-9 w-auto object-contain lg:hidden">
+                        <img src="{{ asset('images/logo.webp') }}" alt="Bakti Merah Putih Logo" class="h-9 w-auto object-contain lg:hidden">
                     </div>
                     
                     <div class="max-w-md mx-auto lg:mx-0">

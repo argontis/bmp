@@ -5,23 +5,31 @@ namespace App\Http\Controllers;
 use App\Models\Campaign;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Campaign::query();
+        $query = Campaign::with('donations');
         if ($request->has('search')) {
             $query->where('name', 'like', '%' . $request->search . '%')
                   ->orWhere('location', 'like', '%' . $request->search . '%');
         }
         $campaigns = $query->orderBy('created_at', 'desc')->paginate(20)->withQueryString();
-        return view('admin', compact('campaigns'));
+        
+        $totalDonatur = \App\Models\User::where('is_admin', false)->whereHas('donations', function($q) {
+            $q->where('status', 'Berhasil');
+        })->count();
+        $totalNominal = \App\Models\Donation::where('status', 'Berhasil')->sum('amount');
+        $kegiatanAktif = Campaign::where('status', 'Aktif')->count();
+        
+        return view('admin', compact('campaigns', 'totalDonatur', 'totalNominal', 'kegiatanAktif'));
     }
 
     public function kegiatan(Request $request)
     {
-        $query = Campaign::query();
+        $query = Campaign::with('donations');
         if ($request->has('search')) {
             $query->where('name', 'like', '%' . $request->search . '%')
                   ->orWhere('location', 'like', '%' . $request->search . '%');
@@ -46,7 +54,14 @@ class AdminController extends Controller
             'status' => 'required|string|in:Aktif,Berjalan,Selesai',
             'category' => 'nullable|string|max:255',
             'volunteer_target' => 'nullable|integer|min:0',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'nullable|string',
+            'activity_date' => 'nullable|date',
         ]);
+
+        if ($request->hasFile('image')) {
+            $validated['image'] = $this->compressToWebp($request->file('image'), 'campaigns', false);
+        }
 
         Campaign::create($validated);
 
@@ -65,7 +80,17 @@ class AdminController extends Controller
             'status' => 'required|string|in:Aktif,Berjalan,Selesai',
             'category' => 'nullable|string|max:255',
             'volunteer_target' => 'nullable|integer|min:0',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'nullable|string',
+            'activity_date' => 'nullable|date',
         ]);
+
+        if ($request->hasFile('image')) {
+            if ($campaign->image) {
+                Storage::disk('public')->delete($campaign->image);
+            }
+            $validated['image'] = $this->compressToWebp($request->file('image'), 'campaigns', false);
+        }
 
         $campaign->update($validated);
 
@@ -75,6 +100,9 @@ class AdminController extends Controller
     public function destroyKegiatan($id)
     {
         $campaign = Campaign::findOrFail($id);
+        if ($campaign->image) {
+            Storage::disk('public')->delete($campaign->image);
+        }
         $campaign->delete();
 
         return redirect()->back()->with('success', 'Kegiatan berhasil dihapus!');
@@ -82,7 +110,14 @@ class AdminController extends Controller
 
     public function donatur(Request $request)
     {
-        $query = \App\Models\User::where('is_admin', false);
+        $query = \App\Models\User::where('is_admin', false)
+            ->whereHas('donations', function ($q) {
+                $q->where('status', 'Berhasil');
+            })
+            ->withSum(['donations' => function ($q) {
+                $q->where('status', 'Berhasil');
+            }], 'amount');
+            
         if ($request->has('search')) {
             $query->where(function($q) use ($request) {
                 $q->where('name', 'like', '%' . $request->search . '%')
@@ -99,19 +134,7 @@ class AdminController extends Controller
         return view('admin_transaksi', compact('donations'));
     }
 
-    public function relawan(Request $request)
-    {
-        $query = \App\Models\Volunteer::with('campaign');
-        if ($request->has('search')) {
-            $query->where(function($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->search . '%')
-                  ->orWhere('email', 'like', '%' . $request->search . '%')
-                  ->orWhere('role', 'like', '%' . $request->search . '%');
-            });
-        }
-        $volunteers = $query->orderBy('created_at', 'desc')->paginate(20)->withQueryString();
-        return view('admin_relawan', compact('volunteers'));
-    }
+
 
     public function updateRelawan(Request $request, $id)
     {
@@ -239,10 +262,7 @@ class AdminController extends Controller
         $validated['slug'] = \Illuminate\Support\Str::slug($validated['title']) . '-' . time();
 
         if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('uploads/artikel'), $filename);
-            $validated['image'] = '/uploads/artikel/' . $filename;
+            $validated['image'] = $this->compressToWebp($request->file('image'), 'uploads/artikel', true);
         }
 
         if ($validated['status'] === 'published') {
@@ -273,10 +293,7 @@ class AdminController extends Controller
             if ($article->image && file_exists(public_path($article->image))) {
                 @unlink(public_path($article->image));
             }
-            $file = $request->file('image');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('uploads/artikel'), $filename);
-            $validated['image'] = '/uploads/artikel/' . $filename;
+            $validated['image'] = $this->compressToWebp($request->file('image'), 'uploads/artikel', true);
         }
 
         if ($validated['status'] === 'published' && !$article->published_at) {
@@ -300,4 +317,69 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'Artikel berhasil dihapus!');
     }
+
+
+    public function laporan(Request $request)
+    {
+        $year = $request->query('year', date('Y'));
+        
+        $totalDonations = \App\Models\Donation::whereYear('created_at', $year)
+                                              ->where('status', 'Berhasil')
+                                              ->count();
+                                              
+        $totalNominal = \App\Models\Donation::whereYear('created_at', $year)
+                                            ->where('status', 'Berhasil')
+                                            ->sum('amount');
+                                            
+        $totalVolunteers = \App\Models\Volunteer::whereYear('created_at', $year)->count();
+        $totalCampaigns = \App\Models\Campaign::whereYear('created_at', $year)->count();
+        
+        // Data per bulan untuk grafik (opsional)
+        $monthlyDonations = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $monthlyDonations[] = \App\Models\Donation::whereYear('created_at', $year)
+                                    ->whereMonth('created_at', $i)
+                                    ->where('status', 'Berhasil')
+                                    ->sum('amount');
+        }
+
+        return view('admin_laporan', compact('year', 'totalDonations', 'totalNominal', 'totalVolunteers', 'totalCampaigns', 'monthlyDonations'));
+    }
+
+    private function compressToWebp($file, $diskPath, $isPublic = false)
+    {
+        $filename = time() . '_' . pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '.webp';
+        $data = @file_get_contents($file->getRealPath());
+        $image = @imagecreatefromstring($data);
+        
+        if ($image) {
+            imagepalettetotruecolor($image);
+            imagealphablending($image, true);
+            imagesavealpha($image, true);
+            
+            if ($isPublic) {
+                $dir = public_path($diskPath);
+                if (!is_dir($dir)) mkdir($dir, 0755, true);
+                imagewebp($image, $dir . '/' . $filename, 80);
+                imagedestroy($image);
+                return '/' . $diskPath . '/' . $filename;
+            } else {
+                $fullPath = storage_path('app/public/' . $diskPath . '/' . $filename);
+                $dir = dirname($fullPath);
+                if (!is_dir($dir)) mkdir($dir, 0755, true);
+                imagewebp($image, $fullPath, 80);
+                imagedestroy($image);
+                return $diskPath . '/' . $filename;
+            }
+        }
+        
+        // Fallback if not an image
+        if ($isPublic) {
+            $file->move(public_path($diskPath), $file->getClientOriginalName());
+            return '/' . $diskPath . '/' . $file->getClientOriginalName();
+        } else {
+            return $file->store($diskPath, 'public');
+        }
+    }
+
 }
