@@ -22,7 +22,7 @@
     <header class="bg-white shadow-sm py-4">
         <div class="max-w-[1280px] mx-auto px-6 flex items-center justify-between">
             <a href="/" class="shrink-0 block"><img src="/images/logo2.webp" alt="Bakti Merah Putih" class="h-10 w-auto object-contain"></a>
-            <a href="{{ url()->previous() }}" class="text-sm font-bold text-gray-500 hover:text-[#D62828] transition-colors flex items-center gap-2">
+            <a href="javascript:void(0)" onclick="window.history.length > 1 ? window.history.back() : window.location.href='/relawan'" class="text-sm font-bold text-gray-500 hover:text-[#D62828] transition-colors flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="m15 18-6-6 6-6"/></svg> Kembali
             </a>
         </div>
