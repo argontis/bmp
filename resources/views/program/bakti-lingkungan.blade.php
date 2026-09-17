@@ -65,16 +65,44 @@
                             <button onclick="window.location.href='/kontak'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">Kontak</button>
                         </nav>
                         <div class="flex items-center gap-3">
-                            <button class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-[#D62828] text-white rounded-full text-[13px] font-bold hover:bg-[#B91C1C] transition-all duration-200 shadow-[0_8px_20px_-8px_rgba(214,40,40,0.7)] hover:shadow-[0_10px_26px_-8px_rgba(214,40,40,0.85)] hover:-translate-y-0.5" onclick="window.location.href='/login'">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-in w-4 h-4 shrink-0"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
+                            <button class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-[#D62828] text-white rounded-full text-[13px] font-bold hover:bg-[#B91C1C] transition-all duration-200 shadow-[0_8px_20px_-8px_rgba(214,40,40,0.7)] hover:shadow-[0_10px_26px_-8px_rgba(214,40,40,0.85)] hover:-translate-y-0.5" onclick="window.location.href='/register'">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-plus w-4 h-4 shrink-0"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
                                 Daftar Sekarang
                             </button>
-                            <button onclick="window.location.href='/donasi'" class="xl:hidden p-2.5 rounded-xl hover:bg-black/5 transition-colors" style="color: white;">
+                            <button onclick="toggleMobileMenu()" class="xl:hidden p-2.5 rounded-xl hover:bg-black/5 transition-colors" style="color: white;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu w-5 h-5"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
                             </button>
                         </div>
                     </div>
                 </header>
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="fixed inset-0 z-[100] bg-white hidden flex-col">
+    <div class="flex items-center justify-between p-6 border-b border-gray-100">
+        <a href="/" class="shrink-0 block">
+            <img src="/images/logo2.webp" alt="Bakti Merah Putih" class="h-14 w-auto object-contain">
+        </a>
+        <button onclick="toggleMobileMenu()" class="p-2.5 rounded-xl hover:bg-black/5 transition-colors text-[#1B1B1B]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+    </div>
+    <nav class="flex flex-col p-6 gap-4 overflow-y-auto">
+        <a href="/" class="text-lg font-semibold {{ request()->is('/') ? 'text-[#D62828]' : 'text-[#1B1B1B]' }}">Beranda</a>
+        <a href="/tentang-kami" class="text-lg font-semibold {{ request()->is('tentang-kami') ? 'text-[#D62828]' : 'text-[#1B1B1B]' }}">Tentang Kami</a>
+        <a href="/program" class="text-lg font-semibold {{ request()->is('program*') ? 'text-[#D62828]' : 'text-[#1B1B1B]' }}">Program</a>
+        <a href="/donasi" class="text-lg font-semibold {{ request()->is('donasi*') ? 'text-[#D62828]' : 'text-[#1B1B1B]' }}">Donasi</a>
+        <a href="/laporan" class="text-lg font-semibold {{ request()->is('laporan*') ? 'text-[#D62828]' : 'text-[#1B1B1B]' }}">Laporan</a>
+        <a href="/artikel" class="text-lg font-semibold {{ request()->is('artikel*') ? 'text-[#D62828]' : 'text-[#1B1B1B]' }}">Artikel</a>
+        <a href="/galeri" class="text-lg font-semibold {{ request()->is('galeri') ? 'text-[#D62828]' : 'text-[#1B1B1B]' }}">Galeri</a>
+        <a href="/relawan" class="text-lg font-semibold {{ request()->is('relawan*') ? 'text-[#D62828]' : 'text-[#1B1B1B]' }}">Relawan</a>
+        <a href="/kontak" class="text-lg font-semibold {{ request()->is('kontak') ? 'text-[#D62828]' : 'text-[#1B1B1B]' }}">Kontak</a>
+        <div class="mt-4 pt-4 border-t border-gray-100">
+            <a href="/register" class="flex items-center justify-center gap-2 w-full px-5 py-3 bg-[#D62828] text-white rounded-xl text-[15px] font-bold hover:bg-[#B91C1C] transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-plus w-4 h-4"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+                Daftar Sekarang
+            </a>
+        </div>
+    </nav>
+</div>
 
                 <main class="min-h-screen bg-[#FBFAF7]">
                     <!-- Page Header -->
@@ -197,8 +225,8 @@
                 </footer>
 
                 <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 sm:hidden">
-                    <button onclick="window.location.href='/login'" class="flex items-center gap-2 px-7 py-4 bg-[#D62828] text-white rounded-full font-extrabold text-sm shadow-[0_18px_40px_-10px_rgba(214,40,40,0.8)] hover:scale-105 transition-transform active:scale-95">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-in w-4 h-4"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg> Daftar Sekarang
+                    <button onclick="window.location.href='/register'" class="flex items-center gap-2 px-7 py-4 bg-[#D62828] text-white rounded-full font-extrabold text-sm shadow-[0_18px_40px_-10px_rgba(214,40,40,0.8)] hover:scale-105 transition-transform active:scale-95">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-plus w-4 h-4"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg> Daftar Sekarang
                     </button>
                 </div>
             </div>
@@ -241,5 +269,19 @@
             });
         });
     </script>
+<script>
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        if (menu.classList.contains('hidden')) {
+            menu.classList.remove('hidden');
+            menu.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        } else {
+            menu.classList.add('hidden');
+            menu.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+    }
+</script>
 </body>
 </html>

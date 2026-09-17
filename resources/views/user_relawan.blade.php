@@ -172,6 +172,12 @@
                                 <p class="text-[13px] text-gray-500">Belum ada riwayat kerelawanan.</p>
                             </div>
                             @endforelse
+                            
+                            @if($volunteers->hasPages())
+                            <div class="mt-4 pb-4">
+                                {{ $volunteers->links() }}
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -399,6 +405,12 @@
                                 </div>
                                 @endforelse
                             </div>
+                            
+                            @if($volunteers->hasPages())
+                            <div class="mt-4">
+                                {{ $volunteers->links() }}
+                            </div>
+                            @endif
                             
                             <div class="mt-6">
                                 

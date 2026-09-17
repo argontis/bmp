@@ -189,6 +189,12 @@
                                     <p class="text-gray-500 text-sm font-medium">Saat ini tidak ada kondisi darurat.</p>
                                 </div>
                             @endforelse
+                            
+                            @if($campaigns->hasPages())
+                                <div class="mt-4 pb-4">
+                                    {{ $campaigns->links() }}
+                                </div>
+                            @endif
 
                         </div>
                     </div>

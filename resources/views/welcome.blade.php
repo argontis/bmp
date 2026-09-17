@@ -61,16 +61,44 @@
                             <button onclick="window.location.href='/kontak'" class="relative px-3 py-2 text-[13px] font-semibold transition-colors duration-150 text-[#5B5B5B] hover:text-[#12355B] text-white/80 hover:text-white">Kontak</button>
                         </nav>
                         <div class="flex items-center gap-3">
-                            <button class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-[#D62828] text-white rounded-full text-[13px] font-bold hover:bg-[#B91C1C] transition-all duration-200 shadow-[0_8px_20px_-8px_rgba(214,40,40,0.7)] hover:shadow-[0_10px_26px_-8px_rgba(214,40,40,0.85)] hover:-translate-y-0.5" onclick="window.location.href='/login'">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-in w-4 h-4 shrink-0"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
+                            <button class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-[#D62828] text-white rounded-full text-[13px] font-bold hover:bg-[#B91C1C] transition-all duration-200 shadow-[0_8px_20px_-8px_rgba(214,40,40,0.7)] hover:shadow-[0_10px_26px_-8px_rgba(214,40,40,0.85)] hover:-translate-y-0.5" onclick="window.location.href='/register'">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-plus w-4 h-4 shrink-0"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
                                 Daftar Sekarang
                             </button>
-                            <button onclick="window.location.href='/donasi'" class="xl:hidden p-2.5 rounded-xl hover:bg-black/5 transition-colors" style="color: white;">
+                            <button onclick="toggleMobileMenu()" class="xl:hidden p-2.5 rounded-xl hover:bg-black/5 transition-colors" style="color: white;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu w-5 h-5"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
                             </button>
                         </div>
                     </div>
                 </header>
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="fixed inset-0 z-[100] bg-white hidden flex-col">
+    <div class="flex items-center justify-between p-6 border-b border-gray-100">
+        <a href="/" class="shrink-0 block">
+            <img src="/images/logo2.webp" alt="Bakti Merah Putih" class="h-14 w-auto object-contain">
+        </a>
+        <button onclick="toggleMobileMenu()" class="p-2.5 rounded-xl hover:bg-black/5 transition-colors text-[#1B1B1B]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+    </div>
+    <nav class="flex flex-col p-6 gap-4 overflow-y-auto">
+        <a href="/" class="text-lg font-semibold {{ request()->is('/') ? 'text-[#D62828]' : 'text-[#1B1B1B]' }}">Beranda</a>
+        <a href="/tentang-kami" class="text-lg font-semibold {{ request()->is('tentang-kami') ? 'text-[#D62828]' : 'text-[#1B1B1B]' }}">Tentang Kami</a>
+        <a href="/program" class="text-lg font-semibold {{ request()->is('program*') ? 'text-[#D62828]' : 'text-[#1B1B1B]' }}">Program</a>
+        <a href="/donasi" class="text-lg font-semibold {{ request()->is('donasi*') ? 'text-[#D62828]' : 'text-[#1B1B1B]' }}">Donasi</a>
+        <a href="/laporan" class="text-lg font-semibold {{ request()->is('laporan*') ? 'text-[#D62828]' : 'text-[#1B1B1B]' }}">Laporan</a>
+        <a href="/artikel" class="text-lg font-semibold {{ request()->is('artikel*') ? 'text-[#D62828]' : 'text-[#1B1B1B]' }}">Artikel</a>
+        <a href="/galeri" class="text-lg font-semibold {{ request()->is('galeri') ? 'text-[#D62828]' : 'text-[#1B1B1B]' }}">Galeri</a>
+        <a href="/relawan" class="text-lg font-semibold {{ request()->is('relawan*') ? 'text-[#D62828]' : 'text-[#1B1B1B]' }}">Relawan</a>
+        <a href="/kontak" class="text-lg font-semibold {{ request()->is('kontak') ? 'text-[#D62828]' : 'text-[#1B1B1B]' }}">Kontak</a>
+        <div class="mt-4 pt-4 border-t border-gray-100">
+            <a href="/register" class="flex items-center justify-center gap-2 w-full px-5 py-3 bg-[#D62828] text-white rounded-xl text-[15px] font-bold hover:bg-[#B91C1C] transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-plus w-4 h-4"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+                Daftar Sekarang
+            </a>
+        </div>
+    </nav>
+</div>
 
                 <section class="relative overflow-hidden flex items-center min-h-screen lg:min-h-[max(100vh,760px)] pt-20 lg:pt-0">
                     <div class="absolute inset-0 bg-[#0a1f3a]">
@@ -93,7 +121,7 @@
                                     <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
                                     Yayasan Sosial &amp; Kemanusiaan — Est. 2015
                                 </div>
-                                <h1 class="text-5xl md:text-6xl xl:text-[76px] font-extrabold text-white leading-[1.03] tracking-[-0.02em] mb-7" style="font-family: 'Plus Jakarta Sans', sans-serif; opacity: 1; transform: none;">
+                                <h1 class="text-4xl sm:text-5xl md:text-6xl xl:text-[76px] font-extrabold text-white leading-[1.03] tracking-[-0.02em] mb-7" style="font-family: 'Plus Jakarta Sans', sans-serif; opacity: 1; transform: none;">
                                     Bersama Menebar<br>
                                     <span class="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-rose-300">
                                         Kebaikan
@@ -104,13 +132,13 @@
                                 <p class="text-white/75 text-lg leading-relaxed max-w-xl mb-10" style="opacity: 1; transform: none;">
                                     Bakti Merah Putih bergerak di bidang pendidikan, kesehatan, lingkungan, dan kemanusiaan untuk menghadirkan perubahan nyata bagi jutaan masyarakat di seluruh pelosok Indonesia.
                                 </p>
-                                <div class="flex flex-wrap gap-4" style="opacity: 1; transform: none;">
-                                    <button onclick="window.location.href='/donasi'" class="group inline-flex items-center gap-2.5 px-8 py-4 bg-[#D62828] text-white rounded-full font-extrabold text-[15px] hover:bg-[#B91C1C] transition-all shadow-[0_18px_40px_-12px_rgba(214,40,40,0.8)] hover:-translate-y-0.5">
+                                <div class="flex flex-col sm:flex-row flex-wrap gap-4" style="opacity: 1; transform: none;">
+                                    <button onclick="window.location.href='/donasi'" class="w-full sm:w-auto justify-center group inline-flex items-center gap-2.5 px-8 py-4 bg-[#D62828] text-white rounded-full font-extrabold text-[15px] hover:bg-[#B91C1C] transition-all shadow-[0_18px_40px_-12px_rgba(214,40,40,0.8)] hover:-translate-y-0.5">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4 fill-white"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg> 
                                         Donasi Sekarang
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4 group-hover:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                                     </button>
-                                    <button onclick="window.location.href='/program'" class="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-md border border-white/25 text-white rounded-full font-bold text-[15px] hover:bg-white/20 transition-all">
+                                    <button onclick="window.location.href='/program'" class="w-full sm:w-auto justify-center inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-md border border-white/25 text-white rounded-full font-bold text-[15px] hover:bg-white/20 transition-all">
                                         Lihat Program 
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg>
                                     </button>
@@ -234,7 +262,7 @@
                     </div>
                 </section>
 
-                <section class="bg-[#FBFAF7] py-24">
+                <section class="bg-[#FBFAF7] py-16 md:py-24">
                     <div class="max-w-[1280px] mx-auto px-6">
                         <div class="flex items-end justify-between mb-12">
                             <div>
@@ -242,7 +270,7 @@
                                     <span class="h-px w-7" style="background: rgb(214, 40, 40);"></span>
                                     <span class="text-[11px] font-extrabold tracking-[0.22em] uppercase" style="color: rgb(214, 40, 40);">Program Kami</span>
                                 </span>
-                                <h2 class="text-4xl lg:text-[52px] font-extrabold text-[#12355B] leading-[1.05] tracking-[-0.02em]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Bersama Hadirkan<br>Perubahan Nyata</h2>
+                                <h2 class="text-3xl sm:text-4xl lg:text-[52px] font-extrabold text-[#12355B] leading-[1.05] tracking-[-0.02em]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Bersama Hadirkan<br>Perubahan Nyata</h2>
                             </div>
                             <button onclick="window.location.href='/program'" class="hidden md:inline-flex items-center gap-2 px-5 py-3 border border-[#12355B]/20 text-[#12355B] rounded-full text-[13px] font-bold hover:bg-[#12355B] hover:text-white hover:border-[#12355B] transition-all duration-200">
                                 Lihat Semua Program <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
@@ -342,7 +370,7 @@
                     </div>
                 </section>
 
-                <section class="relative bg-white py-24 overflow-hidden">
+                <section class="relative bg-white py-16 md:py-24 overflow-hidden">
                     <div class="absolute top-24 -left-20 w-80 h-80 rounded-full bg-red-100/40 blur-3xl pointer-events-none"></div>
                     <div class="absolute bottom-10 -right-24 w-96 h-96 rounded-full bg-blue-100/40 blur-3xl pointer-events-none"></div>
                     <div class="relative max-w-[1280px] mx-auto px-6">
@@ -351,7 +379,7 @@
                                 <span class="h-px w-7" style="background: rgb(214, 40, 40);"></span>
                                 <span class="text-[11px] font-extrabold tracking-[0.22em] uppercase" style="color: rgb(214, 40, 40);">Donasi Terbuka</span>
                             </span>
-                            <h2 class="text-4xl lg:text-[52px] font-extrabold text-[#12355B] tracking-[-0.02em]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Program Terbaru</h2>
+                            <h2 class="text-3xl sm:text-4xl lg:text-[52px] font-extrabold text-[#12355B] tracking-[-0.02em]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Program Terbaru</h2>
                             <p class="text-[#888] mt-3 text-base max-w-lg mx-auto">Pilih program yang menyentuh hati Anda. Setiap donasi tercatat transparan.</p>
                         </div>
                         <div class="grid md:grid-cols-3 gap-6">
@@ -714,28 +742,17 @@
                             <div class="absolute inset-0 opacity-[0.07]" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 28px 28px;"></div>
                             <div class="relative z-10 max-w-xl mx-auto">
                                 <div class="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-6">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail w-7 h-7 text-white"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-handshake w-7 h-7 text-white"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08v0c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"></path><path d="m18 15-2-2"></path><path d="m15 18-2-2"></path></svg>
                                 </div>
-                                <h2 class="text-3xl lg:text-[40px] font-extrabold text-white mb-3 tracking-[-0.01em]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Dapatkan Update Kegiatan Kami</h2>
-                                <p class="text-white/80 mb-8 text-base">Ikuti perkembangan program dan dampak donasi Anda langsung di inbox. Tanpa spam, selamanya.</p>
+                                <h2 class="text-3xl lg:text-[40px] font-extrabold text-white mb-3 tracking-[-0.01em]" style="font-family: 'Plus Jakarta Sans', sans-serif;">Mari Wujudkan Perubahan Bersama</h2>
+                                <p class="text-white/80 mb-8 text-base">Setiap donasi Anda, sekecil apapun, membawa perubahan besar bagi mereka yang membutuhkan di seluruh pelosok Indonesia.</p>
                                 
-                                @if(session('newsletter_success'))
-                                    <div class="bg-green-500/20 border border-green-500 text-white px-4 py-3 rounded-lg mb-6 text-sm font-medium">
-                                        {{ session('newsletter_success') }}
-                                    </div>
-                                @endif
-
-                                @if($errors->newsletter->has('email'))
-                                    <div class="bg-red-500/20 border border-red-500 text-white px-4 py-3 rounded-lg mb-6 text-sm font-medium">
-                                        {{ $errors->newsletter->first('email') }}
-                                    </div>
-                                @endif
-
-                                <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" method="POST" action="{{ route('newsletter.subscribe') }}">
-                                    @csrf
-                                    <input type="email" name="email" required="" placeholder="nama@email.com" class="flex-1 px-5 py-4 rounded-full bg-white text-[#1B1B1B] placeholder-gray-400 text-sm font-medium outline-none focus:ring-4 focus:ring-white/40 shadow-lg" value="{{ old('email') }}">
-                                    <button type="submit" class="px-7 py-4 bg-[#12355B] text-white rounded-full text-sm font-extrabold hover:bg-[#0f2a4a] transition-all whitespace-nowrap shadow-lg hover:-translate-y-0.5">Daftar Sekarang</button>
-                                </form>
+                                <div class="flex justify-center mt-4">
+                                    <button onclick="window.location.href='/donasi'" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#D62828] rounded-full text-[15px] font-extrabold hover:bg-gray-50 transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-5 h-5 fill-[#D62828]"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+                                        Mulai Berdonasi
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -812,8 +829,8 @@
                 </footer>
 
                 <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 sm:hidden">
-                    <button onclick="window.location.href='/login'" class="flex items-center gap-2 px-7 py-4 bg-[#D62828] text-white rounded-full font-extrabold text-sm shadow-[0_18px_40px_-10px_rgba(214,40,40,0.8)] hover:scale-105 transition-transform active:scale-95">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-in w-4 h-4"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg> Daftar Sekarang
+                    <button onclick="window.location.href='/register'" class="flex items-center gap-2 px-7 py-4 bg-[#D62828] text-white rounded-full font-extrabold text-sm shadow-[0_18px_40px_-10px_rgba(214,40,40,0.8)] hover:scale-105 transition-transform active:scale-95">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-plus w-4 h-4"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg> Daftar Sekarang
                     </button>
                 </div>
             </div>
@@ -972,5 +989,19 @@
             }
         })();
     </script>
+<script>
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        if (menu.classList.contains('hidden')) {
+            menu.classList.remove('hidden');
+            menu.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        } else {
+            menu.classList.add('hidden');
+            menu.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+    }
+</script>
 </body>
 </html>

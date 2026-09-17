@@ -161,7 +161,10 @@
                                 @endforelse
                             </div>
                             
-                            <div class="mt-6 px-4">
+                            <div class="mt-6 px-4 pb-4">
+                                @if($campaigns->hasPages())
+                                    {{ $campaigns->links() }}
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -415,6 +418,9 @@
                                 </div>
                                 
                                 <div class="mt-8">
+                                    @if($campaigns->hasPages())
+                                        {{ $campaigns->links() }}
+                                    @endif
                                 </div>
                             </div>
                         </div>
