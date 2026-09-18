@@ -23,7 +23,7 @@ class ContactController extends Controller
         }
 
         // Email admin atau tujuan
-        $toEmail = 'info@baktimerahputih.org'; // Default email
+        $toEmail = 'adminbaktimerahputih@gmail.com'; // Default email
 
         try {
             Mail::to($toEmail)->send(new ContactMessageMail($request->all()));

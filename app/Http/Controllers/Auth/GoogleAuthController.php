@@ -10,41 +10,50 @@ use Illuminate\Support\Facades\Auth;
 class GoogleAuthController extends Controller
 {
     /**
-     * Simulate redirecting the user to the Google authentication page.
+     * Redirect the user to the Google authentication page.
      *
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function redirect()
     {
-        return $this->callback();
+        return \Laravel\Socialite\Facades\Socialite::driver('google')->redirect();
     }
 
     /**
-     * Simulate obtaining the user information from Google.
+     * Obtain the user information from Google.
      *
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function callback()
     {
-        $email = 'adminbaktimerahputih@gmail.com';
+        try {
+            $googleUser = \Laravel\Socialite\Facades\Socialite::driver('google')->user();
+        } catch (\Exception $e) {
+            return redirect('/login')->with('error', 'Gagal login menggunakan Google. Silakan coba lagi.');
+        }
 
-        // Check if user already exists
-        $user = User::where('email', $email)->first();
+        // Check if user already exists based on google_id or email
+        $user = User::where('google_id', $googleUser->id)
+                    ->orWhere('email', $googleUser->email)
+                    ->first();
 
         if (! $user) {
             // Create new user
             $user = User::create([
-                'name' => 'Admin Bakti Merah Putih',
-                'email' => $email,
-                'google_id' => 'mock_google_id_123',
-                'is_admin' => 1,
+                'name' => $googleUser->name,
+                'email' => $googleUser->email,
+                'google_id' => $googleUser->id,
+                'is_admin' => 0, // Default to normal user
                 'password' => null,
             ]);
+        } elseif (! $user->google_id) {
+            // Update existing user with google_id
+            $user->update(['google_id' => $googleUser->id]);
         }
 
         Auth::login($user);
 
-        // Arahkan admin ke dashboard admin, user biasa ke account
+        // Redirect admin to admin dashboard, normal user to account
         if ($user->is_admin) {
             return redirect()->intended('/admin');
         }
